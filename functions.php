@@ -61,7 +61,6 @@ $includes = array(
 	'/largo-apis.php',				// APIs for inclusion in child themes
 	'/inc/largo-plugin-init.php',	// a list of recommended plugins
 	'/inc/dashboard.php',			// custom dashboard widgets
-	'/inc/robots.php',				// default robots.txt config
 	'/inc/custom-feeds.php',		// create custom RSS feeds
 	'/inc/users.php',				// add custom fields for user profiles
 	'/inc/sidebars.php',			// register sidebars
