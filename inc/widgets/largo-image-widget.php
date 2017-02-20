@@ -168,10 +168,6 @@ class largo_image_widget extends WP_Widget {
 			<option value="_blank"<?php selected( $instance['linktarget'], '_blank' ); ?>><?php _e('Open New Window', 'largo'); ?></option>
 		</select></p>
 
-		<p><input class="checkbox" type="checkbox" id="<?php echo $this->get_field_id('track'); ?>" name="<?php echo $this->get_field_name('track'); ?>" value="true" <?php checked( $instance['track'], 'true' ); ?>>
-		<label for="<?php echo $this->get_field_id('track'); ?>"><?php _e('Track clicks in Google Analytics', 'largo'); ?></label>
-		</p>
-
 		<?php
 		// Backwards compatibility prior to storing attachment ids
 		?>
