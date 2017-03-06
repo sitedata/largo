@@ -19,16 +19,7 @@
 			</div>
 		</div>
 
-		<div class="span6 right">
-			<?php if (INN_MEMBER) { ?>
-				<?php inn_logo(); ?>
-			<?php } ?>
-			<p class="footer-credit <?php echo ( !INN_MEMBER ? 'footer-credit-padding-inn-logo-missing' : ''); ?>"><?php printf( __('Built with the <a href="%s">Largo WordPress Theme</a> from the <a href="%s">Institute for Nonprofit News</a>.', 'largo'),
-					'http://largoproject.org',
-					'http://inn.org'
-				 );
-			?></p>
-		</div>
+		<? // @TODO 1.0 add a hook to include the INN logo on member sites (maybe) ?>
 	</div>
 
 	<p class="back-to-top visuallyhidden"><a href="#top"><?php _e('Back to top', 'largo'); ?> &uarr;</a></p>
