@@ -95,7 +95,7 @@ $queried_object = get_queried_object();
 					</nav>
 			<?php
 				} elseif ( is_author() ) {
-					the_widget( 'largo_author_widget', array( 'title' => '' ) );
+					// @TODO 1.0 add hook for author widget?
 				}
 			?>
 		</header>
