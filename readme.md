@@ -65,6 +65,3 @@ Special thanks to everyone who has contributed to the project, including: [rnagl
 This project builds on a number of great open source projects, including:
 
 * Project Argo: [argoproject.org](http://argoproject.org/)
-* Twitter Bootstrap: [getbootstrap.com](http://getbootstrap.com/)
-* LESS CSS: [lesscss.org](http://lesscss.org/)
-* Options Framework: [devinsays/options-framework-theme](https://github.com/devinsays/options-framework-theme)
