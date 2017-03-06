@@ -86,7 +86,7 @@ class Largo_Custom_Less_Variables {
 	 */
 	static function init() {
 		// Alters the URL for the CSS files that are recompiled with the custom variables
-		add_filter( 'style_loader_src', array( __CLASS__, 'style_loader_src' ), 10, 2 );
+//		add_filter( 'style_loader_src', array( __CLASS__, 'style_loader_src' ), 10, 2 );
 
 		// Used to output the rendered CSS for the customized LESS
 		add_action( 'template_redirect', array( __CLASS__, 'template_redirect') );
