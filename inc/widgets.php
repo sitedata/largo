@@ -7,19 +7,6 @@
  * @since 1.0
  */
 function largo_widgets() {
-	$unregister = array(
-		'WP_Widget_Pages',
-		'WP_Widget_Calendar',
-		'WP_Widget_Links',
-		'WP_Widget_Tag_Cloud',
-		'WP_Widget_Meta',
-		'WP_Widget_Recent_Comments',
-		'WP_Widget_RSS',
-		'WP_Widget_Recent_Posts'
-	);
-	foreach ( $unregister as $widget ) {
-		unregister_widget( $widget );
-	}
 	$register = array(
 		'largo_donate_widget' => '/inc/widgets/largo-donate.php',
 		'largo_follow_widget' => '/inc/widgets/largo-follow.php',
