@@ -83,10 +83,6 @@ class Largo_Customizer {
 
 		// Register the settings
 		$settings = array(
-			'[site_blurb]'          => array(
-				'type'                  => 'option',
-				'sanitize_callback'     => 'wp_filter_nohtml_kses',
-				),
 			// Homepage
 			'[home_template]'      => array(
 				'type'                  => 'option',
@@ -118,13 +114,6 @@ class Largo_Customizer {
 		foreach( $settings as $setting => $options ) {
 			$wp_customize->add_setting( $this->get_setting_key( $setting ), $options );
 		}
-
-		// Site description
-		$wp_customize->add_control( new Largo_WP_Customize_Textarea_Control( $wp_customize, 'largo_site_description', array(
-			'label'             => __( 'Site Description', 'largo' ),
-			'section'           => 'title_tagline',
-			'settings'          => $this->get_setting_key( '[site_blurb]' ),
-		) ) );
 
 		/**
 		 * Homepage layout

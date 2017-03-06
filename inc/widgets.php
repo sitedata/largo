@@ -21,7 +21,6 @@ function largo_widgets() {
 		unregister_widget( $widget );
 	}
 	$register = array(
-		'largo_about_widget' => '/inc/widgets/largo-about.php',
 		'largo_donate_widget' => '/inc/widgets/largo-donate.php',
 		'largo_follow_widget' => '/inc/widgets/largo-follow.php',
 		'largo_image_widget' => '/inc/widgets/largo-image-widget.php',
