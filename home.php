@@ -6,13 +6,6 @@
  * @since 0.1
  */
 
-/**
- * ======== DO NOT EDIT OR CLONE THIS FILE FOR A CHILD THEME =======
- *
- * Largo comes with a built-in homepage template system, documented in homepages/README.md
- * It's generally better to use that system than to have your child theme use its own home.php template
- */
-
 get_header();
 
 /*
