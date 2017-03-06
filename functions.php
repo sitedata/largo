@@ -41,6 +41,7 @@
 if ( ! defined( 'LARGO_DEBUG' ) )
 	define( 'LARGO_DEBUG', FALSE );
 
+// @TODO 1.0 do we need these? Do we need update scripts for this?
 /**
  * Image size constants, almost 100% that you won't need to change these
  */
@@ -178,10 +179,6 @@ class Largo {
 
 		if ( ! class_exists( 'Navis_Slideshows' ) ) {
 			require_once dirname( __FILE__ ) . '/lib/navis-slideshows/navis-slideshows.php';
-		}
-
-		if ( ! function_exists( 'clean_contact_func' ) ) {
-			require_once dirname( __FILE__ ) . '/lib/clean-contact/clean_contact.php';
 		}
 
 	}
