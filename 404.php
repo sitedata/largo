@@ -1,29 +1,64 @@
 <?php
 /**
- * The template for displaying 404 pages.
+ * The template for displaying 404 pages (not found)
+ *
+ * @link https://codex.wordpress.org/Creating_an_Error_404_Page
  *
  * @package Largo
- * @since 0.1
  */
+
 get_header(); ?>
 
-<div id="content" class="span8" role="main">
-	<?php get_template_part( 'partials/content', 'not-found' ); ?>
-	<?php
-		/*
-		 * Display the Recent Posts widget
-		 *
-		 * @since 0.5.5
-		 * @link https://codex.wordpress.org/Function_Reference/the_widget
-		 */
-		if ( class_exists( 'largo_recent_posts_widget' ) ) {
-			the_widget( 'largo_recent_posts_widget', array (
-				'title' => __( 'Or check out some of our recent stories', 'largo' ),
-				'show_byline' => 1
-			));
-		}
-	?>
-</div><!--#content -->
+	<div id="primary" class="content-area">
+		<main id="main" class="site-main" role="main">
 
-<?php get_sidebar(); ?>
-<?php get_footer();
+			<section class="error-404 not-found">
+				<header class="page-header">
+					<h1 class="page-title"><?php esc_html_e( 'Oops! That page can&rsquo;t be found.', 'largo' ); ?></h1>
+				</header><!-- .page-header -->
+
+				<div class="page-content">
+					<p><?php esc_html_e( 'It looks like nothing was found at this location. Maybe try one of the links below or a search?', 'largo' ); ?></p>
+
+					<?php
+						get_search_form();
+
+						the_widget( 'WP_Widget_Recent_Posts' );
+
+						// Only show the widget if site has multiple categories.
+						if ( largo_categorized_blog() ) :
+					?>
+
+					<div class="widget widget_categories">
+						<h2 class="widget-title"><?php esc_html_e( 'Most Used Categories', 'largo' ); ?></h2>
+						<ul>
+						<?php
+							wp_list_categories( array(
+								'orderby'    => 'count',
+								'order'      => 'DESC',
+								'show_count' => 1,
+								'title_li'   => '',
+								'number'     => 10,
+							) );
+						?>
+						</ul>
+					</div><!-- .widget -->
+
+					<?php
+						endif;
+
+						/* translators: %1$s: smiley */
+						$archive_content = '<p>' . sprintf( esc_html__( 'Try looking in the monthly archives. %1$s', 'largo' ), convert_smilies( ':)' ) ) . '</p>';
+						the_widget( 'WP_Widget_Archives', 'dropdown=1', "after_title=</h2>$archive_content" );
+
+						the_widget( 'WP_Widget_Tag_Cloud' );
+					?>
+
+				</div><!-- .page-content -->
+			</section><!-- .error-404 -->
+
+		</main><!-- #main -->
+	</div><!-- #primary -->
+
+<?php
+get_footer();

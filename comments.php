@@ -1,74 +1,85 @@
 <?php
 /**
- * The template for displaying Comments.
+ * The template for displaying comments
  *
- * The area of the page that contains both current comments
- * and the comment form. The actual display of comments is
- * handled by a callback to argo_comment() which is
- * located in the functions.php file.
+ * This is the template that displays the area of the page that contains both the current comments
+ * and the comment form.
+ *
+ * @link https://codex.wordpress.org/Template_Hierarchy
  *
  * @package Largo
- * @since 0.1
  */
+
+/*
+ * If the current post is protected by a password and
+ * the visitor has not yet entered the password we will
+ * return early without loading the comments.
+ */
+if ( post_password_required() ) {
+	return;
+}
 ?>
-	<div id="comments" class="clearfix">
-	<?php if ( post_password_required() ) : ?>
-		<p class="nopassword"><?php _e('This post is password protected. Enter the password to view any comments.', 'largo'); ?></p>
-	</div><!-- #comments -->
-	<?php
-			/* Stop the rest of comments.php from being processed,
-			 * but don't kill the script entirely -- we still have
-			 * to fully load the template.
-			 */
-			return;
-		endif;
-	?>
 
-	<?php // You can start editing here -- including this comment! ?>
-
-	<?php if ( have_comments() ) : ?>
-		<h2 id="comments-title">
-			<?php
-				printf( _n( 'One thought on &ldquo;%2$s&rdquo;', '%1$s thoughts on &ldquo;%2$s&rdquo;', get_comments_number() ),
-					number_format_i18n( get_comments_number() ), '<span>' . get_the_title() . '</span>' );
-			?>
-		</h2>
-
-		<?php if ( get_comment_pages_count() > 1 && get_option( 'page_comments' ) ) : // are there comments to navigate through ?>
-		<nav id="comment-nav-above">
-			<div class="nav-previous"><?php previous_comments_link( __('&larr; Older Comments', 'largo') ); ?></div>
-			<div class="nav-next"><?php next_comments_link( __('Newer Comments &rarr;', 'largo') ); ?></div>
-		</nav>
-		<?php endif; // check for comment navigation ?>
-
-		<ol class="commentlist">
-			<?php
-				/* Loop through and list the comments. Tell wp_list_comments()
-				 * to use argo_comment() to format the comments.
-				 * If you want to overload this in a child theme then you can
-				 * define argo_comment() and that will be used instead.
-				 * See argo_comment() in argo/functions.php for more.
-				 */
-				wp_list_comments( array( 'callback' => 'largo_comment' ) );
-			?>
-		</ol>
-
-		<?php if ( get_comment_pages_count() > 1 && get_option( 'page_comments' ) ) : // are there comments to navigate through ?>
-		<nav id="comment-nav-below">
-			<div class="nav-previous"><?php previous_comments_link( '&larr; Older Comments' ); ?></div>
-			<div class="nav-next"><?php next_comments_link( 'Newer Comments &rarr;' ); ?></div>
-		</nav>
-		<?php endif; // check for comment navigation ?>
+<div id="comments" class="comments-area">
 
 	<?php
-		/* If there are no comments and comments are closed, let's leave a little note, shall we?
-		 * But we don't want the note on pages or post types that do not support comments.
-		 */
-		elseif ( ! comments_open() && ! is_page() && post_type_supports( get_post_type(), 'comments' ) ) :
-	?>
-		<p class="nocomments notice"><?php _e('Comments are closed.', 'largo'); ?></p>
-	<?php endif; ?>
+	// You can start editing here -- including this comment!
+	if ( have_comments() ) : ?>
+		<h2 class="comments-title">
+			<?php
+				printf( // WPCS: XSS OK.
+					esc_html( _nx( 'One thought on &ldquo;%2$s&rdquo;', '%1$s thoughts on &ldquo;%2$s&rdquo;', get_comments_number(), 'comments title', 'largo' ) ),
+					number_format_i18n( get_comments_number() ),
+					'<span>' . get_the_title() . '</span>'
+				);
+			?>
+		</h2><!-- .comments-title -->
 
-	<?php comment_form(); ?>
+		<?php if ( get_comment_pages_count() > 1 && get_option( 'page_comments' ) ) : // Are there comments to navigate through? ?>
+		<nav id="comment-nav-above" class="navigation comment-navigation" role="navigation">
+			<h2 class="screen-reader-text"><?php esc_html_e( 'Comment navigation', 'largo' ); ?></h2>
+			<div class="nav-links">
+
+				<div class="nav-previous"><?php previous_comments_link( esc_html__( 'Older Comments', 'largo' ) ); ?></div>
+				<div class="nav-next"><?php next_comments_link( esc_html__( 'Newer Comments', 'largo' ) ); ?></div>
+
+			</div><!-- .nav-links -->
+		</nav><!-- #comment-nav-above -->
+		<?php endif; // Check for comment navigation. ?>
+
+		<ol class="comment-list">
+			<?php
+				wp_list_comments( array(
+					'style'      => 'ol',
+					'short_ping' => true,
+				) );
+			?>
+		</ol><!-- .comment-list -->
+
+		<?php if ( get_comment_pages_count() > 1 && get_option( 'page_comments' ) ) : // Are there comments to navigate through? ?>
+		<nav id="comment-nav-below" class="navigation comment-navigation" role="navigation">
+			<h2 class="screen-reader-text"><?php esc_html_e( 'Comment navigation', 'largo' ); ?></h2>
+			<div class="nav-links">
+
+				<div class="nav-previous"><?php previous_comments_link( esc_html__( 'Older Comments', 'largo' ) ); ?></div>
+				<div class="nav-next"><?php next_comments_link( esc_html__( 'Newer Comments', 'largo' ) ); ?></div>
+
+			</div><!-- .nav-links -->
+		</nav><!-- #comment-nav-below -->
+		<?php
+		endif; // Check for comment navigation.
+
+	endif; // Check for have_comments().
+
+
+	// If comments are closed and there are comments, let's leave a little note, shall we?
+	if ( ! comments_open() && get_comments_number() && post_type_supports( get_post_type(), 'comments' ) ) : ?>
+
+		<p class="no-comments"><?php esc_html_e( 'Comments are closed.', 'largo' ); ?></p>
+	<?php
+	endif;
+
+	comment_form();
+	?>
 
 </div><!-- #comments -->

@@ -1,67 +1,45 @@
-# Largo
+[![Build Status](https://travis-ci.org/Automattic/_s.svg?branch=master)](https://travis-ci.org/Automattic/_s)
 
-A responsive WordPress framework designed for news publishers and developed by the Institute for Nonprofit News.
+_s
+===
 
-<img src="https://travis-ci.org/INN/Largo.svg?branch=develop" /> <img src="https://readthedocs.org/projects/largo/badge/?version=master" />
+Hi. I'm a starter theme called `_s`, or `underscores`, if you like. I'm a theme meant for hacking so don't use me as a Parent Theme. Instead try turning me into the next, most awesome, WordPress theme out there. That's what I'm here for.
 
----
+My ultra-minimal CSS might make me look like theme tartare but that means less stuff to get in your way when you're designing your awesome theme. Here are some of the other more interesting things you'll find here:
 
-**IMPORTANT!** THIS PROJECT IS UNDER ACTIVE DEVELOPMENT
+* A just right amount of lean, well-commented, modern, HTML5 templates.
+* A helpful 404 template.
+* A custom header implementation in `inc/custom-header.php` just add the code snippet found in the comments of `inc/custom-header.php` to your `header.php` template.
+* Custom template tags in `inc/template-tags.php` that keep your templates clean and neat and prevent code duplication.
+* Some small tweaks in `inc/extras.php` that can improve your theming experience.
+* A script at `js/navigation.js` that makes your menu a toggled dropdown on small screens (like your phone), ready for CSS artistry. It's enqueued in `functions.php`.
+* 2 sample CSS layouts in `layouts/` for a sidebar on either side of your content.
+* Smartly organized starter CSS in `style.css` that will help you to quickly get your design off the ground.
+* Licensed under GPLv2 or later. :) Use it to make something cool.
 
-We are making regular updates that may or may not always play nice with previous versions.
+Getting Started
+---------------
 
-For released versions of Largo, please see the [list of tagged releases](https://github.com/INN/Largo/releases).
+If you want to keep it simple, head over to http://underscores.me and generate your `_s` based theme from there. You just input the name of the theme you want to create, click the "Generate" button, and you get your ready-to-awesomize starter theme.
 
-The `master` branch is the latest stable version and what INN is using for our sites in production (with a few minor tweaks specific to our hosting environment). Please do not submit pull requests to this branch unless they are minor hotfixes that can be directly merged.
+If you want to set things up manually, download `_s` from GitHub. The first thing you want to do is copy the `_s` directory and change the name to something else (like, say, `megatherium-is-awesome`), and then you'll need to do a five-step find and replace on the name in all the templates.
 
-The `develop` branch contains work in progress slated for our next point release. Feel free to try it out, report issues, etc. but we DO NOT recommend using it in production. This is also typically the branch to submit pull requests to if you want to contribute to the project.
+1. Search for `'_s'` (inside single quotations) to capture the text domain.
+2. Search for `_s_` to capture all the function names.
+3. Search for `Text Domain: _s` in style.css.
+4. Search for <code>&nbsp;_s</code> (with a space before it) to capture DocBlocks.
+5. Search for `_s-` to capture prefixed handles.
 
-Feedback, comments and questions to: [largo@inn.org](mailto:largo@inn.org)
+OR
 
----
+* Search for: `'_s'` and replace with: `'megatherium-is-awesome'`
+* Search for: `_s_` and replace with: `megatherium_is_awesome_`
+* Search for: `Text Domain: _s` and replace with: `Text Domain: megatherium-is-awesome` in style.css.
+* Search for: <code>&nbsp;_s</code> and replace with: <code>&nbsp;Megatherium_is_Awesome</code>
+* Search for: `_s-` and replace with: `megatherium-is-awesome-`
 
-## About Largo
+Then, update the stylesheet header in `style.css` and the links in `footer.php` with your own information. Next, update or delete this readme.
 
-<img align="right" src="/img/largo-login-logo.png" />
+Now you're ready to go! The next step is easy to say, but harder to do: make an awesome WordPress theme. :)
 
-**Largo** is a responsive WordPress starter/parent theme designed with the needs of news publisers in mind.
-
-The project extends work done by [NPR's Project Argo](http://argoproject.org/).
-
-**Documentation** and more information at: [largo.inn.org](https://largo.inn.org)
-
-**Support** is available [via our helpdesk system](http://support.largoproject.org/) or by emailing [support@largoproject.org](mailto:support@largoproject.org).
-
-**Current version:** v0.5.5.2
-
-**Minimum supported PHP version:** 5.3
-
-**Minimum supported WordPress version:** 4.1, though we usually recommend using the current version of WordPress
-
-## Setup
-
-Follow the [setup instructions in the documentation](http://largo.readthedocs.io/users/download.html).
-
-## Contributing
-
-We welcome contributions to any of open source projects.
-
-If you're not sure where to start, [review the open issues on github](https://github.com/INN/Largo/issues) (you might be particularly interested in the issues labelled [help wanted](https://github.com/INN/Largo/labels/help%20wanted) or [good for beginners](https://github.com/INN/Largo/issues?q=label%3A%22good+for+beginners%22)) and then see [our contributing guidelines](/contributing.md) to get started.
-
-If you're still not sure where to start, that's totally fine! [Just shoot us an email](mailto:nerds@inn.org) and we'll do our best to help.
-
-## Credits
-
-Built and maintained by the [Institute for Nonprofit News](http://inn.org) product and technology team ([@INNNerds](http://twitter.com/INNNerds)):
-
--  **[Adam Schweigert](https://github.com/aschweigert)** ([@aschweig](http://twitter.com/aschweig)), Senior Director of Product and Technology
--  **[RC Lations](https://github.com/rclations)** ([@rclations](https://twitter.com/rclations)), Lead Developer
--  **[Julia Smith](https://github.com/julia67)** ([@julia67](https://twitter.com/julia67)), Lead Designer
--  **[Ben Keith](https://github.com/benlk)** ([@benlkeith](http://twitter.com/benlkeith)), News Apps Developer
--  **[Gabriel Hongsdusit](https://github.com/gabehong)** ([@ghongsdusit](https://twitter.com/ghongsdusit)), Design Apprentice
-
-Special thanks to everyone who has contributed to the project, including: [rnagle](https://github.com/rnagle), [kaeti](https://github.com/kaeti), [jackbrighton](http://github.com/jackbrighton), [danielbachhuber](http://github.com/danielbachhuber), [willhaynes](http://github.com/willhaynes), [drywall](http://github.com/drywall), [nacin](http://github.com/nacin), [meredithinn](http://github.com/meredithinn), [tothebeat](http://github.com/tothebeat), [lindamood](http://github.com/lindamood), [mospaw](http://github.com/mospaw), [DrewAPicture](http://github.com/drewapicture), [nipoez](http://github.com/nipoez), [palewire](http://github.com/palewire), [GaryJones](http://github.com/garyjones), [seamusleahy](http://github.com/seamusleahy), [joshuarrrr](http://github.com/joshuarrrr), [yayannabelle](https://github.com/yayannabelle), [jmusal](https://github.com/jmusal), [ntwb](https://github.com/ntwb) and [MsPseudolus](https://github.com/MsPseudolus).
-
-This project builds on a number of great open source projects, including:
-
-* Project Argo: [argoproject.org](http://argoproject.org/)
+Good luck!

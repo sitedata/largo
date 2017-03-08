@@ -2,449 +2,142 @@
 /**
  * Largo functions and definitions
  *
- * When using a child theme (see http://codex.wordpress.org/Theme_Development and
- * http://codex.wordpress.org/Child_Themes), you can override certain functions
- * (those wrapped in a function_exists() call) by defining them first in your child theme's
- * functions.php file. The child theme's functions.php file is included before the parent
- * theme's file, so the child theme functions would be used.
- *
- * Functions that are not pluggable (not wrapped in function_exists()) are instead attached
- * to a filter or action hook. The hook can be removed by using remove_action() or
- * remove_filter() and you can attach your own function to the hook.
- *
- * We can remove the parent theme's hook only after it is attached, which means we need to
- * wait until setting up the child theme:
- *
- * <code>
- * add_action( 'after_setup_theme', 'my_child_theme_setup' );
- * function my_child_theme_setup() {
- *     // We are providing our own filter for excerpt_length (or using the unfiltered value)
- *     remove_filter( 'excerpt_length', 'eleven_excerpt_length' );
- *     ...
- * }
- * </code>
- *
- * For more information on hooks, actions, and filters, see http://codex.wordpress.org/Plugin_API.
+ * @link https://developer.wordpress.org/themes/basics/theme-functions/
  *
  * @package Largo
  */
 
+if ( ! function_exists( 'largo_setup' ) ) :
 /**
- * LARGO_DEBUG defines whether or not to use minified assets
+ * Sets up theme defaults and registers support for various WordPress features.
  *
- * Largo by default uses minified CSS and JavaScript files.
- * set LARGO_DEBUG to TRUE to use unminified JavaScript files
- * and unminified CSS files with sourcemaps to our LESS files.
- *
- * @since 0.5
+ * Note that this function is hooked into the after_setup_theme hook, which
+ * runs before the init hook. The init hook is too late for some features, such
+ * as indicating support for post thumbnails.
  */
-if ( ! defined( 'LARGO_DEBUG' ) )
-	define( 'LARGO_DEBUG', FALSE );
-
-// @TODO 1.0 do we need these? Do we need update scripts for this?
-/**
- * Image size constants, almost 100% that you won't need to change these
- */
-if ( ! defined( 'FULL_WIDTH' ) ) {
-	define( 'FULL_WIDTH', 1170 );
-}
-if ( ! defined( 'LARGE_WIDTH' ) ) {
-	define( 'LARGE_WIDTH', 771 );
-}
-if ( ! defined( 'MEDIUM_WIDTH' ) ) {
-	define( 'MEDIUM_WIDTH', 336 );
-}
-if ( ! defined( 'FULL_HEIGHT' ) ) {
-	define( 'FULL_HEIGHT', 9999 );
-}
-if ( ! defined( 'LARGE_HEIGHT' ) ) {
-	define( 'LARGE_HEIGHT', 9999 );
-}
-if ( ! defined( 'MEDIUM_HEIGHT' ) ) {
-	define( 'MEDIUM_HEIGHT', 9999 );
-}
-if ( ! isset( $content_width ) )
-	/**
-	 * Set the content width based on the theme's design and stylesheet.
-	 *
-	 * @ignore
-	 */
-	$content_width = 771;
-
-if ( ! isset( $largo ) )
+function largo_setup() {
 	/*
-	 * Set the global $largo var
+	 * Make theme available for translation.
+	 * Translations can be filed in the /languages/ directory.
+	 * If you're building a theme based on Largo, use a find and replace
+	 * to change 'largo' to the name of your theme in all the template files.
+	 */
+	load_theme_textdomain( 'largo', get_template_directory() . '/languages' );
+
+	// Add default posts and comments RSS feed links to head.
+	add_theme_support( 'automatic-feed-links' );
+
+	/*
+	 * Let WordPress manage the document title.
+	 * By adding theme support, we declare that this theme does not use a
+	 * hard-coded <title> tag in the document head, and expect WordPress to
+	 * provide it for us.
+	 */
+	add_theme_support( 'title-tag' );
+
+	/*
+	 * Enable support for Post Thumbnails on posts and pages.
 	 *
-	 * @ignore
+	 * @link https://developer.wordpress.org/themes/functionality/featured-images-post-thumbnails/
 	 */
-	$largo = array();
+	add_theme_support( 'post-thumbnails' );
 
-/*
- * load the options framework (used for our theme options pages)
- *
- * @ignore
- */
-if ( ! function_exists( 'optionsframework_init' ) ) {
-	define( 'OPTIONS_FRAMEWORK_DIRECTORY', get_template_directory_uri() . '/lib/options-framework/' );
-	require_once dirname( __FILE__ ) . '/lib/options-framework/options-framework.php';
+	// This theme uses wp_nav_menu() in one location.
+	register_nav_menus( array(
+		'menu-1' => esc_html__( 'Primary', 'largo' ),
+	) );
+
+	/*
+	 * Switch default core markup for search form, comment form, and comments
+	 * to output valid HTML5.
+	 */
+	add_theme_support( 'html5', array(
+		'search-form',
+		'comment-form',
+		'comment-list',
+		'gallery',
+		'caption',
+	) );
+
+	// Set up the WordPress core custom background feature.
+	add_theme_support( 'custom-background', apply_filters( 'largo_custom_background_args', array(
+		'default-color' => 'ffffff',
+		'default-image' => '',
+	) ) );
+
+	// Add theme support for selective refresh for widgets.
+	add_theme_support( 'customize-selective-refresh-widgets' );
 }
-
-/**
- * A class to represent the one true Largo theme instance
- */
-class Largo {
-
-	private static $instance;
-
-	public static function get_instance() {
-
-		if ( ! isset( self::$instance ) ) {
-			self::$instance = new Largo;
-			self::$instance->load();
-		}
-
-		return self::$instance;
-	}
-
-	/**
-	 * Load the theme
-	 */
-	private function load() {
-
-		$this->require_files();
-
-		$this->register_nav_menus();
-		$this->register_media_sizes();
-		$this->template_constants();
-
-		$this->customizer = Largo_Customizer::get_instance();
-
-	}
-
-	/**
-	 * Load required files
-	 */
-	private function require_files() {
-
-		// @todo: is there a reason this is not sorted?
-		$includes = array(
-			'/largo-apis.php',
-			'/inc/ajax-functions.php',
-			'/inc/helpers.php',
-			'/inc/dashboard.php',
-			'/inc/custom-feeds.php',
-			'/inc/users.php',
-			'/inc/term-meta.php',
-			'/inc/sidebars.php',
-			'/inc/customizer/customizer.php',
-			'/inc/widgets.php',
-			'/inc/nav-menus.php',
-			'/inc/taxonomies.php',
-			'/inc/term-icons.php',
-			'/inc/term-sidebars.php',
-			'/inc/images.php',
-			'/inc/editor.php',
-			'/inc/post-metaboxes.php',
-			'/inc/open-graph.php',
-			'/inc/verify.php',
-			'/inc/post-tags.php',
-			'/inc/byline_class.php',
-			'/inc/header-footer.php',
-			'/inc/related-content.php',
-			'/inc/featured-content.php',
-			'/inc/enqueue.php',
-			'/inc/post-social.php',
-			'/inc/post-templates.php',
-			'/inc/home-templates.php',
-			'/inc/update.php',
-			'/inc/featured-media.php',
-			'/inc/deprecated.php',
-			'/inc/pagination.php',
-			'/inc/conditionals.php'
-		);
-
-		if ( $this->is_less_enabled() ) {
-			$includes[] = '/inc/custom-less-variables.php';
-		}
-
-		foreach ( $includes as $include ) {
-			require_once( get_template_directory() . $include );
-		}
-
-		// If the plugin is already active, don't cause fatals
-		if ( ! class_exists( 'Navis_Media_Credit' ) ) {
-			require_once dirname( __FILE__ ) . '/lib/navis-media-credit/navis-media-credit.php';
-		}
-
-		if ( ! class_exists( 'Navis_Slideshows' ) ) {
-			require_once dirname( __FILE__ ) . '/lib/navis-slideshows/navis-slideshows.php';
-		}
-
-	}
-
-	/**
-	 * Register the nav menus for the theme
-	 */
-	private function register_nav_menus() {
-
-		$menus = array(
-			'global-nav' => __( 'Global Navigation', 'largo' ),
-			'main-nav' => __( 'Main Navigation', 'largo' ),
-			'dont-miss' => __( 'Don\'t Miss', 'largo' ),
-			'footer' => __( 'Footer Navigation', 'largo' ),
-			'footer-bottom' => __( 'Footer Bottom', 'largo' )
-		);
-		register_nav_menus( $menus );
-
-		// Avoid database writes on the frontend
-		if ( ! is_admin() ) {
-			return;
-		}
-
-		//Try to automatically link menus to each of the locations.
-		foreach ( $menus as $location => $label ) {
-			// if a location isn't wired up...
-			if ( ! has_nav_menu( $location ) ) {
-
-				// get or create the nav menu
-				$nav_menu = wp_get_nav_menu_object( $label );
-				if ( ! $nav_menu ) {
-					$new_menu_id = wp_create_nav_menu( $label );
-					$nav_menu = wp_get_nav_menu_object( $new_menu_id );
-				}
-
-				// wire it up to the location
-				$locations = get_theme_mod( 'nav_menu_locations' );
-				$locations[ $location ] = $nav_menu->term_id;
-				set_theme_mod( 'nav_menu_locations', $locations );
-			}
-		}
-
-	}
-
-	/**
-	 * Register image and media sizes associated with the theme
-	 */
-	private function register_media_sizes() {
-
-		add_theme_support( 'post-thumbnails' );
-		set_post_thumbnail_size( 140, 140, true ); // thumbnail
-		add_image_size( '60x60', 60, 60, true ); // small thumbnail
-		add_image_size( 'medium', MEDIUM_WIDTH, MEDIUM_HEIGHT ); // medium width scaling
-		add_image_size( 'large', LARGE_WIDTH, LARGE_HEIGHT ); // large width scaling
-		add_image_size( 'full', FULL_WIDTH, FULL_HEIGHT ); // full width scaling
-		add_image_size( 'third-full', FULL_WIDTH / 3, 500, true ); // large width scaling
-		add_image_size( 'two-third-full', FULL_WIDTH / 3 * 2, 500, true ); // large width scaling
-		add_image_size( 'rect_thumb', 800, 600, true ); // used for cat/tax archive pages
-
-		add_filter( 'pre_option_thumbnail_size_w', function(){
-			return 140;
-		});
-		add_filter( 'pre_option_thumbnail_size_h', function(){
-			return 140;
-		});
-		add_filter( 'pre_option_thumbnail_crop', '__return_true' );
-		add_filter( 'pre_option_medium_size_w', function(){
-			return MEDIUM_WIDTH;
-		});
-		add_filter( 'pre_option_medium_size_h', function(){
-			return 9999;
-		});
-		add_filter( 'pre_option_large_size_w', function(){
-			return LARGE_WIDTH;
-		});
-		add_filter( 'pre_option_large_size_h', function(){
-			return 9999;
-		});
-		add_filter( 'pre_option_embed_autourls', '__return_true' );
-		add_filter( 'pre_option_embed_size_w', function(){
-			return LARGE_WIDTH;
-		});
-		add_filter( 'pre_option_embed_size_h', function(){
-			return 9999;
-		});
-
-	}
-
-	/**
-	 * Template display constants, you can override these in your child theme's
-	 * functions.php by doing something like:
-	 * define( 'SHOW_GLOBAL_NAV', FALSE );
-	 */
-	private function template_constants() {
-		/* Navigation */
-		if ( ! defined( 'SHOW_GLOBAL_NAV' ) ) {
-			define( 'SHOW_GLOBAL_NAV', TRUE );
-		}
-		/*
-		 * SHOW_STICKY_NAV is deprecated.
-		 * @link https://github.com/INN/Largo/issues/1135
-		 * @since 0.5.5
-		 */
-		if ( ! defined( 'SHOW_STICKY_NAV' ) ) {
-			define( 'SHOW_STICKY_NAV', FALSE );
-		}
-		if ( ! defined( 'SHOW_MAIN_NAV' ) ) {
-			define( 'SHOW_MAIN_NAV', TRUE );
-		}
-		if ( ! defined( 'SHOW_SECONDARY_NAV' ) ) {
-			if ( of_get_option( 'show_dont_miss_menu' ) ) {
-				define( 'SHOW_SECONDARY_NAV', TRUE );
-			} else {
-				define( 'SHOW_SECONDARY_NAV', FALSE );
-			}
-		}
-
-		/* Category */
-		if ( ! defined( 'SHOW_CATEGORY_RELATED_TOPICS' ) ) {
-			define( 'SHOW_CATEGORY_RELATED_TOPICS', TRUE );
-		}
-	}
-
-	/**
-	 * Is the LESS feature enabled?
-	 */
-	public function is_less_enabled() {
-		return (bool) of_get_option( 'less_enabled' );
-	}
-
-	/**
-	 * Is a given plugin active?
-	 *
-	 * @param string $plugin_slug
-	 * @return bool
-	 */
-	public function is_plugin_active( $plugin_slug ) {
-
-		switch ( $plugin_slug ) {
-			case 'co-authors-plus':
-				return (bool) class_exists( 'coauthors_plus' );
-
-			default:
-				return false;
-		}
-
-	}
-
-}
-
-/**
- * Load the theme
- *
- * @ignore
- */
-function Largo() {
-	return Largo::get_instance();
-}
-add_action( 'after_setup_theme', 'Largo' );
-
-/**
- * Prints an admin warning if php is out of date.
- */
-function largo_php_warning() {
-
-	$minver = "5.3.0";
-	$curver = phpversion();
-
-	if( current_user_can('update_themes') && version_compare( $curver, $minver, "<" ) ) :
-		$warning = "Largo requires <b>PHP $minver</b>. You're running <b>$curver</b>. Please upgrade your version of php.";
- 		echo "<div class='update-nag'>";
-    	_e( $warning, 'largo' );
- 		echo "</div>";
- 	endif;
-
-}
-add_action( 'admin_notices', 'largo_php_warning' );
-
-/*
- * Load up all of the other goodies from the /inc directory
- */
-$includes = array();
-
-/*
- * This functionality is probably not for everyone so we'll make it easy to turn it on or off
- */
-if ( of_get_option( 'custom_landing_enabled' ) && of_get_option( 'series_enabled' ) )
-	$includes[] = '/inc/wp-taxonomy-landing/taxonomy-landing.php'; // adds taxonomy landing plugin
-
-/*
- * Perform load
- */
-foreach ( $includes as $include ) {
-	require_once( get_template_directory() . $include );
-}
-
-if ( ! function_exists( 'largo_setup' ) ) {
-	/**
-	 * Sets up theme defaults and registers support for various WordPress features.
-	 *
-	 * Note that this function is hooked into the after_setup_theme hook, which runs
-	 * before the init hook. The init hook is too late for some features, such as indicating
-	 * support post thumbnails.
-	 *
-	 * To override largo_setup() in a child theme, add your own largo_setup() to your child theme's
-	 * functions.php file.
-	 */
-	function largo_setup() {
-
-		// This theme styles the visual editor with editor-style.css to match the theme style.
-		add_editor_style('/css/editor-style.css');
-
-		// Add default posts and comments RSS feed links to <head>.
-		add_theme_support( 'automatic-feed-links' );
-
-		// Add support for localization (this is a work in progress)
-		load_theme_textdomain('largo', get_template_directory() . '/lang');
-
-		//Add support for <title> tags
-		add_theme_support( 'title-tag' );
-
-	}
-}
+endif;
 add_action( 'after_setup_theme', 'largo_setup' );
 
-if ( ! function_exists( 'of_set_option' ) ) {
-	/**
-	 * Helper for setting specific theme options (optionsframework).
-	 *
-	 * Would be nice if optionsframework included this natively
-	 * See https://github.com/devinsays/options-framework-plugin/issues/167
-	 */
-	function of_set_option( $option_name, $option_value ) {
-		$config = get_option( 'optionsframework' );
+/**
+ * Set the content width in pixels, based on the theme's design and stylesheet.
+ *
+ * Priority 0 to make it available to lower priority callbacks.
+ *
+ * @global int $content_width
+ */
+function largo_content_width() {
+	$GLOBALS['content_width'] = apply_filters( 'largo_content_width', 640 );
+}
+add_action( 'after_setup_theme', 'largo_content_width', 0 );
 
-		if ( ! isset( $config['id'] ) ) {
-			return false;
-		}
+/**
+ * Register widget area.
+ *
+ * @link https://developer.wordpress.org/themes/functionality/sidebars/#registering-a-sidebar
+ */
+function largo_widgets_init() {
+	register_sidebar( array(
+		'name'          => esc_html__( 'Sidebar', 'largo' ),
+		'id'            => 'sidebar-1',
+		'description'   => esc_html__( 'Add widgets here.', 'largo' ),
+		'before_widget' => '<section id="%1$s" class="widget %2$s">',
+		'after_widget'  => '</section>',
+		'before_title'  => '<h2 class="widget-title">',
+		'after_title'   => '</h2>',
+	) );
+}
+add_action( 'widgets_init', 'largo_widgets_init' );
 
-		$options = get_option( $config['id'] );
+/**
+ * Enqueue scripts and styles.
+ */
+function largo_scripts() {
+	wp_enqueue_style( 'largo-style', get_stylesheet_uri() );
 
-		if ( $options ) {
-			$options[$option_name] = $option_value;
-			return update_option( $config['id'], $options );
-		}
+	wp_enqueue_script( 'largo-navigation', get_template_directory_uri() . '/js/navigation.js', array(), '20151215', true );
 
-		return false;
+	wp_enqueue_script( 'largo-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), '20151215', true );
+
+	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
+		wp_enqueue_script( 'comment-reply' );
 	}
 }
+add_action( 'wp_enqueue_scripts', 'largo_scripts' );
 
 /**
- * Gallery Default Settings
- * Adds a '0' option for gallery columns
+ * Implement the Custom Header feature.
  */
-add_action( 'wp_enqueue_media', 'gallery_zero_columns' );
-function gallery_zero_columns() {
-	$columns_src = get_template_directory_uri() . '/lib/navis-slideshows/js/navis-columns.js';
-	wp_enqueue_script( 'navis-columns', $columns_src, array( 'jquery' ), '1.0', true );
-}
+require get_template_directory() . '/inc/custom-header.php';
+
 /**
- * Gallery Default Settings
- * @param Array $settings
- * @return Array $settings
-*/
-function theme_gallery_defaults( $settings ) {
-	// Sets default column setting to 0
-	$settings['galleryDefaults']['columns'] = 0;
-	return $settings;
-}
-add_filter( 'media_view_settings', 'theme_gallery_defaults' );
+ * Custom template tags for this theme.
+ */
+require get_template_directory() . '/inc/template-tags.php';
+
+/**
+ * Custom functions that act independently of the theme templates.
+ */
+require get_template_directory() . '/inc/extras.php';
+
+/**
+ * Customizer additions.
+ */
+require get_template_directory() . '/inc/customizer.php';
+
+/**
+ * Load Jetpack compatibility file.
+ */
+require get_template_directory() . '/inc/jetpack.php';
