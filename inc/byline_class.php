@@ -69,7 +69,7 @@ class Largo_Byline {
 		ob_start();
 
 		// Author-specific portion of byline
-		$this->avatar();
+//		$this->avatar(); @TODO 1.0 replace with hook
 		$this->author_link();
 		$this->job_title();
 		$this->twitter();
@@ -89,37 +89,6 @@ class Largo_Byline {
 	 */
 	public function __toString() {
 		return $this->output;
-	}
-
-	/**
-	 * On single posts, output the avatar for the author object
-	 * This supports both Largo_Byline and Largo_CoAuthors_Byline
-	 */
-	function avatar() {
-		
-		// only do avatars if it's a single post
-		if ( ! is_single() ) {
-			$output = '';
-		} else {
-			$author_email = get_the_author_meta( 'email', $this->author_id );
-			if ( $this->author->type == 'guest-author' && get_the_post_thumbnail( $this->author->ID ) ) {
-				$output = get_the_post_thumbnail( $this->author->ID, array( 60,60 ) );
-				$output = str_replace( 'attachment-32x32', 'avatar avatar-32 photo', $output );
-				$output = str_replace( 'wp-post-image', '', $output );
-			} else if ( largo_has_avatar( $author_email ) ) {
-				$output = get_avatar(
-					$author_email,
-					32,
-					'',
-					get_the_author_meta( 'display_name', $this->author_id ),
-					array(
-						'class' => 'avatar avatar-32 photo',
-					)
-				);
-			}
-			$output .= ' '; // to reduce run-together bylines
-		}
-		echo $output;
 	}
 
 	/**
@@ -242,7 +211,7 @@ class Largo_CoAuthors_Byline extends Largo_Byline {
 
 			ob_start();
 
-			$this->avatar();
+//			$this->avatar();	@TODO 1.0 add hook here instead
 			$this->author_link();
 			$this->job_title();
 			$this->organization();
