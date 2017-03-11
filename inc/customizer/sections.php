@@ -29,5 +29,29 @@ function _customize_sections( $wp_customize ) {
 			'panel'    => 'site-options',
 		)
 	);
+
+	// Homepage Layout
+	$wp_customize->add_section(
+		'largo_homepage_layout_section',
+		array(
+			'title'    => esc_html__( 'Homepage', 'largo' ),
+			'priority' => 10,
+			'panel'    => 'layout',
+		)
+	);
+
+	$mods = get_theme_mod( 'largo_homepage_layout_settings' );
+	$count = 1;
+	while ( $mods >= $count ) {
+		$wp_customize->add_section(
+			"largo_homepage_layout_section-$count",
+			array(
+				'title'    => esc_html__( "Section $count", 'largo' ),
+				'priority' => 10,
+				'panel'    => 'layout',
+			)
+		);
+		$count++;
+	}
 }
 add_action( 'customize_register', '_customize_sections' );

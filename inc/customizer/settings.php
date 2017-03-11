@@ -113,3 +113,64 @@ function _customize_copyright_text( $wp_customize ) {
 	);
 }
 add_action( 'customize_register', '_customize_copyright_text' );
+
+/**
+ *
+ */
+function largo_customize_homepage_layout( $wp_customize ) {
+
+	// Register a setting.
+	$wp_customize->add_setting(
+		'largo_homepage_layout_settings',
+		array(
+			'default' => '',
+		)
+	);
+
+	$wp_customize->add_control(
+		'largo_homepage_layout_settings',
+		array(
+			'label'    => __( 'Sections', 'largo' ),
+			'description' => __( 'How many content sections?', 'largo' ),
+			'section'  => 'largo_homepage_layout_section',
+			'type'     => 'radio',
+			'choices'  => array(
+				'1'  => 'One',
+				'2' => 'Two',
+				'3' => 'Three',
+				'4' => 'Four',
+				'5' => 'Five',
+			),
+		)
+	);
+
+	$mods = get_theme_mod( 'largo_homepage_layout_settings' );
+	$count = 1;
+	while ( $mods >= $count ) {
+		$wp_customize->add_setting(
+			"largo_homepage_layout_settings_$count",
+			array(
+				'default' => '',
+			)
+		);
+
+		$wp_customize->add_control(
+			"largo_homepage_layout_settings_$count",
+			array(
+				'label'    => __( 'Section Columns', 'largo' ),
+				'description' => __( 'How many columns in this section?', 'largo' ),
+				'section'  => "largo_homepage_layout_section-$count",
+				'type'     => 'radio',
+				'choices'  => array(
+					'1'  => 'One',
+					'2' => 'Two',
+					'3' => 'Three',
+					'4' => 'Four',
+				),
+			)
+		);
+		$count++;
+	}
+
+}
+add_action( 'customize_register', 'largo_customize_homepage_layout' );

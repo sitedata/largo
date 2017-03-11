@@ -18,5 +18,14 @@ function _customize_panels( $wp_customize ) {
 		'title'          => esc_html__( 'Site Options', 'largo' ),
 		'description'    => esc_html__( 'Other theme options.', 'largo' ),
 	) );
+
+	// Register a new panel.
+	$wp_customize->add_panel( 'layout', array(
+		'priority'       => 10,
+		'capability'     => 'edit_theme_options',
+		'theme_supports' => '',
+		'title'          => esc_html__( 'Layout', 'largo' ),
+		'description'    => esc_html__( 'Page layouts.', 'largo' ),
+	) );
 }
 add_action( 'customize_register', '_customize_panels' );
