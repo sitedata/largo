@@ -34,7 +34,7 @@ function _customize_sections( $wp_customize ) {
 	$wp_customize->add_section(
 		'largo_homepage_layout_section',
 		array(
-			'title'    => esc_html__( 'Homepage', 'largo' ),
+			'title'    => esc_html__( 'Sections', 'largo' ),
 			'priority' => 10,
 			'panel'    => 'layout',
 		)

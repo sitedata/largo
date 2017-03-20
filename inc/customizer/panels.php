@@ -24,8 +24,8 @@ function _customize_panels( $wp_customize ) {
 		'priority'       => 10,
 		'capability'     => 'edit_theme_options',
 		'theme_supports' => '',
-		'title'          => esc_html__( 'Layout', 'largo' ),
-		'description'    => esc_html__( 'Page layouts.', 'largo' ),
+		'title'          => esc_html__( 'Homepage Layout', 'largo' ),
+		'description'    => esc_html__( 'Homepage layouts.', 'largo' ),
 	) );
 }
 add_action( 'customize_register', '_customize_panels' );
