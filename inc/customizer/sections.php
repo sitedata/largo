@@ -46,7 +46,7 @@ function _customize_sections( $wp_customize ) {
 		$wp_customize->add_section(
 			"largo_homepage_layout_section-$count",
 			array(
-				'title'    => esc_html__( "Section $count", 'largo' ),
+				'title'    => esc_html__( 'Section ', 'largo' ) . $count,
 				'priority' => 10,
 				'panel'    => 'layout',
 			)
