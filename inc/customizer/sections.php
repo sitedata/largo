@@ -36,7 +36,7 @@ function _customize_sections( $wp_customize ) {
 		array(
 			'title'    => esc_html__( 'Sections', 'largo' ),
 			'priority' => 10,
-			'panel'    => 'layout',
+			'panel'    => 'homepage_layout',
 		)
 	);
 
@@ -48,7 +48,7 @@ function _customize_sections( $wp_customize ) {
 			array(
 				'title'    => esc_html__( 'Section ', 'largo' ) . $count,
 				'priority' => 10,
-				'panel'    => 'layout',
+				'panel'    => 'homepage_layout',
 			)
 		);
 		$count++;
