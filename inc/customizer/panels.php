@@ -26,7 +26,6 @@ function _customize_panels( $wp_customize ) {
 		'theme_supports' => '',
 		'title'          => esc_html__( 'Homepage Layout', 'largo' ),
 		'description'    => esc_html__( 'Homepage layouts.', 'largo' ),
-		'active_callback' => 'is_front_page',
 	) );
 }
 add_action( 'customize_register', '_customize_panels' );

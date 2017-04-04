@@ -17,12 +17,20 @@ function _include_custom_controls() {
 add_action( 'customize_register', '_include_custom_controls', -999 );
 
 /**
- * Enqueue customizer related scripts.
+ * Enqueue customizer preview related scripts.
  */
-function _customize_scripts() {
-	wp_enqueue_script( 'largo-customize-livepreview', get_template_directory_uri() . '/inc/customizer/assets/scripts/livepreview.js', array( 'jquery', 'customize-preview' ), '1.0.0', true );
+function largo_customizer_preview_js() {
+	wp_enqueue_script( 'largo-customize-preview', get_template_directory_uri() . '/inc/customizer/assets/scripts/customize-preview.js', array( 'customize-preview' ), '1.0', true );
 }
-add_action( 'customize_preview_init', '_customize_scripts' );
+add_action( 'customize_preview_init', 'largo_customizer_preview_js' );
+
+/**
+ * Load dynamic logic for the customizer controls area.
+ */
+function largo_customizer_panels_js() {
+	wp_enqueue_script( 'largo-customize-controls', get_template_directory_uri() . '/inc/customizer/assets/scripts/customize-controls.js', array( 'jquery', 'customize-controls' ), '1.0', true );
+}
+add_action( 'customize_controls_enqueue_scripts', 'largo_customizer_panels_js' );
 
 /**
  * Add support for the fancy new edit icons.

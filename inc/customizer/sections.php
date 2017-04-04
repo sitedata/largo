@@ -41,6 +41,7 @@ function _customize_sections( $wp_customize ) {
 	);
 
 	$mods = get_theme_mod( 'largo_homepage_layout_settings' );
+	$mods = 5;
 	$count = 1;
 	while ( $mods >= $count ) {
 		$wp_customize->add_section(

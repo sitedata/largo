@@ -1,4 +1,4 @@
-<?php
+ <?php
 /**
  * Customizer settings.
  *
@@ -124,6 +124,7 @@ function largo_customize_homepage_layout( $wp_customize ) {
 		'largo_homepage_layout_settings',
 		array(
 			'default' => '',
+    	'transport' => 'postMessage',
 		)
 	);
 
@@ -144,13 +145,15 @@ function largo_customize_homepage_layout( $wp_customize ) {
 		)
 	);
 
-	$mods = get_theme_mod( 'largo_homepage_layout_settings' );
+//	$mods = get_theme_mod( 'largo_homepage_layout_settings' );
+	$mods = 5;
 	$count = 1;
 	while ( $mods >= $count ) {
 		$wp_customize->add_setting(
 			"largo_homepage_layout_settings_$count",
 			array(
 				'default' => '',
+				'transport' => 'postMessage',
 			)
 		);
 
