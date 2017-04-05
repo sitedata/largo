@@ -19,13 +19,15 @@ get_header(); ?>
 
 		<?php
 		$homepage_sections = get_theme_mod( 'largo_homepage_layout_settings' );
-		$count = 1;
-		while ( $count <= $homepage_sections ) {
-			$columns = get_theme_mod( "largo_homepage_layout_settings_$count" );
-			echo '<div style="background: red; width: 20px; height: 20px; margin: 1em;">';
-				echo $columns;
-			echo '</div>';
-			$count++;
+		if ( $homepage_sections || is_customize_preview() ) {
+			$count = 1;
+			while ( $count <= $homepage_sections ) {
+				$columns = get_theme_mod( "largo_homepage_layout_settings_$count" );
+				echo '<div style="background: red; width: 20px; height: 20px; margin: 1em;">';
+					echo $columns;
+				echo '</div>';
+				$count++;
+			}
 		}
 		?>
 
