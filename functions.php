@@ -98,6 +98,28 @@ function largo_widgets_init() {
 		'before_title'  => '<h2 class="widget-title">',
 		'after_title'   => '</h2>',
 	) );
+
+	$homepage_sections = get_theme_mod( 'largo_homepage_layout_settings', 5 );
+	if ( $homepage_sections || is_customize_preview() ) {
+		$count = 1;
+		while ( $count <= $homepage_sections ) {
+			$columns = get_theme_mod( "largo_homepage_layout_settings_$count", 4 );
+			$column_count = 1;
+			while ( $column_count <= $columns ) {
+				register_sidebar( array(
+					'name'          => esc_html__( "Homepage Section $count Column $column_count", 'largo' ),
+					'id'            => "section-$count-column-$column_count",
+					'description'   => esc_html__( 'Add widgets here.', 'largo' ),
+					'before_widget' => '<section id="%1$s" class="widget %2$s">',
+					'after_widget'  => '</section>',
+					'before_title'  => '<h2 class="widget-title">',
+					'after_title'   => '</h2>',
+				) );
+				$column_count++;
+			}
+			$count++;
+		}
+	}
 }
 add_action( 'widgets_init', 'largo_widgets_init' );
 

@@ -18,13 +18,25 @@ get_header(); ?>
 		<main id="main" class="site-main" role="main">
 
 		<?php
-		$homepage_sections = get_theme_mod( 'largo_homepage_layout_settings' );
+		$homepage_sections = get_theme_mod( 'largo_homepage_layout_settings', 5 );
 		if ( $homepage_sections || is_customize_preview() ) {
 			$count = 1;
 			while ( $count <= $homepage_sections ) {
-				$columns = get_theme_mod( "largo_homepage_layout_settings_$count" );
+				$columns = get_theme_mod( "largo_homepage_layout_settings_$count", 5 );
+				$column_count = 1;
+				while ( $column_count <= $columns ) {
+
+					if ( is_active_sidebar( "section-$count-column-$column_count" ) ) : ?>
+						<div id="primary-sidebar" class="primary-sidebar widget-area" role="complementary">
+							<?php dynamic_sidebar( "section-$count-column-$column_count" ); ?>
+						</div><!-- #primary-sidebar -->
+					<?php endif;
+
+					$column_count++;
+				}
 				echo '<div style="background: red; width: 20px; height: 20px; margin: 1em;">';
 					echo $columns;
+
 				echo '</div>';
 				$count++;
 			}
