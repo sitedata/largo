@@ -29,27 +29,27 @@
 
 		api( 'largo_homepage_layout_settings', function( setting ) {
 
+			var setupControls = [];
+			// Build logic dynamically for 5 homepage sections
 			for ( var i = 1; i <= 5; i++ ) {
 				(function (i) {
-					var setupControls = [];
 					setupControls[i] = function( control ) {
 						var setActiveState, isDisplayed;
 						isDisplayed = function() {
-									return i <= setting.get();
+							return i <= setting.get();
 						};
 						setActiveState = function() {
 							control.active.set( isDisplayed() );
 						};
-								control.active.validate = isDisplayed;
+						control.active.validate = isDisplayed;
 						setActiveState();
 						setting.bind( setActiveState );
 					};
 
 					api.control( 'largo_homepage_layout_settings_' + i, setupControls[i] );
 
-					var selector = 'largo_homepage_layout_section-' + i;
 					// Detect when the front page sections section is expanded (or closed) so we can adjust the preview accordingly.
-					api.section( selector, function( section ) {
+					api.section( 'largo_homepage_layout_section-' + i, function( section ) {
 						section.expanded.bind( function( isExpanding ) {
 							api.previewer.send( 'section-highlight', {
 								expanded: isExpanding,
