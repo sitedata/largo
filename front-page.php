@@ -24,19 +24,21 @@ get_header(); ?>
 			while ( $count <= $homepage_sections ) {
 				$columns = get_theme_mod( "largo_homepage_layout_settings_$count", 5 );
 				$column_count = 1;
+				echo '<div class="section" id="section-' . $count . '" style="border: solid 1px blue; margin: 1em; padding: 1em;">';
+				echo $columns;
 				while ( $column_count <= $columns ) {
+					?>
+					<div class="column panel-placeholder" style="border: dashed 1px red; padding: 1em; margin: 1em;">
+						<?php if ( is_active_sidebar( "section-$count-column-$column_count" ) ) : ?>
+							<div id="primary-sidebar" class="primary-sidebar widget-area" role="complementary">
+								<?php dynamic_sidebar( "section-$count-column-$column_count" ); ?>
+							</div><!-- #primary-sidebar -->
+						<?php endif; ?>
+					</div>
 
-					if ( is_active_sidebar( "section-$count-column-$column_count" ) ) : ?>
-						<div id="primary-sidebar" class="primary-sidebar widget-area" role="complementary">
-							<?php dynamic_sidebar( "section-$count-column-$column_count" ); ?>
-						</div><!-- #primary-sidebar -->
-					<?php endif;
-
+					<?php
 					$column_count++;
 				}
-				echo '<div style="background: red; width: 20px; height: 20px; margin: 1em;">';
-					echo $columns;
-
 				echo '</div>';
 				$count++;
 			}

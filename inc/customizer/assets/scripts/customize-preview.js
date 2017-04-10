@@ -18,15 +18,16 @@
 		api.preview.bind( 'section-highlight', function( data ) {
 
 			// Only on the front page.
-			if ( ! $( 'body' ).hasClass( 'twentyseventeen-front-page' ) ) {
+			if ( ! $( 'body' ).hasClass( 'home' ) ) {
 				return;
 			}
 
 			// When the section is expanded, show and scroll to the content placeholders, exposing the edit links.
 			if ( true === data.expanded ) {
-				$( 'body' ).addClass( 'highlight-front-sections' );
-				$( '.panel-placeholder' ).slideDown( 200, function() {
-					$.scrollTo( $( '#panel1' ), {
+				$( 'body' ).addClass( 'highlight-front-section-' + data.section );
+
+				$( '#section-' + data.section + ' .panel-placeholder' ).slideDown( 200, function() {
+					$.scrollTo( $( '#section-' + data.section ), {
 						duration: 600,
 						offset: { 'top': -70 } // Account for sticky menu.
 					});
