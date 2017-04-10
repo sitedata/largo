@@ -28,113 +28,38 @@
 		} );
 
 		api( 'largo_homepage_layout_settings', function( setting ) {
-		    var setupControl_1 = function( control ) {
-		        var setActiveState, isDisplayed;
-		        isDisplayed = function() {
-							return 1 <= setting.get();
-		        };
-		        setActiveState = function() {
-		            control.active.set( isDisplayed() );
-		        };
-						control.active.validate = isDisplayed;
-		        setActiveState();
-		        setting.bind( setActiveState );
-		    };
 
-				var setupControl_2 = function( control ) {
+			for ( var i = 1; i <= 5; i++ ) {
+				(function (i) {
+					var setupControls = [];
+					setupControls[i] = function( control ) {
 						var setActiveState, isDisplayed;
 						isDisplayed = function() {
-							return 2 <= setting.get();
+									return i <= setting.get();
 						};
 						setActiveState = function() {
-								control.active.set( isDisplayed() );
+							control.active.set( isDisplayed() );
 						};
-						control.active.validate = isDisplayed;
+								control.active.validate = isDisplayed;
 						setActiveState();
 						setting.bind( setActiveState );
-				};
+					};
 
-				var setupControl_3 = function( control ) {
-						var setActiveState, isDisplayed;
-						isDisplayed = function() {
-							return 3 <= setting.get();
-						};
-						setActiveState = function() {
-								control.active.set( isDisplayed() );
-						};
-						control.active.validate = isDisplayed;
-						setActiveState();
-						setting.bind( setActiveState );
-				};
+					api.control( 'largo_homepage_layout_settings_' + i, setupControls[i] );
 
-				var setupControl_4 = function( control ) {
-						var setActiveState, isDisplayed;
-						isDisplayed = function() {
-							return 4 <= setting.get();
-						};
-						setActiveState = function() {
-								control.active.set( isDisplayed() );
-						};
-						control.active.validate = isDisplayed;
-						setActiveState();
-						setting.bind( setActiveState );
-				};
-
-				var setupControl_5 = function( control ) {
-						var setActiveState, isDisplayed;
-						isDisplayed = function() {
-							return 5 <= setting.get();
-						};
-						setActiveState = function() {
-								control.active.set( isDisplayed() );
-						};
-						control.active.validate = isDisplayed;
-						setActiveState();
-						setting.bind( setActiveState );
-				};
-
-				// Detect when the front page sections section is expanded (or closed) so we can adjust the preview accordingly.
-				api.section( 'largo_homepage_layout_section-1', function( section ) {
-					section.expanded.bind( function( isExpanding ) {
-						api.previewer.send( 'section-highlight', {
-							expanded: isExpanding,
-							section: 1,
-						});
-					} );
-				} );
-				// Detect when the front page sections section is expanded (or closed) so we can adjust the preview accordingly.
-				api.section( 'largo_homepage_layout_section-2', function( section ) {
-					section.expanded.bind( function( isExpanding ) {
-						api.previewer.send( 'section-highlight', {
-							expanded: isExpanding,
-							section: 2,
+					var selector = 'largo_homepage_layout_section-' + i;
+					// Detect when the front page sections section is expanded (or closed) so we can adjust the preview accordingly.
+					api.section( selector, function( section ) {
+						section.expanded.bind( function( isExpanding ) {
+							api.previewer.send( 'section-highlight', {
+								expanded: isExpanding,
+								section: i,
+							});
 						} );
 					} );
-				} );
-				// Detect when the front page sections section is expanded (or closed) so we can adjust the preview accordingly.
-				api.section( 'largo_homepage_layout_section-3', function( section ) {
-					section.expanded.bind( function( isExpanding ) {
-						api.previewer.send( 'section-highlight', {
-							expanded: isExpanding,
-							section: 3,
-						} );
-					} );
-				} );
-				// Detect when the front page sections section is expanded (or closed) so we can adjust the preview accordingly.
-				api.section( 'largo_homepage_layout_section-4', function( section ) {
-					section.expanded.bind( function( isExpanding ) {
-						api.previewer.send( 'section-highlight', {
-							expanded: isExpanding,
-							section: 4,
-						} );
-					} );
-				} );
+				})(i);
+			}
 
-		    api.control( 'largo_homepage_layout_settings_1', setupControl_1 );
-		    api.control( 'largo_homepage_layout_settings_2', setupControl_2 );
-		    api.control( 'largo_homepage_layout_settings_3', setupControl_3 );
-		    api.control( 'largo_homepage_layout_settings_4', setupControl_4 );
-		    api.control( 'largo_homepage_layout_settings_5', setupControl_5 );
 		} );
 
 		// from http://shibashake.com/wordpress-theme/wordpress-theme-customizer-javascript-interface
