@@ -8,12 +8,8 @@
 
 	var api = wp.customize;
 
-	// @TODO adapt this from twentyseventeen
 	// Collect information from customize-controls.js about which panels are opening.
 	api.bind( 'preview-ready', function() {
-
-		// Initially hide the theme option placeholders on load
-		$( '.panel-placeholder' ).hide();
 
 		api.preview.bind( 'section-highlight', function( data ) {
 
@@ -22,9 +18,23 @@
 				return;
 			}
 
+			if ( true === data.expanded ) {
+				$( '.section' ).addClass( 'highlight' );
+			} else {
+				$( '.section' ).removeClass( 'highlight' );
+			}
+		});
+
+		api.preview.bind( 'column-highlight', function( data ) {
+
+			// Only on the front page.
+			if ( ! $( 'body' ).hasClass( 'home' ) ) {
+				return;
+			}
+
 			// When the section is expanded, show and scroll to the content placeholders, exposing the edit links.
 			if ( true === data.expanded ) {
-				$( 'body' ).addClass( 'highlight-front-section-' + data.section );
+				$( '#section-' + data.section ).children().addClass( 'highlight' );
 
 				$( '#section-' + data.section + ' .panel-placeholder' ).slideDown( 200, function() {
 					$.scrollTo( $( '#section-' + data.section ), {
@@ -35,7 +45,7 @@
 
 			// If we've left the panel, hide the placeholders and scroll back to the top.
 			} else {
-				$( 'body' ).removeClass( 'highlight-front-sections' );
+				$( '#section-' + data.section ).children().removeClass( 'highlight' );
 				// Don't change scroll when leaving - it's likely to have unintended consequences.
 				$( '.panel-placeholder' ).slideUp( 200 );
 			}
