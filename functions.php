@@ -99,11 +99,11 @@ function largo_widgets_init() {
 		'after_title'   => '</h2>',
 	) );
 
-	$homepage_sections = get_theme_mod( 'largo_homepage_layout_settings', 5 );
+	$homepage_sections = is_customize_preview() ? 5 : get_theme_mod( 'largo_homepage_layout_settings', 5 );
 	if ( $homepage_sections || is_customize_preview() ) {
 		$count = 1;
 		while ( $count <= $homepage_sections ) {
-			$columns = get_theme_mod( "largo_homepage_layout_settings_$count", 4 );
+			$columns = is_customize_preview() ? 4 : get_theme_mod( "largo_homepage_layout_settings_$count", 4 );
 			$column_count = 1;
 			while ( $column_count <= $columns ) {
 				register_sidebar( array(
