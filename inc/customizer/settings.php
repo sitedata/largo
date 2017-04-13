@@ -128,20 +128,31 @@ function largo_customize_homepage_layout( $wp_customize ) {
 		)
 	);
 
-	$wp_customize->add_control(
-		'largo_homepage_layout_settings',
+	// Register a setting.
+	$wp_customize->add_setting(
+		'largo_homepage_layout_settings_test',
 		array(
-			'label'    => __( 'Sections', 'largo' ),
-			'description' => __( 'How many content sections?', 'largo' ),
-			'section'  => 'largo_homepage_layout_section',
-			'type'     => 'radio',
-			'choices'  => array(
-				'1'  => 'One',
-				'2' => 'Two',
-				'3' => 'Three',
-				'4' => 'Four',
-				'5' => 'Five',
-			),
+			'default' => '',
+    	'transport' => 'refresh',
+		)
+	);
+
+	$wp_customize->add_control(
+		new _Radio_Button_Custom_Control(
+			$wp_customize,
+			'largo_homepage_layout_settings',
+			array(
+				'label'    => __( 'Number of Content Sections', 'largo' ),
+				'description' => __( '', 'largo' ),
+				'section'     => 'largo_homepage_layout_section',
+				'choices'  => array(
+					'1'  => '1',
+					'2' => '2',
+					'3' => '3',
+					'4' => '4',
+					'5' => '5',
+				)
+			)
 		)
 	);
 
@@ -165,10 +176,10 @@ function largo_customize_homepage_layout( $wp_customize ) {
 				'section'  => "largo_homepage_layout_section-$count",
 				'type'     => 'radio',
 				'choices'  => array(
-					'1'  => 'One',
-					'2' => 'Two',
-					'3' => 'Three',
-					'4' => 'Four',
+					'1'  => '1',
+					'2' => '2',
+					'3' => '3',
+					'4' => '4',
 				),
 			)
 		);

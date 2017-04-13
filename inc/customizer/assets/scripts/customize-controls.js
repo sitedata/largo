@@ -92,5 +92,4 @@
 		// console.log( api.instance('blogname').get() );
 
 	} );
-
 })( jQuery );

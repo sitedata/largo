@@ -12,7 +12,8 @@ function _include_custom_controls() {
 	require get_template_directory() . '/inc/customizer/panels.php';
 	require get_template_directory() . '/inc/customizer/sections.php';
 	require get_template_directory() . '/inc/customizer/settings.php';
-	require get_template_directory() . '/inc/customizer/tinymce.php';
+	require get_template_directory() . '/inc/customizer/controls/tinymce.php';
+	require get_template_directory() . '/inc/customizer/controls/radiobutton.php';
 }
 add_action( 'customize_register', '_include_custom_controls', -999 );
 
@@ -25,12 +26,15 @@ function largo_customizer_preview_js() {
 add_action( 'customize_preview_init', 'largo_customizer_preview_js' );
 
 /**
- * Load dynamic logic for the customizer controls area.
+ * Load dynamic logic & styles for the customizer controls area.
  */
-function largo_customizer_panels_js() {
-	wp_enqueue_script( 'largo-customize-controls', get_template_directory_uri() . '/inc/customizer/assets/scripts/customize-controls.js', array( 'jquery', 'customize-controls' ), '1.0', true );
+function largo_customizer_panels_scripts() {
+	wp_enqueue_script( 'largo-customize-controls', get_template_directory_uri() . '/inc/customizer/assets/scripts/customize-controls.js', array( 'jquery', 'customize-controls', 'jquery-ui-button' ), '1.0', true );
+	wp_enqueue_script( 'jquery-scrollto', get_theme_file_uri( '/js/jquery.scrollTo.js' ), array( 'jquery' ), '2.1.2', true );
+	wp_enqueue_script( 'jquery-ui-button' );
+	wp_enqueue_style( 'largo-customize-styles', get_template_directory_uri() . '/inc/customizer/assets/css/customizer.css' );
 }
-add_action( 'customize_controls_enqueue_scripts', 'largo_customizer_panels_js' );
+add_action( 'customize_controls_enqueue_scripts', 'largo_customizer_panels_scripts' );
 
 /**
  * Add support for the fancy new edit icons.
