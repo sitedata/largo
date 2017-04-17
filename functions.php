@@ -120,6 +120,8 @@ function largo_widgets_init() {
 			$count++;
 		}
 	}
+
+	register_widget( 'largo_author_widget' );
 }
 add_action( 'widgets_init', 'largo_widgets_init' );
 
@@ -165,3 +167,8 @@ require get_template_directory() . '/inc/customizer/customizer.php';
  * Load Jetpack compatibility file.
  */
 require get_template_directory() . '/inc/jetpack.php';
+
+/**
+ * Widgets
+ */
+require get_template_directory() . '/inc/widgets/author-bio.php';
