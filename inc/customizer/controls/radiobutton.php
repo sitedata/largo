@@ -12,7 +12,7 @@ if ( class_exists( 'WP_Customize_Control' ) ) :
 	 */
 	class _Radio_Button_Custom_Control extends WP_Customize_Control {
 
-		public $type = 'radio';
+		public $type = 'radiobutton';
 
 		/**
 		 * Render the content on the theme customizer page
@@ -31,11 +31,6 @@ if ( class_exists( 'WP_Customize_Control' ) ) :
 				</label>
 			<?php endforeach; ?>
 			</div>
-			<script>
-				jQuery( document ).ready(function($) {
-					$( ".radiobutton" ).buttonset();
-				});
-			</script>
 			<?php
 		}
 	}

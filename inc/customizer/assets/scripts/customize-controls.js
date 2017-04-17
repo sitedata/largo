@@ -76,8 +76,115 @@
 					});
 				} );
 			} );
+/*
+			var container = $('.radiobutton');
+//			console.log( api.control( 'largo_homepage_layout_settings' ).setting.get() );
+//			var setting = api.control( 'largo_homepage_layout_settings' ).setting.get();
 
+			// Initialize the buttonset.
+			container.buttonset();
+
+			// Update the buttonset if the setting changes.
+			api.control( 'largo_homepage_layout_settings' ).setting.bind(function(value) {
+				console.log( value );
+				container.find('input:radio').filter('[value=' + value + ']').prop('checked', true);
+//				container.find('input:radio').filter('[value=' + value + ']').parent().siblings().removeClass( 'active' );
+//				container.find('input:radio').filter('[value=' + value + ']').parent().addClass( 'active' );
+			});
+
+
+
+			// Listen for changes to the radio group.
+			container.on('change', 'input:radio', function() {
+				var value = $(this).parent().find('input:radio:checked').val();
+				control.setting.set(value);
+			});
+
+			// Update the radio group if the setting changes.
+			control.setting.bind(function(value) {
+				$container.find('input:radio').filter('[value=' + value + ']').prop('checked', true);
+			});
+*/
 		} );
+
+		api.controlConstructor['radiobutton'] = api.Control.extend({
+
+		    ready: function() {
+		        var control = this;
+		        var value = (undefined !== control.setting._value) ? control.setting._value : '';
+
+		        this.container.on( 'change', 'input:radio', function() {
+		            value = jQuery( this ).val();
+		            control.setting.set( value );
+		            // refresh the preview
+		            api.previewer.refresh();
+		        });
+		    }
+
+		});
+/*
+		api.controlConstructor['radiobutton'] = api.Control.extend( {
+			ready: function() {
+				var control = this,
+					$container = control.container.find('.radiobutton');
+
+				this.container.on( 'change', 'select',
+					function() {
+						control.setting.set( jQuery( this ).val() );
+					}
+				);
+
+				$container.each(function() {
+					if ($(this).hasClass('make-radio-buttonset-container') || $(this).hasClass('make-radio-image-container')) {
+						$(this).buttonset();
+					}
+				});
+
+				// Listen for changes to the radio group.
+				$container.on('change', 'input:radio', function() {
+					var value = $(this).parent().find('input:radio:checked').val();
+					control.setting.set(value);
+				});
+
+				// Update the radio group if the setting changes.
+				control.setting.bind(function(value) {
+					$container.find('input:radio').filter('[value=' + value + ']').prop('checked', true);
+				});
+
+			}
+		} );
+*/
+
+		/**
+		 * Initialize instances of MAKE_Customizer_Control_Radio
+		 *
+		 * @since 1.7.0.
+		 */
+/*
+		api.controlConstructor.make_radio = api.Control.extend({
+			ready: function() {
+				var control = this,
+					$container = control.container.find('.make-radio-container');
+
+				$container.each(function() {
+					if ($(this).hasClass('make-radio-buttonset-container') || $(this).hasClass('make-radio-image-container')) {
+						$(this).buttonset();
+					}
+				});
+
+				// Listen for changes to the radio group.
+				$container.on('change', 'input:radio', function() {
+					var value = $(this).parent().find('input:radio:checked').val();
+					control.setting.set(value);
+				});
+
+				// Update the radio group if the setting changes.
+				control.setting.bind(function(value) {
+					$container.find('input:radio').filter('[value=' + value + ']').prop('checked', true);
+				});
+			}
+		});
+*/
 
 		// @TODO use these notes to build the "preset layouts"
 		// from http://shibashake.com/wordpress-theme/wordpress-theme-customizer-javascript-interface

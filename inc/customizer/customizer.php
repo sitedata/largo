@@ -8,12 +8,14 @@
 /**
  * Include other customizer files.
  */
-function _include_custom_controls() {
+function _include_custom_controls( $wp_customize ) {
 	require get_template_directory() . '/inc/customizer/panels.php';
 	require get_template_directory() . '/inc/customizer/sections.php';
 	require get_template_directory() . '/inc/customizer/settings.php';
 	require get_template_directory() . '/inc/customizer/controls/tinymce.php';
-	require get_template_directory() . '/inc/customizer/controls/radiobutton.php';
+//	require get_template_directory() . '/inc/customizer/controls/radiobutton.php';
+	require get_template_directory() . '/inc/customizer/controls/radiobutton2.php';
+	$wp_customize->register_control_type( 'Radio_Button_Custom_Control' );
 }
 add_action( 'customize_register', '_include_custom_controls', -999 );
 

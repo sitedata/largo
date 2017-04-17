@@ -124,19 +124,22 @@ function largo_customize_homepage_layout( $wp_customize ) {
 		'largo_homepage_layout_settings',
 		array(
 			'default' => '',
-    	'transport' => 'refresh',
+			'transport' => 'refresh',
 		)
 	);
 
-	// Register a setting.
-	$wp_customize->add_setting(
-		'largo_homepage_layout_settings_test',
-		array(
-			'default' => '',
-    	'transport' => 'refresh',
-		)
-	);
-
+	$wp_customize->add_control( new Radio_Button_Custom_Control( $wp_customize, 'largo_homepage_layout_settings', array(
+		'mode' => 'buttonset',
+		'section'  => 'largo_homepage_layout_section',
+		'choices'  => array(
+			'1'  => '1',
+			'2' => '2',
+			'3' => '3',
+			'4' => '4',
+			'5' => '5',
+		),
+	) ) );
+/*
 	$wp_customize->add_control(
 		new _Radio_Button_Custom_Control(
 			$wp_customize,
@@ -155,7 +158,7 @@ function largo_customize_homepage_layout( $wp_customize ) {
 			)
 		)
 	);
-
+*/
 //	$mods = get_theme_mod( 'largo_homepage_layout_settings' );
 	$mods = 5;
 	$count = 1;
