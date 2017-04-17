@@ -93,7 +93,7 @@ class Radio_Button_Custom_Control extends WP_Customize_Control {
 	 *
 	 * @since 4.1.0
 	 */
-	 // @TODO see https://www.nosegraze.com/image-select-control-wordpress-customizer/
+	 // @TODO see https://www.nosegraze.com/image-select-control-wordpress-customizer/ & https://developer.wordpress.org/themes/customize-api/javascriptunderscore-js-rendered-custom-controls/
 	public function content_template() {
 		?>
 		<# if ( ! data.choices ) {
