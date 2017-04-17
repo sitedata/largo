@@ -6,17 +6,17 @@
  *
  * @package Largo
  */
-class largo_author_widget extends WP_Widget {
+class largo_site_description extends WP_Widget {
 
 	/*
 	 * Set up the widget
 	 */
 	function __construct() {
 		$widget_ops = array(
-			'classname' 	=> 'largo-author',
-			'description'	=> __('Show the author bio in a widget', 'largo')
+			'classname' 	=> 'largo-site-description',
+			'description'	=> __('Show the site description in a widget', 'largo')
 		);
-		parent::__construct( 'largo-author-widget', __( 'Author Bio (Largo)', 'largo' ), $widget_ops );
+		parent::__construct( 'largo-site-description', __( 'Site Description (Largo)', 'largo' ), $widget_ops );
 	}
 
 	/*
@@ -35,12 +35,11 @@ class largo_author_widget extends WP_Widget {
 			echo $args['before_title'] . apply_filters( 'widget_title', $instance['title'] ) . $args['after_title'];
 		}
 
-		echo '<div class="author-box author vcard">';
+		echo '<div class="site-description">';
 
-			$output = get_avatar( $post->post_author );
-			$output .= get_the_author_meta( 'description', $post->post_author );
+			$output = get_option( 'site_description' ) ? get_option( 'site_description' ) : '';
 
-			apply_filters( 'largo_author_widget', $output );
+			apply_filters( 'largo_site_description_widget', $output );
 			echo $output;
 
 		echo '</div>';
