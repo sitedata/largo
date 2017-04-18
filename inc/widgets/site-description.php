@@ -1,10 +1,12 @@
 <?php
 /**
- * Author Bio Widget
+ * Site Description Widget
  *
- * archive.php uses this widget to create the header of the Author Archive page
+ * The field this references is called "site_blurb" in the database.
+ * "site_description" in the database is called "Site Tagline" in the Customizer.
  *
  * @package Largo
+ * @since Largo 1.0
  */
 class largo_site_description extends WP_Widget {
 
@@ -37,7 +39,7 @@ class largo_site_description extends WP_Widget {
 
 		echo '<div class="site-description">';
 
-			$output = get_option( 'site_description' ) ? get_option( 'site_description' ) : '';
+			$output = get_option( 'site_blurb' ) ? get_option( 'site_blurb' ) : '';
 
 			apply_filters( 'largo_site_description_widget', $output );
 			echo $output;
