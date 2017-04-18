@@ -39,7 +39,7 @@ class largo_site_description extends WP_Widget {
 
 		echo '<div class="site-description">';
 
-			$output = get_option( 'site_blurb' ) ? get_option( 'site_blurb' ) : '';
+			$output = get_option( 'site_blurb' ) ? stripslashes( get_option( 'site_blurb' ) ) : '';
 
 			apply_filters( 'largo_site_description_widget', $output );
 			echo $output;
