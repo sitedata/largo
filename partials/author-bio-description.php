@@ -1,4 +1,9 @@
 <?php
+/**
+ * Describe the author through their biographical information
+ *
+ * @since 0.4
+ */
 
 // Author name
 if ( is_author() ) {
@@ -20,10 +25,11 @@ if ( largo_has_avatar( $author_obj->user_email ) ) {
 }
 
 // Job!
-$show_job_titles = of_get_option('show_job_titles');
+$show_job_titles = get_theme_mod('show_job_titles');
 if ( $job = $author_obj->job_title && $show_job_titles ) {
 	echo '<p class="job-title">' . esc_attr( $author_obj->job_title ) . '</p>';
 }
+
 // Description
 if ( $author_obj->description ) {
 	echo '<p>' . esc_attr( $author_obj->description ) . '</p>';
