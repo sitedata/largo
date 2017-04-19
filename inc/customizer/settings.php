@@ -124,7 +124,7 @@ function largo_customize_homepage_layout( $wp_customize ) {
 		'largo_homepage_layout_settings',
 		array(
 			'default' => '',
-    	'transport' => 'refresh',
+			'transport' => 'refresh',
 		)
 	);
 
