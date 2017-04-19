@@ -74,7 +74,7 @@ class largo_author_widget extends WP_Widget {
 	 * Widget update function: sanitizes title.
 	 */
 	function update( $new_instance, $old_instance ) {
-		$instance = array()
+		$instance = array();
 		$instance['title'] = ( ! empty( $new_instance['title'] ) ) ? strip_tags( $new_instance['title'] ) : '';
 		return $instance;
 	}
