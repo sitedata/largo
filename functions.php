@@ -175,6 +175,11 @@ require get_template_directory() . '/inc/jetpack.php';
 require get_template_directory() . '/inc/settings.php';
 
 /**
+ * Allow users to create custom sidebars for taxonomy archives
+ */
+require get_template_directory() . '/inc/taxonomy-archive-sidebars.php';
+
+/**
  * Widgets
  */
 require get_template_directory() . '/inc/widgets/author-bio.php';
