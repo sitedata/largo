@@ -16,7 +16,7 @@ class largo_author_widget extends WP_Widget {
 			'classname' 	=> 'largo-author',
 			'description'	=> __('Show the author bio in a widget', 'largo')
 		);
-		parent::__construct( 'largo-author-widget', __( 'Author Bio (Largo)', 'largo' ), $widget_ops );
+		parent::__construct( 'largo-author-widget', __('Largo Author Bio', 'largo'), $widget_ops);
 	}
 
 	/*
@@ -25,37 +25,57 @@ class largo_author_widget extends WP_Widget {
 	function widget( $args, $instance ) {
 
 		global $post;
-		$author_id = $post->post_author;
 
-		$output = '';
+		extract( $args );
 
-		echo $args['before_widget'];
+		$authors = array();
+		$bios = '';
 
-		if ( ! empty( $instance['title'] ) ) {
-			echo $args['before_title'] . apply_filters( 'widget_title', $instance['title'] ) . $args['after_title'];
+		if( get_post_meta( $post->ID, 'largo_byline_text' ) )
+			$byline_text = esc_attr( get_post_meta( $post->ID, 'largo_byline_text', true ) );
+
+		if( ( is_singular() ) && empty($byline_text) ) {
+			if ( is_singular() ) {
+				if ( function_exists( 'get_coauthors' ) ) {
+					$authors = get_coauthors( get_queried_object_id() );
+				} else {
+					$authors = array( get_user_by( 'id', get_queried_object()->post_author ) );
+				}
+			}
+
+			// make sure we have at least one bio before we show the widget
+			foreach ( $authors as $key => $author ) {
+				$bio = trim( $author->description );
+				if ( !is_author() && empty( $bio ) ) {
+					unset( $authors[$key] );
+				} else {
+					$bios .= $bio;
+				}
+			}
 		}
 
-		echo '<div class="author-box author vcard">';
+		if ( ! empty( $bios ) ) {
+			echo $before_widget;
 
-			$output = get_avatar( $post->post_author );
-			$output .= get_the_author_meta( 'description', $post->post_author );
+			foreach( $authors as $author_obj ) {
+				$context = array('author_obj' => $author_obj); ?>
 
-			apply_filters( 'largo_author_widget', $output );
-			echo $output;
+					<div class="author-box row-fluid author vcard clearfix">
+						<?php largo_render_template( 'partials/author-bio', 'description', $context ); ?>
+						<?php largo_render_template( 'partials/author-bio', 'social-links', $context ); ?>
+					</div>
+			<?php }
 
-		echo '</div>';
-
-		echo $args['after_widget'];
-
+			echo $after_widget;
+		}
 	}
 
 	/*
 	 * Widget update function: sanitizes title.
 	 */
 	function update( $new_instance, $old_instance ) {
-		$instance = array();
+		$instance = array()
 		$instance['title'] = ( ! empty( $new_instance['title'] ) ) ? strip_tags( $new_instance['title'] ) : '';
-
 		return $instance;
 	}
 
