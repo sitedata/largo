@@ -16,7 +16,7 @@ class largo_author_widget extends WP_Widget {
 			'classname' 	=> 'largo-author',
 			'description'	=> __('Show the author bio in a widget', 'largo')
 		);
-		parent::__construct( 'largo-author-widget', __('Largo Author Bio', 'largo'), $widget_ops);
+		parent::__construct( 'largo-author-widget', __( 'Author Bio (Largo)', 'largo' ), $widget_ops );
 	}
 
 	/*
