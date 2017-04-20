@@ -140,7 +140,10 @@ function largo_scripts() {
 		wp_enqueue_script( 'comment-reply' );
 	}
 
-	wp_enqueue_script( 'jquery-scrollto', get_theme_file_uri( '/js/jquery.scrollTo.js' ), array( 'jquery' ), '2.1.2', true );
+	if ( is_customize_preview() ) {
+		wp_enqueue_style( 'largo-customizer-preview-style', get_template_directory_uri() . '/customizer.css' );
+		wp_enqueue_script( 'jquery-scrollto', get_theme_file_uri( '/js/jquery.scrollTo.js' ), array( 'jquery' ), '2.1.2', true );
+	}
 }
 add_action( 'wp_enqueue_scripts', 'largo_scripts' );
 
