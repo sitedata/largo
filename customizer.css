@@ -1,0 +1,8 @@
+.home .section.highlight,
+.home .column.highlight {
+  border: dashed 2px #008ec2;
+  margin: 1em;
+  padding: 1em;
+}
+
+/*# sourceMappingURL=data:application/json;charset=utf8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImN1c3RvbWl6ZXIuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTs7RUFFRSwyQkFBMEI7RUFDMUIsWUFBVztFQUNYLGFBQVk7Q0FDWiIsImZpbGUiOiJjdXN0b21pemVyLmNzcyIsInNvdXJjZXNDb250ZW50IjpbIi5ob21lIC5zZWN0aW9uLmhpZ2hsaWdodCxcbi5ob21lIC5jb2x1bW4uaGlnaGxpZ2h0IHtcbiBcdGJvcmRlcjogZGFzaGVkIDJweCAjMDA4ZWMyO1xuIFx0bWFyZ2luOiAxZW07XG4gXHRwYWRkaW5nOiAxZW07XG4gfVxuIl19 */

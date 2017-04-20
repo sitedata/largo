@@ -140,47 +140,28 @@ function largo_scripts() {
 		wp_enqueue_script( 'comment-reply' );
 	}
 
-	wp_enqueue_script( 'jquery-scrollto', get_theme_file_uri( '/js/jquery.scrollTo.js' ), array( 'jquery' ), '2.1.2', true );
+	if ( is_customize_preview() ) {
+		wp_enqueue_style( 'largo-customizer-preview-style', get_template_directory_uri() . '/customizer.css' );
+		wp_enqueue_script( 'jquery-scrollto', get_theme_file_uri( '/js/jquery.scrollTo.js' ), array( 'jquery' ), '2.1.2', true );
+	}
 }
 add_action( 'wp_enqueue_scripts', 'largo_scripts' );
 
 /**
- * Implement the Custom Header feature.
+ * Require_once all Largo files
  */
-require get_template_directory() . '/inc/custom-header.php';
-
-/**
- * Custom template tags for this theme.
- */
-require get_template_directory() . '/inc/template-tags.php';
-
-/**
- * Custom functions that act independently of the theme templates.
- */
-require get_template_directory() . '/inc/extras.php';
-
-/**
- * Customizer additions.
- */
-require get_template_directory() . '/inc/customizer/customizer.php';
-
-/**
- * Load Jetpack compatibility file.
- */
-require get_template_directory() . '/inc/jetpack.php';
-
-/**
- * Load additional site settings.
- */
-require get_template_directory() . '/inc/settings.php';
-
-/**
- * Widgets
- */
-require get_template_directory() . '/inc/widgets/author-bio.php';
-require get_template_directory() . '/inc/widgets/site-description.php';
-
-/**
- * Avatars
- */
-require get_template_directory() . '/inc/avatars.php';
+$requires = array(
+	'/inc/custom-header.php', // Custom Header feature
+	'/inc/template-tags.php', // Custom template tags for this theme
+	'/inc/extras.php', // Custom functions that act independently of the theme templates
+	'/inc/customizer/customizer.php', // Customizer additions
+	'/inc/jetpack.php', // Jetpack compatibility file
+	'/inc/settings.php', // Additional site settings
+	'/inc/taxonomy-archive-sidebars.php', // Custom sidebars for taxonomy archives
+	'/inc/widgets/author-bio.php',
+	'/inc/widgets/site-description.php',
+	'/inc/avatars.php',
+);
+foreach ( $requires as $require_once ) {
+	require_once( get_template_directory() . $require_once );
+}
