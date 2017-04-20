@@ -56,11 +56,12 @@ class largo_author_widget extends WP_Widget {
 			echo $args['before_widget'];
 
 			foreach( $authors as $author_obj ) {
-				$context = array('author_obj' => $author_obj); ?>
+				$context = array('author_obj' => $author_obj);
+				?>
 
 					<div class="author-box row-fluid author vcard clearfix">
-						<?php largo_render_template( 'partials/author-bio', 'description', $context ); ?>
-						<?php largo_render_template( 'partials/author-bio', 'social-links', $context ); ?>
+						<?php get_template_part( 'partials/author-bio', 'description' ); ?>
+						<?php get_template_part( 'partials/author-bio', 'social-links' ); ?>
 					</div>
 			<?php }
 
