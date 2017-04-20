@@ -154,7 +154,6 @@ $requires = array(
 	'/inc/customizer/customizer.php', // Customizer additions
 	'/inc/jetpack.php', // Jetpack compatibility file
 	'/inc/settings.php', // Additional site settings
-	// widgets
 	'/inc/widgets/author-bio.php',
 	'/inc/widgets/site-description.php',
 );
