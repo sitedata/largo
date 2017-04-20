@@ -12,14 +12,11 @@
  */
 function largo_has_avatar( $email ) {
 	$user = get_user_by( 'email', $email );
-	if {
-		if ( largo_has_gravatar( $email ) ) {
-			return true;
-		}	
+	if ( largo_has_gravatar( $email ) ) {
+		return true;
 	}
 	return false;
 }
-
 
 /**
  * Determine whether or not an author has a valid gravatar image

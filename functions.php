@@ -179,3 +179,8 @@ require get_template_directory() . '/inc/settings.php';
  */
 require get_template_directory() . '/inc/widgets/author-bio.php';
 require get_template_directory() . '/inc/widgets/site-description.php';
+
+/**
+ * Avatars
+ */
+require get_template_directory() . '/inc/avatars.php';
