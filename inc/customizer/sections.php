@@ -36,7 +36,8 @@ function _customize_sections( $wp_customize ) {
 		array(
 			'title'    => esc_html__( 'Sections', 'largo' ),
 			'priority' => 10,
-			'panel'    => 'homepage_layout',
+			'panel'    => 'layout',
+			'active_callback' => 'is_front_page',
 		)
 	);
 
@@ -49,7 +50,8 @@ function _customize_sections( $wp_customize ) {
 			array(
 				'title'    => esc_html__( 'Section ', 'largo' ) . $count,
 				'priority' => 10,
-				'panel'    => 'homepage_layout',
+				'panel'    => 'layout',
+				'active_callback' => 'is_front_page',
 			)
 		);
 		$count++;
