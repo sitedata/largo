@@ -4,14 +4,16 @@
  */
 
 /**
- * Determine whether or not a user has an avatar. Fallback checks if user has a gravatar.
+ * Determine whether or not a user has an avatar.
+ *
+ * It's a wrapper for largo_has_gravatar, providing a way to answer
+ * "yes" in the event that we add other forms of avatar.
  *
  * @param $email string an author's email address
  * @return bool true if an avatar is available for this user
  * @since 0.4
  */
 function largo_has_avatar( $email ) {
-	$user = get_user_by( 'email', $email );
 	if ( largo_has_gravatar( $email ) ) {
 		return true;
 	}
