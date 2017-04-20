@@ -25,7 +25,6 @@ get_header(); ?>
 				$columns = get_theme_mod( "largo_homepage_layout_settings_$count", 5 );
 				$column_count = 1;
 				echo '<div class="section grid" id="section-' . $count . '">';
-				echo 'Section ' . $count . ' (' . $columns . ' Columns)';
 				while ( $column_count <= $columns ) { ?>
 					<div class="column grid__col-auto">
 						<?php if ( is_active_sidebar( "section-$count-column-$column_count" ) ) : ?>
