@@ -160,7 +160,6 @@ $requires = array(
 	'/inc/taxonomy-archive-sidebars.php', // Custom sidebars for taxonomy archives
 	'/inc/widgets/author-bio.php',
 	'/inc/widgets/site-description.php',
-	'/inc/avatars.php',
 );
 foreach ( $requires as $require_once ) {
 	require_once( get_template_directory() . $require_once );

@@ -16,13 +16,14 @@ if ( is_author() ) {
 	);
 }
 
-// Avatar
-if ( largo_has_avatar( $author_obj->user_email ) ) {
-	echo '<div class="photo">' . get_avatar( $author_obj->ID, 96, '', $author_obj->display_name ) . '</div>';
-} elseif ( $author_obj->type == 'guest-author' && get_the_post_thumbnail( $author_obj->ID ) ) {
+// Guest Author's set profile icon overrides any gravatar
+if ( $author_obj->type == 'guest-author' && get_the_post_thumbnail( $author_obj->ID ) ) {
+	// Co-Authors Plus Guest Authors are posts
 	$photo = get_the_post_thumbnail( $author_obj->ID, array( 96,96 ) );
 	$photo = str_replace( 'attachment-96x96 wp-post-image', 'avatar avatar-96 photo', $photo );
 	echo '<div class="photo">' . $photo . '</div>';
+} else if ( get_avatar_url( $author_obj->user_email ) ) {
+	echo '<div class="photo">' . get_avatar( $author_obj->ID, 96, '', $author_obj->display_name ) . '</div>';
 }
 
 /**
