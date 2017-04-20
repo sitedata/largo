@@ -2,6 +2,7 @@
 /**
  * Describe the author through their biographical information
  *
+ * Used in the author bio widget
  * @since 0.4
  */
 
@@ -24,13 +25,25 @@ if ( largo_has_avatar( $author_obj->user_email ) ) {
 	echo '<div class="photo">' . $photo . '</div>';
 }
 
-// Job!
-$show_job_titles = get_theme_mod('show_job_titles');
-if ( $job = $author_obj->job_title && $show_job_titles ) {
-	echo '<p class="job-title">' . esc_attr( $author_obj->job_title ) . '</p>';
-}
+/**
+ * Action allowing additional output on the author bio before the author description
+ *
+ * This action has a parameter $author_obj, which your action function may use for whatever purpose
+ * @param $author_obj
+ * @since 1.0
+ */
+do_action( 'largo_author_bio_before_description', $author_obj );
 
 // Description
 if ( $author_obj->description ) {
 	echo '<p>' . esc_attr( $author_obj->description ) . '</p>';
 }
+
+/**
+ * Action allowing additional output on the author bio after the author description
+ *
+ * This action has a parameter $author_obj, which your action function may use for whatever purpose
+ * @param $author_obj
+ * @since 1.0
+ */
+do_action( 'largo_author_bio_after_description', $author_obj );
