@@ -26,7 +26,7 @@ class largo_author_widget extends WP_Widget {
 
 		global $post;
 
-		extract( $args );
+		var_log( $args );
 
 		$authors = array();
 		$bios = '';
@@ -55,7 +55,7 @@ class largo_author_widget extends WP_Widget {
 		}
 
 		if ( ! empty( $bios ) ) {
-			echo $before_widget;
+			echo $args['before_widget'];
 
 			foreach( $authors as $author_obj ) {
 				$context = array('author_obj' => $author_obj); ?>
@@ -66,7 +66,7 @@ class largo_author_widget extends WP_Widget {
 					</div>
 			<?php }
 
-			echo $after_widget;
+			echo $args['after_widget'];
 		}
 	}
 
