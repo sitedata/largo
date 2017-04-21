@@ -19,16 +19,6 @@ function largo_activation_maybe_setup() {
 		return false;
 	}
 
-	// We must make sure some things are enqueued first in order to run these functions
-	$requires = array(
-		// included for the definition of the defaults in optionsframework_options()
-		'/options.php',
-	);
-	// after_switch_theme appears to run before after_setup_theme, which is what calls Largo::get_instance calls Largo::load calls Largo::require_files
-	foreach ( $requires as $required ) {
-		require_once( get_template_directory() . $required );
-	}
-
 	// We assume here that since this action runs on after_switch_theme,
 	// and since switching themes requires admin privileges,
 	// that this user has the permissions to run optionsframework_init
@@ -37,7 +27,7 @@ function largo_activation_maybe_setup() {
 		// perform any Largo 1.0 setup functions
 	}
 
-	of_set_option( 'largo_version', largo_version() );
+	set_theme_mod( 'largo_version', largo_version() );
 
 	// Prevent the update nag from displaying on the first page load
 	remove_action( 'admin_notices', 'largo_update_admin_notice', 10 );
@@ -58,7 +48,9 @@ add_action( 'after_switch_theme', 'largo_activation_maybe_setup' );
  * @since 0.3
  */
 function largo_perform_update() {
-	if ( largo_need_updates() ) {
+
+	// Options Framework updates only apply to pre-1.0 Largo
+	if ( largo_need_updates_0() ) {
 
 		// Stash the options from the previous version of the theme for later use
 		$previous_options = largo_preserve_previous_options();
@@ -88,8 +80,14 @@ function largo_perform_update() {
 
 		largo_replace_deprecated_widgets();
 
-		// Set version.
+		// Set version with current Largo.
 		of_set_option( 'largo_version', largo_version() );
+	}
+
+	// do we need a transitional 0.x -> 1.x function here?
+
+	// this is for post-1.0 stuff, but might actually be better with a different logic flow
+	if ( largo_need_updates() ) {
 	}
 
 	return true;
@@ -110,13 +108,19 @@ function largo_version() {
 }
 
 /**
- * Checks if updates need to be run.
+ * Checks if updates need to be run for the pre-Largo-1.0 Options Framework
+ *
+ * This function used to be named largo_need_updates();
+ * It was suffixed with a _0 for Largo 1.0 to largo_need_updates_0() to indicate that it
+ * applies to the 0.x branch of largo
+ *
+ * There's probably a better name for this.
  *
  * @since 0.3
  *
- * @return boolean $result True if updates need to be run
+ * @return boolean $result True if updates need to be run for the options framework stuff
  */
-function largo_need_updates() {
+function largo_need_updates_0() {
 	// try to figure out which versions of the options are stored. Implemented in 0.3
 	if ( of_get_option( 'largo_version' ) ) {
 		$compare = version_compare( largo_version(), of_get_option( 'largo_version' ) );
@@ -130,6 +134,28 @@ function largo_need_updates() {
 
 	// if 'largo_version' isn't present, the settings are so old that we can safely ignore them
 	// or it's a fresh install
+	return false;
+}
+
+/**
+ * Checks if updates need to be run for any version of Largo
+ *
+ * @uses largo_need_updates_0
+ * @since 0.3
+ * @return boolean $result True if updates need to be run.
+ */
+function largo_need_updates() {
+	if ( get_theme_mod( 'largo_version' ) ) {
+		$compare = version_compare( largo_version(), get_theme_mod( 'largo_version' ) );
+
+		if ( $compare == 1 ) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	// if 'largo_version' isn't set in the theme mods, then this is a version of Largo that needs updates to be run
 	return true;
 }
 
