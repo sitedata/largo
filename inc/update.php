@@ -78,8 +78,6 @@ function largo_perform_update() {
 			largo_transition_nav_menus();
 			largo_update_prominence_term_descriptions();
 			largo_force_settings_update();
-			largo_enable_if_series();
-			largo_enable_series_if_landing_page();
 		}
 
 		// Run when updating from pre-0.5
@@ -155,7 +153,6 @@ function largo_update_widgets() {
 
 	/* checks and adds if necessary:
 		social_icons_display ('btm' or 'both')
-		add series widget
 		show_tags
 		show_author_box
 		show_related_content
@@ -167,13 +164,6 @@ function largo_update_widgets() {
 		'values' => array( 'btm', 'both' ),
 		'widget' => 'largo-follow',
 		'settings' => array( 'title' => '' ),
-	);
-
-	//this is a dummy check
-	$checks['in_series'] = array(
-		'values' => NULL,
-		'widget' => 'largo-post-series-links',
-		'settings' => array( 'title' => __( 'Related Series', 'largo' ) ),
 	);
 
 	$checks['show_tags'] = array(
@@ -326,13 +316,6 @@ function largo_update_prominence_term_descriptions() {
 			'olddescription' => __( 'If you are using the Newspaper or Carousel optional homepage layout, add this label to label to a post to make it the top story on the homepage.', 'largo' ),
 			'slug' => 'top-story'
 		),
-		array(
-			'name' => __( 'Featured in Series', 'largo' ),
-			// 0.4 description did not change from 0.3
-			'description' => __( 'Select this option to allow this post to float to the top of any/all series landing pages sorting by Featured first.', 'largo' ),
-			'olddescription' => __( 'Select this option to allow this post to float to the top of any/all series landing pages sorting by Featured first.', 'largo' ),
-			'slug' => 'series-featured'
-		)
 	);
 
 	foreach ( $largoOldProminenceTerms as $update ) {
@@ -402,59 +385,6 @@ function largo_force_settings_update() {
 
 	foreach ( $options as $option ) {
 		of_set_option( $option['id'], $option['std'] );
-	}
-}
-
-/**
- * Enable series if series have been created.
- *
- * @since 0.4
- *
- * @return boolean $result True if series were enabled by this function
- */
-function largo_enable_if_series() {
-	// assuming that some posts will be in a series if series were used
-	$terms = get_terms(
-		'series',
-		array(
-			'hide_empty' => false,
-			'fields' => 'all'
-		)
-	);
-
-	// enable series if more than 0 terms were returned
-	if ( gettype( $terms ) == 'array' && count( $terms ) > 0 ) {
-		of_set_option( 'series_enabled', '1' );
-		return true;
-	}
-	return false;
-}
-
-/**
- * Enable the series taxonomy if the series landing pages are in use.
- *
- * @since 0.4
- *
- * @return boolean $result If series landing pages (and series) were enabled by this function.
- */
-function largo_enable_series_if_landing_page() {
-
-	// get a list of post types
-	$types = get_post_types( '', 'names' );
-
-	// Get a list of pages in the 'series' taxonomy if the landing page is registered
-	if ( isset( $types['cftl-tax-landing'] ) ) {
-		$args = array(
-			'post_type' => 'cftl-tax-landing'
-		);
-		$pages = get_pages( $args );
-		if ( $pages !== false ) {
-			// get_pages returns false if no pages found, so if it's not false then there are probably cftl-tax-landing pages
-			of_set_option( 'series_enabled', '1' );
-			of_set_option( 'custom_landing_enabled', '1' );
-			return true;
-		}
-		return false;
 	}
 }
 
