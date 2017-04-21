@@ -40,18 +40,6 @@ add_action( 'wp_head', 'largo_pingback_header' );
 
 
 /**
- * Send anything to the error log in a human-readable format
- *
- * @param 	mixed $stuff the stuff to be sent to the error log.
- * @since 	0.4
- */
-if (!  function_exists( 'var_log' ) ) {
-	function var_log( $stuff ) {
-		error_log( var_export( $stuff, true ) );
-	}
-}
-
-/**
  * Get a template part, while merging the $context array into wp_query
  *
  * The array of key -> value ends up in the global namespace.
