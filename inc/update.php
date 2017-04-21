@@ -95,8 +95,6 @@ function largo_perform_update() {
 			// what else do we want to do here?
 		}
 
-		// Always run
-		largo_update_custom_less_variables();
 		largo_replace_deprecated_widgets();
 
 		// Set version.
@@ -566,23 +564,6 @@ function largo_set_new_option_defaults() {
 		$previous_options = largo_retrieve_previous_options();
 		$options = wp_parse_args( $previous_options, $defaults );
 		update_option( $config['id'], $options );
-	}
-}
-
-/**
- * Make sure custom CSS is regenerated if we're using custom LESS variables
- */
-function largo_update_custom_less_variables() {
-	$largo = Largo::get_instance();
-	if ( $largo->is_less_enabled() ) {
-		$variables = Largo_Custom_Less_Variables::get_custom_values();
-		$escaped = array();
-
-		foreach ( $variables['variables'] as $key => $var ) {
-			$escaped[$key] = addslashes( $var );
-		}
-
-		Largo_Custom_Less_Variables::update_custom_values($escaped);
 	}
 }
 
