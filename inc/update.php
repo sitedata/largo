@@ -89,6 +89,12 @@ function largo_perform_update() {
 			largo_remove_topstory_prominence_term();
 		}
 
+		// Run when updating from pre-1.0
+		if ( version_compare( $previous_options['largo_version'], '1.0' ) < 0 ) {
+			// import optionsframework stuff to theme_mods
+			// what else do we want to do here?
+		}
+
 		// Always run
 		largo_update_custom_less_variables();
 		largo_replace_deprecated_widgets();
@@ -528,6 +534,14 @@ function largo_remove_topstory_prominence_term() {
 	}
 	return $del_terms;
 }
+
+
+/* --------------------------------------------------------
+ * Upgrades for moving from 0.5 -> 1.0
+ *
+ * In which we transition away from the options framework
+ * to WordPress' theme_mods
+ * ------------------------------------------------------ */
 
 /* --------------------------------------------------------
  * Always run
