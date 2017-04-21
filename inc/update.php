@@ -74,7 +74,6 @@ function largo_perform_update() {
 
 		// Run when updating from pre-0.4
 		if ( version_compare( $previous_options['largo_version'], '0.4' ) < 0 ) {
-			largo_home_transition();
 			largo_update_widgets();
 			largo_transition_nav_menus();
 			largo_update_prominence_term_descriptions();
@@ -145,40 +144,7 @@ function largo_need_updates() {
  * Upgrades for moving from 0.3 -> 0.4
  *
  * In which many theme options became widgets
- * And homepage templates are implemented
  * ------------------------------------------------------ */
-
-/**
- * Convert old theme option of 'homepage_top' to new option of 'home_template'
- *
- * @since 0.4
- */
-function largo_home_transition() {
-	$previous_options = largo_retrieve_previous_options();
-	$old_regime = ( isset( $previous_options['homepage_top'] ) ) ? $previous_options['homepage_top'] : 0;
-	$new_regime = of_get_option( 'home_template', 0 );
-
-	// we're using the old system and the new one isn't in place, act accordingly
-	// this should ALWAYS happen when this function is called, as there's a separate version check before this is invoked
-	// however, it will not run if the new system has already been set up, so largo-dev to 0.4 will not overwrite details.
-	// the home template sidebars have same names as old regime so that *shouldn't* be an issue
-	if ( isset( $previous_options['homepage_layout'] ) && $previous_options['homepage_layout'] == '3col' ) {
-		of_set_option( 'home_template', 'LegacyThreeColumn' );
-	} else if ( $old_regime ) {
-		if ( $old_regime == 'topstories' ) {
-			$home_template = 'TopStories';
-		}
-		if ( $old_regime == 'slider' ) {
-			$home_template = 'HomepageBlog';
-		}
-		if ( $old_regime == 'blog' ) {
-			$home_template = 'HomepageBlog';
-		}
-		of_set_option( 'home_template', $home_template );
-	} else if ( ! $new_regime ) {
-		of_set_option( 'home_template', 'HomepageBlog' );
-	}
-}
 
 /**
  * Puts new widgets into sidebars as appropriate based on old theme options
