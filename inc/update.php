@@ -1210,3 +1210,28 @@ if ( ! function_exists( 'of_get_option' ) ) {
 		return $default;
 	}
 }
+
+if ( ! function_exists( 'of_set_option' ) ) {
+	/**
+	 * Helper for setting specific theme options (optionsframework).
+	 *
+	 * Would be nice if optionsframework included this natively
+	 * See https://github.com/devinsays/options-framework-plugin/issues/167
+	 *
+	 * Kept in Largo 1.0 so that we can perform update functions regarding versions of Largo before 1.0
+	 *
+	 * @since 0.2
+	 */
+	function of_set_option( $option_name, $option_value ) {
+		$config = get_option( 'optionsframework' );
+		if ( ! isset( $config['id'] ) ) {
+			return false;
+		}
+		$options = get_option( $config['id'] );
+		if ( $options ) {
+			$options[$option_name] = $option_value;
+			return update_option( $config['id'], $options );
+		}
+		return false;
+	}
+}
