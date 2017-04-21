@@ -27,7 +27,7 @@
 		    api.control( 'blogdescription', setupControl );
 		} );
 
-		api( 'largo_homepage_layout_settings', function( setting ) {
+		api( 'largo_homepage_layout_settings_sections', function( setting ) {
 
 			// Build logic dynamically for each of 5 homepage sections
 			var setupControls = [];
@@ -53,7 +53,8 @@
 						setActiveState();
 						setting.bind( setActiveState );
 					};
-					api.control( 'largo_homepage_layout_settings_' + i, setupControls[i] );
+					api.control( 'largo_homepage_layout_settings_section-' + i + '-columns', setupControls[i] );
+					api.control( 'largo_homepage_layout_settings_section-' + i + '-padding', setupControls[i] );
 
 
 					// Detect when the front page sections section is expanded (or closed) so we can adjust the preview accordingly.

@@ -140,13 +140,44 @@ add_action( 'wp_enqueue_scripts', 'largo_scripts' );
  */
 function largo_customizer_css() {
 	$site_width = intval( get_theme_mod( 'layout_width' ) ) > 0 ? get_theme_mod( 'layout_width' ) : 1600; // Set fallback value for site width if unset - also defined in customize-preview.js
+	$data = 'data-sitewidth="' . $site_width . '"';
+
+	$homepage_styles = '';
+
+	$padding = get_theme_mod( 'largo_homepage_layout_settings_section_padding' );
+	if ( $padding ) {
+		$homepage_styles .= '#section' . $count . ' {
+			padding: ' . $padding . 'em;
+		}
+		';
+		$data .= 'data-section-padding="' . $padding . '"';
+	}
+
+	// Styles for each section
+	$homepage_sections = get_theme_mod( 'largo_homepage_layout_settings_sections' );
+	if ( $homepage_sections ) {
+		$count = 1;
+		while ( $count <= $homepage_sections ) {
+			$padding = get_theme_mod( 'largo_homepage_layout_settings_section-' . $count . '-padding' );
+			if ( $padding ) {
+				$homepage_styles .= '#section-' . $count . ' .column {
+			padding: ' . $padding . 'em;
+		}';
+			}
+			$data .= 'data-section-' . $count . '-padding="' . $padding . '"';
+			$count++;
+		}
+	}
 	?>
-	<style type="text/css" id="largo-customizer-styles" <?php if ( is_customize_preview() ) { echo 'data-sitewidth="' . $site_width . '"'; } ?>>
+	<style type="text/css" id="largo-customizer-styles" <?php if ( is_customize_preview() ) { echo $data; } ?>>
 		#page {
 			width: <?php echo absint( $site_width ); ?>px;
 			max-width: 90%;
 			margin: 0 auto;
 		}
+		<?php if ( is_front_page() ) {
+			echo $homepage_styles;
+		} ?>
 	</style>
 	<?php
 }

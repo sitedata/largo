@@ -153,8 +153,9 @@ function largo_sanitize_setting_layout_width( $value ) {
  */
 function largo_customize_homepage_layout( $wp_customize ) {
 
+	// Number of Sections
 	$wp_customize->add_setting(
-		'largo_homepage_layout_settings',
+		'largo_homepage_layout_settings_sections',
 		array(
 			'default'       => '',
 			'transport'     => 'refresh',
@@ -162,7 +163,7 @@ function largo_customize_homepage_layout( $wp_customize ) {
 	);
 
 	$wp_customize->add_control(
-		'largo_homepage_layout_settings',
+		'largo_homepage_layout_settings_sections',
 		array(
 			'label'         => __( 'Sections', 'largo' ),
 			'description'   => __( 'How many content sections?', 'largo' ),
@@ -178,6 +179,28 @@ function largo_customize_homepage_layout( $wp_customize ) {
 		)
 	);
 
+	// Section Padding
+	$wp_customize->add_setting(
+		'largo_homepage_layout_settings_section_padding',
+		array(
+			'default'       => '',
+			'transport'     => 'postMessage',
+		)
+	);
+
+	$wp_customize->add_control(
+		'largo_homepage_layout_settings_section_padding',
+		array(
+			'label'         => __( 'Section Padding', 'largo' ),
+			'section'       => 'largo_homepage_layout_section',
+			'type'          => 'number',
+			'input_attrs'   => array(
+				'placeholder'   => '0',
+				'min'           => 0
+			),
+		)
+	);
+
 	/*
 	 *  We register all section controls here instead of pulling the current value
 	 * from get_theme_mod( 'largo_homepage_layout_settings' );
@@ -186,8 +209,10 @@ function largo_customize_homepage_layout( $wp_customize ) {
 	$mods = 5;
 	$count = 1;
 	while ( $mods >= $count ) {
+
+		// Section columns
 		$wp_customize->add_setting(
-			"largo_homepage_layout_settings_$count",
+			"largo_homepage_layout_settings_section-$count-columns",
 			array(
 				'default'       => '',
 				'transport'     => 'refresh',
@@ -195,7 +220,7 @@ function largo_customize_homepage_layout( $wp_customize ) {
 		);
 
 		$wp_customize->add_control(
-			"largo_homepage_layout_settings_$count",
+			"largo_homepage_layout_settings_section-$count-columns",
 			array(
 				'label'         => __( 'Section Columns', 'largo' ),
 				'description'   => __( 'How many columns in this section?', 'largo' ),
@@ -206,6 +231,28 @@ function largo_customize_homepage_layout( $wp_customize ) {
 					'2'             => 'Two',
 					'3'             => 'Three',
 					'4'             => 'Four',
+				),
+			)
+		);
+
+		// Column padding
+		$wp_customize->add_setting(
+			"largo_homepage_layout_settings_section-$count-padding",
+			array(
+				'default'       => '',
+				'transport'     => 'postMessage',
+			)
+		);
+
+		$wp_customize->add_control(
+			"largo_homepage_layout_settings_section-$count-padding",
+			array(
+				'label'         => __( 'Column Padding', 'largo' ),
+				'section'       => "largo_homepage_layout_section-$count",
+				'type'          => 'number',
+				'input_attrs'   => array(
+					'placeholder'   => '0',
+					'min'           => 0,
 				),
 			)
 		);

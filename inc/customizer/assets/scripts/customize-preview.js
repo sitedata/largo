@@ -115,4 +115,27 @@
 		});
 	});
 
+	for ( var i = 1; i <= 5; i++ ) {
+		(function (i) {
+			// Column padding.
+			api( 'largo_homepage_layout_settings_section-' + i + '-padding', function( value ) {
+				value.bind( function( to ) {
+
+					// Update CSS value.
+					var style = $( '#largo-customizer-styles' ),
+						padding = style.data( 'section-' + i + '-padding' ),
+						css = style.html();
+						to  = to || '0';
+
+					css = css.split( padding + 'em' ).join( to + 'em' );
+					console.log( css );
+					console.log( to );
+					console.log( padding );
+					style.html( css ).data( 'section-' + i + '-padding', to );
+				});
+			});
+		})(i);
+	}
+
+
 })( jQuery );

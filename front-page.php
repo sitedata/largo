@@ -18,11 +18,11 @@ get_header(); ?>
 		<main id="main" class="site-main" role="main">
 
 		<?php
-		$homepage_sections = get_theme_mod( 'largo_homepage_layout_settings', 5 );
+		$homepage_sections = get_theme_mod( 'largo_homepage_layout_settings_sections', 5 );
 		if ( $homepage_sections || is_customize_preview() ) {
 			$count = 1;
 			while ( $count <= $homepage_sections ) {
-				$columns = get_theme_mod( "largo_homepage_layout_settings_$count", 5 );
+				$columns = get_theme_mod( "largo_homepage_layout_settings_section-$count-columns", 5 );
 				$column_count = 1;
 				echo '<div class="section grid" id="section-' . $count . '">';
 				while ( $column_count <= $columns ) { ?>
