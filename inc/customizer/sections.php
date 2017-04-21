@@ -30,6 +30,16 @@ function _customize_sections( $wp_customize ) {
 		)
 	);
 
+	// Genral Site Layout
+	$wp_customize->add_section(
+		'largo_layout_section',
+		array(
+			'title'    => esc_html__( 'General', 'largo' ),
+			'priority' => 10,
+			'panel'    => 'layout',
+		)
+	);
+
 	// Homepage Layout
 	$wp_customize->add_section(
 		'largo_homepage_layout_section',
