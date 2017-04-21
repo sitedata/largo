@@ -34,11 +34,8 @@ function largo_activation_maybe_setup() {
 	// that this user has the permissions to run optionsframework_init
 	// @see optionsframework_rolescheck() in lib/options-framework/options-framework.php
 	if ( current_user_can( 'update_themes' ) ) {
-		optionsframework_init();
+		// perform any Largo 1.0 setup functions
 	}
-
-	// this must run before any other function that makes use of of_set_option()
-	largo_set_new_option_defaults();
 
 	of_set_option( 'largo_version', largo_version() );
 
@@ -68,9 +65,6 @@ function largo_perform_update() {
 
 		if ( ! isset( $previous_options['largo_version'] ) )
 			$previous_options['largo_version'] = null;
-
-		// this must run before any other function that makes use of of_set_option()
-		largo_set_new_option_defaults();
 
 		// Run when updating from pre-0.4
 		if ( version_compare( $previous_options['largo_version'], '0.4' ) < 0 ) {
@@ -134,7 +128,8 @@ function largo_need_updates() {
 		}
 	}
 
-	// if 'largo_version' isn't present, the settings are old!
+	// if 'largo_version' isn't present, the settings are so old that we can safely ignore them
+	// or it's a fresh install
 	return true;
 }
 
@@ -443,25 +438,6 @@ function largo_remove_topstory_prominence_term() {
  * Functions that should run any time the largo version
  * number bumps.
  * ------------------------------------------------------ */
-
-/**
- * Save default values for any newly introduced options to the database
- *
- * Note: this must be called before any other update function calls `of_set_option`,
- * as `of_set_uption` defaults all values to null.
- *
- * @since 0.5.1
- */
-function largo_set_new_option_defaults() {
-	// Gets the unique id, returning a default if it isn't defined
-	$config = get_option( 'optionsframework' );
-	if ( isset( $config['id'] ) ) {
-		$defaults = of_get_default_values(); // the list of default values.
-		$previous_options = largo_retrieve_previous_options();
-		$options = wp_parse_args( $previous_options, $defaults );
-		update_option( $config['id'], $options );
-	}
-}
 
 /**
  * Replace deprecated widgets with new widgets
