@@ -29,26 +29,21 @@ class largo_author_widget extends WP_Widget {
 		$authors = array();
 		$bios = '';
 
-		if( get_post_meta( $post->ID, 'largo_byline_text' ) )
-			$byline_text = esc_attr( get_post_meta( $post->ID, 'largo_byline_text', true ) );
-
-		if( ( is_singular() ) && empty($byline_text) ) {
-			if ( is_singular() ) {
-				if ( function_exists( 'get_coauthors' ) ) {
-					$authors = get_coauthors( get_queried_object_id() );
-				} else {
-					$authors = array( get_user_by( 'id', get_queried_object()->post_author ) );
-				}
+		if ( is_singular() ) {
+			if ( function_exists( 'get_coauthors' ) ) {
+				$authors = get_coauthors( get_queried_object_id() );
+			} else {
+				$authors = array( get_user_by( 'id', get_queried_object()->post_author ) );
 			}
+		}
 
-			// make sure we have at least one bio before we show the widget
-			foreach ( $authors as $key => $author ) {
-				$bio = trim( $author->description );
-				if ( !is_author() && empty( $bio ) ) {
-					unset( $authors[$key] );
-				} else {
-					$bios .= $bio;
-				}
+		// make sure we have at least one bio before we show the widget
+		foreach ( $authors as $key => $author ) {
+			$bio = trim( $author->description );
+			if ( !is_author() && empty( $bio ) ) {
+				unset( $authors[$key] );
+			} else {
+				$bios .= $bio;
 			}
 		}
 
