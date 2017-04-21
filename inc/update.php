@@ -1168,3 +1168,31 @@ function largo_block_theme_options() { ?>
 	</h3>
 <?php
 }
+
+if ( ! function_exists( 'of_get_option' ) ) {
+	/**
+	 * Get Option.
+	 *
+	 * Helper function to return the theme option value.
+	 * If no value has been saved, it returns $default.
+	 * Needed because options are saved as serialized strings.
+	 *
+	 * The first lookup finds the name of the current optionsframework saved option set.
+	 * The second lookup uses that name as the index in the wp_options table.
+	 *
+	 * Copied into Largo 1.0 so that we can read from optionsframework options
+	 *
+	 * @since 0.2
+	 */
+	function of_get_option( $name, $default = false ) {
+		$config = get_option( 'optionsframework' );
+		if ( ! isset( $config['id'] ) ) {
+			return $default;
+		}
+		$options = get_option( $config['id'] );
+		if ( isset( $options[$name] ) ) {
+			return $options[$name];
+		}
+		return $default;
+	}
+}
