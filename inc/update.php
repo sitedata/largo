@@ -94,6 +94,7 @@ function largo_perform_update() {
 
 	// this is for post-1.0 stuff, but might actually be better with a different logic flow
 	if ( largo_need_updates_1() ) {
+		set_theme_mod( 'largo_version', largo_version() );
 	}
 
 	return true;
