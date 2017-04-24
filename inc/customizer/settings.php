@@ -62,7 +62,7 @@ function _customize_site_blurb( $wp_customize ) {
 		'site_blurb',
 		array(
 			'default'           => '',
-			'sanitize_callback' => 'wp_filter_nohtml_kses',
+			'sanitize_callback' => 'wp_kses_data',
 			'type'              => 'option',
 		)
 	);
