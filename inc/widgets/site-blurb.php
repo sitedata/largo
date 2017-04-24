@@ -1,22 +1,21 @@
 <?php
 /**
- * Author Bio Widget
- *
- * archive.php uses this widget to create the header of the Author Archive page
+ * Site Blurb Widget
  *
  * @package Largo
+ * @since Largo 1.0
  */
-class largo_site_description extends WP_Widget {
+class largo_site_blurb extends WP_Widget {
 
 	/*
 	 * Set up the widget
 	 */
 	function __construct() {
 		$widget_ops = array(
-			'classname' 	=> 'largo-site-description',
-			'description'	=> __('Show the site description in a widget', 'largo')
+			'classname' 	=> 'largo-site-blurb',
+			'description'	=> __('Show the site blurb in a widget', 'largo')
 		);
-		parent::__construct( 'largo-site-description', __( 'Site Description (Largo)', 'largo' ), $widget_ops );
+		parent::__construct( 'largo-site-blurb', __( 'Site Blurb (Largo)', 'largo' ), $widget_ops );
 	}
 
 	/*
@@ -35,11 +34,11 @@ class largo_site_description extends WP_Widget {
 			echo $args['before_title'] . apply_filters( 'widget_title', $instance['title'] ) . $args['after_title'];
 		}
 
-		echo '<div class="site-description">';
+		echo '<div class="site-blurb">';
 
-			$output = get_option( 'site_description' ) ? get_option( 'site_description' ) : '';
+			$output = get_option( 'site_blurb' ) ? stripslashes( get_option( 'site_blurb' ) ) : '';
 
-			apply_filters( 'largo_site_description_widget', $output );
+			apply_filters( 'largo_site_blurb_widget', $output );
 			echo $output;
 
 		echo '</div>';

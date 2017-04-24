@@ -53,6 +53,34 @@ function _customize_additional_scripts( $wp_customize ) {
 add_action( 'customize_register', '_customize_additional_scripts' );
 
 /**
+ * Register settings for site identity
+ * The section title_tagline is provided by Largo under the label "Site Identity"
+ */
+function _customize_site_blurb( $wp_customize ) {
+	// Register a setting
+	$wp_customize->add_setting(
+		'site_blurb',
+		array(
+			'default'           => '',
+			'sanitize_callback' => 'wp_kses_data',
+			'type'              => 'option',
+		)
+	);
+
+	// Create the setting field
+	$wp_customize->add_control(
+		'site_blurb',
+		array(
+			'label'       => esc_html__( 'Site Blurb', 'largo' ),
+			'description' => __( 'Enter a <strong>short blurb about your site</strong>. This is used in a sidebar widget', 'largo' ),
+			'section'     => 'title_tagline',
+			'type'        => 'textarea',
+		)
+	);
+}
+add_action( 'customize_register', '_customize_site_blurb' );
+
+/**
  * Register a social icons setting.
  */
 function _customize_social_icons( $wp_customize ) {

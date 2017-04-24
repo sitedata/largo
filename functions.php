@@ -110,7 +110,7 @@ function largo_widgets_init() {
 	}
 
 	register_widget( 'largo_author_widget' );
-	register_widget( 'largo_site_description' );
+	register_widget( 'largo_site_blurb' );
 }
 add_action( 'widgets_init', 'largo_widgets_init' );
 
@@ -164,7 +164,7 @@ $requires = array(
 	'/inc/settings.php', // Additional site settings
 	'/inc/taxonomy-archive-sidebars.php', // Custom sidebars for taxonomy archives
 	'/inc/widgets/author-bio.php',
-	'/inc/widgets/site-description.php',
+	'/inc/widgets/site-blurb.php',
 );
 foreach ( $requires as $require_once ) {
 	require_once( get_template_directory() . $require_once );
