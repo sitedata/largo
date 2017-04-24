@@ -71,7 +71,7 @@ function _customize_title_tagline( $wp_customize ) {
 	$wp_customize->add_control(
 		'site_blurb',
 		array(
-			'label'       => esc_html__( 'Site Description', 'largo' ),
+			'label'       => esc_html__( 'Site Blurb', 'largo' ),
 			'description' => __( 'Enter a <strong>short blurb about your site</strong>. This is used in a sidebar widget', 'largo' ),
 			'section'     => 'title_tagline',
 			'type'        => 'textarea',
