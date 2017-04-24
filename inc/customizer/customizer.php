@@ -42,7 +42,7 @@ function _selective_refresh_support( $wp_customize ) {
 	// The <div> classname to append edit icon too.
 	$settings = array(
 		'blogname'          => '.site-title a',
-		'blogdescription'   => '.site-description',
+		'blogdescription'   => '.site-blurb',
 		'_copyright_text' => '.site-info',
 	);
 
