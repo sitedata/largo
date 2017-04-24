@@ -28,7 +28,7 @@ function largo_activation_maybe_setup() {
 	}
 
 	// if optionsframework options exist, please do not mess with update logic by setting the new theme mod
-	if ( get_option( 'optionsframework' ) ) {
+	if ( ! get_option( 'optionsframework' ) ) {
 		set_theme_mod( 'largo_version', largo_version() );
 	}
 
@@ -74,13 +74,6 @@ function largo_perform_update() {
 			error_log(var_export( "running < 0.5", true));
 			// Repeatable, should be run when updating to 0.4+
 			largo_remove_topstory_prominence_term();
-		}
-
-		// Run when updating from pre-1.0
-		if ( version_compare( $previous_options['largo_version'], '1.0' ) < 0 ) {
-			error_log(var_export( "running < 1.0", true));
-			// import optionsframework stuff to theme_mods
-			// what else do we want to do here?
 		}
 
 		largo_replace_deprecated_widgets();
@@ -500,6 +493,7 @@ function largo_remove_topstory_prominence_term() {
  *
  * @since 1.0
  * @link https://codex.wordpress.org/Theme_Modification_API
+ * @return boolean Whether the function was successfully completed
  */
 function largo_optionsframework_to_theme_mods() {
 	$updates = array(
@@ -521,7 +515,17 @@ function largo_optionsframework_to_theme_mods() {
 	$config = get_option( 'optionsframework' );
 	$optionsframework = get_option( $config['id'] );
 
+	// strange
+	if ( ! is_array( $optionsframework ) ) {
+		return false;
+	}
+
 	foreach ( $updates as $setting ) {
+		// abort
+		if ( ! is_string( $setting['from'] ) || ! is_string( $setting['to'] ) ) {
+			break;
+		}
+
 		$value = $optionsframework[ $setting['from'] ];
 
 		// callback allowing modification of value
@@ -534,6 +538,8 @@ function largo_optionsframework_to_theme_mods() {
 
 		set_theme_mod( $setting['to'], $value );
 	}
+
+	return true;
 }
 
 /* --------------------------------------------------------
