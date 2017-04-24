@@ -56,7 +56,7 @@ add_action( 'customize_register', '_customize_additional_scripts' );
  * Register settings for site identity
  * The section title_tagline is provided by Largo under the label "Site Identity"
  */
-function _customize_title_tagline( $wp_customize ) {
+function _customize_site_blurb( $wp_customize ) {
 	// Register a setting
 	$wp_customize->add_setting(
 		'site_blurb',
@@ -78,7 +78,7 @@ function _customize_title_tagline( $wp_customize ) {
 		)
 	);
 }
-add_action( 'customize_register', '_customize_title_tagline' );
+add_action( 'customize_register', '_customize_site_blurb' );
 
 /**
  * Register a social icons setting.
