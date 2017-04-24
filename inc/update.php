@@ -15,7 +15,7 @@
  * @link https://github.com/INN/Largo/issues/690
  */
 function largo_activation_maybe_setup() {
-	if ( of_get_option( 'largo_version', false ) ) {
+	if ( get_theme_mod( 'largo_version', false ) ) {
 		return false;
 	}
 
@@ -27,7 +27,10 @@ function largo_activation_maybe_setup() {
 		// perform any Largo 1.0 setup functions
 	}
 
-	set_theme_mod( 'largo_version', largo_version() );
+	// if optionsframework options exist, please do not mess with update logic by setting the new theme mod
+	if ( get_option( 'optionsframework' ) ) {
+		set_theme_mod( 'largo_version', largo_version() );
+	}
 
 	// Prevent the update nag from displaying on the first page load
 	remove_action( 'admin_notices', 'largo_update_admin_notice', 10 );
@@ -68,20 +71,19 @@ function largo_perform_update() {
 
 		// Run when updating from pre-0.5
 		if ( version_compare( $previous_options['largo_version'], '0.5' ) < 0 ) {
+			error_log(var_export( "running < 0.5", true));
 			// Repeatable, should be run when updating to 0.4+
 			largo_remove_topstory_prominence_term();
 		}
 
 		// Run when updating from pre-1.0
 		if ( version_compare( $previous_options['largo_version'], '1.0' ) < 0 ) {
+			error_log(var_export( "running < 1.0", true));
 			// import optionsframework stuff to theme_mods
 			// what else do we want to do here?
 		}
 
 		largo_replace_deprecated_widgets();
-
-		// Set version with current Largo.
-		of_set_option( 'largo_version', largo_version() );
 	}
 
 	// For transitional functions from Largo pre-1.0 to 1.0
@@ -90,9 +92,15 @@ function largo_perform_update() {
 	//     - optionsframework saved version being < current version number
 	//     - theme_mod saved version does not exist, OR saved version exists and < current version number
 	if ( largo_need_updates_0() && largo_need_updates_1() ) {
+		largo_optionsframework_to_theme_mods();
+
+		// Set optionsframework version to current post-1.0 Largo version
+		// This will make largo_need_updates_0() return false in the future
+		// This should be the last update performed in the 0.5 -> 1.0 transitional block
+		of_set_option( 'largo_version', largo_version() );
 	}
 
-	// this is for post-1.0 stuff, but might actually be better with a different logic flow
+	// this is for post-1.0 stuff
 	if ( largo_need_updates_1() ) {
 		set_theme_mod( 'largo_version', largo_version() );
 	}
@@ -154,7 +162,7 @@ function largo_need_updates_0() {
 
 		// no need to update the options framework if the saved largo version is > 1.0, since
 		// that means that we've already run upgrades against the optionsframework after 1.0
-		$post_optionsframework = version_compare( '1.0', of_get_option( 'largo_version' ), '<=' );
+		$post_optionsframework = version_compare( '1.0.0', of_get_option( 'largo_version' ), '<=' );
 		if ( $post_optionsframework ) {
 			$return = false;
 		}
@@ -486,6 +494,47 @@ function largo_remove_topstory_prominence_term() {
  * In which we transition away from the options framework
  * to WordPress' theme_mods
  * ------------------------------------------------------ */
+
+/**
+ * Copy selected settings from the options framework to the theme_mods settings
+ *
+ * @since 1.0
+ * @link https://codex.wordpress.org/Theme_Modification_API
+ */
+function largo_optionsframework_to_theme_mods() {
+	$updates = array(
+		/*
+		 * Example array, with optional callback
+		array(
+			'from' => 'site_blurb',
+			'to' => 'site_blurb',
+			'callback' => something that's callable, be that an anonymous function or a string function name
+		),
+		*/
+		array(
+			'from' => 'site_blurb',
+			'to' => 'site_blurb',
+		),
+	);
+
+	// cache this to prevent fewer db reads
+	$config = get_option( 'optionsframework' );
+	$optionsframework = get_option( $config['id'] );
+
+	foreach ( $updates as $setting ) {
+		$value = $optionsframework[ $setting['from'] ];
+
+		// callback allowing modification of value
+		if ( isset( $setting['callback'] ) ) {
+			if ( is_callable( $setting['callback'] ) ) {
+				$value = call_user_func( $setting['callback'], $value );
+			}
+		}
+		error_log(var_export( $value, true));
+
+		set_theme_mod( $setting['to'], $value );
+	}
+}
 
 /* --------------------------------------------------------
  * Always run
