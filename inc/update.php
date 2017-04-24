@@ -84,10 +84,16 @@ function largo_perform_update() {
 		of_set_option( 'largo_version', largo_version() );
 	}
 
-	// do we need a transitional 0.x -> 1.x function here?
+	// For transitional functions from Largo pre-1.0 to 1.0
+	// This is triggered by all of the below being true:
+	//     - optionsframework saved version exists
+	//     - optionsframework saved version being < current version number
+	//     - theme_mod saved version does not exist, OR saved version exists and < current version number
+	if ( largo_need_updates_0() && largo_need_updates_1() ) {
+	}
 
 	// this is for post-1.0 stuff, but might actually be better with a different logic flow
-	if ( largo_need_updates() ) {
+	if ( largo_need_updates_1() ) {
 	}
 
 	return true;
@@ -105,6 +111,20 @@ function largo_version() {
 		return $parent->get( 'Version' );
 	}
 	return $theme->get( 'Version' );
+}
+
+/**
+ * Wrapper for all granular "does largo need an update?" functions
+ *
+ * This wraps the update functions specific to various options frameworks
+ *
+ * @uses largo_need_updates_0
+ * @uses largo_need_updates_1
+ * @since 1.0
+ * @return boolean Whether an update is needed
+ */
+function largo_need_updates() {
+	return largo_need_updates_0() || largo_need_updates_1();
 }
 
 /**
@@ -126,25 +146,33 @@ function largo_need_updates_0() {
 		$compare = version_compare( largo_version(), of_get_option( 'largo_version' ) );
 
 		if ( $compare == 1 ) {
-			return true;
+			$return = true;
 		} else {
-			return false;
+			$return = false;
 		}
+
+		// no need to update the options framework if the saved largo version is > 1.0, since
+		// that means that we've already run upgrades against the optionsframework after 1.0
+		$post_optionsframework = version_compare( '1.0', of_get_option( 'largo_version' ), '<=' );
+		if ( $post_optionsframework ) {
+			$return = false;
+		}
+
+		return $return;
 	}
 
-	// if 'largo_version' isn't present, the settings are so old that we can safely ignore them
-	// or it's a fresh install
+	// if 'largo_version' isn't present in the optionsframework, the settings are so old that we can safely ignore them for 1.0 and following
+	// or it's a fresh install, in which case we don't need to do anything regarding the optionsframework options
 	return false;
 }
 
 /**
- * Checks if updates need to be run for any version of Largo
+ * Checks if updates need to be run for the theme_mods options introduced in Largo 1.0
  *
- * @uses largo_need_updates_0
- * @since 0.3
+ * @since 1.0
  * @return boolean $result True if updates need to be run.
  */
-function largo_need_updates() {
+function largo_need_updates_1() {
 	if ( get_theme_mod( 'largo_version' ) ) {
 		$compare = version_compare( largo_version(), get_theme_mod( 'largo_version' ) );
 
@@ -412,7 +440,7 @@ function largo_force_settings_update() {
 /* --------------------------------------------------------
  * Upgrades for moving from 0.4 -> 0.5
  *
- * In which top stories are no registered by default.
+ * In which top stories are now registered by default.
  * ------------------------------------------------------ */
 
 /**
@@ -553,7 +581,7 @@ function largo_replace_deprecated_widgets() {
 						/*
 						 * So many variables ...
 						 *
-						 * $local_all_widgets: Associative array of $region a sidebar or widget area => $local_current_sidebar array of widget slugs in regione
+						 * $local_all_widgets: Associative array of $region a sidebar or widget area => $local_current_sidebar array of widget slugs in region
 						 * $local_current_sidebar: Array of the widgets in the current sidebar/widget area/$region
 						 * $current_widget_slug: the old widget's ID: slug-widget-2
 						 * $old_widget_name: The slug of the widget that needs to be updated, from $upgrades: slug
