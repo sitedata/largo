@@ -391,23 +391,23 @@ function largo_update_prominence_term_description_single( $update, $term_descrip
 	// Toggle comment on these two lines to revert to old descriptions.
 	if ( in_array( $update['olddescription'], $term_descriptions ) ) {
 #	if ( in_array( $update['description'], $term_descriptions ) ) {
-	    $id = get_term_by( 'slug', $update['slug'], 'prominence', 'ARRAY_A' );
-	    // Comment out this function call to avoid all prominence term updates.
+		$id = get_term_by( 'slug', $update['slug'], 'prominence', 'ARRAY_A' );
+		// Comment out this function call to avoid all prominence term updates.
 #		/*
-	    wp_update_term(
-	        $id['term_id'], 'prominence',
-	        array(
-	            'name' => $update['name'],
-	            // Toggle comment on these two lines to revert to old descriptions.
-	            'description' => $update['description'],
-#   	        'description' => $update['olddescription'],
-	            'slug' => $update['slug']
-	        )
-	    );
-#	    */
-	    $logarray[] = 'Updated description of "' . $update['name'] . '" from "'. $update['olddescription'] . '" to "' . $update['description'] . '"';
-	    // Clean the entire prominence term cache
-	    clean_term_cache( $id['term_id'], 'prominence', true );
+		wp_update_term(
+			$id['term_id'], 'prominence',
+			array(
+				'name' => $update['name'],
+				// Toggle comment on these two lines to revert to old descriptions.
+				'description' => $update['description'],
+#				'description' => $update['olddescription'],
+				'slug' => $update['slug']
+			)
+		);
+#		*/
+		$logarray[] = 'Updated description of "' . $update['name'] . '" from "'. $update['olddescription'] . '" to "' . $update['description'] . '"';
+		// Clean the entire prominence term cache
+		clean_term_cache( $id['term_id'], 'prominence', true );
 	}
 
 	return $update;
