@@ -143,60 +143,97 @@ function _customize_copyright_text( $wp_customize ) {
 add_action( 'customize_register', '_customize_copyright_text' );
 
 /**
- *
+ * Register General Layout Option Settings
+ */
+function largo_customize_layout( $wp_customize ) {
+
+	$wp_customize->add_setting(
+		'layout_width',
+		array(
+			'default'       => '',
+			'transport'     => 'postMessage',
+			'sanitize_callback' => 'largo_sanitize_setting_layout_width',
+		)
+	);
+
+	$wp_customize->add_control(
+		'layout_width',
+		array(
+			'label'	        => __( 'Default Site Width', 'largo' ),
+			'description'   => __( 'Content area width at full resolution', 'largo' ),
+			'section'       => 'largo_layout_section',
+			'type'          => 'number',
+			'input_attrs' => array(
+				'placeholder' => '1600',
+				'min'   => 0,
+			),
+		)
+	);
+}
+add_action( 'customize_register', 'largo_customize_layout' );
+
+function largo_sanitize_setting_layout_width( $value ) {
+	return intval( $value ) > 0 ? intval( $value ) : 1600;
+}
+
+/**
+ * Register Homepage Layout Settings
  */
 function largo_customize_homepage_layout( $wp_customize ) {
 
-	// Register a setting.
 	$wp_customize->add_setting(
 		'largo_homepage_layout_settings',
 		array(
-			'default' => '',
-    	'transport' => 'refresh',
+			'default'       => '',
+			'transport'     => 'refresh',
 		)
 	);
 
 	$wp_customize->add_control(
 		'largo_homepage_layout_settings',
 		array(
-			'label'    => __( 'Sections', 'largo' ),
-			'description' => __( 'How many content sections?', 'largo' ),
-			'section'  => 'largo_homepage_layout_section',
-			'type'     => 'radio',
-			'choices'  => array(
-				'1'  => 'One',
-				'2' => 'Two',
-				'3' => 'Three',
-				'4' => 'Four',
-				'5' => 'Five',
+			'label'         => __( 'Sections', 'largo' ),
+			'description'   => __( 'How many content sections?', 'largo' ),
+			'section'       => 'largo_homepage_layout_section',
+			'type'          => 'radio',
+			'choices'       => array(
+				'1'             => 'One',
+				'2'             => 'Two',
+				'3'             => 'Three',
+				'4'             => 'Four',
+				'5'             => 'Five',
 			),
 		)
 	);
 
-//	$mods = get_theme_mod( 'largo_homepage_layout_settings' );
+	/*
+	 *  We register all section controls here instead of pulling the current value
+	 * from get_theme_mod( 'largo_homepage_layout_settings' );
+	 * so that all controls are available to the customizer logic.
+	 */
 	$mods = 5;
 	$count = 1;
 	while ( $mods >= $count ) {
 		$wp_customize->add_setting(
 			"largo_homepage_layout_settings_$count",
 			array(
-				'default' => '',
-				'transport' => 'refresh',
+				'default'       => '',
+				'transport'     => 'refresh',
 			)
 		);
 
 		$wp_customize->add_control(
 			"largo_homepage_layout_settings_$count",
 			array(
-				'label'    => __( 'Section Columns', 'largo' ),
-				'description' => __( 'How many columns in this section?', 'largo' ),
-				'section'  => "largo_homepage_layout_section-$count",
-				'type'     => 'radio',
-				'choices'  => array(
-					'1'  => 'One',
-					'2' => 'Two',
-					'3' => 'Three',
-					'4' => 'Four',
+				'label'         => __( 'Section Columns', 'largo' ),
+				'description'   => __( 'How many columns in this section?', 'largo' ),
+				'section'       => "largo_homepage_layout_section-$count",
+				'type'          => 'radio',
+				'choices'       => array(
+					'1'             => 'One',
+					'2'             => 'Two',
+					'3'             => 'Three',
+					'4'             => 'Four',
 				),
 			)
 		);

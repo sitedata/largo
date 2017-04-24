@@ -72,18 +72,6 @@ endif;
 add_action( 'after_setup_theme', 'largo_setup' );
 
 /**
- * Set the content width in pixels, based on the theme's design and stylesheet.
- *
- * Priority 0 to make it available to lower priority callbacks.
- *
- * @global int $content_width
- */
-function largo_content_width() {
-	$GLOBALS['content_width'] = apply_filters( 'largo_content_width', 640 );
-}
-add_action( 'after_setup_theme', 'largo_content_width', 0 );
-
-/**
  * Register widget area.
  *
  * @link https://developer.wordpress.org/themes/functionality/sidebars/#registering-a-sidebar
@@ -140,42 +128,44 @@ function largo_scripts() {
 		wp_enqueue_script( 'comment-reply' );
 	}
 
-	wp_enqueue_script( 'jquery-scrollto', get_theme_file_uri( '/js/jquery.scrollTo.js' ), array( 'jquery' ), '2.1.2', true );
+	if ( is_customize_preview() ) {
+		wp_enqueue_style( 'largo-customizer-preview-style', get_template_directory_uri() . '/customizer.css' );
+		wp_enqueue_script( 'jquery-scrollto', get_theme_file_uri( '/js/jquery.scrollTo.js' ), array( 'jquery' ), '2.1.2', true );
+	}
 }
 add_action( 'wp_enqueue_scripts', 'largo_scripts' );
 
 /**
- * Implement the Custom Header feature.
+ * Print CSS set in the customizer.
  */
-require get_template_directory() . '/inc/custom-header.php';
+function largo_customizer_css() {
+	$site_width = intval( get_theme_mod( 'layout_width' ) ) > 0 ? get_theme_mod( 'layout_width' ) : 1600; // Set fallback value for site width if unset - also defined in customize-preview.js
+	?>
+	<style type="text/css" id="largo-customizer-styles" <?php if ( is_customize_preview() ) { echo 'data-sitewidth="' . $site_width . '"'; } ?>>
+		#page {
+			width: <?php echo absint( $site_width ); ?>px;
+			max-width: 90%;
+			margin: 0 auto;
+		}
+	</style>
+	<?php
+}
+add_action( 'wp_head', 'largo_customizer_css' );
 
 /**
- * Custom template tags for this theme.
+ * Require_once all Largo files
  */
-require get_template_directory() . '/inc/template-tags.php';
-
-/**
- * Custom functions that act independently of the theme templates.
- */
-require get_template_directory() . '/inc/extras.php';
-
-/**
- * Customizer additions.
- */
-require get_template_directory() . '/inc/customizer/customizer.php';
-
-/**
- * Load Jetpack compatibility file.
- */
-require get_template_directory() . '/inc/jetpack.php';
-
-/**
- * Load additional site settings.
- */
-require get_template_directory() . '/inc/settings.php';
-
-/**
- * Widgets
- */
-require get_template_directory() . '/inc/widgets/author-bio.php';
-require get_template_directory() . '/inc/widgets/site-description.php';
+$requires = array(
+	'/inc/custom-header.php', // Custom Header feature
+	'/inc/template-tags.php', // Custom template tags for this theme
+	'/inc/extras.php', // Custom functions that act independently of the theme templates
+	'/inc/customizer/customizer.php', // Customizer additions
+	'/inc/jetpack.php', // Jetpack compatibility file
+	'/inc/settings.php', // Additional site settings
+	'/inc/taxonomy-archive-sidebars.php', // Custom sidebars for taxonomy archives
+	'/inc/widgets/author-bio.php',
+	'/inc/widgets/site-description.php',
+);
+foreach ( $requires as $require_once ) {
+	require_once( get_template_directory() . $require_once );
+}
