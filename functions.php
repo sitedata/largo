@@ -163,8 +163,8 @@ function largo_customizer_css() {
 				$homepage_styles .= '#section-' . $count . ' .column {
 			padding: ' . $padding . 'em;
 		}';
-			}
 			$data .= 'data-section-' . $count . '-padding="' . $padding . '"';
+			}
 			$count++;
 		}
 	}
