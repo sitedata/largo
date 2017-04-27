@@ -72,18 +72,6 @@ endif;
 add_action( 'after_setup_theme', 'largo_setup' );
 
 /**
- * Set the content width in pixels, based on the theme's design and stylesheet.
- *
- * Priority 0 to make it available to lower priority callbacks.
- *
- * @global int $content_width
- */
-function largo_content_width() {
-	$GLOBALS['content_width'] = apply_filters( 'largo_content_width', 640 );
-}
-add_action( 'after_setup_theme', 'largo_content_width', 0 );
-
-/**
  * Register widget area.
  *
  * @link https://developer.wordpress.org/themes/functionality/sidebars/#registering-a-sidebar
@@ -146,6 +134,23 @@ function largo_scripts() {
 	}
 }
 add_action( 'wp_enqueue_scripts', 'largo_scripts' );
+
+/**
+ * Print CSS set in the customizer.
+ */
+function largo_customizer_css() {
+	$site_width = intval( get_theme_mod( 'layout_width' ) ) > 0 ? get_theme_mod( 'layout_width' ) : 1600; // Set fallback value for site width if unset - also defined in customize-preview.js
+	?>
+	<style type="text/css" id="largo-customizer-styles" <?php if ( is_customize_preview() ) { echo 'data-sitewidth="' . $site_width . '"'; } ?>>
+		#page {
+			width: <?php echo absint( $site_width ); ?>px;
+			max-width: 90%;
+			margin: 0 auto;
+		}
+	</style>
+	<?php
+}
+add_action( 'wp_head', 'largo_customizer_css' );
 
 /**
  * Require_once all Largo files

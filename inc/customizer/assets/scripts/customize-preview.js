@@ -100,4 +100,19 @@
 		});
 	});
 
+	// Site width.
+	api( 'layout_width', function( value ) {
+		value.bind( function( to ) {
+
+			// Update CSS value.
+			var style = $( '#largo-customizer-styles' ),
+				sitewidth = style.data( 'sitewidth' ),
+				css = style.html();
+				to  = to || '1600'; // If value is removed, fallback to default value - also set in largo_customizer_css().
+
+			css = css.split( sitewidth + 'px' ).join( to + 'px' );
+			style.html( css ).data( 'sitewidth', to );
+		});
+	});
+
 })( jQuery );
