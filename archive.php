@@ -75,8 +75,11 @@ $queried_object = get_queried_object();
 					printf( '<a class="rss-link rss-subscribe-link" href="%1$s">%2$s <i class="icon-rss"></i></a>', $rss_link, __( 'Subscribe', 'largo' ) );
 				}
 
-				$post_id = largo_get_term_meta_post( $queried_object->taxonomy, $queried_object->term_id );
-				the_post_thumbnail($post_id);
+				// Integration with https://github.com/INN/featured-media
+				if ( function_exists( 'largo_get_term_meta_post' ) ) {
+					$post_id = largo_get_term_meta_post( $queried_object->taxonomy, $queried_object->term_id );
+					the_post_thumbnail($post_id);
+				}
 
 				if ( isset( $title ) ) {
 					echo '<h1 class="page-title">' . $title . '</h1>';
