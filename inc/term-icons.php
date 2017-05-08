@@ -65,6 +65,7 @@ class Largo_Term_Icons {
 	 * Renders the form fields on the term edit page
 	 *
 	 * @param object $term A taxonomy term
+	 * @uses largo_get_term_meta
 	 */
 	function display_fields( $term ) {
 		if ( !in_array( $term->taxonomy, $this->get_icon_taxonomies() ) ) {

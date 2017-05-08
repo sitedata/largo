@@ -7,7 +7,6 @@
  * @link https://github.com/INN/link-roundups
  * @link https://wordpress.org/plugins/link-roundups/
  */
-$hero_class = largo_hero_class( $post->ID, FALSE );
 $values = get_post_custom( $post->ID );
 $featured = has_term( 'homepage-featured', 'prominence' );
 ?>

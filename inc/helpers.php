@@ -304,7 +304,6 @@ function largo_get_current_url() {
  * @param array An array of WP_Post objects to iterate over
  * @return str|false The HTML for the image, or false if no images were found.
  * @since 0.5.3
- * @uses largo_has_featured_media
  */
 function largo_first_thumbnail_in_post_array( $array ) {
 	$thumb = '';
