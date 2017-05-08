@@ -158,7 +158,6 @@ class Largo {
 			'/inc/home-templates.php',
 			'/inc/update.php',
 			'/inc/featured-media.php',
-			'/inc/deprecated.php',
 			'/inc/pagination.php',
 			'/inc/conditionals.php'
 		);
