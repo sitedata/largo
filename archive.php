@@ -76,7 +76,7 @@ $queried_object = get_queried_object();
 				}
 
 				// Integration with https://github.com/INN/featured-media
-				if ( function_exists( 'largo_get_term_meta_post' ) ) {
+				if ( function_exists( 'largo_add_term_featured_media_button' ) ) {
 					$post_id = largo_get_term_meta_post( $queried_object->taxonomy, $queried_object->term_id );
 					the_post_thumbnail($post_id);
 				}
