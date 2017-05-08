@@ -230,31 +230,40 @@ if ( ! function_exists( 'largo_google_analytics' ) ) {
 	function largo_google_analytics() {
 		if ( !current_user_can('edit_posts') ) : // don't track editors ?>
 			<script>
+			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
 			<?php if ( of_get_option( 'ga_id', true ) ) : // make sure the ga_id setting is defined ?>
-				ga( 'create', '<?php echo of_get_option( "ga_id" ) ?>', 'auto', 'dashboardTracker' );
+				ga( 'create', {
+					trackingId: '<?php echo of_get_option( "ga_id" ) ?>',
+					cookieDomain: 'auto',
+					name: 'dashboardTracker'
+				} );
 				ga( 'dashboardTracker.send', 'pageview' );
 			<?php endif; ?>
-				<?php if (defined('INN_MEMBER') && INN_MEMBER) { ?>
+
+			<?php if (defined('INN_MEMBER') && INN_MEMBER) { ?>
 
 				// Create tracking for Largo Account and capture analytics.js and legacy ga.js domain info for reporting segmentation.
-				ga( 'create', 'UA-17578670-2', 'auto', 'largoTracker', {
+				ga( 'create', {
+					trackingId: 'UA-17578670-2'
 					cookieDomain: '<?php echo parse_url( home_url(), PHP_URL_HOST ); ?>',
-					legacyCookieDomain: '<?php echo parse_url( home_url(), PHP_URL_HOST ); ?>'
+					legacyCookieDomain: '<?php echo parse_url( home_url(), PHP_URL_HOST ); ?>',
+					name: 'largoTracker'
 				} );
 				ga( 'largoTracker.send', 'pageview' );
-				<?php } ?>
+			<?php } ?>
 
 				// Create tracking for INN Network Account and capture analytics.js and legacy ga.js domain info for reporting segmentation.
-				ga( 'create', 'UA-17578670-4', 'auto', 'innTracker', {
+				ga( 'create', {
+					trackingId: 'UA-17578670-4',
 					cookieDomain: '<?php echo parse_url( home_url(), PHP_URL_HOST ); ?>',
-					legacyCookieDomain: '<?php echo parse_url( home_url(), PHP_URL_HOST ); ?>'
+					legacyCookieDomain: '<?php echo parse_url( home_url(), PHP_URL_HOST ); ?>',
+					name: 'innTracker'
 				} );
 				ga( 'innTracker.send', 'pageview' );
-
-				(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-				(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-				m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-				})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 			</script>
 	<?php endif;
 	}
