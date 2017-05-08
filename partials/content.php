@@ -7,7 +7,7 @@
 $args = array (
 	// post-specific, should probably not be filtered but may be useful
 	'post_id' => $post->ID,
-	'hero_class' => largo_hero_class( $post->ID, FALSE ),
+	'hero_class' => '',
 
 	// only used to determine the existence of a youtube_url
 	'values' => get_post_custom( $post->ID ),

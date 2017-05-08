@@ -76,7 +76,7 @@ $queried_object = get_queried_object();
 				}
 
 				$post_id = largo_get_term_meta_post( $queried_object->taxonomy, $queried_object->term_id );
-				largo_hero($post_id);
+				the_post_thumbnail($post_id);
 
 				if ( isset( $title ) ) {
 					echo '<h1 class="page-title">' . $title . '</h1>';

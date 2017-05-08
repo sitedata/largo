@@ -210,14 +210,6 @@ EOT;
 		$this->markTestIncomplete("This test has not yet been implemented.");
 	}
 
-	function test_largo_hero_class() {
-		$this->markTestIncomplete("This test has not yet been implemented.");
-	}
-
-	function test_largo_hero_with_caption() {
-		$this->markTestIncomplete("This test has not yet been implemented.");
-	}
-
 	function test_largo_post_metadata() {
 		$this->markTestIncomplete("This test has not yet been implemented.");
 	}

@@ -29,7 +29,7 @@
 	<?php
 		do_action('largo_after_post_header');
 
-		largo_hero(null,'span12');
+		the_post_thumbnail(null,'span12');
 
 		do_action('largo_after_hero');
 	?>

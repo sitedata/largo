@@ -25,6 +25,6 @@ function largo_cached_nav_menu( $args = array(), $prime_cache = false ) {
  */
 if ( ! function_exists( 'largo_hero_with_caption' ) ) {
 	function largo_hero_with_caption( $post_id ) {
-		largo_featured_image_hero($post_id);
+		the_post_thumbnail($post_id);
 	}
 }
