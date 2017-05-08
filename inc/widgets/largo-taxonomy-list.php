@@ -139,7 +139,7 @@ class largo_taxonomy_list_widget extends WP_Widget {
 	 *
 	 * @private
 	 * @uses largo_taxonomy_list_widget::render_li
-	 * @uses largo_featured_thumbnail_in_post_array
+	 * @uses largo_first_thumbnail_in_post_array
 	 * @uses largo_first_headline_in_post_array
 	 * @since 0.5.3
 	 */
@@ -188,7 +188,7 @@ class largo_taxonomy_list_widget extends WP_Widget {
 	 *
 	 * @private
 	 * @uses largo_taxonomy_list_widget::render_li
-	 * @uses largo_featured_thumbnail_in_post_array
+	 * @uses largo_first_thumbnail_in_post_array
 	 * @uses largo_first_headline_in_post_array
 	 * @since 0.5.3
 	 */
