@@ -1,8 +1,16 @@
 <?php
-
 /**
  * Adds custom meta fields functionality to terms
  * Uses a custom post type as a proxy to bridge between a term_id and a post_meta field
+ *
+ * This functionality is used by:
+ * - https://github.com/INN/featured-media (plugin has fallbacks for when this file is removed from Largo)
+ * - inc/term-sidebars.php to store the term sidebar choice
+ * - inc/sidebars.php to display the term sidebar choice
+ * - inc/term-icons.php to store the term icon choice
+ *
+ * @since Largo 0.4
+ * @link https://github.com/INN/largo/pull/143
  */
 
 /**
