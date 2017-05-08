@@ -20,6 +20,8 @@ function largo_cached_nav_menu( $args = array(), $prime_cache = false ) {
  * Returns the featured image for a post; deprecated in 0.5.1
  * to be used as the hero image with caption and credit (if available)
  *
+ * Modified in 1.0 to return the_post_thumbnail instead of the largo featured media image
+ *
  * @since 0.4
  * @deprecated 0.5.1
  */
