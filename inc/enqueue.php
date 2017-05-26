@@ -248,7 +248,7 @@ if ( ! function_exists( 'largo_google_analytics' ) ) {
 
 				// Create tracking for Largo Account and capture analytics.js and legacy ga.js domain info for reporting segmentation.
 				ga( 'create', {
-					trackingId: 'UA-17578670-2'
+					trackingId: 'UA-17578670-2',
 					cookieDomain: '<?php echo parse_url( home_url(), PHP_URL_HOST ); ?>',
 					legacyCookieDomain: '<?php echo parse_url( home_url(), PHP_URL_HOST ); ?>',
 					name: 'largoTracker'
