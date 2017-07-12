@@ -24,7 +24,6 @@ Function reference by file
 * `inc/images.php <inc/images.html>`_
 * `inc/metabox-api.php <inc/metabox-api.html>`_
 * `inc/nav-menus.php <inc/nav-menus.html>`_
-* `inc/plugin-init.php <inc/plugin-init.html>`_
 * `inc/post-metaboxes.php <inc/post-metaboxes.html>`_
 * `inc/post-social.php <inc/post-social.html>`_
 * `inc/post-tags.php <inc/post-tags.html>`_
