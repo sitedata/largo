@@ -230,31 +230,40 @@ if ( ! function_exists( 'largo_google_analytics' ) ) {
 	function largo_google_analytics() {
 		if ( !current_user_can('edit_posts') ) : // don't track editors ?>
 			<script>
-			    var _gaq = _gaq || [];
-			<?php if ( of_get_option( 'ga_id', true ) ) : // make sure the ga_id setting is defined ?>
-				_gaq.push(['_setAccount', '<?php echo of_get_option( "ga_id" ) ?>']);
-				_gaq.push(['_trackPageview']);
-			<?php endif; ?>
-				<?php if (defined('INN_MEMBER') && INN_MEMBER) { ?>
-				_gaq.push(
-					["inn._setAccount", "UA-17578670-2"],
-					["inn._setCustomVar", 1, "MemberName", "<?php bloginfo('name') ?>"],
-					["inn._trackPageview"]
-				);
-				<?php } ?>
-			    _gaq.push(
-					["largo._setAccount", "UA-17578670-4"],
-					["largo._setCustomVar", 1, "SiteName", "<?php bloginfo('name') ?>"],
-					["largo._setDomainName", "<?php echo parse_url( home_url(), PHP_URL_HOST ); ?>"],
-					["largo._setAllowLinker", true],
-					["largo._trackPageview"]
-				);
+			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-			    (function() {
-				    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-				    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-				    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-				})();
+			<?php if ( of_get_option( 'ga_id', true ) ) : // make sure the ga_id setting is defined ?>
+				ga( 'create', {
+					trackingId: '<?php echo of_get_option( "ga_id" ) ?>',
+					cookieDomain: 'auto',
+					name: 'dashboardTracker'
+				} );
+				ga( 'dashboardTracker.send', 'pageview' );
+			<?php endif; ?>
+
+			<?php if (defined('INN_MEMBER') && INN_MEMBER) { ?>
+
+				// Create tracking for Largo Account and capture analytics.js and legacy ga.js domain info for reporting segmentation.
+				ga( 'create', {
+					trackingId: 'UA-17578670-2',
+					cookieDomain: '<?php echo parse_url( home_url(), PHP_URL_HOST ); ?>',
+					legacyCookieDomain: '<?php echo parse_url( home_url(), PHP_URL_HOST ); ?>',
+					name: 'largoTracker'
+				} );
+				ga( 'largoTracker.send', 'pageview' );
+			<?php } ?>
+
+				// Create tracking for INN Network Account and capture analytics.js and legacy ga.js domain info for reporting segmentation.
+				ga( 'create', {
+					trackingId: 'UA-17578670-4',
+					cookieDomain: '<?php echo parse_url( home_url(), PHP_URL_HOST ); ?>',
+					legacyCookieDomain: '<?php echo parse_url( home_url(), PHP_URL_HOST ); ?>',
+					name: 'innTracker'
+				} );
+				ga( 'innTracker.send', 'pageview' );
 			</script>
 	<?php endif;
 	}
