@@ -22,12 +22,6 @@ function largo_dashboard_quick_links() {
 	';
 }
 
-// add a credit line to the admin footer
-function largo_admin_footer_text( $default_text ) {
-	return '<span id="footer-thankyou">This website powered by <a href="http://largoproject.org">Project Largo</a> from <a href="http://inn.org">INN</a> and <a href="http://wordpress.org">WordPress</a>.</span>';
-}
-add_filter( 'admin_footer_text', 'largo_admin_footer_text' );
-
 // remove the links menu item and the media options
 function largo_admin_menu() {
 	remove_menu_page( 'link-manager.php' );
