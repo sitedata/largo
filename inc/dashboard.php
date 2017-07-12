@@ -7,59 +7,12 @@
  */
 
 // cleanup the wordpress dashboard and add a few of our own widgets
-function largo_dashboard_widgets_member() {
+function largo_dashboard_widgets() {
 	global $wp_meta_boxes;
-
 	wp_add_dashboard_widget( 'dashboard_quick_links', __( 'Project Largo Help', 'largo' ), 'largo_dashboard_quick_links' );
-
-	wp_add_dashboard_widget( 'dashboard_member_news', __( 'Recent Stories from INN Members', 'largo' ), 'largo_dashboard_member_news' );
-	$my_widget = $wp_meta_boxes['dashboard']['normal']['core']['dashboard_member_news'];
-	unset($wp_meta_boxes['dashboard']['normal']['core']['dashboard_member_news']);
-	$wp_meta_boxes['dashboard']['side']['core']['dashboard_member_news'] = $my_widget;
-
-	wp_add_dashboard_widget( 'dashboard_network_news', __( 'INN Network News', 'largo' ), 'largo_dashboard_network_news' );
-	$my_widget = $wp_meta_boxes['dashboard']['normal']['core']['dashboard_network_news'];
-	unset($wp_meta_boxes['dashboard']['normal']['core']['dashboard_network_news']);
-	$wp_meta_boxes['dashboard']['side']['core']['dashboard_network_news'] = $my_widget;
 }
+add_action('wp_dashboard_setup', 'largo_dashboard_widgets');
 
-// we'll still clean things up a bit for non INN members
-function largo_dashboard_widgets_nonmember() {
-	global $wp_meta_boxes;
-
-	wp_add_dashboard_widget( 'dashboard_quick_links', __( 'Project Largo Help', 'largo' ), 'largo_dashboard_quick_links' );
-
-	wp_add_dashboard_widget( 'dashboard_network_news', __( 'INN Network News', 'largo' ), 'largo_dashboard_network_news' );
-	$my_widget = $wp_meta_boxes['dashboard']['normal']['core']['dashboard_network_news'];
-	unset($wp_meta_boxes['dashboard']['normal']['core']['dashboard_network_news']);
-	$wp_meta_boxes['dashboard']['side']['core']['dashboard_network_news'] = $my_widget;
-}
-
-// custom dashboard widgets for INN members
-function largo_dashboard_network_news() {
-	echo '<div class="rss-widget">';
-	wp_widget_rss_output( array(
-		'url' => 'http://feeds.feedburner.com/INNArticles',
-		'title' => __( 'INN Network News', 'largo' ),
-		'items' => 1,
-		'show_summary' => 1,
-		'show_author' => 0,
-		'show_date' => 1
-	));
-	echo '</div>';
-}
-function largo_dashboard_member_news() {
-	echo '<div class="rss-widget">';
-	wp_widget_rss_output(array(
-		'url' => 'http://feeds.feedburner.com/INNMemberInvestigations',
-		'title' => __( 'Recent Stories from INN Members', 'largo' ),
-		'items' => 3,
-		'show_summary' => 1,
-		'show_author' => 1,
-		'show_date' => 1
-	));
-	echo "</div>";
-}
 function largo_dashboard_quick_links() {
 	echo '
 		<div class="list-widget">
@@ -74,28 +27,6 @@ function largo_dashboard_quick_links() {
 			<p>Developers can also log issues on <a href="https://github.com/INN/Largo">our public github repository</a> and if you would like to be included in our Largo users\' group, <a href="http://inn.us1.list-manage1.com/subscribe?u=81670c9d1b5fbeba1c29f2865&id=913028b23c">sign up here</a>.</p>
 		</div>
 	';
-}
-
-// add the largo logo to the login page
-function largo_custom_login_logo() {
-	echo '
-		<style type="text/css">
-			.login h1 a {
-			  background-image: url(' . get_template_directory_uri() . '/img/largo-login-logo.png) !important;
-			  background-size:  164px 169px;
-			  height: 169px;
-			  width: 164px;
-			}
-		</style>
-	';
-}
-
-// only load the dashboard customizations if this is an INN member site
-if ( INN_MEMBER === TRUE ) {
-	add_action('login_head', 'largo_custom_login_logo');
-	add_action('wp_dashboard_setup', 'largo_dashboard_widgets_member');
-} else {
-	add_action('wp_dashboard_setup', 'largo_dashboard_widgets_nonmember');
 }
 
 /**
@@ -127,10 +58,6 @@ function largo_dash_admin_menu( $wp_admin_bar ) {
 	$args = array( 'id' => 'support', 'title' => 'Help Desk', 'href' => 'http://support.largoproject.org', 'parent' => 'largo_admin_mega' );
 	$wp_admin_bar->add_node( $args );
 
-	// Member Forums
-	$args = array( 'id' => 'user_forums', 'title' => 'Community Forums', 'href' => 'http://support.largoproject.org/support/discussions', 'parent' => 'largo_admin_mega' );
-	$wp_admin_bar->add_node( $args );
-
 	// Largo on GitHub
 	$args = array( 'id' => 'github', 'title' => 'Largo on GitHub', 'href' => 'https://github.com/inn/largo', 'parent' => 'largo_admin_mega' );
 	$wp_admin_bar->add_node( $args );
@@ -139,8 +66,8 @@ function largo_dash_admin_menu( $wp_admin_bar ) {
 	$args = array( 'id' => 'twitter', 'title' => '@LargoProject on Twitter', 'href' => 'https://twitter.com/largoproject', 'parent' => 'largo_admin_mega');
 	$wp_admin_bar->add_node( $args );
 
-	// INN Nerds
-	$args = array(' id' => 'inn_nerds', 'title' => 'INN Nerds', 'href' => 'http://nerds.inn.org', 'parent' => 'largo_admin_mega' );
+	// INN Labs
+	$args = array(' id' => 'inn_labs', 'title' => 'INN Labs', 'href' => 'https://labs.inn.org', 'parent' => 'largo_admin_mega' );
 	$wp_admin_bar->add_node( $args );
 
 	// About INN
