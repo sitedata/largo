@@ -6,13 +6,6 @@
  * @since 0.1
  */
 
-// cleanup the wordpress dashboard and add a few of our own widgets
-function largo_dashboard_widgets() {
-	global $wp_meta_boxes;
-	wp_add_dashboard_widget( 'dashboard_quick_links', __( 'Project Largo Help', 'largo' ), 'largo_dashboard_quick_links' );
-}
-add_action('wp_dashboard_setup', 'largo_dashboard_widgets');
-
 function largo_dashboard_quick_links() {
 	echo '
 		<div class="list-widget">
