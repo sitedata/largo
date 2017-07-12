@@ -211,7 +211,7 @@ function largo_remove_hero( $content ) {
 		return str_replace( $matches[0], '', $content );
 	}
 
-	return $content;
+	return trim( $content );
 
 }
 add_filter( 'the_content', 'largo_remove_hero', 1 );

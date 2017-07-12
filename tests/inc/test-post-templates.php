@@ -66,7 +66,7 @@ Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Sed posuere
 
 		$c2final = '<img src="' . $attachment_url . '" alt="1559758083_cef4ef63d2_o" width="771" height="475" class="alignnone size-medium wp-image-' . $attachment_id . '" />
 <h2>Headings</h2>
-Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Sed posuere consectetur est at lobortis. Nulla vitae elit libero, a pharetra augue. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Donec sed odio dui.';
+Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Sed posuere consectetur est at lobortis. Nulla vitae elit libero, a pharetra augue. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Donec sed odio dui.>';
 
 		$post_id = $this->factory->post->create();
 
