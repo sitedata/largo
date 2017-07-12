@@ -6,9 +6,9 @@
  */
 
 /**
- * Add a custom panels to attach sections too.
+ * Add a custom panels.
  */
-function _customize_panels( $wp_customize ) {
+function largo_customize_panels( $wp_customize ) {
 
 	// Register a new panel.
 	$wp_customize->add_panel( 'site-options', array(
@@ -28,4 +28,4 @@ function _customize_panels( $wp_customize ) {
 		'description'    => esc_html__( 'layout settings.', 'largo' ),
 	) );
 }
-add_action( 'customize_register', '_customize_panels' );
+add_action( 'customize_register', 'largo_customize_panels' );
