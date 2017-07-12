@@ -22,57 +22,6 @@ function largo_dashboard_quick_links() {
 	';
 }
 
-/**
- * Largo Dashboard / Admin Bar Menu
- * -- Priority 15 Places between WordPress Logo and My Sites
- * -- To move menu to end of items use something like priority 999
- */
-
-add_action( 'admin_bar_menu', 'largo_dash_admin_menu', 15 );
-function largo_dash_admin_menu( $wp_admin_bar ) {
-
-	// Add Top Level Text Node for Dropdown
-	$args = array( 'id' => 'largo_admin_mega', 'title' => 'Largo' );
-	$wp_admin_bar->add_node( $args );
-
-	// Main Website
-	$args = array( 'id' => 'website', 'title' => 'Main Website', 'href' => 'http://largoproject.org/', 'parent' => 'largo_admin_mega' );
-	$wp_admin_bar->add_node( $args );
-
-	// Documentation
-	$args = array( 'id' => 'largo_docs', 'title' => 'Documentation', 'href' => 'http://largo.readthedocs.io/', 'parent' => 'largo_admin_mega' );
-	$wp_admin_bar->add_node( $args );
-
-	// Knowledge Base
-	$args = array( 'id' => 'knowledge_base', 'title' => 'Knowledge Base', 'href' => 'http://support.largoproject.org/support/solutions', 'parent' => 'largo_admin_mega' );
-	$wp_admin_bar->add_node( $args );
-
-	// Member Help Desk
-	$args = array( 'id' => 'support', 'title' => 'Help Desk', 'href' => 'http://support.largoproject.org', 'parent' => 'largo_admin_mega' );
-	$wp_admin_bar->add_node( $args );
-
-	// Largo on GitHub
-	$args = array( 'id' => 'github', 'title' => 'Largo on GitHub', 'href' => 'https://github.com/inn/largo', 'parent' => 'largo_admin_mega' );
-	$wp_admin_bar->add_node( $args );
-
-	// Largo on Twitter
-	$args = array( 'id' => 'twitter', 'title' => '@LargoProject on Twitter', 'href' => 'https://twitter.com/largoproject', 'parent' => 'largo_admin_mega');
-	$wp_admin_bar->add_node( $args );
-
-	// INN Labs
-	$args = array(' id' => 'inn_labs', 'title' => 'INN Labs', 'href' => 'https://labs.inn.org', 'parent' => 'largo_admin_mega' );
-	$wp_admin_bar->add_node( $args );
-
-	// About INN
-	$args = array( 'id' => 'about_inn', 'title' => 'About INN', 'href' => 'http://inn.org', 'parent' => 'largo_admin_mega' );
-	$wp_admin_bar->add_node( $args );
-
-	// Donate
-	$args = array( 'id' => 'donate_inn', 'title' => 'Donate', 'href' => 'https://inn.org/donate', 'parent' => 'largo_admin_mega' );
-	$wp_admin_bar->add_node( $args );
-
-}
-
 // add a credit line to the admin footer
 function largo_admin_footer_text( $default_text ) {
 	return '<span id="footer-thankyou">This website powered by <a href="http://largoproject.org">Project Largo</a> from <a href="http://inn.org">INN</a> and <a href="http://wordpress.org">WordPress</a>.</span>';
