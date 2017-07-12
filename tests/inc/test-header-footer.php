@@ -19,12 +19,6 @@ class HeaderFooterTestFunctions extends WP_UnitTestCase {
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
 
-	function test_inn_logo() {
-		$this->expectOutputRegex('/[.*]+/'); // This is excessively greedy, it expects any output at all
-		$this->expectOutputRegex('/inn_logo_gray.png/'); // This is excessively greedy, it expects any output at all
-		inn_logo();
-	}
-
 	function test_largo_social_links() {
 		// this function only creates output if there are >0 social links
 		$fields = array(
