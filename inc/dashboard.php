@@ -21,10 +21,3 @@ function largo_dashboard_quick_links() {
 		</div>
 	';
 }
-
-// remove the links menu item and the media options
-function largo_admin_menu() {
-	remove_menu_page( 'link-manager.php' );
-	remove_menu_page( 'options-media.php' );
-}
-add_action( 'admin_menu', 'largo_admin_menu' );
