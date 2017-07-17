@@ -20,7 +20,7 @@
 		</div>
 
 		<div class="span6 right">
-			<p class="footer-credit <?php echo ( !INN_MEMBER ? 'footer-credit-padding-inn-logo-missing' : ''); ?>"><?php printf( __('Built with the <a href="%s">Largo WordPress Theme</a> from the <a href="%s">Institute for Nonprofit News</a>.', 'largo'),
+			<p class="footer-credit"><?php printf( __('Built with the <a href="%s">Largo WordPress Theme</a> from the <a href="%s">Institute for Nonprofit News</a>.', 'largo'),
 					'http://largoproject.org',
 					'http://inn.org'
 				 );
