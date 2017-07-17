@@ -1,53 +1,60 @@
-# Travis CI Configuration File
-
-# Use Travis CI container-based infrastructure
-# See: http://docs.travis-ci.com/user/workers/container-based-infrastructure/
 sudo: false
 
-# Tell Travis CI we're using PHP
 language: php
 
-# PHP version used in first build configuration.
-# 5.3 matches the version of php installed in the INN/deploy-tools virtualbox
-# 5.5 matches http://phpinfo.wpengine.com/
-php:
-    - "5.3"
-    - "5.5"
-    - "7.0"
-
-# WordPress version used in first build configuration.
-env:
-    - WP_VERSION=master
-    - WP_VERSION=4.6
-    - WP_VERSION=4.5
-
-# Only test the unittests branch for now
-branches:
-    only:
-        - develop
-        - master
-
-# Clones WordPress and configures our testing environment.
-before_script:
-    - export SLUG=$(basename $(pwd))
-    - export WP_TESTS_DIR=/tmp/wordpress/tests/phpunit
-    - export WP_CORE_DIR=/tmp/wordpress/
-    - git clone --depth=1 --branch="$WP_VERSION" git://develop.git.wordpress.org/ $WP_CORE_DIR
-    - cd ..
-    - mv $SLUG "$WP_CORE_DIR/src/wp-content/themes/$SLUG"
-    - cd $WP_CORE_DIR
-    - mysql -e "CREATE DATABASE wordpress_tests;" -uroot
-    - cp wp-tests-config-sample.php wp-tests-config.php
-    - sed -i "s:dirname( __FILE__ ) . '/src/':'$WP_CORE_DIR/src/':" wp-tests-config.php
-    - sed -i "s/youremptytestdbnamehere/wordpress_tests/" wp-tests-config.php
-    - sed -i "s/yourusernamehere/travis/" wp-tests-config.php
-    - sed -i "s/yourpasswordhere//" wp-tests-config.php
-    - mv wp-tests-config.php "$WP_TESTS_DIR/wp-tests-config.php"
-    - cd "$WP_CORE_DIR/src/wp-content/themes/$SLUG"
-
-script: phpunit
-
 notifications:
-    hipchat:
-        rooms:
-            secure: mrJDwl2LYmWGY6gKUEsSnbGp3mQ8UhVQkb9oBmRSDx9T/hCSDx4Q2KDLo0OqCFIwDB5BevP16vDDWVmsg8Ldwk+Hh0YAmdUqBAXe21+17ojqSIAdQg6LgLrEFEBNVBlPu89xonRMnsai34RDCoRt5c9OLuWgGVMAcTojpQvPiII=
+  email:
+    on_success: never
+    on_failure: change
+
+branches:
+  only:
+    - master
+
+cache:
+  directories:
+    - vendor
+    - $HOME/.composer/cache
+
+matrix:
+  include:
+    - php: 7.1
+      env: WP_VERSION=latest
+    - php: 7.0
+      env: WP_VERSION=latest
+    - php: 5.6
+      env: WP_VERSION=latest
+    - php: 5.6
+      env: WP_VERSION=trunk
+    - php: 5.6
+      env: WP_TRAVISCI=phpcs
+    - php: 5.3
+      env: WP_VERSION=latest
+
+before_script:
+  - export PATH="$HOME/.composer/vendor/bin:$PATH"
+  - |
+    if [[ ! -z "$WP_VERSION" ]] ; then
+      bash bin/install-wp-tests.sh wordpress_test root '' localhost $WP_VERSION
+      if [[ ${TRAVIS_PHP_VERSION:0:2} == "5." ]]; then
+        composer global require "phpunit/phpunit=4.8.*"
+      else
+        composer global require "phpunit/phpunit=5.7.*"
+      fi
+    fi
+  - |
+    if [[ "$WP_TRAVISCI" == "phpcs" ]] ; then
+      composer global require wp-coding-standards/wpcs
+      phpcs --config-set installed_paths $HOME/.composer/vendor/wp-coding-standards/wpcs
+    fi
+
+script:
+  - |
+    if [[ ! -z "$WP_VERSION" ]] ; then
+      phpunit
+      WP_MULTISITE=1 phpunit
+    fi
+  - |
+    if [[ "$WP_TRAVISCI" == "phpcs" ]] ; then
+      phpcs --standard=phpcs.ruleset.xml $(find . -name '*.php')
+    fi
