@@ -691,16 +691,6 @@ function optionsframework_options() {
 		'std'  => '0',
 		'type' => 'checkbox');
 
-
-/*
- * Removing inn_member_since in 0.5.2
-	if ( INN_MEMBER ) { // only relevant in this case, options affecting the logo display
-		$options[] = array(
-			'name' 	=> __('INN Membership Options', 'largo'),
-			'type'	=> 'info');
-	}
-*/
-
 	return apply_filters('largo_options', $options);
 }
 
