@@ -1,6 +1,9 @@
 <?php
 
-$wp_tests_dir = getenv('WP_TESTS_DIR');
+// Get our tests directory.
+$wp_tests_dir = ( getenv( 'WP_TESTS_DIR' ) ) ? getenv( 'WP_TESTS_DIR' ) : '/tmp/wordpress-tests-lib';
+
+// Include our tests functions.
 require_once $wp_tests_dir . '/includes/functions.php';
 
 $basename = basename(dirname(__DIR__));
@@ -20,6 +23,6 @@ tests_add_filter('filesystem_method', function($arg) {
 	return 'direct';
 }, 1, 10);
 
-require dirname(__FILE__) . '/mock/mock-options-framework.php';
+//require dirname(__FILE__) . '/mock/mock-options-framework.php';
 require dirname(__FILE__) . '/mock/mock-admin-functions.php';
 require $wp_tests_dir . '/includes/bootstrap.php';
