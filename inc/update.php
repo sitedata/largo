@@ -47,6 +47,56 @@ function largo_need_updates() {
 }
 
 /* --------------------------------------------------------
+ * Update.php admin page logic.
+ * ------------------------------------------------------ */
+
+/**
+ * Add an admin notice if largo needs to be updated.
+ *
+ * @since 0.3
+ */
+function largo_update_admin_notice() {
+	if ( ! current_user_can( 'update_themes' ) ) {
+		return;
+	}
+	if ( largo_need_updates() && ! ( isset( $_GET['page'] ) && $_GET['page'] == 'update-largo' ) ) {
+?>
+	<div class="update-nag" style="display: block;"><p>
+	<?php printf(
+		__( 'Largo has been updated! Please <a href="%s">visit the update page</a> to apply a required database update.', 'largo' ),
+		admin_url( 'index.php?page=update-largo' )
+	);
+	?>
+	</p></div>
+<?php
+	}
+}
+add_action( 'admin_notices', 'largo_update_admin_notice' );
+
+/**
+ * Register an admin page for updates.
+ *
+ * @since 0.3
+ */
+function largo_register_update_page() {
+	$parent_slug = null;
+	$page_title = 'Update Largo';
+	$menu_title = 'Update Largo';
+	$capability = 'update_themes';
+	$menu_slug = 'update-largo';
+	$function = 'largo_update_page_view';
+
+	if ( largo_need_updates() ) {
+		add_submenu_page(
+			$parent_slug, $page_title, $menu_title,
+			$capability, $menu_slug, $function
+		);
+	}
+}
+add_action( 'admin_menu', 'largo_register_update_page' );
+
+
+/* --------------------------------------------------------
  * Start updates and helpers
  * ------------------------------------------------------ */
 
@@ -859,55 +909,6 @@ function largo_get_widget_number( $slug ) {
 	}
 	return false;
 }
-
-/* --------------------------------------------------------
- * Update.php admin page logic.
- * ------------------------------------------------------ */
-
-/**
- * Add an admin notice if largo needs to be updated.
- *
- * @since 0.3
- */
-function largo_update_admin_notice() {
-	if ( ! current_user_can( 'update_themes' ) ) {
-		return;
-	}
-	if ( largo_need_updates() && ! ( isset( $_GET['page'] ) && $_GET['page'] == 'update-largo' ) ) {
-?>
-	<div class="update-nag" style="display: block;"><p>
-	<?php printf(
-		__( 'Largo has been updated! Please <a href="%s">visit the update page</a> to apply a required database update.', 'largo' ),
-		admin_url( 'index.php?page=update-largo' )
-	);
-	?>
-	</p></div>
-<?php
-	}
-}
-add_action( 'admin_notices', 'largo_update_admin_notice' );
-
-/**
- * Register an admin page for updates.
- *
- * @since 0.3
- */
-function largo_register_update_page() {
-	$parent_slug = null;
-	$page_title = 'Update Largo';
-	$menu_title = 'Update Largo';
-	$capability = 'update_themes';
-	$menu_slug = 'update-largo';
-	$function = 'largo_update_page_view';
-
-	if ( largo_need_updates() ) {
-		add_submenu_page(
-			$parent_slug, $page_title, $menu_title,
-			$capability, $menu_slug, $function
-		);
-	}
-}
-add_action( 'admin_menu', 'largo_register_update_page' );
 
 /**
  * DOM for admin page for updates.
