@@ -3,19 +3,21 @@
  * Contains functions and tools for transitioning between Largo 0.3 and Largo 0.4
  */
 
- /**
-  * Returns current version of largo as set in stylesheet.
-  *
-  * @since 0.3
-  */
- function largo_version() {
- 	$theme = wp_get_theme();
- 	$parent = $theme->parent();
- 	if ( ! empty( $parent ) ) {
- 		return $parent->get( 'Version' );
- 	}
- 	return $theme->get( 'Version' );
- }
+/**
+ * Returns current version of largo as set in stylesheet.
+ *
+ * @since 0.3
+ */
+function largo_version() {
+	$theme = wp_get_theme();
+
+	if ( is_child_theme() ) {
+		$parent = $theme->parent();
+		return $parent->get( 'Version' );
+	} else {
+		return $theme->get( 'Version' );
+	}
+}
 
  /**
   * Checks if updates need to be run.
