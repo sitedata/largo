@@ -56,9 +56,11 @@ function largo_need_updates() {
  * @since 0.3
  */
 function largo_update_admin_notice() {
+	// Don't show update message unless current user can run the update.
 	if ( ! current_user_can( 'update_themes' ) ) {
 		return;
 	}
+
 	if ( largo_need_updates() && ! ( isset( $_GET['page'] ) && $_GET['page'] == 'update-largo' ) ) {
 ?>
 	<div class="update-nag" style="display: block;"><p>
