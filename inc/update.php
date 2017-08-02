@@ -19,28 +19,32 @@ function largo_version() {
 	}
 }
 
- /**
-  * Checks if updates need to be run.
-  *
-  * @since 0.3
-  *
-  * @return boolean $result True if updates need to be run
-  */
- function largo_need_updates() {
- 	// try to figure out which versions of the options are stored. Implemented in 0.3
- 	if ( of_get_option( 'largo_version' ) ) {
- 		$compare = version_compare( largo_version(), of_get_option( 'largo_version' ) );
+/**
+ * Checks if updates need to be run.
+ *
+ * @since 0.3
+ *
+ * @return boolean $result True if updates need to be run
+ */
+function largo_need_updates() {
+	// Check theme mods for largo version number.
+	if ( get_theme_mod( 'largo_version' ) ) {
+		$largo_db_version = get_theme_mod( 'largo_version' );
 
- 		if ( $compare == 1 ) {
- 			return true;
- 		} else {
- 			return false;
- 		}
- 	}
+	// If options framework is installed (used in versions < 0.6).
+	} elseif ( function_exists( 'of_get_option' ) ) {
+		$largo_db_version = of_get_option( 'largo_version' ) ? of_get_option( 'largo_version' ) : false;
 
- 	// if 'largo_version' isn't present, the settings are old!
- 	return true;
- }
+	// If no db version, we need to run updates.
+	} else {
+		return true;
+	}
+
+	// Only run updates if the db version is lower than the largo files version.
+	if ( 0 < version_compare( largo_version(), $largo_db_version ) ) {
+		return true;
+	}
+}
 
 /* --------------------------------------------------------
  * Start updates and helpers
