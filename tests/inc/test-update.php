@@ -38,17 +38,17 @@ class UpdateTestFunctions extends WP_UnitTestCase {
 
 	function test_largo_version() {
 		$return = largo_version();
-		$this->assertTrue(isset($return));
+		$this->assertTrue( isset( $return ) );
 	}
 
 	function test_largo_need_updates() {
 		// force updates by setting current version of largo to 0.0
-		of_set_option('largo_version', '0.0');
-		$this->assertTrue(largo_need_updates());
+		of_set_option( 'largo_version', '0.0' );
+		$this->assertTrue( largo_need_updates() );
 
 		// Will we ever hit this version number?
-		of_set_option('largo_version', '999.999');
-		$this->assertFalse(largo_need_updates());
+		of_set_option( 'largo_version', '999.999' );
+		$this->assertFalse( largo_need_updates() );
 
 		of_reset_options();
 	}
