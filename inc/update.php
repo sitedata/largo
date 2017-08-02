@@ -3,6 +3,43 @@
  * Contains functions and tools for transitioning between Largo 0.3 and Largo 0.4
  */
 
+ /**
+  * Returns current version of largo as set in stylesheet.
+  *
+  * @since 0.3
+  */
+ function largo_version() {
+ 	$theme = wp_get_theme();
+ 	$parent = $theme->parent();
+ 	if ( ! empty( $parent ) ) {
+ 		return $parent->get( 'Version' );
+ 	}
+ 	return $theme->get( 'Version' );
+ }
+
+ /**
+  * Checks if updates need to be run.
+  *
+  * @since 0.3
+  *
+  * @return boolean $result True if updates need to be run
+  */
+ function largo_need_updates() {
+ 	// try to figure out which versions of the options are stored. Implemented in 0.3
+ 	if ( of_get_option( 'largo_version' ) ) {
+ 		$compare = version_compare( largo_version(), of_get_option( 'largo_version' ) );
+
+ 		if ( $compare == 1 ) {
+ 			return true;
+ 		} else {
+ 			return false;
+ 		}
+ 	}
+
+ 	// if 'largo_version' isn't present, the settings are old!
+ 	return true;
+ }
+
 /* --------------------------------------------------------
  * Start updates and helpers
  * ------------------------------------------------------ */
@@ -100,42 +137,6 @@ function largo_perform_update() {
 	return true;
 }
 
-/**
- * Returns current version of largo as set in stylesheet.
- *
- * @since 0.3
- */
-function largo_version() {
-	$theme = wp_get_theme();
-	$parent = $theme->parent();
-	if ( ! empty( $parent ) ) {
-		return $parent->get( 'Version' );
-	}
-	return $theme->get( 'Version' );
-}
-
-/**
- * Checks if updates need to be run.
- *
- * @since 0.3
- *
- * @return boolean $result True if updates need to be run
- */
-function largo_need_updates() {
-	// try to figure out which versions of the options are stored. Implemented in 0.3
-	if ( of_get_option( 'largo_version' ) ) {
-		$compare = version_compare( largo_version(), of_get_option( 'largo_version' ) );
-
-		if ( $compare == 1 ) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-
-	// if 'largo_version' isn't present, the settings are old!
-	return true;
-}
 
 /* --------------------------------------------------------
  * Upgrades for moving from 0.3 -> 0.4
