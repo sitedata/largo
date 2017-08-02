@@ -37,11 +37,24 @@ class UpdateTestFunctions extends WP_UnitTestCase {
 	}
 
 	function test_largo_version() {
+		/**
+		 * @TODO
+		 *
+		 * Return correct version.
+		 */
 		$return = largo_version();
 		$this->assertTrue( isset( $return ) );
 	}
 
 	function test_largo_need_updates() {
+		/**
+		 * @TODO
+		 *
+		 * update existing tests to work on theme mods.
+		 * test if there is no largo version set in db.
+		 * test if db largo version is higher than files version (in case Largo is reverted to an older version).
+		 */
+
 		// force updates by setting current version of largo to 0.0
 		of_set_option( 'largo_version', '0.0' );
 		$this->assertTrue( largo_need_updates() );
