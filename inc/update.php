@@ -61,16 +61,14 @@ function largo_update_admin_notice() {
 		return;
 	}
 
-	if ( largo_need_updates() && ! ( isset( $_GET['page'] ) && $_GET['page'] == 'update-largo' ) ) {
-?>
-	<div class="update-nag" style="display: block;"><p>
-	<?php printf(
-		__( 'Largo has been updated! Please <a href="%s">visit the update page</a> to apply a required database update.', 'largo' ),
-		admin_url( 'index.php?page=update-largo' )
-	);
-	?>
-	</p></div>
-<?php
+	$screen = get_current_screen();
+	if ( largo_need_updates() && 'dashboard_page_update-largo' !== $screen->id ) {
+		echo '<div class="update-nag">';
+			printf(
+				__( 'Largo has been updated! Please <a href="%s">visit the update page</a> to apply a required database update.', 'largo' ),
+				admin_url( 'index.php?page=update-largo' )
+			);
+		echo '</div>';
 	}
 }
 add_action( 'admin_notices', 'largo_update_admin_notice' );
