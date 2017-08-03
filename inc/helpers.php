@@ -289,7 +289,7 @@ function largo_get_current_url() {
 	$is_ssl = is_ssl();
 	$url = $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
 
-	if ( ! empty( $is_ssl ) ) {
+	if ( $is_ssl ) {
 		return "https://" . $url;
 	} else {
 		return "http://" . $url;
