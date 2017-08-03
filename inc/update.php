@@ -86,12 +86,80 @@ function largo_register_update_page() {
 			'Update Largo',
 			'update_themes',
 			'update-largo',
-			'largo_update_page_view'
+			'largo_update_page_template'
 		);
 	}
 }
 add_action( 'admin_menu', 'largo_register_update_page' );
 
+/**
+ * DOM for admin page for updates.
+ *
+ * @since 0.3
+ */
+function largo_update_page_template() { ?>
+	<style type="text/css">
+		.largo-update-message {
+			max-width: 700px;
+		}
+		.largo-update-message,
+		.largo-update-message p {
+			font-size: 16px;
+		}
+		.largo-update-message ul li {
+			list-style-type: disc;
+			list-style-position: inside;
+		}
+		.largo-update-message .submit-container {
+			max-width: 178px;
+		}
+		.largo-update-message .spinner {
+			background: url(../wp-includes/images/spinner.gif) 0 0/20px 20px no-repeat;
+			-webkit-background-size: 20px 20px;
+			display: none;
+			opacity: .7;
+			filter: alpha(opacity=70);
+			width: 20px;
+			height: 20px;
+			margin: 0;
+			position: relative;
+			top: 4px;
+		}
+		.largo-update-message .updated,
+		.largo-update-message .error {
+			padding-top: 16px;
+			padding-bottom: 16px;
+		}
+	</style>
+	<div class="wrap">
+		<div id="icon-tools" class="icon32"></div>
+		<h2>Largo Database Update</h2>
+		<div class="largo-update-message">
+			<p><?php _e('This version of Largo includes a variety of updates, enhancements and changes.'); ?></p>
+			<?php if (version_compare(of_get_option('largo_version'), '0.4') < 0) { ?>
+				<p><?php _e('These changes affect'); ?>:
+					<ul>
+						<li><?php _e('Theme options'); ?></li>
+						<li><?php _e('Configured menus'); ?></li>
+						<li><?php _e('Site navigation'); ?></li>
+						<li><?php _e('Sidebars and widgets'); ?></li>
+					</ul>
+				<p><?php _e( 'The database update you are about to apply will take steps to migrate existing site settings.', 'largo' ); ?></p>
+				<p><?php _e( 'In the event that a site setting can not be migrated, the update will do its best to preserve it instead.', 'largo' ); ?></p>
+				<p><?php _e( 'For example, menus that existed in previous versions of Largo have been removed. If your site has been using one of these now-deprecated menus, the update process will merge it with the nearest related menu.', 'largo' ); ?></p>
+				<p><?php _e( 'Please be sure to review your site settings after applying the update to ensure all is well.', 'largo' ); ?></p>
+			<?php } else { ?>
+				<p><?php _e( 'Click the button below to apply a required database update.', 'largo' ); ?></p>
+			<?php } ?>
+
+			<p class="submit-container">
+				<input type="submit" class="button-primary" id="update" name="update" value="<?php _e( 'Update the database!', 'largo' ); ?>">
+				<span class="spinner"></span>
+			<p>
+		</div>
+	</div>
+<?php
+}
 
 /* --------------------------------------------------------
  * Start updates and helpers
@@ -905,75 +973,6 @@ function largo_get_widget_number( $slug ) {
 		return $matches[1];
 	}
 	return false;
-}
-
-/**
- * DOM for admin page for updates.
- *
- * @since 0.3
- */
-function largo_update_page_view() { ?>
-	<style type="text/css">
-		.largo-update-message {
-			max-width: 700px;
-		}
-		.largo-update-message,
-		.largo-update-message p {
-			font-size: 16px;
-		}
-		.largo-update-message ul li {
-			list-style-type: disc;
-			list-style-position: inside;
-		}
-		.largo-update-message .submit-container {
-			max-width: 178px;
-		}
-		.largo-update-message .spinner {
-			background: url(../wp-includes/images/spinner.gif) 0 0/20px 20px no-repeat;
-			-webkit-background-size: 20px 20px;
-			display: none;
-			opacity: .7;
-			filter: alpha(opacity=70);
-			width: 20px;
-			height: 20px;
-			margin: 0;
-			position: relative;
-			top: 4px;
-		}
-		.largo-update-message .updated,
-		.largo-update-message .error {
-			padding-top: 16px;
-			padding-bottom: 16px;
-		}
-	</style>
-	<div class="wrap">
-		<div id="icon-tools" class="icon32"></div>
-		<h2>Largo Database Update</h2>
-		<div class="largo-update-message">
-			<p><?php _e('This version of Largo includes a variety of updates, enhancements and changes.'); ?></p>
-			<?php if (version_compare(of_get_option('largo_version'), '0.4') < 0) { ?>
-				<p><?php _e('These changes affect'); ?>:
-					<ul>
-						<li><?php _e('Theme options'); ?></li>
-						<li><?php _e('Configured menus'); ?></li>
-						<li><?php _e('Site navigation'); ?></li>
-						<li><?php _e('Sidebars and widgets'); ?></li>
-					</ul>
-				<p><?php _e( 'The database update you are about to apply will take steps to migrate existing site settings.', 'largo' ); ?></p>
-				<p><?php _e( 'In the event that a site setting can not be migrated, the update will do its best to preserve it instead.', 'largo' ); ?></p>
-				<p><?php _e( 'For example, menus that existed in previous versions of Largo have been removed. If your site has been using one of these now-deprecated menus, the update process will merge it with the nearest related menu.', 'largo' ); ?></p>
-				<p><?php _e( 'Please be sure to review your site settings after applying the update to ensure all is well.', 'largo' ); ?></p>
-			<?php } else { ?>
-				<p><?php _e( 'Click the button below to apply a required database update.', 'largo' ); ?></p>
-			<?php } ?>
-
-			<p class="submit-container">
-				<input type="submit" class="button-primary" id="update" name="update" value="<?php _e( 'Update the database!', 'largo' ); ?>">
-				<span class="spinner"></span>
-			<p>
-		</div>
-	</div>
-<?php
 }
 
 /**
