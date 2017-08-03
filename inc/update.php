@@ -79,17 +79,14 @@ add_action( 'admin_notices', 'largo_update_admin_notice' );
  * @since 0.3
  */
 function largo_register_update_page() {
-	$parent_slug = null;
-	$page_title = 'Update Largo';
-	$menu_title = 'Update Largo';
-	$capability = 'update_themes';
-	$menu_slug = 'update-largo';
-	$function = 'largo_update_page_view';
-
 	if ( largo_need_updates() ) {
 		add_submenu_page(
-			$parent_slug, $page_title, $menu_title,
-			$capability, $menu_slug, $function
+			null,
+			'Update Largo',
+			'Update Largo',
+			'update_themes',
+			'update-largo',
+			'largo_update_page_view'
 		);
 	}
 }
