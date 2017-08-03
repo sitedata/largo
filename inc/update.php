@@ -96,6 +96,7 @@ add_action( 'admin_menu', 'largo_register_update_page' );
  * @since 0.3
  */
 function largo_update_page_template() {
+	// @TODO move these inline styles to their own stylesheet, enqueued only on this page.
 ?>
 	<style type="text/css">
 		.largo-update-message {
@@ -133,7 +134,6 @@ function largo_update_page_template() {
 	<div class="wrap">
 		<div id="icon-tools" class="icon32"></div>
 		<h2>Largo Database Update</h2>
-		<?php 	$theme = wp_get_theme(); var_dump( '<pre>', $theme, '</pre>' ); ?>
 		<div class="largo-update-message">
 			<p><?php _e( 'This version of Largo includes a variety of updates, enhancements and changes.' ); ?></p>
 			<?php if ( version_compare( of_get_option( 'largo_version' ), '0.4' ) < 0 ) { ?>
