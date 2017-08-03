@@ -30,13 +30,11 @@ function largo_need_updates() {
 	// Check theme mods for largo version number.
 	if ( get_theme_mod( 'largo_version' ) ) {
 		$largo_db_version = get_theme_mod( 'largo_version' );
-
-	// If options framework is installed (used in versions < 0.6).
 	} elseif ( function_exists( 'of_get_option' ) ) {
+		// If options framework is installed (used in versions < 0.6).
 		$largo_db_version = of_get_option( 'largo_version' ) ? of_get_option( 'largo_version' ) : false;
-
-	// If no db version, we need to run updates.
 	} else {
+		// If no db version, we need to run updates.
 		return true;
 	}
 
@@ -46,9 +44,9 @@ function largo_need_updates() {
 	}
 }
 
-/* --------------------------------------------------------
+/**
  * Update.php admin page logic.
- * ------------------------------------------------------ */
+ */
 
 /**
  * Add an admin notice if largo needs to be updated.
@@ -97,7 +95,8 @@ add_action( 'admin_menu', 'largo_register_update_page' );
  *
  * @since 0.3
  */
-function largo_update_page_template() { ?>
+function largo_update_page_template() {
+?>
 	<style type="text/css">
 		.largo-update-message {
 			max-width: 700px;
@@ -134,15 +133,16 @@ function largo_update_page_template() { ?>
 	<div class="wrap">
 		<div id="icon-tools" class="icon32"></div>
 		<h2>Largo Database Update</h2>
+		<?php 	$theme = wp_get_theme(); var_dump( '<pre>', $theme, '</pre>' ); ?>
 		<div class="largo-update-message">
-			<p><?php _e('This version of Largo includes a variety of updates, enhancements and changes.'); ?></p>
-			<?php if (version_compare(of_get_option('largo_version'), '0.4') < 0) { ?>
-				<p><?php _e('These changes affect'); ?>:
+			<p><?php _e( 'This version of Largo includes a variety of updates, enhancements and changes.' ); ?></p>
+			<?php if ( version_compare( of_get_option( 'largo_version' ), '0.4' ) < 0 ) { ?>
+				<p><?php _e( 'These changes affect' ); ?>:
 					<ul>
-						<li><?php _e('Theme options'); ?></li>
-						<li><?php _e('Configured menus'); ?></li>
-						<li><?php _e('Site navigation'); ?></li>
-						<li><?php _e('Sidebars and widgets'); ?></li>
+						<li><?php _e( 'Theme options' ); ?></li>
+						<li><?php _e( 'Configured menus' ); ?></li>
+						<li><?php _e( 'Site navigation' ); ?></li>
+						<li><?php _e( 'Sidebars and widgets' ); ?></li>
 					</ul>
 				<p><?php _e( 'The database update you are about to apply will take steps to migrate existing site settings.', 'largo' ); ?></p>
 				<p><?php _e( 'In the event that a site setting can not be migrated, the update will do its best to preserve it instead.', 'largo' ); ?></p>
@@ -161,9 +161,9 @@ function largo_update_page_template() { ?>
 <?php
 }
 
-/* --------------------------------------------------------
+/**
  * Start updates and helpers
- * ------------------------------------------------------ */
+ */
 
 /**
  * For initial activations of Largo, where no largo was previously installed
@@ -177,12 +177,12 @@ function largo_activation_maybe_setup() {
 		return false;
 	}
 
-	// We must make sure some things are enqueued first in order to run these functions
+	// We must make sure some things are enqueued first in order to run these functions.
 	$requires = array(
-		// included for the definition of the defaults in optionsframework_options()
+		// included for the definition of the defaults in optionsframework_options().
 		'/options.php',
 	);
-	// after_switch_theme appears to run before after_setup_theme, which is what calls Largo::get_instance calls Largo::load calls Largo::require_files
+	// after_switch_theme appears to run before after_setup_theme, which is what calls Largo::get_instance calls Largo::load calls Largo::require_files.
 	foreach ( $requires as $required ) {
 		require_once( get_template_directory() . $required );
 	}
@@ -190,20 +190,20 @@ function largo_activation_maybe_setup() {
 	// We assume here that since this action runs on after_switch_theme,
 	// and since switching themes requires admin privileges,
 	// that this user has the permissions to run optionsframework_init
-	// @see optionsframework_rolescheck() in lib/options-framework/options-framework.php
+	// @see optionsframework_rolescheck() in lib/options-framework/options-framework.php.
 	if ( current_user_can( 'update_themes' ) ) {
 		optionsframework_init();
 	}
 
-	// this must run before any other function that makes use of of_set_option()
+	// this must run before any other function that makes use of of_set_option().
 	largo_set_new_option_defaults();
 
 	of_set_option( 'largo_version', largo_version() );
 
-	// Prevent the update nag from displaying on the first page load
+	// Prevent the update nag from displaying on the first page load.
 	remove_action( 'admin_notices', 'largo_update_admin_notice', 10 );
 
-	// Prevent the theme options menu from getting hijacked with the update nag
+	// Prevent the theme options menu from getting hijacked with the update nag.
 	remove_action( 'admin_menu', 'largo_block_theme_options_for_update', 10 );
 
 	return true;
@@ -221,16 +221,17 @@ add_action( 'after_switch_theme', 'largo_activation_maybe_setup' );
 function largo_perform_update() {
 	if ( largo_need_updates() ) {
 
-		// Stash the options from the previous version of the theme for later use
+		// Stash the options from the previous version of the theme for later use.
 		$previous_options = largo_preserve_previous_options();
 
-		if ( ! isset( $previous_options['largo_version'] ) )
+		if ( ! isset( $previous_options['largo_version'] ) ) {
 			$previous_options['largo_version'] = null;
+		}
 
-		// this must run before any other function that makes use of of_set_option()
+		// this must run before any other function that makes use of of_set_option().
 		largo_set_new_option_defaults();
 
-		// Run when updating from pre-0.4
+		// Run when updating from pre-0.4.
 		if ( version_compare( $previous_options['largo_version'], '0.4' ) < 0 ) {
 			largo_home_transition();
 			largo_update_widgets();
@@ -241,33 +242,33 @@ function largo_perform_update() {
 			largo_enable_series_if_landing_page();
 		}
 
-		// Run when updating from pre-0.5
+		// Run when updating from pre-0.5.
 		if ( version_compare( $previous_options['largo_version'], '0.5' ) < 0 ) {
-			// Repeatable, should be run when updating to 0.4+
+			// Repeatable, should be run when updating to 0.4+.
 			largo_remove_topstory_prominence_term();
 		}
 
-		// Always run
+		// Always run.
 		largo_update_custom_less_variables();
 		largo_replace_deprecated_widgets();
 
 		// Set version.
 		of_set_option( 'largo_version', largo_version() );
-	}
+	} // End if().
 
 	return true;
 }
 
 
-/* --------------------------------------------------------
+/**
  * Upgrades for moving from 0.3 -> 0.4
  *
  * In which many theme options became widgets
  * And homepage templates are implemented
- * ------------------------------------------------------ */
+ */
 
 /**
- * Convert old theme option of 'homepage_top' to new option of 'home_template'
+ * Convert old theme option of 'homepage_top' to new option of 'home_template'.
  *
  * @since 0.4
  */
@@ -279,21 +280,21 @@ function largo_home_transition() {
 	// we're using the old system and the new one isn't in place, act accordingly
 	// this should ALWAYS happen when this function is called, as there's a separate version check before this is invoked
 	// however, it will not run if the new system has already been set up, so largo-dev to 0.4 will not overwrite details.
-	// the home template sidebars have same names as old regime so that *shouldn't* be an issue
-	if ( isset( $previous_options['homepage_layout'] ) && $previous_options['homepage_layout'] == '3col' ) {
+	// the home template sidebars have same names as old regime so that *shouldn't* be an issue.
+	if ( isset( $previous_options['homepage_layout'] ) && '3col' === $previous_options['homepage_layout'] ) {
 		of_set_option( 'home_template', 'LegacyThreeColumn' );
-	} else if ( $old_regime ) {
-		if ( $old_regime == 'topstories' ) {
+	} elseif ( $old_regime ) {
+		if ( 'topstories' === $old_regime ) {
 			$home_template = 'TopStories';
 		}
-		if ( $old_regime == 'slider' ) {
+		if ( 'slider' === $old_regime ) {
 			$home_template = 'HomepageBlog';
 		}
-		if ( $old_regime == 'blog' ) {
+		if ( 'blog' === $old_regime ) {
 			$home_template = 'HomepageBlog';
 		}
 		of_set_option( 'home_template', $home_template );
-	} else if ( ! $new_regime ) {
+	} elseif ( ! $new_regime ) {
 		of_set_option( 'home_template', 'HomepageBlog' );
 	}
 }
@@ -321,9 +322,9 @@ function largo_update_widgets() {
 		'settings' => array( 'title' => '' ),
 	);
 
-	//this is a dummy check
+	// this is a dummy check.
 	$checks['in_series'] = array(
-		'values' => NULL,
+		'values' => null,
 		'widget' => 'largo-post-series-links',
 		'settings' => array( 'title' => __( 'Related Series', 'largo' ) ),
 	);
@@ -352,13 +353,13 @@ function largo_update_widgets() {
 		'settings' => array(),
 	);
 
-	//loop thru, see if value is present, then see if widget exists, if not, create one
+	// loop thru, see if value is present, then see if widget exists, if not, create one.
 	$previous_options = largo_retrieve_previous_options();
-	foreach( $checks as $option => $i ) {
-		$opt = $previous_options[$option];
-		if ( $i['values'] === NULL || in_array( $opt, $i['values'] ) ) {
-			//we found an option that suggests we need to add a widget.
-			//if there's not aleady one present, add it
+	foreach ( $checks as $option => $i ) {
+		$opt = $previous_options[ $option ];
+		if ( null === $i['values'] || in_array( $opt, $i['values'] ) ) {
+			// we found an option that suggests we need to add a widget.
+			// if there's not aleady one present, add it.
 			if ( ! largo_widget_in_region( $i['widget'] ) ) {
 				largo_instantiate_widget( $i['widget'], $i['settings'], 'article-bottom' );
 			}
@@ -379,20 +380,20 @@ function largo_transition_nav_menus() {
 		$locations['main-nav'] = $main_nav->term_id;
 	}
 
-	// Get the menu items for each menu
+	// Get the menu items for each menu.
 	$existing_items = array();
 	foreach ( $locations as $location => $id ) {
-		$existing_items[$location] = wp_get_nav_menu_items( $id );
+		$existing_items[ $location ] = wp_get_nav_menu_items( $id );
 	}
 
-	// These nav menu locations/menus get folded into main-nav menu
+	// These nav menu locations/menus get folded into main-nav menu.
 	$transition = array( 'navbar-categories', 'navbar-supplemental', 'sticky-nav' );
 
 	// Move all the category, supplemental items to main-nav.
 	// Remove category and supplemental navs.
 	foreach ( $transition as $location_slug ) {
-		if ( isset( $existing_items[$location_slug] ) ) {
-			$items = $existing_items[$location_slug];
+		if ( isset( $existing_items[ $location_slug ] ) ) {
+			$items = $existing_items[ $location_slug ];
 			if ( $items ) {
 				foreach ( $items as $idx => $item ) {
 					$meta = get_metadata( 'post', $item->ID );
@@ -407,21 +408,21 @@ function largo_transition_nav_menus() {
 						'menu-item-xfn' => $meta['_menu_item_xfn'][0],
 						'menu-item-url' => $meta['_menu_item_url'][0],
 						'menu-item-title' => $item->post_title,
-						'menu-item-attr-title' => $item->post_excerpt
+						'menu-item-attr-title' => $item->post_excerpt,
 					);
 					wp_update_nav_menu_item( $locations['main-nav'], $item->ID, $attrs );
 				}
 			}
-			// Get rid of the menu
-			wp_delete_nav_menu( $locations[$location_slug] );
-			unset( $locations[$location_slug] );
+			// Get rid of the menu.
+			wp_delete_nav_menu( $locations[ $location_slug ] );
+			unset( $locations[ $location_slug ] );
 		}
 	}
 	set_theme_mod( 'nav_menu_locations', $locations );
 }
 
 /**
- * Updates post prominence term descriptions iff they use the old language
+ * Updates post prominence term descriptions iff they use the old language.
  *
  * This function can be added to the `init` action to force an update of prominence term descriptions:
  *    add_action('init', 'largo_update_prominence_term_descriptions');
@@ -433,61 +434,66 @@ function largo_transition_nav_menus() {
  * @uses largo_update_prominence_term_description_single
  */
 function largo_update_prominence_term_descriptions() {
-	// see https://github.com/INN/Largo/issues/210
-
+	// see https://github.com/INN/Largo/issues/210.
 	$terms = get_terms( 'prominence', array(
 			'hide_empty' => false,
-			'fields' => 'all'
-		) );
+			'fields' => 'all',
+		)
+	);
 
-	// prevent PHP warnings in case no terms returned
-	if ( gettype( $terms ) != "array" ) {
+	// prevent PHP warnings in case no terms returned.
+	if ( 'array' !== gettype( $terms ) ) {
 		return false;
 	}
 
-	$term_descriptions = array_map( function( $arg ) { return $arg->description; }, $terms);
+	$term_descriptions = array_map(
+		function( $arg ) {
+			return $arg->description;
+		},
+		$terms
+	);
 
-	$largoOldProminenceTerms = array(
- 		array(
+	$largo_old_prominence_terms = array(
+		array(
 			'name' => __( 'Sidebar Featured Widget', 'largo' ),
 			'description' => __( 'If you are using the Featured Posts widget in a sidebar, add this label to posts to determine which to display in the widget.', 'largo' ),
 			'olddescription' => __( 'If you are using the Sidebar Featured Posts widget, add this label to posts to determine which to display in the widget.', 'largo' ),
-			'slug' => 'sidebar-featured'
+			'slug' => 'sidebar-featured',
 		),
 		array(
 			'name' => __( 'Footer Featured Widget', 'largo' ),
 			'description' => __( 'If you are using the Featured Posts widget in the footer, add this label to posts to determine which to display in the widget.', 'largo' ),
 			'olddescription' => __( 'If you are using the Footer Featured Posts widget, add this label to posts to determine which to display in the widget.', 'largo' ),
-			'slug' => 'footer-featured'
+			'slug' => 'footer-featured',
 		),
 		array(
 			'name' => __( 'Featured in Category', 'largo' ),
 			'description' => __( 'This will allow you to designate a story to appear more prominently on category archive pages.', 'largo' ),
 			'olddescription' => __( 'Not yet implemented, in the future this will allow you to designate a story (or stories) to appear more prominently on category archive pages.', 'largo' ),
-			'slug' => 'category-featured'
+			'slug' => 'category-featured',
 		),
 		array(
 			'name' => __( 'Homepage Featured', 'largo' ),
 			'description' => __( 'Add this label to posts to display them in the featured area on the homepage.', 'largo' ),
 			'olddescription' => __( 'If you are using the Newspaper or Carousel optional homepage layout, add this label to posts to display them in the featured area on the homepage.', 'largo' ),
-			'slug' => 'homepage-featured'
+			'slug' => 'homepage-featured',
 		),
 		array(
-			'name' => __('Homepage Top Story', 'largo'),
+			'name' => __( 'Homepage Top Story', 'largo' ),
 			'description' => __( 'If you are using a "Big story" homepage layout, add this label to a post to make it the top story on the homepage', 'largo' ),
 			'olddescription' => __( 'If you are using the Newspaper or Carousel optional homepage layout, add this label to label to a post to make it the top story on the homepage.', 'largo' ),
-			'slug' => 'top-story'
-		),
+			'slug' => 'top-story',
+			),
 		array(
 			'name' => __( 'Featured in Series', 'largo' ),
 			// 0.4 description did not change from 0.3
 			'description' => __( 'Select this option to allow this post to float to the top of any/all series landing pages sorting by Featured first.', 'largo' ),
 			'olddescription' => __( 'Select this option to allow this post to float to the top of any/all series landing pages sorting by Featured first.', 'largo' ),
-			'slug' => 'series-featured'
-		)
+			'slug' => 'series-featured',
+		),
 	);
 
-	foreach ( $largoOldProminenceTerms as $update ) {
+	foreach ( $largo_old_prominence_terms as $update ) {
 		largo_update_prominence_term_description_single( $update, $term_descriptions );
 	}
 }
@@ -499,35 +505,34 @@ function largo_update_prominence_term_descriptions() {
  *
  * @since 0.4
  *
- * @param array $update The new details for the prominence tax term to be updated
- * @param array $term_descriptions Array of prominence terms, each prominence term as an associative array with keys: name, description, olddescription, slug
+ * @param array $update The new details for the prominence tax term to be updated.
+ * @param array $term_descriptions Array of prominence terms, each prominence term as an associative array with keys: name, description, olddescription, slug.
  * @uses wp_update_term
  * @uses clean_term_cache
- *
  */
 function largo_update_prominence_term_description_single( $update, $term_descriptions ) {
 	$logarray = array();
 
 	// Toggle comment on these two lines to revert to old descriptions.
 	if ( in_array( $update['olddescription'], $term_descriptions ) ) {
-#	if ( in_array( $update['description'], $term_descriptions ) ) {
-	    $id = get_term_by( 'slug', $update['slug'], 'prominence', 'ARRAY_A' );
-	    // Comment out this function call to avoid all prominence term updates.
+	// if ( in_array( $update['description'], $term_descriptions ) ) {
+		$id = get_term_by( 'slug', $update['slug'], 'prominence', 'ARRAY_A' );
+		// Comment out this function call to avoid all prominence term updates.
 #		/*
-	    wp_update_term(
-	        $id['term_id'], 'prominence',
-	        array(
-	            'name' => $update['name'],
-	            // Toggle comment on these two lines to revert to old descriptions.
-	            'description' => $update['description'],
+		wp_update_term(
+			$id['term_id'], 'prominence',
+			array(
+				'name' => $update['name'],
+				// Toggle comment on these two lines to revert to old descriptions.
+				'description' => $update['description'],
 #   	        'description' => $update['olddescription'],
-	            'slug' => $update['slug']
-	        )
-	    );
+				'slug' => $update['slug']
+			)
+		);
 #	    */
-	    $logarray[] = 'Updated description of "' . $update['name'] . '" from "'. $update['olddescription'] . '" to "' . $update['description'] . '"';
-	    // Clean the entire prominence term cache
-	    clean_term_cache( $id['term_id'], 'prominence', true );
+		$logarray[] = 'Updated description of "' . $update['name'] . '" from "'. $update['olddescription'] . '" to "' . $update['description'] . '"';
+		// Clean the entire prominence term cache
+		clean_term_cache( $id['term_id'], 'prominence', true );
 	}
 
 	return $update;
