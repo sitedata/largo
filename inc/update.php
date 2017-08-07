@@ -39,7 +39,6 @@ function largo_need_updates() {
 		if ( $legacy_options && isset( $legacy_options['largo_version'] ) ) {
 			$largo_db_version = $legacy_options['largo_version'];
 		}
-
 	} else {
 
 		// When in doubt, default to current version.
@@ -68,7 +67,8 @@ function largo_update_admin_notice() {
 	if ( largo_need_updates() && 'dashboard_page_update-largo' !== $screen->id ) {
 		echo '<div class="notice notice-warning"><p>';
 			printf(
-				__( 'Largo has been updated. Please <a href="%s">visit the update page</a> to apply a required database update.', 'largo' ),
+				// translators: This message is displayed when we need to run database updates.
+				esc_html__( 'Largo has been updated. Please <a href="%s">visit the update page</a> to apply a required database update.', 'largo' ),
 				admin_url( 'index.php?page=update-largo' )
 			);
 		echo '</p></div>';
