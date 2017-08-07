@@ -27,15 +27,24 @@ function largo_version() {
  * @return boolean $result True if updates need to be run
  */
 function largo_need_updates() {
-	// Check theme mods for largo version number.
 	if ( get_theme_mod( 'largo_version' ) ) {
+
+		// Check theme mods for largo version number.
 		$largo_db_version = get_theme_mod( 'largo_version' );
-	} elseif ( function_exists( 'of_get_option' ) ) {
-		// If options framework is installed (used in versions < 0.6).
-		$largo_db_version = of_get_option( 'largo_version' ) ? of_get_option( 'largo_version' ) : false;
+
+	} elseif ( get_option( 'largo' ) ) {
+
+		// Check for options framework values used in Largo < 0.6.
+		$legacy_options = get_option( 'largo' );
+		if ( $legacy_options && isset( $legacy_options['largo_version'] ) ) {
+			$largo_db_version = $legacy_options['largo_version'];
+		}
+
 	} else {
-		// If no db version, we need to run updates.
-		return true;
+
+		// When in doubt, default to current version.
+		set_theme_mod( 'largo_version', largo_version() );
+		$largo_db_version = largo_version();
 	}
 
 	// Only run updates if the db version is lower than the largo files version.
@@ -43,10 +52,6 @@ function largo_need_updates() {
 		return true;
 	}
 }
-
-/**
- * Update.php admin page logic.
- */
 
 /**
  * Add an admin notice if largo needs to be updated.
@@ -79,7 +84,7 @@ add_action( 'admin_notices', 'largo_update_admin_notice' );
 function largo_register_update_page() {
 	if ( largo_need_updates() ) {
 		add_submenu_page(
-			null,
+			'index.php',
 			'Update Largo',
 			'Update Largo',
 			'update_themes',
