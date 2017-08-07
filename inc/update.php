@@ -140,25 +140,25 @@ function largo_update_page_template() {
 		<div id="icon-tools" class="icon32"></div>
 		<h2>Largo Database Update</h2>
 		<div class="largo-update-message">
-			<p><?php _e( 'This version of Largo includes a variety of updates, enhancements and changes.' ); ?></p>
+			<p><?php esc_html_e( 'This version of Largo includes a variety of updates, enhancements and changes.', 'largo' ); ?></p>
 			<?php if ( version_compare( of_get_option( 'largo_version' ), '0.4' ) < 0 ) { ?>
-				<p><?php _e( 'These changes affect' ); ?>:
+				<p><?php esc_html_e( 'These changes affect', 'largo' ); ?>:
 					<ul>
-						<li><?php _e( 'Theme options' ); ?></li>
-						<li><?php _e( 'Configured menus' ); ?></li>
-						<li><?php _e( 'Site navigation' ); ?></li>
-						<li><?php _e( 'Sidebars and widgets' ); ?></li>
+						<li><?php esc_html_e( 'Theme options', 'largo' ); ?></li>
+						<li><?php esc_html_e( 'Configured menus', 'largo' ); ?></li>
+						<li><?php esc_html_e( 'Site navigation', 'largo' ); ?></li>
+						<li><?php esc_html_e( 'Sidebars and widgets', 'largo' ); ?></li>
 					</ul>
-				<p><?php _e( 'The database update you are about to apply will take steps to migrate existing site settings.', 'largo' ); ?></p>
-				<p><?php _e( 'In the event that a site setting can not be migrated, the update will do its best to preserve it instead.', 'largo' ); ?></p>
-				<p><?php _e( 'For example, menus that existed in previous versions of Largo have been removed. If your site has been using one of these now-deprecated menus, the update process will merge it with the nearest related menu.', 'largo' ); ?></p>
-				<p><?php _e( 'Please be sure to review your site settings after applying the update to ensure all is well.', 'largo' ); ?></p>
+				<p><?php esc_html_e( 'The database update you are about to apply will take steps to migrate existing site settings.', 'largo' ); ?></p>
+				<p><?php esc_html_e( 'In the event that a site setting can not be migrated, the update will do its best to preserve it instead.', 'largo' ); ?></p>
+				<p><?php esc_html_e( 'For example, menus that existed in previous versions of Largo have been removed. If your site has been using one of these now-deprecated menus, the update process will merge it with the nearest related menu.', 'largo' ); ?></p>
+				<p><?php esc_html_e( 'Please be sure to review your site settings after applying the update to ensure all is well.', 'largo' ); ?></p>
 			<?php } else { ?>
-				<p><?php _e( 'Click the button below to apply a required database update.', 'largo' ); ?></p>
+				<p><?php esc_html_e( 'Click the button below to apply a required database update.', 'largo' ); ?></p>
 			<?php } ?>
 
 			<p class="submit-container">
-				<input type="submit" class="button-primary" id="update" name="update" value="<?php _e( 'Update the database!', 'largo' ); ?>">
+				<input type="submit" class="button-primary" id="update" name="update" value="<?php esc_html_e( 'Update the database!', 'largo' ); ?>">
 				<span class="spinner"></span>
 			<p>
 		</div>
