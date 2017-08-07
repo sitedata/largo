@@ -20,13 +20,11 @@ function largo_version() {
 }
 
 /**
- * Checks if updates need to be run.
+ * Returns current version of largo databse.
  *
- * @since 0.3
- *
- * @return boolean $result True if updates need to be run
+ * @since 0.6
  */
-function largo_need_updates() {
+function largo_db_version() {
 	if ( get_theme_mod( 'largo_version' ) ) {
 
 		// Check theme mods for largo version number.
@@ -45,9 +43,19 @@ function largo_need_updates() {
 		set_theme_mod( 'largo_version', largo_version() );
 		$largo_db_version = largo_version();
 	}
+	return $largo_db_version;
+}
 
+/**
+ * Checks if updates need to be run.
+ *
+ * @since 0.3
+ *
+ * @return boolean $result True if updates need to be run
+ */
+function largo_need_updates() {
 	// Only run updates if the db version is lower than the largo files version.
-	if ( 0 < version_compare( largo_version(), $largo_db_version ) ) {
+	if ( 0 < version_compare( largo_version(), largo_db_version() ) ) {
 		return true;
 	}
 }
@@ -68,7 +76,8 @@ function largo_update_admin_notice() {
 		echo '<div class="notice notice-warning"><p>';
 			printf(
 				// translators: This message is displayed when we need to run database updates.
-				esc_html__( 'Largo has been updated. Please <a href="%s">visit the update page</a> to apply a required database update.', 'largo' ),
+				wp_kses( __( 'Largo has been updated. Please <a href="%s">visit the update page</a> to apply a required database update.', 'largo' ),
+				array(  'a' => array( 'href' => array() ) ) ),
 				admin_url( 'index.php?page=update-largo' )
 			);
 		echo '</p></div>';
@@ -96,7 +105,7 @@ function largo_register_update_page() {
 add_action( 'admin_menu', 'largo_register_update_page' );
 
 /**
- * DOM for admin page for updates.
+ * Template for Largo Updates admin page.
  *
  * @since 0.3
  */
@@ -137,33 +146,47 @@ function largo_update_page_template() {
 		}
 	</style>
 	<div class="wrap">
-		<div id="icon-tools" class="icon32"></div>
-		<h2>Largo Database Update</h2>
+		<h1><?php esc_html_e( 'Largo Database Update', 'largo' ); ?></h1>
 		<div class="largo-update-message">
-			<p><?php esc_html_e( 'This version of Largo includes a variety of updates, enhancements and changes.', 'largo' ); ?></p>
-			<?php if ( version_compare( of_get_option( 'largo_version' ), '0.4' ) < 0 ) { ?>
-				<p><?php esc_html_e( 'These changes affect', 'largo' ); ?>:
-					<ul>
-						<li><?php esc_html_e( 'Theme options', 'largo' ); ?></li>
-						<li><?php esc_html_e( 'Configured menus', 'largo' ); ?></li>
-						<li><?php esc_html_e( 'Site navigation', 'largo' ); ?></li>
-						<li><?php esc_html_e( 'Sidebars and widgets', 'largo' ); ?></li>
-					</ul>
-				<p><?php esc_html_e( 'The database update you are about to apply will take steps to migrate existing site settings.', 'largo' ); ?></p>
-				<p><?php esc_html_e( 'In the event that a site setting can not be migrated, the update will do its best to preserve it instead.', 'largo' ); ?></p>
-				<p><?php esc_html_e( 'For example, menus that existed in previous versions of Largo have been removed. If your site has been using one of these now-deprecated menus, the update process will merge it with the nearest related menu.', 'largo' ); ?></p>
-				<p><?php esc_html_e( 'Please be sure to review your site settings after applying the update to ensure all is well.', 'largo' ); ?></p>
-			<?php } else { ?>
-				<p><?php esc_html_e( 'Click the button below to apply a required database update.', 'largo' ); ?></p>
-			<?php } ?>
-
+			<p><?php esc_html_e( 'The following updates have been have new versions available. Check the ones you want to update and then click “Update Themes”..', 'largo' ); ?></p>
+			<hr />
+			<?php
+			foreach ( largo_update_notices() as $version => $update_notices ) {
+				if ( 0 < version_compare( largo_version(), largo_db_version() ) ) {
+					echo '<h3>' . $version . '</h3>';
+					echo '<ul>';
+						foreach ( $update_notices as $notice ) {
+							echo '<li>' . $notice . '</li>';
+						}
+					echo '</ul>';
+				}
+			}
+			?>
 			<p class="submit-container">
-				<input type="submit" class="button-primary" id="update" name="update" value="<?php esc_html_e( 'Update the database!', 'largo' ); ?>">
+				<input type="submit" class="button-primary" id="update" name="update" value="<?php esc_attr_e( 'Run Database Updates', 'largo' ); ?>">
 				<span class="spinner"></span>
 			<p>
 		</div>
 	</div>
 <?php
+}
+
+/**
+ * Update notices to for users.
+ *
+ * @since 0.6
+ */
+function largo_update_notices() {
+	$notices = array(
+		'0.4' => array(
+			esc_html__( 'Theme options', 'largo' ),
+			esc_html__( 'Configured menus', 'largo' ),
+			esc_html__( 'Site navigation', 'largo' ),
+			esc_html__( 'Sidebars and widgets', 'largo' ),
+			esc_html__( 'Menus that existed in previous versions of Largo have been removed. If your site has been using one of these now-deprecated menus, the update process will merge it with the nearest related menu.', 'largo' ),
+		),
+	);
+	return $notices;
 }
 
 /**
@@ -1173,12 +1196,11 @@ add_action( 'admin_menu', 'largo_block_theme_options_for_update', 10 );
  *
  * @since 0.5.3
  */
-function largo_block_theme_options() { ?>
-	<h3>
-	<?php printf(
-		__( 'Please <a href="%s">visit the update page</a> to apply required Largo updates before editing Theme Options.', 'largo' ),
-		admin_url( 'index.php?page=update-largo' )
-	); ?>
-	</h3>
-<?php
+function largo_block_theme_options() {
+		printf(
+			// translators: This message is displayed when we need to run database updates.
+			wp_kses( __( '<h3>Please <a href="%s">visit the update page</a> to apply required Largo updates before editing Theme Options.</h3>', 'largo' ),
+			array(  'a' => array( 'href' => array() ) ) ),
+			admin_url( 'index.php?page=update-largo' )
+		);
 }
