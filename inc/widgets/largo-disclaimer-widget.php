@@ -23,8 +23,8 @@ class largo_disclaimer_widget extends WP_Widget {
 		?>
 			<?php if ( get_post_meta(get_the_ID(), 'disclaimer', true ) ): ?>
 				<?php echo get_post_meta(get_the_ID(), 'disclaimer', true ); ?>
-			<?php elseif ( of_get_option( 'default_disclaimer' ) ) : ?>
-        <?php echo of_get_option( 'default_disclaimer' ); ?>
+			<?php elseif ( get_theme_mod( 'default_disclaimer' ) ) : ?>
+        <?php echo get_theme_mod( 'default_disclaimer' ); ?>
 			<?php else: ?>
     			<p class="error"><strong><?php _e('You have not set a disclaimer for your site.</strong> Add a site disclaimer by visiting the Largo Theme Options page.', 'largo'); ?></p>
       <?php endif; ?>

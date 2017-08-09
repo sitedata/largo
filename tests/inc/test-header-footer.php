@@ -15,7 +15,7 @@ class HeaderFooterTestFunctions extends WP_UnitTestCase {
 	function test_largo_copyright_message() {
 		$this->expectOutputRegex('/[.*]+/'); // This is excessively greedy, it expects any output at all
 		largo_copyright_message();
-		// this should also test of_get_option( 'copyright_msg' );
+		// this should also test get_theme_mod( 'copyright_msg' );
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
 

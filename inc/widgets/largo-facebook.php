@@ -53,7 +53,7 @@ class largo_facebook_widget extends WP_Widget {
 
 	function form( $instance ) {
 		$defaults = array(
-			'fb_page_url' 		=> of_get_option( 'facebook_link' ),
+			'fb_page_url' 		=> get_theme_mod( 'facebook_link' ),
 			'widget_height' 	=> 350,
 			'show_faces' 		=> 1,
 			'show_stream' 		=> 0,

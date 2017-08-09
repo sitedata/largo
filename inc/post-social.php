@@ -26,7 +26,7 @@ if ( ! function_exists( 'largo_post_social_links' ) ) {
 	function largo_post_social_links( $echo = true ) {
 		global $post, $wpdb;
 
-		$utilities = of_get_option( 'article_utilities' );
+		$utilities = get_theme_mod( 'article_utilities' );
 
 		$output = '<div class="largo-follow post-social clearfix">';
 
@@ -37,7 +37,7 @@ if ( ! function_exists( 'largo_post_social_links' ) ) {
 			$output .= sprintf(
 				$fb_share,
 				rawurlencode( get_permalink() ),
-				__( ucfirst( of_get_option( 'fb_verb' ) ), 'largo' )
+				__( ucfirst( get_theme_mod( 'fb_verb' ) ), 'largo' )
 			);
 		}
 
@@ -71,7 +71,7 @@ if ( ! function_exists( 'largo_post_social_links' ) ) {
 
 			// Use the site Twitter handle if that exists and there isn't yet a via
 			if ( empty( $via ) ) {
-				$site = of_get_option( 'twitter_link' );
+				$site = get_theme_mod( 'twitter_link' );
 				if ( !empty( $site ) ) {
 					$via = '&via=' . rawurlencode( largo_twitter_url_to_username( $site ) ) ;
 				}
@@ -201,7 +201,7 @@ EOD;
  */
 if ( ! function_exists( 'largo_floating_social_buttons' ) ) {
 	function largo_floating_social_buttons() {
-		if ( is_single() && of_get_option('single_floating_social_icons', '1') == '1' ) {
+		if ( is_single() && get_theme_mod('single_floating_social_icons', '1') == '1' ) {
 			echo '<script type="text/template" id="tmpl-floating-social-buttons">';
 			largo_post_social_links();
 			echo '</script>';
@@ -219,11 +219,11 @@ add_action('wp_footer', 'largo_floating_social_buttons');
  */
 if ( ! function_exists('largo_floating_social_button_width_json') ) {
 	function largo_floating_social_button_width_json() {
-		if ( is_single() && of_get_option('single_floating_social_icons', '1') == '1' ) {
+		if ( is_single() && get_theme_mod('single_floating_social_icons', '1') == '1' ) {
 			$template = get_post_template(null);
 
 			if ( is_null( $template ) )
-				$template = of_get_option( 'single_template' );
+				$template = get_theme_mod( 'single_template' );
 
 			$is_single_column = (bool) strstr( $template, 'single-one-column' ) || $template == 'normal' || is_null( $template );
 
@@ -260,7 +260,7 @@ add_action('wp_footer', 'largo_floating_social_button_width_json');
  */
 if ( ! function_exists('largo_floating_social_button_js') ) {
 	function largo_floating_social_button_js() {
-		if ( is_single() && of_get_option('single_floating_social_icons', '1') == '1' ) {
+		if ( is_single() && get_theme_mod('single_floating_social_icons', '1') == '1' ) {
 			?>
 			<script type="text/javascript" src="<?php
 				$suffix = (LARGO_DEBUG)? '' : '.min';

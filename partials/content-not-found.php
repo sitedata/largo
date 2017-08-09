@@ -2,8 +2,8 @@
 $apologies = __( 'Apologies, but no results were found. Perhaps searching will help.', 'largo' );
 
 if ( is_404() ) {
-	if ( of_get_option( '404_message' ) ) {
-		$apologies = of_get_option( '404_message' );
+	if ( get_theme_mod( '404_message' ) ) {
+		$apologies = get_theme_mod( '404_message' );
 	} else {
 		$apologies = sprintf(
 			__( 'Apologies, but <code>%s</code> was not found. Perhaps searching will help.', 'largo' ),

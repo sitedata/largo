@@ -11,11 +11,11 @@ $args = array(
 	'ignore_sticky_posts' => true
 );
 
-if ( of_get_option( 'num_posts_home' ) ) {
-	$args['posts_per_page'] = of_get_option( 'num_posts_home', 10 );
+if ( get_theme_mod( 'num_posts_home' ) ) {
+	$args['posts_per_page'] = get_theme_mod( 'num_posts_home', 10 );
 }
-if ( of_get_option( 'cats_home' ) ) {
-	$args['cat'] = of_get_option( 'cats_home', '' );
+if ( get_theme_mod( 'cats_home' ) ) {
+	$args['cat'] = get_theme_mod( 'cats_home', '' );
 }
 
 $query = new WP_Query($args);

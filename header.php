@@ -87,7 +87,7 @@
 			
 			get_template_part( 'partials/nav', 'sticky' ); 
 			
-			if ( of_get_option( 'leaderboard_enabled' ) == TRUE ) {
+			if ( get_theme_mod( 'leaderboard_enabled' ) == TRUE ) {
 				get_template_part( 'partials/header-ad-zone' );
 			}
 

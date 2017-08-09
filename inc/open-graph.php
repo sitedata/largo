@@ -15,8 +15,8 @@ if ( ! function_exists( 'largo_opengraph' ) ) {
 		if ( is_single() && has_post_thumbnail( $post->ID ) ) {
 			$image = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'full' );
 			$thumbnailURL = $image[0];
-		} else if ( of_get_option( 'logo_thumbnail_sq' ) ) {
-			$thumbnailURL = of_get_option( 'logo_thumbnail_sq' );
+		} else if ( get_theme_mod( 'logo_thumbnail_sq' ) ) {
+			$thumbnailURL = get_theme_mod( 'logo_thumbnail_sq' );
 		} else {
 			$thumbnailURL = false;
 		}
@@ -26,8 +26,8 @@ if ( ! function_exists( 'largo_opengraph' ) ) {
 		<meta name="twitter:card" content="summary">
 
 		<?php
-			if ( of_get_option( 'twitter_link' ) )
-				echo '<meta name="twitter:site" content="@' . largo_twitter_url_to_username( of_get_option( 'twitter_link' ) ) . '">';
+			if ( get_theme_mod( 'twitter_link' ) )
+				echo '<meta name="twitter:site" content="@' . largo_twitter_url_to_username( get_theme_mod( 'twitter_link' ) ) . '">';
 		?>
 
 		<?php // output appropriate OG tags by page type
@@ -90,8 +90,8 @@ if ( ! function_exists( 'largo_opengraph' ) ) {
 
 			// google author/publisher markup
 			// see: https://support.google.com/webmasters/answer/1408986
-			if ( of_get_option( 'gplus_link' ) )
-				echo '<link href="' . esc_url( of_get_option( 'gplus_link' ) ) . '" rel="publisher" />';
+			if ( get_theme_mod( 'gplus_link' ) )
+				echo '<link href="' . esc_url( get_theme_mod( 'gplus_link' ) ) . '" rel="publisher" />';
 	}
 }
 add_action( 'wp_head', 'largo_opengraph' );

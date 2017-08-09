@@ -81,7 +81,7 @@ class UpdateTestFunctions extends WP_UnitTestCase {
 		largo_perform_update();
 
 		// check that options have been set
-		$this->assertEquals(largo_version(), of_get_option('largo_version'));
+		$this->assertEquals(largo_version(), get_theme_mod('largo_version'));
 
 		// Cleanup
 		delete_option('sidebars_widgets');
@@ -102,7 +102,7 @@ class UpdateTestFunctions extends WP_UnitTestCase {
 		largo_preserve_previous_options();
 		of_reset_options();
 		largo_home_transition();
-		$this->assertEquals('TopStories', of_get_option('home_template', 0));
+		$this->assertEquals('TopStories', get_theme_mod('home_template', 0));
 
 		// old slider
 		update_option(
@@ -112,7 +112,7 @@ class UpdateTestFunctions extends WP_UnitTestCase {
 		largo_preserve_previous_options();
 		of_reset_options();
 		largo_home_transition();
-		$this->assertEquals('HomepageBlog', of_get_option('home_template', 0));
+		$this->assertEquals('HomepageBlog', get_theme_mod('home_template', 0));
 
 		// old blog
 		update_option(
@@ -122,14 +122,14 @@ class UpdateTestFunctions extends WP_UnitTestCase {
 		largo_preserve_previous_options();
 		of_reset_options();
 		largo_home_transition();
-		$this->assertEquals('HomepageBlog', of_get_option('home_template', 0));
+		$this->assertEquals('HomepageBlog', get_theme_mod('home_template', 0));
 
 		// Not actually set
 		update_option(get_option('stylesheet'), $this->previous_options);
 		largo_preserve_previous_options();
 		of_reset_options();
 		largo_home_transition();
-		$this->assertEquals('HomepageBlog', of_get_option('home_template', 0));
+		$this->assertEquals('HomepageBlog', get_theme_mod('home_template', 0));
 	}
 
 	function test_largo_update_widgets() {
@@ -344,7 +344,7 @@ class UpdateTestFunctions extends WP_UnitTestCase {
 	function test_largo_force_settings_update() {
 		of_reset_options();
 		largo_force_settings_update();
-		$this->assertEquals('normal', of_get_option('single_template'));
+		$this->assertEquals('normal', get_theme_mod('single_template'));
 	}
 
 	// Test functions related to the WP admin workflow views

@@ -27,7 +27,7 @@ if ( ! function_exists( 'largo_header' ) ) {
 		$header_tag = is_home() ? 'h1' : 'h2'; // use h1 for the homepage, h2 for internal pages
 
 		// if we're using the text only header, display the output, otherwise this is just replacement text for the banner image
-		$header_class = of_get_option( 'no_header_image' ) ? 'branding' : 'visuallyhidden';
+		$header_class = get_theme_mod( 'no_header_image' ) ? 'branding' : 'visuallyhidden';
 		$divider = $header_class == 'branding' ? '' : ' - ';
 
 		// print the text-only version of the site title
@@ -52,8 +52,8 @@ if ( ! function_exists( 'largo_header' ) ) {
 			echo '<a itemprop="url" href="' . esc_url( home_url( '/' ) ) . '"><img class="header_img" src="" alt="" /></a>';
 		}
 
-		if ( of_get_option( 'logo_thumbnail_sq' ) )
-			echo '<meta itemprop="logo" content="' . esc_url( of_get_option( 'logo_thumbnail_sq' ) ) . '"/>';
+		if ( get_theme_mod( 'logo_thumbnail_sq' ) )
+			echo '<meta itemprop="logo" content="' . esc_url( get_theme_mod( 'logo_thumbnail_sq' ) ) . '"/>';
 	}
 }
 
@@ -64,7 +64,7 @@ if ( ! function_exists( 'largo_header' ) ) {
  */
 if ( ! function_exists( 'largo_copyright_message' ) ) {
 	function largo_copyright_message() {
-		$msg = of_get_option( 'copyright_msg' );
+		$msg = get_theme_mod( 'copyright_msg' );
 		if ( ! $msg )
 			$msg = __( 'Copyright %s', 'largo' );
 		printf( $msg, date( 'Y' ) );
@@ -97,8 +97,8 @@ if ( ! function_exists( 'largo_social_links' ) ) {
 		foreach ( $networks as $field => $title ) {
 			$field_link =  $field . '_link';
 
-			if ( of_get_option( $field_link ) ) {
-				echo '<li><a href="' . esc_url( of_get_option( $field_link ) ) . '" title="' . esc_attr( $title ) . '"><i class="icon-' . esc_attr( $field ) . '"></i></a></li>';
+			if ( get_theme_mod( $field_link ) ) {
+				echo '<li><a href="' . esc_url( get_theme_mod( $field_link ) ) . '" title="' . esc_attr( $title ) . '"><i class="icon-' . esc_attr( $field ) . '"></i></a></li>';
 			}
 		}
 	}
@@ -111,10 +111,10 @@ if ( ! function_exists( 'largo_social_links' ) ) {
  */
 if ( ! function_exists( 'largo_shortcut_icons' ) ) {
 	function largo_shortcut_icons() {
-		if ( of_get_option( 'logo_thumbnail_sq' ) )
-			echo '<link rel="apple-touch-icon" href="' . esc_url( of_get_option( 'logo_thumbnail_sq' ) ) . '"/>';
-		if ( of_get_option( 'favicon' ) )
-			echo '<link rel="shortcut icon" href="' . esc_url( of_get_option( 'favicon' ) ) . '"/>';
+		if ( get_theme_mod( 'logo_thumbnail_sq' ) )
+			echo '<link rel="apple-touch-icon" href="' . esc_url( get_theme_mod( 'logo_thumbnail_sq' ) ) . '"/>';
+		if ( get_theme_mod( 'favicon' ) )
+			echo '<link rel="shortcut icon" href="' . esc_url( get_theme_mod( 'favicon' ) ) . '"/>';
 	}
 }
 add_action( 'wp_head', 'largo_shortcut_icons' );
@@ -130,7 +130,7 @@ if ( ! function_exists ( 'largo_seo' ) ) {
 		// noindex for date archives (and optionally on all archive pages)
 		// if the blog is set to private wordpress already adds noindex,nofollow
 		if ( get_option( 'blog_public') ) {
-			if ( is_date() || ( is_archive() &&  of_get_option( 'noindex_archives' ) ) ) {
+			if ( is_date() || ( is_archive() &&  get_theme_mod( 'noindex_archives' ) ) ) {
 				echo '<meta name="robots" content="noindex,follow" />';
 			}
 		}

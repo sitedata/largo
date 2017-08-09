@@ -84,7 +84,7 @@ function largo_render_homepage_layout($layout) {
  * Get the class name of the currently-active homepage layout
  */
 function largo_get_active_homepage_layout() {
-	return of_get_option('home_template', 'HomepageBlog');
+	return get_theme_mod('home_template', 'HomepageBlog');
 }
 
 /**

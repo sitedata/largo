@@ -90,7 +90,7 @@ EOT;
 		ob_start();
 		largo_post_social_links();
 		$ret = ob_get_clean();
-//		$this->assertRegExp('/' . preg_quote(esc_attr( of_get_option( 'fb_verb' ) ), '/' ) . '/i', $ret, "The Facebook Verb was not in the Facebook output");
+//		$this->assertRegExp('/' . preg_quote(esc_attr( get_theme_mod( 'fb_verb' ) ), '/' ) . '/i', $ret, "The Facebook Verb was not in the Facebook output");
 //		$this->assertRegExp('/' . preg_quote(rawurlencode(get_permalink()), '/') . '/', $ret, "The permalink was not in the Facebook output");
 		unset($ret);
 		of_reset_options();

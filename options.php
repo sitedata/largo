@@ -325,9 +325,9 @@ function optionsframework_options() {
 	if (count($home_templates)) {
 		$home_std= 'HomepageBlog';
 
-		$home_template = of_get_option('home_template');
+		$home_template = get_theme_mod('home_template');
 		if (empty($home_template)) {
-			if (of_get_option('homepage_layout') == '3col')
+			if (get_theme_mod('homepage_layout') == '3col')
 				$home_std= 'LegacyThreeColumn';
 		}
 

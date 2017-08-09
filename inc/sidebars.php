@@ -37,7 +37,7 @@ function largo_register_sidebars() {
 		)
 	);
 
-	if ( of_get_option('footer_layout') !== '1col') {
+	if ( get_theme_mod('footer_layout') !== '1col') {
 		$sidebars[] = array (
 			'name' 	=> __( 'Footer 2', 'largo' ),
 			'desc' 	=> __( 'The second footer widget area.', 'largo' ),
@@ -50,7 +50,7 @@ function largo_register_sidebars() {
 		);
 	}
 
-	if ( of_get_option('footer_layout') == '4col' || of_get_option('footer_layout') == '4col-asymm' ) {
+	if ( get_theme_mod('footer_layout') == '4col' || get_theme_mod('footer_layout') == '4col-asymm' ) {
 		$sidebars[] = array(
 			'name' 	=> __( 'Footer 4', 'largo' ),
 			'desc' 	=> __( 'The fourth footer widget area.', 'largo' ),
@@ -58,7 +58,7 @@ function largo_register_sidebars() {
 		);
 	}
 
-	if ( of_get_option( 'use_topic_sidebar' ) ) {
+	if ( get_theme_mod( 'use_topic_sidebar' ) ) {
 		$sidebars[] = array(
 			'name' 	=> __( 'Archive/Topic Sidebar', 'largo' ),
 			'desc' 	=> __( 'The sidebar for category, tag and other archive pages', 'largo' ),
@@ -66,7 +66,7 @@ function largo_register_sidebars() {
 		);
 	}
 
-	if ( of_get_option( 'use_before_footer_sidebar' ) ) {
+	if ( get_theme_mod( 'use_before_footer_sidebar' ) ) {
 		$sidebars[] = array(
 			'name' 	=> __( 'Before Footer', 'largo' ),
 			'desc' 	=> __( 'Full-width area immediately above footer', 'largo' ),
@@ -74,7 +74,7 @@ function largo_register_sidebars() {
 		);
 	}
 
-	if ( of_get_option('homepage_bottom') == 'widgets' ) {
+	if ( get_theme_mod('homepage_bottom') == 'widgets' ) {
 		$sidebars[] = array(
 			'name' 	=> __( 'Homepage Bottom', 'largo' ),
 			'desc' 	=> __( 'An optional widget area at the bottom of the homepage', 'largo' ),
@@ -82,7 +82,7 @@ function largo_register_sidebars() {
 		);
 	}
 
-	if ( of_get_option( 'leaderboard_enabled' ) ) {
+	if ( get_theme_mod( 'leaderboard_enabled' ) ) {
 		$sidebars[] = array(
 			'name' 	=> __( 'Header Ad Zone', 'largo'),
 			'desc' 	=> __( 'An optional leaderboard (728x90) ad zone above the main site header', 'largo' ),
@@ -90,7 +90,7 @@ function largo_register_sidebars() {
 		);
 	}
 
-	if ( of_get_option( 'header_widget_enabled' ) ) {
+	if ( get_theme_mod( 'header_widget_enabled' ) ) {
 		$sidebars[] = array(
 			'name' 	=> __( 'Header Widget', 'largo'),
 			'desc' 	=> __( 'An optional area to place one widget in the header next to the site logo.', 'largo' ),
@@ -99,7 +99,7 @@ function largo_register_sidebars() {
 	}
 
 	// user-defined custom widget areas
-	$custom_sidebars = preg_split( '/$\R?^/m', of_get_option( 'custom_sidebars' ) );
+	$custom_sidebars = preg_split( '/$\R?^/m', get_theme_mod( 'custom_sidebars' ) );
 	if ( is_array( $custom_sidebars ) ) {
 		foreach( $custom_sidebars as $sidebar ) {
 			$sidebar_slug = largo_make_slug( $sidebar );
@@ -143,7 +143,7 @@ if( !function_exists( 'largo_custom_sidebars_dropdown' ) ) {
 		$custom = ( $selected ) ? $selected:get_post_meta( $the_id, 'custom_sidebar', true );
 
 		// for the ultimate in backwards compatibility, if nothing's set or using deprecated 'default'
-		$default = ( of_get_option( 'single_template' ) == 'classic' ) ? 'sidebar-single' : 'none';
+		$default = ( get_theme_mod( 'single_template' ) == 'classic' ) ? 'sidebar-single' : 'none';
 		$val = $default;
 
 		// for new posts
@@ -159,7 +159,7 @@ if( !function_exists( 'largo_custom_sidebars_dropdown' ) ) {
 		if ( $admin_page->base == 'post' ) {
 
 			// Add a default option for one column post/page layout (e.g. no sidebar)
-			$default_template = of_get_option( 'single_template' );
+			$default_template = get_theme_mod( 'single_template' );
 			$custom_template = get_post_meta( $the_id, '_wp_post_template', true );
 
 			$one_column_layout_test = (
@@ -183,7 +183,7 @@ if( !function_exists( 'largo_custom_sidebars_dropdown' ) ) {
 		}
 
 		if ( $admin_page->base == 'edit-tags' ) {
-			if ( of_get_option( 'use_topic_sidebar' ) && is_active_sidebar( 'topic-sidebar' ) ) {
+			if ( get_theme_mod( 'use_topic_sidebar' ) && is_active_sidebar( 'topic-sidebar' ) ) {
 				$default_label = sprintf( __( 'Default (%s)', 'largo' ), $wp_registered_sidebars['topic-sidebar']['name'] );
 			} else {
 				$default_label = sprintf( __( 'Default (%s)', 'largo' ), $wp_registered_sidebars['sidebar-main']['name'] );
@@ -226,7 +226,7 @@ if( !function_exists( 'largo_landing_page_custom_sidebars_dropdown' ) ) {
 		$custom = ( $selected )? $selected : get_post_meta( $the_id, 'custom_sidebar', true );
 
 		// for the ultimate in backwards compatibility, if nothing's set or using deprecated 'default'
-		$default = ( of_get_option( 'single_template' ) == 'classic' ) ? 'sidebar-single' : 'none';
+		$default = ( get_theme_mod( 'single_template' ) == 'classic' ) ? 'sidebar-single' : 'none';
 		$val = $default;
 
 		// for new posts
@@ -240,7 +240,7 @@ if( !function_exists( 'largo_landing_page_custom_sidebars_dropdown' ) ) {
 		$admin_page = get_current_screen();
 		$output = '';
 		if ( isset( $admin_page->post_type ) and $admin_page->post_type == 'cftl-tax-landing' ) {
-			$default = of_get_option(
+			$default = get_theme_mod(
 				'landing_' . $left_or_right . '_region_default',
 				( $left_or_right == 'right') ? 'sidebar-main' : 'sidebar-single' );
 
@@ -311,7 +311,7 @@ function largo_get_custom_sidebar() {
 function largo_is_sidebar_required() {
 	global $post;
 
-	$default_template = of_get_option( 'single_template' );
+	$default_template = get_theme_mod( 'single_template' );
 	$custom_template = get_post_meta( $post->ID, '_wp_post_template', true );
 	$custom_sidebar = largo_get_custom_sidebar();
 
@@ -333,7 +333,7 @@ function largo_sidebar_span_class() {
 	global $post;
 
 	if (is_single() || is_singular()) {
-		$default_template = of_get_option( 'single_template' );
+		$default_template = get_theme_mod( 'single_template' );
 
 		$meta_field = ( is_single() ) ? '_wp_post_template' : '_wp_page_template';
 
@@ -361,7 +361,7 @@ function largo_sidebar_span_class() {
  * @since 0.5.5
  */
 function largo_header_widget_sidebar() {
-	if ( of_get_option('header_widget_enabled') ) {
+	if ( get_theme_mod('header_widget_enabled') ) {
 		dynamic_sidebar('header-widget');
 	}
 }

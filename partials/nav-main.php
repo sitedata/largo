@@ -9,7 +9,7 @@
  * @link http://largo.readthedocs.io/users/themeoptions.html#navigation
  */
 
-if ( ! is_single() && ! is_singular() || ! of_get_option( 'main_nav_hide_article', false ) ) {
+if ( ! is_single() && ! is_singular() || ! get_theme_mod( 'main_nav_hide_article', false ) ) {
 ?>
 <nav id="main-nav" class="navbar clearfix">
 	<div class="navbar-inner">

@@ -17,7 +17,7 @@ Theme Options and the Options Framework
 
 Largo uses the `Options Framework <https://wordpress.org/plugins/options-framework/>`_ for the Appearance > Theme Options menu pages.
 
-If you need to access a Theme Options value, use ``of_get_option()`` instead of the usual ``get_option()``. The theme options pages themselves can be customized from ``options.php`` in the main theme folder.
+If you need to access a Theme Options value, use ``get_theme_mod()`` instead of the usual ``get_option()``. The theme options pages themselves can be customized from ``options.php`` in the main theme folder.
 
 Homepage Templates
 ------------------

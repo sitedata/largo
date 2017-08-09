@@ -297,7 +297,7 @@ function largo_perform_update() {
 function largo_home_transition() {
 	$previous_options = largo_retrieve_previous_options();
 	$old_regime = ( isset( $previous_options['homepage_top'] ) ) ? $previous_options['homepage_top'] : 0;
-	$new_regime = of_get_option( 'home_template', 0 );
+	$new_regime = get_theme_mod( 'home_template', 0 );
 
 	// we're using the old system and the new one isn't in place, act accordingly
 	// this should ALWAYS happen when this function is called, as there's a separate version check before this is invoked
@@ -1057,7 +1057,7 @@ function largo_ajax_update_database() {
 
 	$ret = largo_perform_update();
 	if ( ! empty( $ret ) ) {
-		if ( version_compare( of_get_option( 'largo_version' ), '0.4' ) < 0 ) {
+		if ( version_compare( get_theme_mod( 'largo_version' ), '0.4' ) < 0 ) {
 			$message = __( "Thank you -- the update is complete. Don\'t forget to check your site settings!", "largo" );
 		} else {
 			$message = __( 'Thank you -- the update is complete.', 'largo' );
@@ -1095,7 +1095,7 @@ class LargoPreviousOptions {
 	}
 
 	protected static function _getSuffix() {
-		$version = ( ! empty( self::$version ) ) ? self::$version : of_get_option( 'largo_version', '' );
+		$version = ( ! empty( self::$version ) ) ? self::$version : get_theme_mod( 'largo_version', '' );
 		if ( ! empty( $version ) ) {
 			self::_setVersion( $version );
 			return '_' . self::$version;

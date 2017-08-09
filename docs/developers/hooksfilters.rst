@@ -45,7 +45,7 @@ post type.
     **Usage:** ::
 
     function gijn_additional_networks( $networks ) {
-		if ( of_get_option( 'listserv_link' ) ) {
+		if ( get_theme_mod( 'listserv_link' ) ) {
 			$gijn_networks = array( 
 				'listserv' => 'Join The GIJN Listserv'
 			);

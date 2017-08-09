@@ -530,8 +530,8 @@ function cftl_field_defaults( ) {
 		'post_order' => array('DESC'),
 		'show' => array('image' => 1, 'excerpt' => 1, 'byline' => 1, 'tags' => 0),
 		'footer_enabled' => array(1),
-		'left_region' => of_get_option('landing_left_region_default', 'sidebar-single'),
-		'right_region' => of_get_option('landing_right_region_default', 'sidebar-main'),
+		'left_region' => get_theme_mod('landing_left_region_default', 'sidebar-single'),
+		'right_region' => get_theme_mod('landing_right_region_default', 'sidebar-main'),
 	);
 }
 

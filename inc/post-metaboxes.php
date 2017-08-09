@@ -77,7 +77,7 @@ largo_add_meta_box(
 	'largo_byline_meta',
 	__( 'Custom Byline Options', 'largo' ),
 	'largo_byline_meta_box_display',
-	( of_get_option( 'custom_landing_enabled' ) ) ? array('post', 'cftl-tax-landing') : 'post',
+	( get_theme_mod( 'custom_landing_enabled' ) ) ? array('post', 'cftl-tax-landing') : 'post',
 	'side',
 	'core'
 );
@@ -94,7 +94,7 @@ largo_add_meta_box(
 
 // Disclaimer
 
-if( of_get_option('disclaimer_enabled') ) {
+if( get_theme_mod('disclaimer_enabled') ) {
 	largo_add_meta_box(
 		'largo_custom_disclaimer',
 		__( 'Disclaimer', 'largo' ),
@@ -169,7 +169,7 @@ function largo_layout_meta_box_display () {
 
 	wp_nonce_field( 'largo_meta_box_nonce', 'meta_box_nonce' );
 
-	$current_template = (of_get_option('single_template') == 'normal')? __('One Column (Standard)', 'largo'):__('Two Column (Classic)', 'largo');
+	$current_template = (get_theme_mod('single_template') == 'normal')? __('One Column (Standard)', 'largo'):__('Two Column (Classic)', 'largo');
 
 	if ( $post->post_type != 'page' ) {
 		echo '<p><strong>' . __('Template', 'largo' ) . '</strong></p>';
@@ -258,7 +258,7 @@ function largo_custom_disclaimer_meta_box_display() {
 	$value = get_post_meta( $post->ID, 'disclaimer', true );
 
 	if ( empty( $value ) ) {
-		$value = of_get_option( 'default_disclaimer' );
+		$value = get_theme_mod( 'default_disclaimer' );
 	}
 
 	echo '<p><strong>' . __('Disclaimer', 'largo') . '</strong><br />';

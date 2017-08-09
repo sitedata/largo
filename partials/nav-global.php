@@ -10,7 +10,7 @@
  * @link http://largo.readthedocs.io/users/menus.html#available-menu-areas
  */
 
-if ( ! is_single() && ! is_singular() || ! of_get_option( 'main_nav_hide_article', false ) ) {
+if ( ! is_single() && ! is_singular() || ! get_theme_mod( 'main_nav_hide_article', false ) ) {
 ?>
 	<div class="global-nav-bg">
 		<div class="global-nav">
@@ -30,13 +30,13 @@ if ( ! is_single() && ! is_singular() || ! of_get_option( 'main_nav_hide_article
 				<div class="nav-right">
 					<?php
 					/* Check to display Social Media Icons */
-					if ( of_get_option( 'show_header_social') ) { ?>
+					if ( get_theme_mod( 'show_header_social') ) { ?>
 						<ul id="header-social" class="social-icons visible-desktop">
 							<?php largo_social_links(); ?>
 						</ul>
 					<?php }
 					/* Check to display Donate Button */
-					if ( of_get_option( 'show_donate_button') )
+					if ( get_theme_mod( 'show_donate_button') )
 						largo_donate_button();
 					?>
 					<!-- BEGIN Header Search -->

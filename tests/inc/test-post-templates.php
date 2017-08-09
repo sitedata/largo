@@ -26,7 +26,7 @@ class PostTemplatesTestFunctions extends WP_UnitTestCase {
 		// returns unchanged when:
 		//     global $post is not set
 		//     the current $post does not have a featured media thumbnail
-		//     of_get_option('single_template') is not normal or classic
+		//     get_theme_mod('single_template') is not normal or classic
 		//     the first paragraph of the post contents doesn't have an image
 		//     the image in the first paragraph has a different src and attachment id than the post's featured media thumbnail
 		//     the image in the first paragraph has the same src, or has a different src but the same id, and the image's classes include 'size-small' or 'size-medium'

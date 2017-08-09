@@ -74,7 +74,7 @@ class largo_twitter_widget extends WP_Widget {
 	function form( $instance ) {
 		$defaults = array(
 			'widget_ID' 		=> '',
-			'twitter_username' 	=> largo_twitter_url_to_username( of_get_option( 'twitter_link' ) ),
+			'twitter_username' 	=> largo_twitter_url_to_username( get_theme_mod( 'twitter_link' ) ),
 			'widget_type' 		=> 'timeline',
 		);
 		$instance = wp_parse_args( (array) $instance, $defaults );

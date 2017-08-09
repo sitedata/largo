@@ -21,8 +21,8 @@ class largo_about_widget extends WP_Widget {
 		if ( $title )
 			echo $before_title . $title . $after_title; ?>
 
-			<?php if ( of_get_option( 'site_blurb' ) ) : ?>
-                <p><?php echo of_get_option( 'site_blurb' ); ?></p>
+			<?php if ( get_theme_mod( 'site_blurb' ) ) : ?>
+                <p><?php echo get_theme_mod( 'site_blurb' ); ?></p>
 			<?php else: ?>
     			<p class="error"><strong><?php _e('You have not set a description for your site.</strong> Add a site description by visiting the Largo Theme Options page.', 'largo'); ?></p>
         	<?php endif; // end about site ?>

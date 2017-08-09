@@ -237,7 +237,7 @@ class largo_recent_posts_widget extends WP_Widget {
 
 		<?php
 			// only show this admin if the "Post Types" taxonomy is enabled.
-			if ( taxonomy_exists('post-type') && of_get_option('post_types_enabled') ) {
+			if ( taxonomy_exists('post-type') && get_theme_mod('post_types_enabled') ) {
 		?>
 		<p>
 			<input class="checkbox" type="checkbox" <?php echo $show_icon; ?> id="<?php echo $this->get_field_id( 'show_icon' ); ?>" name="<?php echo $this->get_field_name( 'show_icon' ); ?>" /> <label for="<?php echo $this->get_field_id( 'show_icon' ); ?>"><?php _e( 'Show the post type icon?', 'largo' ); ?></label>

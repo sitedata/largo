@@ -184,7 +184,7 @@ function largo_remove_hero( $content ) {
 		return $content;
 	}
 
-	if ( of_get_option( 'single_template' ) != 'normal' && of_get_option( 'single_template' ) != 'classic' ) {
+	if ( get_theme_mod( 'single_template' ) != 'normal' && get_theme_mod( 'single_template' ) != 'classic' ) {
 		return $content;
 	}
 

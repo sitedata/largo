@@ -47,9 +47,9 @@ if ( ! function_exists( 'largo_enqueue_js' ) ) {
 			'is_home' => is_home(),
 			'is_single' => is_single() || is_singular(),
 			'sticky_nav_options' => array(
-				'sticky_nav_display' => (bool) of_get_option( 'sticky_nav_display', 0 ),
-				'main_nav_hide_article' => (bool) of_get_option( 'main_nav_hide_article', 0 ),
-				'nav_overflow_label' => of_get_option( 'nav_overflow_label', 'More' )
+				'sticky_nav_display' => (bool) get_theme_mod( 'sticky_nav_display', 0 ),
+				'main_nav_hide_article' => (bool) get_theme_mod( 'main_nav_hide_article', 0 ),
+				'nav_overflow_label' => get_theme_mod( 'nav_overflow_label', 'More' )
 			)
 		));
 
@@ -145,11 +145,11 @@ if ( ! function_exists( 'largo_header_js' ) ) {
 				var screenWidth = document.documentElement.clientWidth,
 				header_img;
 				if (screenWidth <= 767) {
-					header_img = '<?php echo of_get_option( 'banner_image_sm' ); ?>';
+					header_img = '<?php echo get_theme_mod( 'banner_image_sm' ); ?>';
 				} else if (screenWidth > 767 && screenWidth <= 979) {
-					header_img = '<?php echo of_get_option( 'banner_image_med' ); ?>';
+					header_img = '<?php echo get_theme_mod( 'banner_image_med' ); ?>';
 				} else {
-					header_img = '<?php echo of_get_option( 'banner_image_lg' ); ?>';
+					header_img = '<?php echo get_theme_mod( 'banner_image_lg' ); ?>';
 				}
 				return header_img;
 			}
@@ -194,7 +194,7 @@ if ( ! function_exists( 'largo_footer_js' ) ) {
 		 * @link https://developers.facebook.com/docs/ads-for-websites/drive-conversions
 		 * @since 0.5.4
 		 */
-		$fb_pixel_id = of_get_option( 'fb_tracking_pixel' );
+		$fb_pixel_id = get_theme_mod( 'fb_tracking_pixel' );
 		if( !empty($fb_pixel_id) ) { ?>
 			<script>
 				(function() {

@@ -11,13 +11,13 @@
 	do_action('largo_before_sticky_posts');
 
 	// sticky posts box if this site uses it
-	if (of_get_option('show_sticky_posts'))
+	if (get_theme_mod('show_sticky_posts'))
 		get_template_part('partials/sticky-posts');
 
 	do_action('largo_after_sticky_posts');
 
 	// bottom section, we'll either use a two-column widget area or a single column list of recent posts
-	if (of_get_option('homepage_bottom') === 'widgets') {
+	if (get_theme_mod('homepage_bottom') === 'widgets') {
 		get_template_part('partials/home', 'bottom-widget-area');
 	} else {
 		get_template_part('partials/home-post-list');

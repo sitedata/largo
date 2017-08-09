@@ -48,7 +48,7 @@ function of_set_option($name, $value) {
 	return $GLOBALS['mock_options_framework']->set_option($name, $value);
 }
 
-function of_get_option($name, $default=false) {
+function get_theme_mod($name, $default=false) {
 	return $GLOBALS['mock_options_framework']->get_option($name, $default);
 }
 

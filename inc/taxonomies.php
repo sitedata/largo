@@ -12,7 +12,7 @@
  * @return bool Whether or not the Series taxonomy option is enabled in the Theme Options > Advanced
  */
 function largo_is_series_enabled() {
-	$series_enabled = of_get_option( 'series_enabled' );
+	$series_enabled = get_theme_mod( 'series_enabled' );
 	return !empty( $series_enabled );
 }
 
@@ -23,7 +23,7 @@ function largo_is_series_enabled() {
  * @return bool Whether or not the Series Landing Page  option is enabled in the Theme Options > Advanced
  */
 function largo_is_series_landing_enabled() {
-	$series_landing_enabled = of_get_option( 'custom_landing_enabled' );
+	$series_landing_enabled = get_theme_mod( 'custom_landing_enabled' );
 	return !empty( $series_landing_enabled );
 }
 
@@ -126,7 +126,7 @@ function largo_custom_taxonomies() {
 	 * @link https://github.com/INN/Largo/issues/1173
 	 */
 	if ( !taxonomy_exists('post-type') ) {
-		$enabled = ( ! of_get_option( 'post_types_enabled' ) == 0 );
+		$enabled = ( ! get_theme_mod( 'post_types_enabled' ) == 0 );
 		register_taxonomy(
 			'post-type',
 			array( 'post' ),
@@ -324,7 +324,7 @@ function largo_get_series_posts( $series_id, $number = -1 ) {
 */
 function largo_series_landing_link( $post_link, $post ) {
 	// Get configuration setting for Custom Landing Pages
-	$opt_custom_landing_enabled = of_get_option( 'custom_landing_enabled', 0 );
+	$opt_custom_landing_enabled = get_theme_mod( 'custom_landing_enabled', 0 );
 	$custom_landing_enabled = !empty( $opt_custom_landing_enabled );
 
 	// Only process Landing Page post type when Series Landing Pages are enabled

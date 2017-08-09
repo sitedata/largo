@@ -8,10 +8,10 @@
  */
 if ( ! function_exists( 'largo_donate_button' ) ) {
 	function largo_donate_button () {
-		if ( $donate_link = of_get_option( 'donate_link' ) )
+		if ( $donate_link = get_theme_mod( 'donate_link' ) )
 			printf('<div class="donate-btn"><a href="%1$s"><i class="icon-heart"></i>%2$s</a></div> ',
 				esc_url( $donate_link ),
-				esc_html( of_get_option( 'donate_button_text' ) )
+				esc_html( get_theme_mod( 'donate_button_text' ) )
 			);
 	}
 }
@@ -26,7 +26,7 @@ if ( ! function_exists( 'largo_add_dont_miss_label' ) ) {
 	function largo_add_dont_miss_label( $items, $args ) {
 
 		// Get theme options label
-		$theme_option = esc_html( of_get_option( 'dont_miss_label') );
+		$theme_option = esc_html( get_theme_mod( 'dont_miss_label') );
 		if ( ! empty( $theme_option ) ) {
 			return '<li class="menu-label">' . $theme_option . '</li>' . $items;
 		} else {
@@ -51,7 +51,7 @@ add_filter( 'wp_nav_menu_objects', 'largo_modify_nav_menu_args', 10, 2 );
 
 if ( ! function_exists( 'largo_add_footer_menu_label' ) ) {
 	function largo_add_footer_menu_label( $items, $args ) {
-	    return '<li class="menu-label">' . esc_html( of_get_option( 'footer_menu_label') ) . '</li>' . $items;
+	    return '<li class="menu-label">' . esc_html( get_theme_mod( 'footer_menu_label') ) . '</li>' . $items;
 	}
 }
 add_filter( 'wp_nav_menu_footer-navigation_items', 'largo_add_footer_menu_label', 10, 2 );

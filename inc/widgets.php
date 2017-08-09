@@ -38,13 +38,13 @@ function largo_widgets() {
 	);
 
 	// If series are enabled
-	if ( of_get_option('series_enabled') !== false ) {
+	if ( get_theme_mod('series_enabled') !== false ) {
 		$register['largo_series_posts_widget'] = '/inc/widgets/largo-series-posts.php';
 		$register['largo_post_series_links_widget'] = '/inc/widgets/largo-post-series-links.php';
 	}
 
 	/* If disclaimer is enabled */
-	if( of_get_option('disclaimer_enabled') )
+	if( get_theme_mod('disclaimer_enabled') )
 		$register['largo_disclaimer_widget'] = '/inc/widgets/largo-disclaimer-widget.php';
 
 	foreach ( $register as $key => $val ) {
@@ -246,7 +246,7 @@ function largo_populate_article_bottom_widget_area($theme) {
 
 	$old_largo_article_bottom_settings_check = false;
 	foreach ($old_largo_article_bottom_settings as $option_name) {
-		$option = of_get_option($option_name);
+		$option = get_theme_mod($option_name);
 		if (!empty($option)) {
 			$old_largo_article_bottom_settings_check = true;
 			break;
@@ -258,7 +258,7 @@ function largo_populate_article_bottom_widget_area($theme) {
 
 	// Otherwise, if there's no largo_version or the 'article-bottom' area is empty,
 	// we're on a clean install and should set the default widgets
-	if (!of_get_option('largo_version') || !is_active_sidebar('article-bottom')) {
+	if (!get_theme_mod('largo_version') || !is_active_sidebar('article-bottom')) {
 		largo_instantiate_widget('largo-author', array(), 'article-bottom');
 		largo_instantiate_widget('largo-related-posts', array(), 'article-bottom');
 	}

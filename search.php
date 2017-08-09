@@ -6,7 +6,7 @@ get_header();
 ?>
 
 <div id="content" class="stories archive search-results span8" role="main">
-	<?php if (of_get_option('use_gcs') && of_get_option('gcs_id')) { ?>
+	<?php if (get_theme_mod('use_gcs') && get_theme_mod('gcs_id')) { ?>
 		<h1>
 			<?php
 				printf( __('Search results for <span class="search-term">%s</span>', 'largo'), get_search_query() );
@@ -25,7 +25,7 @@ get_header();
 		<div class="gcs_container">
 			<script>
 				(function() {
-					var cx = '<?php echo of_get_option('gcs_id'); ?>';
+					var cx = '<?php echo get_theme_mod('gcs_id'); ?>';
 					var gcse = document.createElement('script');
 					gcse.type = 'text/javascript';
 					gcse.async = true;

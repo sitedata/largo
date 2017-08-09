@@ -37,11 +37,11 @@ class largo_donate_widget extends WP_Widget {
 	}
 	function form( $instance ) {
 		$donate_link = '';
-		if ( of_get_option( 'donate_link' ) )
-			$donate_link = esc_url( of_get_option( 'donate_link' ) );
+		if ( get_theme_mod( 'donate_link' ) )
+			$donate_link = esc_url( get_theme_mod( 'donate_link' ) );
 		$donate_btn_text = __('Donate Now', 'largo');
-		if ( of_get_option( 'donate_button_text' ) )
-			$donate_btn_text = esc_attr( of_get_option( 'donate_button_text' ) );
+		if ( get_theme_mod( 'donate_button_text' ) )
+			$donate_btn_text = esc_attr( get_theme_mod( 'donate_button_text' ) );
 		$defaults = array(
 			'title' 			=> __('Support ' . get_bloginfo('name'), 'largo'),
 			'cta_text' 			=> __('We depend on your support. A generous gift in any amount helps us continue to bring you this service.', 'largo'),

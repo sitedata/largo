@@ -49,9 +49,9 @@ class largo_follow_widget extends WP_Widget {
 			
 			foreach ( $networks as $network => $btn_text ) {
 				if ( $network == 'rss' ) {
-					$link = of_get_option( 'rss_link' ) ? esc_url( of_get_option( 'rss_link' ) ) : get_feed_link();
+					$link = get_theme_mod( 'rss_link' ) ? esc_url( get_theme_mod( 'rss_link' ) ) : get_feed_link();
 				} else {
-					$link = esc_url( of_get_option( $network . '_link' ) );
+					$link = esc_url( get_theme_mod( $network . '_link' ) );
 				}
 				
 				if ( $link ) {

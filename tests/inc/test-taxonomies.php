@@ -49,7 +49,7 @@ class TaxonomiesTestFunctions extends WP_UnitTestCase {
 		// largo_custom_taxonomies();
 		// Test that taxonomy_exists('prominence')
 		// Test that taxonomy_exists('post-type')
-		// Test that post-type's 'public' property is equal to of_get_option('post_types_enabled')
+		// Test that post-type's 'public' property is equal to get_theme_mod('post_types_enabled')
 		// Test that prominence terms are registered
 		// Test that taxonomy_exists('series')
 

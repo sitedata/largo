@@ -9,7 +9,7 @@
  * @link http://largo.readthedocs.io/users/themeoptions.html#navigation
  */
 
-$site_name = ( of_get_option( 'nav_alt_site_name', false ) ) ? of_get_option( 'nav_alt_site_name' ) : get_bloginfo('name'); ?>
+$site_name = ( get_theme_mod( 'nav_alt_site_name', false ) ) ? get_theme_mod( 'nav_alt_site_name' ) : get_bloginfo('name'); ?>
  <div class="sticky-nav-wrapper nocontent">
 	<div class="sticky-nav-holder">
 
@@ -34,7 +34,7 @@ $site_name = ( of_get_option( 'nav_alt_site_name', false ) ) ? of_get_option( 'n
 					 *
 					 * @link https://largo.readthedocs.io/users/themeoptions.html
 					 */
-					if ( of_get_option( 'show_header_social') ) { ?>
+					if ( get_theme_mod( 'show_header_social') ) { ?>
 						<ul id="header-social" class="social-icons visible-desktop">
 							<?php largo_social_links(); ?>
 						</ul>
@@ -49,11 +49,11 @@ $site_name = ( of_get_option( 'nav_alt_site_name', false ) ) ? of_get_option( 'n
 							 *
 							 * @link https://largo.readthedocs.io/users/themeoptions.html
 							 */
-							if ( of_get_option( 'show_donate_button') ) {
-								if ($donate_link = of_get_option('donate_link')) { ?>
+							if ( get_theme_mod( 'show_donate_button') ) {
+								if ($donate_link = get_theme_mod('donate_link')) { ?>
 								<li class="donate">
 									<a class="donate-link" href="<?php echo esc_url($donate_link); ?>">
-										<span><i class="icon-heart"></i><?php echo esc_html(of_get_option('donate_button_text')); ?></span>
+										<span><i class="icon-heart"></i><?php echo esc_html(get_theme_mod('donate_button_text')); ?></span>
 									</a>
 								</li><?php
 								}
@@ -98,7 +98,7 @@ $site_name = ( of_get_option( 'nav_alt_site_name', false ) ) ? of_get_option( 'n
 
 					<!-- BEGIN MOBILE MENU (hidden on desktop) -->
 					<div class="nav-left">
-						<?php if ( of_get_option( 'sticky_header_logo' ) !== '' ) { ?>
+						<?php if ( get_theme_mod( 'sticky_header_logo' ) !== '' ) { ?>
 							<ul>
 								<li class="home-icon"><a href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php largo_home_icon( 'icon-white', 'orig' ); ?></a></li>
 							</ul>
@@ -113,11 +113,11 @@ $site_name = ( of_get_option( 'nav_alt_site_name', false ) ) ? of_get_option( 'n
 					<!-- BEGIN DESKTOP MENU -->
 					<div class="nav-shelf">
 					<ul class="nav">
-						<?php if ( of_get_option('sticky_header_logo') !== '') { ?>
+						<?php if ( get_theme_mod('sticky_header_logo') !== '') { ?>
 							<li class="home-icon">
 								<a href="<?php echo esc_url( home_url( '/' ) ); ?>">
 									<?php
-									if ( of_get_option( 'sticky_header_logo' ) !== '' )
+									if ( get_theme_mod( 'sticky_header_logo' ) !== '' )
 										largo_home_icon( 'icon-white' , 'orig' );
 									?>
 								</a>
@@ -137,11 +137,11 @@ $site_name = ( of_get_option( 'nav_alt_site_name', false ) ) ? of_get_option( 'n
 							);
 							largo_nav_menu($args);
 
-							if ( of_get_option( 'show_donate_button') ) {
-								if ($donate_link = of_get_option('donate_link')) { ?>
+							if ( get_theme_mod( 'show_donate_button') ) {
+								if ($donate_link = get_theme_mod('donate_link')) { ?>
 								<li class="donate">
 									<a class="donate-link" href="<?php echo esc_url($donate_link); ?>">
-										<span><?php echo esc_html(of_get_option('donate_button_text')); ?></span>
+										<span><?php echo esc_html(get_theme_mod('donate_button_text')); ?></span>
 									</a>
 								</li><?php
 								}

@@ -104,13 +104,13 @@ if ( !function_exists( 'largo_load_more_posts' ) ) {
 			$is_home = true;
 
 		// num_posts_home is only relevant on the homepage
-		if ( of_get_option( 'num_posts_home' ) && $is_home )
-			$args['posts_per_page'] = of_get_option( 'num_posts_home' );
+		if ( get_theme_mod( 'num_posts_home' ) && $is_home )
+			$args['posts_per_page'] = get_theme_mod( 'num_posts_home' );
 
 		if ( $is_home ) {
 			$args['paged'] = ( $args['paged'] - 1 );
-			if ( of_get_option('cats_home') )
-				$args['cat'] = of_get_option( 'cats_home' );
+			if ( get_theme_mod('cats_home') )
+				$args['cat'] = get_theme_mod( 'cats_home' );
 		}
 
 		$args = apply_filters( 'largo_lmp_args', $args );

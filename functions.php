@@ -308,7 +308,7 @@ class Largo {
 			define( 'SHOW_MAIN_NAV', TRUE );
 		}
 		if ( ! defined( 'SHOW_SECONDARY_NAV' ) ) {
-			if ( of_get_option( 'show_dont_miss_menu' ) ) {
+			if ( get_theme_mod( 'show_dont_miss_menu' ) ) {
 				define( 'SHOW_SECONDARY_NAV', TRUE );
 			} else {
 				define( 'SHOW_SECONDARY_NAV', FALSE );
@@ -325,7 +325,7 @@ class Largo {
 	 * Is the LESS feature enabled?
 	 */
 	public function is_less_enabled() {
-		return (bool) of_get_option( 'less_enabled' );
+		return (bool) get_theme_mod( 'less_enabled' );
 	}
 
 	/**
@@ -384,7 +384,7 @@ $includes = array();
 /*
  * This functionality is probably not for everyone so we'll make it easy to turn it on or off
  */
-if ( of_get_option( 'custom_landing_enabled' ) && of_get_option( 'series_enabled' ) )
+if ( get_theme_mod( 'custom_landing_enabled' ) && get_theme_mod( 'series_enabled' ) )
 	$includes[] = '/inc/wp-taxonomy-landing/taxonomy-landing.php'; // adds taxonomy landing plugin
 
 /*

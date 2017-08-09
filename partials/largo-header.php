@@ -7,7 +7,7 @@
  * @package Largo
  * @see inc/header-footer.php
  */
-if ( ! is_single() && ! is_singular() || ! of_get_option( 'main_nav_hide_article', false ) ) {
+if ( ! is_single() && ! is_singular() || ! get_theme_mod( 'main_nav_hide_article', false ) ) {
 ?>
 <header id="site-header" class="clearfix nocontent" itemscope itemtype="http://schema.org/Organization">
 	<?php
