@@ -153,11 +153,11 @@ function largo_update_page_template() {
 			<p><?php esc_html_e( 'The following updates have been have new versions available. Check the ones you want to update and then click “Update Themes”..', 'largo' ); ?></p>
 			<hr />
 			<?php
-			foreach ( largo_update_notices() as $version => $update_notices ) {
-				if ( 0 < version_compare( largo_version(), largo_db_version() ) ) {
+			foreach ( largo_updates() as $version => $updates ) {
+				if ( 0 < version_compare( $version, largo_db_version() ) ) {
 					echo '<h3>' . $version . '</h3>';
 					echo '<ul>';
-					foreach ( $update_notices as $notice ) {
+					foreach ( $updates['notices'] as $notice ) {
 						echo '<li>' . $notice . '</li>';
 					}
 					echo '</ul>';
@@ -174,21 +174,84 @@ function largo_update_page_template() {
 }
 
 /**
- * Update notices to for users.
+ * Catalog of Largo updates by version.
  *
  * @since 0.6
  */
-function largo_update_notices() {
+function largo_updates() {
 	$notices = array(
+		'0.6' => array(
+			'notices' => array(
+				esc_html__( 'Convert theme data from the options framework into standard theme options.', 'largo' ),
+			),
+			'functions' => array(
+				'largo_convert_to_theme_mods'
+			),
+		),
+		'0.5' => array(
+			'notices' => array(),
+			'functions' => array(
+				'largo_remove_topstory_prominence_term',
+			),
+		),
 		'0.4' => array(
-			esc_html__( 'Theme options', 'largo' ),
-			esc_html__( 'Configured menus', 'largo' ),
-			esc_html__( 'Site navigation', 'largo' ),
-			esc_html__( 'Sidebars and widgets', 'largo' ),
-			esc_html__( 'Menus that existed in previous versions of Largo have been removed. If your site has been using one of these now-deprecated menus, the update process will merge it with the nearest related menu.', 'largo' ),
+			'notices' => array(
+				esc_html__( 'Theme options', 'largo' ),
+				esc_html__( 'Configured menus', 'largo' ),
+				esc_html__( 'Site navigation', 'largo' ),
+				esc_html__( 'Sidebars and widgets', 'largo' ),
+				esc_html__( 'Menus that existed in previous versions of Largo have been removed. If your site has been using one of these now-deprecated menus, the update process will merge it with the nearest related menu.', 'largo' ),
+			),
+			'functions' => array(
+				'largo_home_transition',
+				'largo_update_widgets',
+				'largo_transition_nav_menus',
+				'largo_update_prominence_term_descriptions',
+				'largo_force_settings_update',
+				'largo_enable_if_series',
+				'largo_enable_series_if_landing_page',
+			),
 		),
 	);
 	return $notices;
+}
+
+/**
+ * Performs various update functions and set a new verion number.
+ *
+ * This acts as a main() for applying database updates when the update ajax is
+ * called.
+ *
+ * @since 0.3
+ */
+function largo_perform_update() {
+	if ( largo_need_updates() ) {
+
+		// Stash the options from the previous version of the theme for later use.
+		$previous_options = largo_preserve_previous_options();
+
+		if ( ! isset( $previous_options['largo_version'] ) ) {
+			$previous_options['largo_version'] = null;
+		}
+
+		// this must run before any other function that makes use of set_theme_mod().
+		largo_set_new_option_defaults();
+
+		foreach ( largo_updates() as $version => $updates ) {
+			foreach ( $updates['functions'] as $function ) {
+				call_user_func( $function );
+			}
+		}
+
+		// Always run.
+		largo_update_custom_less_variables();
+		largo_replace_deprecated_widgets();
+
+		// Set version.
+		set_theme_mod( 'largo_version', largo_version() );
+	} // End if().
+
+	return true;
 }
 
 /**
@@ -231,55 +294,6 @@ function largo_activation_maybe_setup() {
 	return true;
 }
 add_action( 'after_switch_theme', 'largo_activation_maybe_setup' );
-
-/**
- * Performs various update functions and set a new verion number.
- *
- * This acts as a main() for applying database updates when the update ajax is
- * called.
- *
- * @since 0.3
- */
-function largo_perform_update() {
-	if ( largo_need_updates() ) {
-
-		// Stash the options from the previous version of the theme for later use.
-		$previous_options = largo_preserve_previous_options();
-
-		if ( ! isset( $previous_options['largo_version'] ) ) {
-			$previous_options['largo_version'] = null;
-		}
-
-		// this must run before any other function that makes use of set_theme_mod().
-		largo_set_new_option_defaults();
-
-		// Run when updating from pre-0.4.
-		if ( version_compare( $previous_options['largo_version'], '0.4' ) < 0 ) {
-			largo_home_transition();
-			largo_update_widgets();
-			largo_transition_nav_menus();
-			largo_update_prominence_term_descriptions();
-			largo_force_settings_update();
-			largo_enable_if_series();
-			largo_enable_series_if_landing_page();
-		}
-
-		// Run when updating from pre-0.5.
-		if ( version_compare( $previous_options['largo_version'], '0.5' ) < 0 ) {
-			// Repeatable, should be run when updating to 0.4+.
-			largo_remove_topstory_prominence_term();
-		}
-
-		// Always run.
-		largo_update_custom_less_variables();
-		largo_replace_deprecated_widgets();
-
-		// Set version.
-		set_theme_mod( 'largo_version', largo_version() );
-	} // End if().
-
-	return true;
-}
 
 
 /**
@@ -1185,8 +1199,8 @@ function largo_block_theme_options_for_update() {
 		});
 
 		add_theme_page(
-			__( 'Theme Options', 'options_framework_theme' ),
-			__( 'Theme Options', 'options_framework_theme' ),
+			__( 'Theme Options', 'largo' ),
+			__( 'Theme Options', 'largo' ),
 			'update_themes',
 			'largo-block-theme-options',
 			'largo_block_theme_options'
@@ -1217,7 +1231,7 @@ function largo_block_theme_options() {
 
 function largo_convert_to_theme_mods() {
 	$optionsframework = get_option( 'optionsframework' );
-	$largo_option = get_option( 'largo' )
+	$largo_option = get_option( 'largo' );
 	$options_to_convert = array_combine( $optionsframework, $largo_option );
 	foreach ( $options_to_convert as $option => $value ) {
 		set_theme_mod( $option, $value );
