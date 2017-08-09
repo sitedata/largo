@@ -1216,5 +1216,12 @@ function largo_block_theme_options() {
 }
 
 function largo_convert_to_theme_mods() {
-	// posts_term_plural
+	$optionsframework = get_option( 'optionsframework' );
+	$largo_option = get_option( 'largo' )
+	$options_to_convert = array_combine( $optionsframework, $largo_option );
+	foreach ( $options_to_convert as $option => $value ) {
+		set_theme_mod( $option, $value );
+	}
+	delete_option( 'optionsframework' );
+	delete_option( 'largo' );
 }
