@@ -270,7 +270,7 @@ if ( ! function_exists( 'largo_categories_and_tags' ) ) {
 						__( '<%1$s class="post-category-link"><a href="%2$s" title="Read %3$s in the %4$s category">%5$s%4$s</a></%1$s>', 'largo' ),
 						$item_wrapper,
 						( $rss ? get_category_feed_link( $cat->term_id ) : get_category_link( $cat->term_id ) ),
-						of_get_option( 'posts_term_plural' ),
+						get_theme_mod( 'posts_term_plural' ),
 						$cat->name,
 						$icon
 					);
@@ -291,7 +291,7 @@ if ( ! function_exists( 'largo_categories_and_tags' ) ) {
 						__( '<%1$s class="post-tag-link"><a href="%2$s" title="Read %3$s tagged with: %4$s">%5$s%4$s</a></%1$s>', 'largo' ),
 						$item_wrapper,
 						( $rss ?  get_tag_feed_link( $tag->term_id ) : get_tag_link( $tag->term_id ) ),
-						of_get_option( 'posts_term_plural' ),
+						get_theme_mod( 'posts_term_plural' ),
 						$tag->name,
 						$icon
 					);
@@ -370,7 +370,7 @@ function largo_top_term( $options = array() ) {
 			'<%1$s class="post-category-link">'.$link[0].'%5$s%4$s'.$link[1].'</%1$s>',
 			$args['wrapper'],
 			get_term_link( $term ),
-			of_get_option( 'posts_term_plural' ),
+			get_theme_mod( 'posts_term_plural' ),
 			$term->name,
 			$icon
 		);
@@ -624,7 +624,7 @@ class Largo_Related {
 	 */
 	protected function get_term_posts() {
 
-		//we've gone back and forth through all the post's series, now let's try traditional taxonomies	
+		//we've gone back and forth through all the post's series, now let's try traditional taxonomies
 		$taxonomies = array();
 		foreach ( array( 'category', 'post_tag' ) as $_taxonomy ) {
 			$_terms = get_object_term_cache( $this->post_id, $_taxonomy );
@@ -633,7 +633,7 @@ class Largo_Related {
 				$_terms = wp_get_object_terms( $this->post_id, $_taxonomy );
 				wp_cache_add( $this->post_id, $taxonomies, $_taxonomy . '_relationships' );
 			}
-			
+
 			if ( is_array( $_terms ) ) {
 				$taxonomies = array_merge( $taxonomies, $_terms );
 			}

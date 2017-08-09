@@ -161,7 +161,7 @@ if ( ! function_exists( 'largo_content_nav' ) ) {
 			</nav><!-- #nav-below -->
 
 		<?php } elseif ( $wp_query->max_num_pages > 1 ) {
-			$posts_term = of_get_option('posts_term_plural');
+			$posts_term = get_theme_mod( 'posts_term_plural' );
 
 			largo_render_template('partials/load-more-posts', array(
 				'nav_id' => $nav_id,
@@ -171,4 +171,3 @@ if ( ! function_exists( 'largo_content_nav' ) ) {
 		}
 	}
 }
-

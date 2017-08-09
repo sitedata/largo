@@ -1214,3 +1214,7 @@ function largo_block_theme_options() {
 			admin_url( 'index.php?page=update-largo' )
 		);
 }
+
+function largo_convert_to_theme_mods() {
+	// posts_term_plural
+}

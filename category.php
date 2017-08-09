@@ -13,7 +13,7 @@ global $tags, $paged, $post, $shown_ids;
 $title = single_cat_title( '', false );
 $description = category_description();
 $rss_link = get_category_feed_link( get_queried_object_id() );
-$posts_term = of_get_option( 'posts_term_plural', 'Stories' );
+$posts_term = get_theme_mod( 'posts_term_plural', 'Stories' );
 $queried_object = get_queried_object();
 ?>
 
@@ -65,8 +65,8 @@ $queried_object = get_queried_object();
 
 <div class="row-fluid clearfix">
 	<div class="stories span8" role="main" id="content">
-		
-	<?php 
+
+	<?php
 		do_action( 'largo_before_category_river' );
 		if ( have_posts() ) {
 			$counter = 1;
