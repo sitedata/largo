@@ -156,7 +156,7 @@ class AjaxFunctionsTestAjaxFunctions extends WP_Ajax_UnitTestCase {
 		$wp_action = array();
 
 		$category = $this->factory->category->create();
-		of_set_option('cats_home', (string) $category);
+		set_theme_mod('cats_home', (string) $category);
 		$posts = $this->factory->post->create_many(10, array(
 			'post_category' => $category
 		));

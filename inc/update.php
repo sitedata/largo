@@ -217,7 +217,7 @@ function largo_activation_maybe_setup() {
 		require_once( get_template_directory() . $required );
 	}
 
-	// this must run before any other function that makes use of of_set_option().
+	// this must run before any other function that makes use of set_theme_mod().
 	largo_set_new_option_defaults();
 
 	set_theme_mod( 'largo_version', largo_version() );
@@ -250,7 +250,7 @@ function largo_perform_update() {
 			$previous_options['largo_version'] = null;
 		}
 
-		// this must run before any other function that makes use of of_set_option().
+		// this must run before any other function that makes use of set_theme_mod().
 		largo_set_new_option_defaults();
 
 		// Run when updating from pre-0.4.
@@ -275,7 +275,7 @@ function largo_perform_update() {
 		largo_replace_deprecated_widgets();
 
 		// Set version.
-		of_set_option( 'largo_version', largo_version() );
+		set_theme_mod( 'largo_version', largo_version() );
 	} // End if().
 
 	return true;
@@ -304,7 +304,7 @@ function largo_home_transition() {
 	// however, it will not run if the new system has already been set up, so largo-dev to 0.4 will not overwrite details.
 	// the home template sidebars have same names as old regime so that *shouldn't* be an issue.
 	if ( isset( $previous_options['homepage_layout'] ) && '3col' === $previous_options['homepage_layout'] ) {
-		of_set_option( 'home_template', 'LegacyThreeColumn' );
+		set_theme_mod( 'home_template', 'LegacyThreeColumn' );
 	} elseif ( $old_regime ) {
 		if ( 'topstories' === $old_regime ) {
 			$home_template = 'TopStories';
@@ -315,9 +315,9 @@ function largo_home_transition() {
 		if ( 'blog' === $old_regime ) {
 			$home_template = 'HomepageBlog';
 		}
-		of_set_option( 'home_template', $home_template );
+		set_theme_mod( 'home_template', $home_template );
 	} elseif ( ! $new_regime ) {
-		of_set_option( 'home_template', 'HomepageBlog' );
+		set_theme_mod( 'home_template', 'HomepageBlog' );
 	}
 }
 
@@ -582,7 +582,7 @@ function largo_force_settings_update() {
 	);
 
 	foreach ( $options as $option ) {
-		of_set_option( $option['id'], $option['std'] );
+		set_theme_mod( $option['id'], $option['std'] );
 	}
 }
 
@@ -605,7 +605,7 @@ function largo_enable_if_series() {
 
 	// enable series if more than 0 terms were returned.
 	if ( gettype( $terms ) == 'array' && count( $terms ) > 0 ) {
-		of_set_option( 'series_enabled', '1' );
+		set_theme_mod( 'series_enabled', '1' );
 		return true;
 	}
 	return false;
@@ -631,8 +631,8 @@ function largo_enable_series_if_landing_page() {
 		$pages = get_pages( $args );
 		if ( false !== $pages ) {
 			// get_pages returns false if no pages found, so if it's not false then there are probably cftl-tax-landing pages.
-			of_set_option( 'series_enabled', '1' );
-			of_set_option( 'custom_landing_enabled', '1' );
+			set_theme_mod( 'series_enabled', '1' );
+			set_theme_mod( 'custom_landing_enabled', '1' );
 			return true;
 		}
 		return false;
@@ -690,7 +690,7 @@ function largo_remove_topstory_prominence_term() {
 /**
  * Save default values for any newly introduced options to the database
  *
- * Note: this must be called before any other update function calls `of_set_option`,
+ * Note: this must be called before any other update function calls `set_theme_mod`,
  * as `of_set_uption` defaults all values to null.
  *
  * @since 0.5.1

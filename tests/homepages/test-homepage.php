@@ -27,7 +27,7 @@ class HomepageTest extends WP_UnitTestCase {
 		global $largo_homepage_factory;
 
 		// if series are enabled
-		of_set_option('series_enabled', 1);
+		set_theme_mod('series_enabled', 1);
 
 		foreach ($largo_homepage_factory->layouts as $key => $value)
 			$this->assertInternalType('object', $value);
@@ -36,7 +36,7 @@ class HomepageTest extends WP_UnitTestCase {
 	function test_largo_get_home_layouts_series_disabled() {
 		global $largo_homepage_factory;
 		// if series are not enabled
-		of_set_option('series_enabled', 0);
+		set_theme_mod('series_enabled', 0);
 
 		foreach ($largo_homepage_factory->layouts as $key => $value)
 			$this->assertInternalType('object', $value);
@@ -64,7 +64,7 @@ class HomepageTest extends WP_UnitTestCase {
 
 		// If we set a new layout, largo_get_active_homepage_layout should return the correct one
 // Disabling option framework tests
-//		of_set_option('home_template', 'HomepageSingle');
+//		set_theme_mod('home_template', 'HomepageSingle');
 //		$active = largo_get_active_homepage_layout();
 //		$this->assertEquals('HomepageSingle', $active);
 	}

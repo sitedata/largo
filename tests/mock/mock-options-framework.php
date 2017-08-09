@@ -44,7 +44,7 @@ class MockOptionsFramework {
 
 $GLOBALS['mock_options_framework'] = new MockOptionsFramework();
 
-function of_set_option($name, $value) {
+function set_theme_mod($name, $value) {
 	return $GLOBALS['mock_options_framework']->set_option($name, $value);
 }
 

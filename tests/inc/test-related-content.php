@@ -148,7 +148,7 @@ class LargoRelatedTestFunctions extends WP_UnitTestCase {
 	 * Test that an unorganized series returns a post published before the considered post, but no others.
 	 */
 	function test_unorganized_series_before() {
-//		of_set_option('series_enabled', 1);
+//		set_theme_mod('series_enabled', 1);
 
 		// Some randos before and after
 		$this->factory->post->create(array(
@@ -175,7 +175,7 @@ class LargoRelatedTestFunctions extends WP_UnitTestCase {
 	 * Test that an unorganized series returns a post published after the considered post, but no others.
 	 */
 	function test_unorganized_series_after() {
-		of_set_option('series_enabled', 1);
+		set_theme_mod('series_enabled', 1);
 
 		// Some randos before and after
 		$this->factory->post->create(array(
@@ -199,7 +199,7 @@ class LargoRelatedTestFunctions extends WP_UnitTestCase {
 	}
 
 	function test_series_asc() {
-//		of_set_option('series_enabled', 1);
+//		set_theme_mod('series_enabled', 1);
 
 		// Some randos before and after
 		$this->factory->post->create(array(
@@ -239,7 +239,7 @@ class LargoRelatedTestFunctions extends WP_UnitTestCase {
 	}
 
 	function test_series_desc() {
-//		of_set_option('series_enabled', 1);
+//		set_theme_mod('series_enabled', 1);
 
 		// Some randos before and after
 		$this->factory->post->create(array(
@@ -280,7 +280,7 @@ class LargoRelatedTestFunctions extends WP_UnitTestCase {
 	}
 
 	function test_series_series_custom() {
-//		of_set_option('series_enabled', 1);
+//		set_theme_mod('series_enabled', 1);
 
 		// Some randos before and after
 		$this->factory->post->create(array(
@@ -341,7 +341,7 @@ class LargoRelatedTestFunctions extends WP_UnitTestCase {
 
 	function test_series_featured_desc() {
 		$this->markTestIncomplete('This test has not been implemented yet.');
-		of_set_option('series_enabled', 1);
+		set_theme_mod('series_enabled', 1);
 		// Create a landing page that sets the order to 'featured, DESC'
 		$landing = $this->factory->post->create(array(
 			'post_type' => 'cftl-tax-landing',
@@ -380,7 +380,7 @@ class LargoRelatedTestFunctions extends WP_UnitTestCase {
 
 	function test_series_featured_asc() {
 		$this->markTestIncomplete('This test has not been implemented yet.');
-		of_set_option('series_enabled', 1);
+		set_theme_mod('series_enabled', 1);
 		// Create a landing page that sets the order to 'featured, ASC'
 		$landing = $this->factory->post->create(array(
 			'post_type' => 'cftl-tax-landing',
@@ -429,7 +429,7 @@ class LargoRelatedTestFunctions extends WP_UnitTestCase {
 	 * @todo This test checks for a post before and a post after the considered post
 	 */
 	function test_category() {
-		of_set_option('series_enabled', false);
+		set_theme_mod('series_enabled', false);
 		// Some randos before and after
 		$this->factory->post->create(array(
 			'post_date' => '2013-01-01 00:00:00',

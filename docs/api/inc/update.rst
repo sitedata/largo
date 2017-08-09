@@ -105,7 +105,7 @@ inc/update.php
 
    Save default values for any newly introduced options to the database
 
-   Note: this must be called before any other update function calls `of_set_option`,
+   Note: this must be called before any other update function calls `set_theme_mod`,
    as `of_set_uption` defaults all values to null.
 
    :since: 0.5.1

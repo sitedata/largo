@@ -19,7 +19,7 @@ class DisclaimerWidgetTestFunctions extends WP_UnitTestCase {
 		unregister_widget('largo_disclaimer_widget');
 
 		// Set the option
-		of_set_option('disclaimer_enabled','1');
+		set_theme_mod('disclaimer_enabled','1');
 
 		largo_widgets();
 
@@ -33,7 +33,7 @@ class DisclaimerWidgetTestFunctions extends WP_UnitTestCase {
 		unregister_widget('largo_disclaimer_widget');
 
 		// Set the option
-		of_set_option('disclaimer_enabled','0');
+		set_theme_mod('disclaimer_enabled','0');
 
 		largo_widgets();
 

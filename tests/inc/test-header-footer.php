@@ -34,7 +34,7 @@ class HeaderFooterTestFunctions extends WP_UnitTestCase {
 		);
 		foreach ( $fields as $field ) {
 // Disabling tests that rely on options framework
-//			of_set_option( $field, 'http://foo.bar\/'.$field);
+//			set_theme_mod( $field, 'http://foo.bar\/'.$field);
 //			$this->expectOutputRegex('/http:\/\/foo.bar\/'.$field.'/'); // This is excessively greedy, it expects any output at all
 			largo_social_links();
 			of_reset_options();

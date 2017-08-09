@@ -17,7 +17,7 @@ class PostSeriesLinksWidgetTestFunctions extends WP_UnitTestCase {
 		unregister_widget('largo_post_series_links_widget');
 
 		// Set the option
-		of_set_option('series_enabled', '1');
+		set_theme_mod('series_enabled', '1');
 
 		largo_widgets();
 
@@ -31,7 +31,7 @@ class PostSeriesLinksWidgetTestFunctions extends WP_UnitTestCase {
 		unregister_widget('largo_post_series_links_widget');
 
 		// Set the option
-		of_set_option('series_enabled', false);
+		set_theme_mod('series_enabled', false);
 
 		largo_widgets();
 

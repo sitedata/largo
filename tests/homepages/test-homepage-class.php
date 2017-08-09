@@ -69,7 +69,7 @@ class HomepageClassTest extends WP_UnitTestCase {
 
 		// After we set the homepage layout option, it should
 // Turning this off because the options framework isn't loaded
-//		of_set_option('home_template', get_class($this->layout));
+//		set_theme_mod('home_template', get_class($this->layout));
 //		$this->assertTrue($this->layout->isActiveHomepageLayout());
 	}
 

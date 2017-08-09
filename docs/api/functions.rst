@@ -38,7 +38,7 @@ functions.php
    To override largo_setup() in a child theme, add your own largo_setup() to your child theme's
    functions.php file.
 
-.. php:function:: of_set_option()
+.. php:function:: set_theme_mod()
 
    Helper for setting specific theme options (optionsframework).
 

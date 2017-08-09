@@ -56,11 +56,11 @@ class UpdateTestFunctions extends WP_UnitTestCase {
 		 */
 
 		// force updates by setting current version of largo to 0.0
-		of_set_option( 'largo_version', '0.0' );
+		set_theme_mod( 'largo_version', '0.0' );
 		$this->assertTrue( largo_need_updates() );
 
 		// Will we ever hit this version number?
-		of_set_option( 'largo_version', '999.999' );
+		set_theme_mod( 'largo_version', '999.999' );
 		$this->assertFalse( largo_need_updates() );
 
 		of_reset_options();
@@ -76,7 +76,7 @@ class UpdateTestFunctions extends WP_UnitTestCase {
 		) );
 
 		// force updates by setting current version of largo to 0.0
-		of_set_option('largo_version', '0.0');
+		set_theme_mod('largo_version', '0.0');
 
 		largo_perform_update();
 
@@ -515,7 +515,7 @@ class LargoUpdateTestAjaxFunctions extends WP_Ajax_UnitTestCase {
 
 	function test_largo_ajax_update_database_false() {
 		// If the install doesn't need to be updated, this should return json with success == false
-		of_set_option('largo_version', largo_version());
+		set_theme_mod('largo_version', largo_version());
 
 		try {
 			$this->_handleAjax("largo_ajax_update_database");
@@ -527,7 +527,7 @@ class LargoUpdateTestAjaxFunctions extends WP_Ajax_UnitTestCase {
 
 	function test_largo_ajax_update_database_true() {
 		// If the install needs updated, this should return json with success == true
-//		of_set_option('largo_version', null);
+//		set_theme_mod('largo_version', null);
 
 		try {
 			$this->_handleAjax("largo_ajax_update_database");

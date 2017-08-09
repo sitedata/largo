@@ -18,12 +18,12 @@ class TaxonomiesTestFunctions extends WP_UnitTestCase {
 		$this->assertFalse($result);
 
 		// Series option is to not enable series
-//		of_set_option('series_enabled', false);
+//		set_theme_mod('series_enabled', false);
 		$result = largo_is_series_enabled();
 //		$this->assertFalse($result);
 
 		// Series option is to enable series
-//		of_set_option('series_enabled', 1);
+//		set_theme_mod('series_enabled', 1);
 		$result = largo_is_series_enabled();
 //		$this->assertTrue($result);
 	}
@@ -34,12 +34,12 @@ class TaxonomiesTestFunctions extends WP_UnitTestCase {
 		$this->assertFalse($result);
 
 		// Series option is to not enable series
-//		of_set_option('custom_landing_enabled', false);
+//		set_theme_mod('custom_landing_enabled', false);
 		$result = largo_is_series_landing_enabled();
 //		$this->assertFalse($result);
 
 		// Series option is to enable series
-//		of_set_option('custom_landing_enabled', 1);
+//		set_theme_mod('custom_landing_enabled', 1);
 		$result = largo_is_series_landing_enabled();
 //		$this->assertTrue($result);
 	}
@@ -58,12 +58,12 @@ class TaxonomiesTestFunctions extends WP_UnitTestCase {
 
 	function test_largo_post_in_series() {
 		// If series are disabled:
-		of_set_option('series_enabled', false);
+		set_theme_mod('series_enabled', false);
 		$result = largo_post_in_series();
 		$this->assertFalse($result);
 
 		// If series are enabled:
-		of_set_option('series_enabled', 1);
+		set_theme_mod('series_enabled', 1);
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
 
