@@ -78,16 +78,6 @@ if ( ! isset( $largo ) )
 	 */
 	$largo = array();
 
-/*
- * load the options framework (used for our theme options pages)
- *
- * @ignore
- */
-if ( ! function_exists( 'optionsframework_init' ) ) {
-	define( 'OPTIONS_FRAMEWORK_DIRECTORY', get_template_directory_uri() . '/lib/options-framework/' );
-	require_once dirname( __FILE__ ) . '/lib/options-framework/options-framework.php';
-}
-
 /**
  * Add largo dashboard widget with help options
  *

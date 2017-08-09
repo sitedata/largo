@@ -217,14 +217,6 @@ function largo_activation_maybe_setup() {
 		require_once( get_template_directory() . $required );
 	}
 
-	// We assume here that since this action runs on after_switch_theme,
-	// and since switching themes requires admin privileges,
-	// that this user has the permissions to run optionsframework_init
-	// @see optionsframework_rolescheck() in lib/options-framework/options-framework.php.
-	if ( current_user_can( 'update_themes' ) ) {
-		optionsframework_init();
-	}
-
 	// this must run before any other function that makes use of of_set_option().
 	largo_set_new_option_defaults();
 

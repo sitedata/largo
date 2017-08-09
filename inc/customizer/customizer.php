@@ -33,7 +33,6 @@ class Largo_Customizer {
 
 		$this->setup_actions();
 
-		// See optionsframework_option_name()
 		$this->option_key = preg_replace("/\W/", "_", strtolower( get_option( 'stylesheet' ) ) );
 
 	}
