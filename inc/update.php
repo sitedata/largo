@@ -203,7 +203,7 @@ function largo_update_notices() {
  * @link https://github.com/INN/Largo/issues/690
  */
 function largo_activation_maybe_setup() {
-	if ( of_get_option( 'largo_version', false ) ) {
+	if ( get_theme_mod( 'largo_version', false ) ) {
 		return false;
 	}
 
@@ -228,7 +228,7 @@ function largo_activation_maybe_setup() {
 	// this must run before any other function that makes use of of_set_option().
 	largo_set_new_option_defaults();
 
-	of_set_option( 'largo_version', largo_version() );
+	set_theme_mod( 'largo_version', largo_version() );
 
 	// Prevent the update nag from displaying on the first page load.
 	remove_action( 'admin_notices', 'largo_update_admin_notice', 10 );
