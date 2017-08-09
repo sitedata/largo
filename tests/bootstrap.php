@@ -29,13 +29,5 @@ function _register_theme() {
 }
 tests_add_filter( 'muplugins_loaded', '_register_theme' );
 
-/**
- * Adding this for now to prevent failing tests
- * @TODO remove options framework, then remove this function.
- */
-function of_reset_options() {
-	return;
-}
-
 // Start up the WP testing environment.
 require $_tests_dir . '/includes/bootstrap.php';

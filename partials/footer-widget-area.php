@@ -12,15 +12,15 @@
  *
  * @link https://secure.php.net/manual/en/function.array-search.php
  * @link https://codex.wordpress.org/Function_Reference/get_template_part
- * @see optionsframework_options
  * @since 0.5.2
  *
+ * @package Largo
  */
 
- // Get the layout from the options.
-$layout = get_theme_mod('footer_layout');
+// Get the layout from the options.
+$layout = get_theme_mod( 'footer_layout' );
 
-// If the specified template does not exist in the child or parent theme, use 3col-default
+// If the specified template does not exist in the child or parent theme, use 3col-default.
 if ( locate_template( 'partials/footer-widget-' . $layout . '.php' ) == '' ) {
 	$layout = '3col-default';
 }
@@ -28,5 +28,5 @@ if ( locate_template( 'partials/footer-widget-' . $layout . '.php' ) == '' ) {
 ?>
 
 <div id="supplementary" class="row-fluid _<?php echo $layout ?>">
-	<?php get_template_part( 'partials/footer-widget', $layout); ?>
+	<?php get_template_part( 'partials/footer-widget', $layout ); ?>
 </div>
