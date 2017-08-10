@@ -48,7 +48,7 @@ If you're still not sure where to start, that's totally fine! [Just shoot us an 
 
 ## Credits
 
-Built and maintained by the [INN Labs](https://labs.inn.org) - ([@INNNerds](http://twitter.com/INNNerds)):
+Built and maintained by [INN Labs](https://labs.inn.org) and users like you!
 
 -  **[Julia Smith](https://github.com/julia67)** ([@julia67](https://twitter.com/julia67)), Director, INN Labs
 -  **[RC Lations](https://github.com/rclations)** ([@rclations](https://twitter.com/rclations)), Lead Developer
