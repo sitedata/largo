@@ -1,10 +1,6 @@
 # Largo
 
-```diff
-- Note: Largo is undergoing a full rebuild in the 1.0 branch
-```
-
-A responsive WordPress framework designed for news publishers and developed by the Institute for Nonprofit News.
+A WordPress theme crafted specifically with the needs of news publishers in mind.
 
 <img src="https://travis-ci.org/INN/Largo.svg?branch=develop" /> <img src="https://readthedocs.org/projects/largo/badge/?version=master" />
 
@@ -52,20 +48,17 @@ If you're still not sure where to start, that's totally fine! [Just shoot us an 
 
 ## Credits
 
-Built and maintained by the [Institute for Nonprofit News](http://inn.org) product and technology team ([@INNNerds](http://twitter.com/INNNerds)):
+Built and maintained by the [INN Labs](https://labs.inn.org) - ([@INNNerds](http://twitter.com/INNNerds)):
 
--  **[Adam Schweigert](https://github.com/aschweigert)** ([@aschweig](http://twitter.com/aschweig)), Senior Director of Product and Technology
+-  **[Julia Smith](https://github.com/julia67)** ([@julia67](https://twitter.com/julia67)), Director, INN Labs
 -  **[RC Lations](https://github.com/rclations)** ([@rclations](https://twitter.com/rclations)), Lead Developer
--  **[Julia Smith](https://github.com/julia67)** ([@julia67](https://twitter.com/julia67)), Lead Designer
 -  **[Ben Keith](https://github.com/benlk)** ([@benlkeith](http://twitter.com/benlkeith)), News Apps Developer
--  **[Gabriel Hongsdusit](https://github.com/gabehong)** ([@ghongsdusit](https://twitter.com/ghongsdusit)), Design Apprentice
+-  **[Kay Lima](https://github.com/kaylima)** ([@kayleen_lima](https://twitter.com/kayleen_lima)), Support and Community Lead
 
-Special thanks to everyone who has contributed to the project, including: [rnagle](https://github.com/rnagle), [kaeti](https://github.com/kaeti), [jackbrighton](http://github.com/jackbrighton), [danielbachhuber](http://github.com/danielbachhuber), [willhaynes](http://github.com/willhaynes), [drywall](http://github.com/drywall), [nacin](http://github.com/nacin), [meredithinn](http://github.com/meredithinn), [tothebeat](http://github.com/tothebeat), [lindamood](http://github.com/lindamood), [mospaw](http://github.com/mospaw), [DrewAPicture](http://github.com/drewapicture), [nipoez](http://github.com/nipoez), [palewire](http://github.com/palewire), [GaryJones](http://github.com/garyjones), [seamusleahy](http://github.com/seamusleahy), [joshuarrrr](http://github.com/joshuarrrr), [yayannabelle](https://github.com/yayannabelle), [jmusal](https://github.com/jmusal), [ntwb](https://github.com/ntwb) and [MsPseudolus](https://github.com/MsPseudolus).
+Special thanks to everyone who has contributed to the project, including: [gabehong](https://github.com/gabehong), [aschweigert](https://github.com/aschweigert), [rnagle](https://github.com/rnagle), [kaeti](https://github.com/kaeti), [jackbrighton](http://github.com/jackbrighton), [danielbachhuber](http://github.com/danielbachhuber), [willhaynes](http://github.com/willhaynes), [drywall](http://github.com/drywall), [nacin](http://github.com/nacin), [meredithinn](http://github.com/meredithinn), [tothebeat](http://github.com/tothebeat), [lindamood](http://github.com/lindamood), [mospaw](http://github.com/mospaw), [DrewAPicture](http://github.com/drewapicture), [nipoez](http://github.com/nipoez), [palewire](http://github.com/palewire), [GaryJones](http://github.com/garyjones), [seamusleahy](http://github.com/seamusleahy), [joshuarrrr](http://github.com/joshuarrrr), [yayannabelle](https://github.com/yayannabelle), [jmusal](https://github.com/jmusal), [ntwb](https://github.com/ntwb) and [MsPseudolus](https://github.com/MsPseudolus).
 
 This project builds on a number of great open source projects, including:
 
 * Project Argo: [argoproject.org](http://argoproject.org/)
 * Twitter Bootstrap: [getbootstrap.com](http://getbootstrap.com/)
 * LESS CSS: [lesscss.org](http://lesscss.org/)
-* Options Framework: [devinsays/options-framework-theme](https://github.com/devinsays/options-framework-theme)
-* TGM Plugin Activation Library: [thomasgriffin/TGM-Plugin-Activation](https://github.com/thomasgriffin/TGM-Plugin-Activation)
