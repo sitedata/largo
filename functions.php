@@ -152,6 +152,7 @@ class Largo {
 			'/inc/term-meta.php',
 			'/inc/sidebars.php',
 			'/inc/customizer/customizer.php',
+			'/inc/customizer/customizer-legacy.php',
 			'/inc/widgets.php',
 			'/inc/nav-menus.php',
 			'/inc/taxonomies.php',
