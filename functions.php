@@ -30,25 +30,6 @@
  */
 
 /**
- * By default we'll assume the site is not hosted by INN.
- *
- * There should be no reason to set this. It is defined to
- * modify the default value of 'INN_MEMBER' below to true for
- * INN hosted sites.
- */
-if ( ! defined( 'INN_HOSTED' ) )
-	define( 'INN_HOSTED', FALSE );
-
-/**
- * By default we'll assume the site is not for an INN member.
- *
- * Set INN_MEMBER to TRUE to show an INN logo in the footer
- * and a widget of INN member stories in the homepage sidebar
- */
-if ( ! defined( 'INN_MEMBER' ) )
-	define( 'INN_MEMBER', FALSE || INN_HOSTED );
-
-/**
  * LARGO_DEBUG defines whether or not to use minified assets
  *
  * Largo by default uses minified CSS and JavaScript files.
@@ -59,7 +40,7 @@ if ( ! defined( 'INN_MEMBER' ) )
  */
 if ( ! defined( 'LARGO_DEBUG' ) )
 	define( 'LARGO_DEBUG', FALSE );
-	
+
 /**
  * Image size constants, almost 100% that you won't need to change these
  */
@@ -108,6 +89,33 @@ if ( ! function_exists( 'optionsframework_init' ) ) {
 }
 
 /**
+ * Add largo dashboard widget with help options
+ *
+ * @since 0.1
+ */
+function largo_dashboard_widgets() {
+   global $wp_meta_boxes;
+   wp_add_dashboard_widget( 'dashboard_quick_links', __( 'Project Largo Help', 'largo' ), 'largo_dashboard_quick_links' );
+}
+add_action('wp_dashboard_setup', 'largo_dashboard_widgets');
+
+function largo_dashboard_quick_links() {
+   echo '
+	   <div class="list-widget">
+		   <p>If you\'re having trouble with your site, want to request a new feature or are just interested in learning more about Project Largo, here are a few helpful links:</p>
+		   <ul>
+			   <li><a href="http://largoproject.org/">Largo Project Website</a></li>
+			   <li><a href="http://largo.readthedocs.io/">Largo Documentation</a></li>
+			   <li><a href="http://support.largoproject.org">Help Desk</a></li>
+			   <li><a href="http://support.largoproject.org/support/solutions">Knowledge Base</a></li>
+			   <li><a href="mailto:support@largoproject.org">Contact Us</a></li>
+		   </ul>
+		   <p>Developers can also log issues on <a href="https://github.com/INN/Largo">our public github repository</a> and if you would like to be included in our Largo users\' group, <a href="http://inn.us1.list-manage1.com/subscribe?u=81670c9d1b5fbeba1c29f2865&id=913028b23c">sign up here</a>.</p>
+	   </div>
+   ';
+}
+
+/**
  * A class to represent the one true Largo theme instance
  */
 class Largo {
@@ -149,8 +157,6 @@ class Largo {
 			'/largo-apis.php',
 			'/inc/ajax-functions.php',
 			'/inc/helpers.php',
-			'/inc/plugin-init.php',
-			'/inc/dashboard.php',
 			'/inc/custom-feeds.php',
 			'/inc/users.php',
 			'/inc/term-meta.php',
@@ -419,7 +425,7 @@ if ( ! function_exists( 'largo_setup' ) ) {
 
 		// Add support for localization (this is a work in progress)
 		load_theme_textdomain('largo', get_template_directory() . '/lang');
-		
+
 		//Add support for <title> tags
 		add_theme_support( 'title-tag' );
 
@@ -451,3 +457,24 @@ if ( ! function_exists( 'of_set_option' ) ) {
 		return false;
 	}
 }
+
+/**
+ * Gallery Default Settings
+ * Adds a '0' option for gallery columns
+ */
+add_action( 'wp_enqueue_media', 'gallery_zero_columns' );
+function gallery_zero_columns() {
+	$columns_src = get_template_directory_uri() . '/lib/navis-slideshows/js/navis-columns.js';
+	wp_enqueue_script( 'navis-columns', $columns_src, array( 'jquery' ), '1.0', true );
+}
+/**
+ * Gallery Default Settings
+ * @param Array $settings
+ * @return Array $settings
+*/
+function theme_gallery_defaults( $settings ) {
+	// Sets default column setting to 0
+	$settings['galleryDefaults']['columns'] = 0;
+	return $settings;
+}
+add_filter( 'media_view_settings', 'theme_gallery_defaults' );

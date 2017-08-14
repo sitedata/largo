@@ -32,11 +32,3 @@ the_widget( 'largo_featured_widget', array(
 		'num_sentences' => 2
 	)
 );
-
-if (is_home() && INN_MEMBER === TRUE) {
-	the_widget('largo_INN_RSS_widget', array(
-			'title' => __('Stories From Other INN Members', 'largo'),
-			'num_posts' => 3
-		)
-	);
-}

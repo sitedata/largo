@@ -1,14 +1,10 @@
 # Largo
 
-A responsive WordPress framework designed for news publishers and developed by the Institute for Nonprofit News.
+A WordPress theme crafted specifically with the needs of news publishers in mind.
 
 <img src="https://travis-ci.org/INN/Largo.svg?branch=develop" /> <img src="https://readthedocs.org/projects/largo/badge/?version=master" />
 
 ---
-
-**IMPORTANT!** THIS PROJECT IS UNDER ACTIVE DEVELOPMENT
-
-We are making regular updates that may or may not always play nice with previous versions.
 
 For released versions of Largo, please see the [list of tagged releases](https://github.com/INN/Largo/releases).
 
@@ -28,11 +24,11 @@ Feedback, comments and questions to: [largo@inn.org](mailto:largo@inn.org)
 
 The project extends work done by [NPR's Project Argo](http://argoproject.org/).
 
-**Documentation** and more information at: [largoproject.org](http://largoproject.org)
+**Documentation** and more information at: [largo.inn.org](https://largo.inn.org)
 
 **Support** is available [via our helpdesk system](http://support.largoproject.org/) or by emailing [support@largoproject.org](mailto:support@largoproject.org).
 
-**Current version:** v0.5.4
+**Current version:** v0.5.5.2
 
 **Minimum supported PHP version:** 5.3
 
@@ -52,21 +48,17 @@ If you're still not sure where to start, that's totally fine! [Just shoot us an 
 
 ## Credits
 
-Built and maintained by the [Institute for Nonprofit News](http://inn.org) news apps and technology team ([@INNNerds](http://twitter.com/INNNerds)):
+Built and maintained by [INN Labs](https://labs.inn.org) and users like you!
 
--  **[Adam Schweigert](https://github.com/aschweigert)** ([@aschweig](http://twitter.com/aschweig)), Senior Director of Product and Technology
--  **[Ryan Nagle](https://github.com/rnagle)** ([@ryannagle](http://twitter.com/ryannagle)), Director of Technology
--  **[Kaeti Hinck](https://github.com/kaeti)** ([@kaeti](http://twitter.com/kaeti)), Design Director
--  **[Denise Malan](https://github.com/dnmalan)** ([@denisemalan](http://twitter.com/denisemalan)), Director of Data Services
--  **[Jack Brighton](http://github.com/jackbrighton)** ([@jackbrighton](http://twitter.com/jackbrighton)), Manager of Support, Training and Documentation
+-  **[Julia Smith](https://github.com/julia67)** ([@julia67](https://twitter.com/julia67)), Director, INN Labs
+-  **[RC Lations](https://github.com/rclations)** ([@rclations](https://twitter.com/rclations)), Lead Developer
 -  **[Ben Keith](https://github.com/benlk)** ([@benlkeith](http://twitter.com/benlkeith)), News Apps Developer
+-  **[Kay Lima](https://github.com/kaylima)** ([@kayleen_lima](https://twitter.com/kayleen_lima)), Support and Community Lead
 
-Special thanks to everyone who has contributed to the project, including: [danielbachhuber](http://github.com/danielbachhuber), [willhaynes](http://github.com/willhaynes), [drywall](http://github.com/drywall), [nacin](http://github.com/nacin), [meredithinn](http://github.com/meredithinn), [tothebeat](http://github.com/tothebeat), [lindamood](http://github.com/lindamood), [mospaw](http://github.com/mospaw), [DrewAPicture](http://github.com/drewapicture), [nipoez](http://github.com/nipoez), [palewire](http://github.com/palewire), [GaryJones](http://github.com/garyjones), [seamusleahy](http://github.com/seamusleahy) and [joshuarrrr](http://github.com/joshuarrrr).
+Special thanks to everyone who has contributed to the project, including: [gabehong](https://github.com/gabehong), [aschweigert](https://github.com/aschweigert), [rnagle](https://github.com/rnagle), [kaeti](https://github.com/kaeti), [jackbrighton](http://github.com/jackbrighton), [danielbachhuber](http://github.com/danielbachhuber), [willhaynes](http://github.com/willhaynes), [drywall](http://github.com/drywall), [nacin](http://github.com/nacin), [meredithinn](http://github.com/meredithinn), [tothebeat](http://github.com/tothebeat), [lindamood](http://github.com/lindamood), [mospaw](http://github.com/mospaw), [DrewAPicture](http://github.com/drewapicture), [nipoez](http://github.com/nipoez), [palewire](http://github.com/palewire), [GaryJones](http://github.com/garyjones), [seamusleahy](http://github.com/seamusleahy), [joshuarrrr](http://github.com/joshuarrrr), [yayannabelle](https://github.com/yayannabelle), [jmusal](https://github.com/jmusal), [ntwb](https://github.com/ntwb) and [MsPseudolus](https://github.com/MsPseudolus).
 
 This project builds on a number of great open source projects, including:
 
 * Project Argo: [argoproject.org](http://argoproject.org/)
 * Twitter Bootstrap: [getbootstrap.com](http://getbootstrap.com/)
 * LESS CSS: [lesscss.org](http://lesscss.org/)
-* Options Framework: [devinsays/options-framework-theme](https://github.com/devinsays/options-framework-theme)
-* TGM Plugin Activation Library: [thomasgriffin/TGM-Plugin-Activation](https://github.com/thomasgriffin/TGM-Plugin-Activation)

@@ -78,6 +78,28 @@ if ( ! function_exists( 'largo_enqueue_js' ) ) {
 }
 add_action( 'wp_enqueue_scripts', 'largo_enqueue_js' );
 
+if ( ! function_exists( 'largo_gallery_enqueue' ) ) {
+	/**
+	 * Enqueue Largo gallery CSS & JS
+	 *
+	 * @since 0.5.5.3
+	 */
+	function largo_gallery_enqueue() {
+		$slick_css = get_template_directory_uri() . '/lib/navis-slideshows/vendor/slick/slick.css';
+		wp_enqueue_style( 'navis-slick', $slick_css, array(), '1.0' );
+
+		$slides_src = get_template_directory_uri() . '/lib/navis-slideshows/vendor/slick/slick.min.js';
+		wp_enqueue_script( 'jquery-slick', $slides_src, array( 'jquery' ), '3.0', true );
+
+		$slides_css = get_template_directory_uri() . '/lib/navis-slideshows/css/slides.css';
+		wp_enqueue_style( 'navis-slides', $slides_css, array(), '1.0' );
+
+		$show_src = get_template_directory_uri() . '/lib/navis-slideshows/js/navis-slideshows.js';
+		wp_enqueue_script( 'navis-slideshows', $show_src, array( 'jquery-slick' ), '0.11', true );
+	}
+	add_action( 'wp_enqueue_scripts', 'largo_gallery_enqueue' );
+}
+
 if ( ! function_exists( 'largo_enqueue_child_theme_css' ) ) {
 	/**
 	 * Enqueue Largo child theme CSS
@@ -198,43 +220,3 @@ if ( ! function_exists( 'largo_footer_js' ) ) {
 	}
 }
 add_action( 'wp_footer', 'largo_footer_js' );
-
-if ( ! function_exists( 'largo_google_analytics' ) ) {
-	/**
-	 * Add Google Analytics code to the footer, you need to add your GA ID to the theme settings for this to work
-	 *
-	 * @since 1.0
-	 */
-	function largo_google_analytics() {
-		if ( !current_user_can('edit_posts') ) : // don't track editors ?>
-			<script>
-			    var _gaq = _gaq || [];
-			<?php if ( of_get_option( 'ga_id', true ) ) : // make sure the ga_id setting is defined ?>
-				_gaq.push(['_setAccount', '<?php echo of_get_option( "ga_id" ) ?>']);
-				_gaq.push(['_trackPageview']);
-			<?php endif; ?>
-				<?php if (defined('INN_MEMBER') && INN_MEMBER) { ?>
-				_gaq.push(
-					["inn._setAccount", "UA-17578670-2"],
-					["inn._setCustomVar", 1, "MemberName", "<?php bloginfo('name') ?>"],
-					["inn._trackPageview"]
-				);
-				<?php } ?>
-			    _gaq.push(
-					["largo._setAccount", "UA-17578670-4"],
-					["largo._setCustomVar", 1, "SiteName", "<?php bloginfo('name') ?>"],
-					["largo._setDomainName", "<?php echo parse_url( home_url(), PHP_URL_HOST ); ?>"],
-					["largo._setAllowLinker", true],
-					["largo._trackPageview"]
-				);
-
-			    (function() {
-				    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-				    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-				    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-				})();
-			</script>
-	<?php endif;
-	}
-}
-add_action( 'wp_head', 'largo_google_analytics' );

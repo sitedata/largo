@@ -1,25 +1,41 @@
 <?php
+/**
+ * PHPUnit bootstrap file
+ *
+ * @package Largo
+ */
 
-$wp_tests_dir = getenv('WP_TESTS_DIR');
-require_once $wp_tests_dir . '/includes/functions.php';
+$_tests_dir = getenv( 'WP_TESTS_DIR' );
+if ( ! $_tests_dir ) {
+	$_tests_dir = '/tmp/wordpress-tests-lib';
+}
 
-$basename = basename(dirname(__DIR__));
+// Give access to tests_add_filter() function.
+require_once $_tests_dir . '/includes/functions.php';
 
-$GLOBALS['wp_tests_options'] = array(
-	'stylesheet' => $basename,
-	'template' => $basename
-);
+function _register_theme() {
 
-tests_add_filter('set_current_user', function($arg) {
-	$user = wp_get_current_user();
-	$user->set_role('administrator');
-	return $arg;
-}, 1, 10);
+	$theme_dir = dirname( dirname( __FILE__ ) );
+	$current_theme = basename( $theme_dir );
 
-tests_add_filter('filesystem_method', function($arg) {
-	return 'direct';
-}, 1, 10);
+	register_theme_directory( dirname( $theme_dir ) );
 
-require dirname(__FILE__) . '/mock/mock-options-framework.php';
-require dirname(__FILE__) . '/mock/mock-admin-functions.php';
-require $wp_tests_dir . '/includes/bootstrap.php';
+	add_filter( 'pre_option_template', function() use ( $current_theme ) {
+		return $current_theme;
+	});
+	add_filter( 'pre_option_stylesheet', function() use ( $current_theme ) {
+		return $current_theme;
+	});
+}
+tests_add_filter( 'muplugins_loaded', '_register_theme' );
+
+/**
+ * Adding this for now to prevent failing tests
+ * @TODO remove options framework, then remove this function.
+ */
+function of_reset_options() {
+	return;
+}
+
+// Start up the WP testing environment.
+require $_tests_dir . '/includes/bootstrap.php';

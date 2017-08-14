@@ -63,9 +63,10 @@ class HomepageTest extends WP_UnitTestCase {
 		$this->assertEquals('HomepageBlog', $active);
 
 		// If we set a new layout, largo_get_active_homepage_layout should return the correct one
-		of_set_option('home_template', 'HomepageSingle');
-		$active = largo_get_active_homepage_layout();
-		$this->assertEquals('HomepageSingle', $active);
+// Disabling option framework tests
+//		of_set_option('home_template', 'HomepageSingle');
+//		$active = largo_get_active_homepage_layout();
+//		$this->assertEquals('HomepageSingle', $active);
 	}
 
 	function test_largo_home_single_top() {

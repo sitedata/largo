@@ -8,7 +8,7 @@
  *
  * @since 0.5.3
  */
- 
+
 .before-footer-wrapper {
   background-color: @preFooterColor;
 }
@@ -38,25 +38,7 @@
   margin-right: 1em;
 }
 
-/*
- * image displays 300px wide, but is physically 1699x385 px^2
- * We'll use math to get the padding top and bottom correct, according to the brand guidelines
- * margin top and margin bottom should be equal to the height of one of the squares.
- * By cropping the image to the outer boundary of the lower-left square in inn_logo_reversetype.png, we get a square height of 184px.
- * 184/1669 = x/300
- */
-@inn-logo-physical-width: 1669px;
-@inn-logo-physical-height: 385px;
-@inn-logo-width: 200px;
-@inn-logo-square: (@inn-logo-width*184/@inn-logo-physical-width); // 184 comes form the width of one square in INN's 2015 logo
-@inn-logo-height: (@inn-logo-width*@inn-logo-physical-height/@inn-logo-physical-width); // the rendered height of the logo image
 @footer-social-logo-font-size: @baseFontSize + 2;
-
-#inn-logo {
-  margin-top: @inn-logo-square;
-  margin-bottom: @inn-logo-square*0.75;
-  max-width: @inn-logo-width;
-}
 
 #footer-logos-bg {
   background-color: @white;

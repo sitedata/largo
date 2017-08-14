@@ -26,7 +26,6 @@ function largo_widgets() {
 		'largo_facebook_widget' => '/inc/widgets/largo-facebook.php',
 		'largo_follow_widget' => '/inc/widgets/largo-follow.php',
 		'largo_image_widget' => '/inc/widgets/largo-image-widget.php',
-		'largo_INN_RSS_widget' => '/inc/widgets/largo-inn-rss.php',
 		'largo_recent_comments_widget' => '/inc/widgets/largo-recent-comments.php',
 		'largo_recent_posts_widget' => '/inc/widgets/largo-recent-posts.php',
 		'largo_taxonomy_list_widget' => '/inc/widgets/largo-taxonomy-list.php',

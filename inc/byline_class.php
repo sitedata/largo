@@ -23,8 +23,12 @@ class Largo_Byline {
 	 */
 	private $custom;
 
-	/** @var int The ID of the author for this post */
-	private $author_id;
+	/**
+	 * Temporary variable used for the author ID;
+	 * This must be public, because Largo_CoAuthors_Byline's methods incorporate methods from Largo_Byline, and parent classes cannot see private or protected members of extending classes.
+	 * @var int The ID of the author for this post
+	 */
+	public $author_id;
 
 	/**
 	 * @var string The HTML ouput of this class
@@ -98,16 +102,20 @@ class Largo_Byline {
 			$output = '';
 		} else {
 			$author_email = get_the_author_meta( 'email', $this->author_id );
-			if ( largo_has_avatar( $author_email ) ) {
+			if ( $this->author->type == 'guest-author' && get_the_post_thumbnail( $this->author->ID ) ) {
+				$output = get_the_post_thumbnail( $this->author->ID, array( 60,60 ) );
+				$output = str_replace( 'attachment-32x32', 'avatar avatar-32 photo', $output );
+				$output = str_replace( 'wp-post-image', '', $output );
+			} else if ( largo_has_avatar( $author_email ) ) {
 				$output = get_avatar(
 					$author_email,
 					32,
 					'',
-					get_the_author_meta( 'display_name', $this->author_id )
+					get_the_author_meta( 'display_name', $this->author_id ),
+					array(
+						'class' => 'avatar avatar-32 photo',
+					)
 				);
-			} elseif ( $this->author->type == 'guest-author' && get_the_post_thumbnail( $this->author->ID ) ) {
-				$output = get_the_post_thumbnail( $this->author->ID, array( 32,32 ) );
-				$output = str_replace( 'attachment-32x32 wp-post-image', 'avatar avatar-32 photo', $output );
 			}
 			$output .= ' '; // to reduce run-together bylines
 		}
@@ -211,9 +219,10 @@ class Largo_CoAuthors_Byline extends Largo_Byline {
 
 	/**
 	 * Temporary variable used for the author ID;
+	 * This must be public, because Largo_CoAuthors_Byline's methods incorporate methods from Largo_Byline, and parent classes cannot see private or protected members of extending classes.
 	 * @see $this->generate_byline();
 	 */
-	private $author_id;
+	public $author_id;
 
 	/**
 	 * Differs from Largo_Byline in following ways:
