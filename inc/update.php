@@ -234,9 +234,6 @@ function largo_perform_update() {
 			$previous_options['largo_version'] = null;
 		}
 
-		// this must run before any other function that makes use of set_theme_mod().
-		largo_set_new_option_defaults();
-
 		foreach ( largo_updates() as $version => $updates ) {
 			foreach ( $updates['functions'] as $function ) {
 				call_user_func( $function );
@@ -279,9 +276,6 @@ function largo_activation_maybe_setup() {
 	foreach ( $requires as $required ) {
 		require_once( get_template_directory() . $required );
 	}
-
-	// this must run before any other function that makes use of set_theme_mod().
-	largo_set_new_option_defaults();
 
 	set_theme_mod( 'largo_version', largo_version() );
 
@@ -700,25 +694,6 @@ function largo_remove_topstory_prominence_term() {
  * Functions that should run any time the largo version
  * number bumps.
  */
-
-/**
- * Save default values for any newly introduced options to the database
- *
- * Note: this must be called before any other update function calls `set_theme_mod`,
- * as `of_set_uption` defaults all values to null.
- *
- * @since 0.5.1
- */
-function largo_set_new_option_defaults() {
-	// Gets the unique id, returning a default if it isn't defined.
-	$config = get_option( 'optionsframework' );
-	if ( isset( $config['id'] ) ) {
-		$defaults = of_get_default_values(); // the list of default values.
-		$previous_options = largo_retrieve_previous_options();
-		$options = wp_parse_args( $previous_options, $defaults );
-		update_option( $config['id'], $options );
-	}
-}
 
 /**
  * Make sure custom CSS is regenerated if we're using custom LESS variables
@@ -1230,9 +1205,9 @@ function largo_block_theme_options() {
 }
 
 function largo_convert_to_theme_mods() {
-	$optionsframework = get_option( 'optionsframework' );
-	$largo_option = get_option( 'largo' );
-	$options_to_convert = array_combine( $optionsframework, $largo_option );
+	$optionsframework = get_option( 'optionsframework' ) ? get_option( 'optionsframework' ) : array();
+	$largo_option = get_option( 'largo' ) ? get_option( 'largo' ) : array();
+	$options_to_convert = array_merge( $optionsframework, $largo_option );
 	foreach ( $options_to_convert as $option => $value ) {
 		set_theme_mod( $option, $value );
 	}
