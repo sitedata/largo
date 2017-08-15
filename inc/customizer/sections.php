@@ -10,13 +10,13 @@
  */
 function largo_customize_sections( $wp_customize ) {
 
-	$wp_customize->add_section( 'basic-settings', array(
+	$wp_customize->add_section( 'basic_settings', array(
 		'title'          => esc_html__( 'Basic Settings', 'largo' ),
 		'priority'       => 10,
 //		'description'    => esc_html__( '', 'largo' ),
 	) );
 
-	$wp_customize->add_section( 'theme-images', array(
+	$wp_customize->add_section( 'theme_images', array(
 		'title'          => esc_html__( 'Theme Images', 'largo' ),
 		'priority'       => 10,
 //		'description'    => esc_html__( '', 'largo' ),
