@@ -885,5 +885,371 @@ function largo_customize_settings( $wp_customize ) {
 			'type'        => 'text',
 		)
 	);
+
+	/**
+	 * Advanced Section.
+	 */
+
+	// Enable Custom LESS to CSS For Theme Customization.
+	$wp_customize->add_setting(
+		'less_enabled',
+		array(
+			'default'           => '',
+		)
+	);
+	$wp_customize->add_control(
+		'less_enabled',
+		array(
+			'label'       => esc_html__( 'Enable Custom LESS to CSS For Theme Customization.', 'largo' ),
+			'section'     => 'advanced',
+			'type'        => 'checkbox',
+		)
+	);
+
+	// Enable "Series" taxonomy.
+	$wp_customize->add_setting(
+		'series_enabled',
+		array(
+			'default'           => '',
+		)
+	);
+	$wp_customize->add_control(
+		'series_enabled',
+		array(
+			'label'       => esc_html__( 'Enable "Series" taxonomy.', 'largo' ),
+			'section'     => 'advanced',
+			'type'        => 'checkbox',
+		)
+	);
+
+	// Enable Custom Landing Pages for Series/Project Pages. Requires "Series" taxonomy to be enabled.
+	$wp_customize->add_setting(
+		'custom_landing_enabled',
+		array(
+			'default'           => '',
+		)
+	);
+	$wp_customize->add_control(
+		'custom_landing_enabled',
+		array(
+			'label'       => esc_html__( 'Enable "Series" taxonomy.', 'largo' ),
+			'section'     => 'advanced',
+			'type'        => 'checkbox',
+		)
+	);
+
+	// Default region in lefthand column of Landing Pages.
+	$wp_customize->add_setting(
+		'landing_left_region_default',
+		array(
+			'default'           => 'sidebar-main',
+		)
+	);
+	$wp_customize->add_control(
+		'landing_left_region_default',
+		array(
+			'label'       => esc_html__( 'Default region in lefthand column of Landing Pages', 'largo' ),
+			'section'     => 'advanced',
+			'type'        => 'select',
+			'choices'     => array(
+				'sidebar-main'      => 'Main Sidebar',
+				'sidebar-single'    => 'Single Sidebar',
+				'homepage-alert'    => 'Homepage Alert',
+			),
+		)
+	);
+
+	// Enable Custom Landing Pages for Series/Project Pages. Requires "Series" taxonomy to be enabled.
+	$wp_customize->add_setting(
+		'landing_right_region_default',
+		array(
+			'default'           => 'sidebar-main',
+		)
+	);
+	$wp_customize->add_control(
+		'landing_right_region_default',
+		array(
+			'label'       => esc_html__( 'Default region in righthand column of Landing Pages', 'largo' ),
+			'section'     => 'advanced',
+			'type'        => 'select',
+			'choices'     => array(
+				'sidebar-main'      => 'Main Sidebar',
+				'sidebar-single'    => 'Single Sidebar',
+				'homepage-alert'    => 'Homepage Alert',
+			),
+		)
+	);
+
+	// Enable Optional Leaderboard Ad Zone.
+	$wp_customize->add_setting(
+		'leaderboard_enabled',
+		array(
+			'default'           => '',
+		)
+	);
+	$wp_customize->add_control(
+		'leaderboard_enabled',
+		array(
+			'label'       => esc_html__( 'Enable Optional Leaderboard Ad Zone.', 'largo' ),
+			'section'     => 'advanced',
+			'type'        => 'checkbox',
+		)
+	);
+
+	// Enable Optional Header Widget Area.
+	$wp_customize->add_setting(
+		'header_widget_enabled',
+		array(
+			'default'           => '',
+		)
+	);
+	$wp_customize->add_control(
+		'header_widget_enabled',
+		array(
+			'label'       => esc_html__( 'Enable Optional Header Widget Area.', 'largo' ),
+			'section'     => 'advanced',
+			'type'        => 'checkbox',
+		)
+	);
+
+	// Enable "Post Types" taxonomy.
+	$wp_customize->add_setting(
+		'post_types_enabled',
+		array(
+			'default'           => '',
+		)
+	);
+	$wp_customize->add_control(
+		'post_types_enabled',
+		array(
+			'label'       => esc_html__( 'Enable "Post Types" taxonomy.', 'largo' ),
+			'section'     => 'advanced',
+			'type'        => 'checkbox',
+		)
+	);
+
+	// Enable Disclaimer Widget.
+	$wp_customize->add_setting(
+		'disclaimer_enabled',
+		array(
+			'default'           => '',
+		)
+	);
+	$wp_customize->add_control(
+		'disclaimer_enabled',
+		array(
+			'label'       => esc_html__( 'Enable Disclaimer Widget.', 'largo' ),
+			'section'     => 'advanced',
+			'type'        => 'checkbox',
+		)
+	);
+
+	// Enter a default disclaimer.
+	$wp_customize->add_setting(
+		'default_disclaimer',
+		array(
+			'default'           => '',
+			'sanitize_callback' => 'esc_html',
+		)
+	);
+	$wp_customize->add_control(
+		'default_disclaimer',
+		array(
+			'label'       => esc_html__( 'Enter a default disclaimer.', 'largo' ),
+			'section'     => 'advanced',
+			'type'        => 'textarea',
+		)
+	);
+
+	// Replace WordPress search with Google Custom Search.
+	$wp_customize->add_setting(
+		'use_gcs',
+		array(
+			'default'           => '',
+		)
+	);
+	$wp_customize->add_control(
+		'use_gcs',
+		array(
+			'label'       => esc_html__( 'Replace WordPress search with Google Custom Search.', 'largo' ),
+			'section'     => 'advanced',
+			'type'        => 'checkbox',
+		)
+	);
+
+	// Search engine ID.
+	$wp_customize->add_setting(
+		'gcs_id',
+		array(
+			'default'           => '',
+			'sanitize_callback' => 'esc_html',
+		)
+	);
+	$wp_customize->add_control(
+		'gcs_id',
+		array(
+			'label'       => esc_html__( 'Search engine ID (something like 012174647732932797336:f2lixuynrs0).', 'largo' ),
+			'description' => esc_html__( 'Google Custom Search typically returns better results than the search engine built into WordPress. You can get your ID and configure it at https://www.google.com/cse/create/new.', 'largo' ),
+			'section'     => 'advanced',
+			'type'        => 'text',
+		)
+	);
+
+	// Twitter Account ID.
+	$wp_customize->add_setting(
+		'twitter_acct_id',
+		array(
+			'default'           => '',
+			'sanitize_callback' => 'esc_html',
+		)
+	);
+	$wp_customize->add_control(
+		'twitter_acct_id',
+		array(
+			'label'       => esc_html__( 'Twitter Account ID', 'largo' ),
+			'description' => esc_html__( 'This is used for verifying your site for Twitter Analytics. This is NOT your username, it will be a 9 digit number.', 'largo' ),
+			'section'     => 'advanced',
+			'type'        => 'text',
+		)
+	);
+
+	// Google site verification meta tag.
+	$wp_customize->add_setting(
+		'google_site_verification',
+		array(
+			'default'           => '',
+			'sanitize_callback' => 'esc_html',
+		)
+	);
+	$wp_customize->add_control(
+		'google_site_verification',
+		array(
+			'label'       => esc_html__( 'Google site verification meta tag', 'largo' ),
+			'description' => esc_html__( 'Used to verify a site in Google Webmaster Tools. This will be a long string of numbers and letters.', 'largo' ),
+			'section'     => 'advanced',
+			'type'        => 'text',
+		)
+	);
+
+	// Facebook admins meta tag.
+	$wp_customize->add_setting(
+		'fb_admins',
+		array(
+			'default'           => '',
+			'sanitize_callback' => 'esc_html',
+		)
+	);
+	$wp_customize->add_control(
+		'fb_admins',
+		array(
+			'label'       => esc_html__( 'Facebook admins meta tag', 'largo' ),
+			'description' => esc_html__( 'This is a comma-separated list of numerical FB user IDs you want to allow to access Facebook insights for your site.', 'largo' ),
+			'section'     => 'advanced',
+			'type'        => 'text',
+		)
+	);
+
+	// Facebook app ID meta tag.
+	$wp_customize->add_setting(
+		'fb_app_id',
+		array(
+			'default'           => '',
+			'sanitize_callback' => 'esc_html',
+		)
+	);
+	$wp_customize->add_control(
+		'fb_app_id',
+		array(
+			'label'       => esc_html__( 'Facebook app ID meta tag', 'largo' ),
+			'description' => esc_html__( 'This is a numerical app ID that will allow Facebook to capture insights for any social plugins active on your site and display them in your Facebook app/page insights.', 'largo' ),
+			'section'     => 'advanced',
+			'type'        => 'text',
+		)
+	);
+
+	// Facebook Tracking Pixel ID.
+	$wp_customize->add_setting(
+		'fb_tracking_pixel',
+		array(
+			'default'           => '',
+			'sanitize_callback' => 'esc_html',
+		)
+	);
+	$wp_customize->add_control(
+		'fb_tracking_pixel',
+		array(
+			'label'       => esc_html__( 'Facebook Tracking Pixel ID', 'largo' ),
+			'description' => esc_html__( 'Unique numerical ID (one per Facebook Ads account) to enable tracking of site visitors and targeting of specific Facebook ads at your audience.', 'largo' ),
+			'section'     => 'advanced',
+			'type'        => 'text',
+		)
+	);
+
+	// Bitly site verification.
+	$wp_customize->add_setting(
+		'bitly_verification',
+		array(
+			'default'           => '',
+			'sanitize_callback' => 'esc_html',
+		)
+	);
+	$wp_customize->add_control(
+		'bitly_verification',
+		array(
+			'label'       => esc_html__( 'Bitly site verification', 'largo' ),
+			'description' => esc_html__( 'This is a string of numbers and letters used to verify your site with bitly analytics.', 'largo' ),
+			'section'     => 'advanced',
+			'type'        => 'text',
+		)
+	);
+
+	// Use noindex for all archive pages?
+	$wp_customize->add_setting(
+		'noindex_archives',
+		array(
+			'default'           => '',
+		)
+	);
+	$wp_customize->add_control(
+		'noindex_archives',
+		array(
+			'label'       => esc_html__( 'Use noindex for all archive pages (default is to use noindex for just date archives).', 'largo' ),
+			'section'     => 'advanced',
+			'type'        => 'checkbox',
+		)
+	);
+
+	// 404 page text.
+	$wp_customize->add_setting(
+		'404_message',
+		array(
+			'default'           => '',
+			'sanitize_callback' => 'esc_html',
+		)
+	);
+	$wp_customize->add_control(
+		'404_message',
+		array(
+			'label'       => esc_html__( '404 page text.', 'largo' ),
+			'section'     => 'advanced',
+			'type'        => 'textarea',
+		)
+	);
+
+	// Enable display of job titles in bylines and author biographies?
+	$wp_customize->add_setting(
+		'show_job_titles',
+		array(
+			'default'           => '',
+		)
+	);
+	$wp_customize->add_control(
+		'show_job_titles',
+		array(
+			'label'       => esc_html__( 'Enable display of job titles in bylines and author biographies?', 'largo' ),
+			'section'     => 'advanced',
+			'type'        => 'checkbox',
+		)
+	);
 }
 add_action( 'customize_register', 'largo_customize_settings' );
