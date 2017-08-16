@@ -10,7 +10,7 @@
  *
  * @param obj $wp_customize Theme Customizer object.
  */
-function largo_customize_additional_scripts( $wp_customize ) {
+function largo_customize_settings( $wp_customize ) {
 
 	// Site Description.
 	$wp_customize->add_setting(
@@ -412,5 +412,4 @@ Donate Button.', 'largo' ),
 		)
 	);
 }
-
-add_action( 'customize_register', 'largo_customize_additional_scripts' );
+add_action( 'customize_register', 'largo_customize_settings' );
