@@ -17,7 +17,7 @@ function largo_customize_additional_scripts( $wp_customize ) {
 		'site_blurb',
 		array(
 			'default'           => '',
-			'sanitize_callback' => 'force_balance_tags',
+			'sanitize_callback' => 'esc_html',
 		)
 	);
 	$wp_customize->add_control(
@@ -35,7 +35,7 @@ function largo_customize_additional_scripts( $wp_customize ) {
 		'rss_link',
 		array(
 			'default'           => '',
-			'sanitize_callback' => 'force_balance_tags',
+			'sanitize_callback' => 'esc_attr',
 		)
 	);
 	$wp_customize->add_control(
@@ -45,7 +45,7 @@ function largo_customize_additional_scripts( $wp_customize ) {
 			'description' => esc_html__( 'Enter the URL for your primary RSS feed. You can override the default if you use Feedburner or some other service to generate or track your RSS feed
 Donate Button.', 'largo' ),
 			'section'     => 'basic_settings',
-			'type'        => 'textarea',
+			'type'        => 'url',
 		)
 	);
 
@@ -54,7 +54,6 @@ Donate Button.', 'largo' ),
 		'show_donate_button',
 		array(
 			'default'           => '',
-			'sanitize_callback' => 'force_balance_tags',
 		)
 	);
 	$wp_customize->add_control(
@@ -72,7 +71,7 @@ Donate Button.', 'largo' ),
 		'donate_link',
 		array(
 			'default'           => '',
-			'sanitize_callback' => 'force_balance_tags',
+			'sanitize_callback' => 'esc_url',
 		)
 	);
 	$wp_customize->add_control(
@@ -90,7 +89,7 @@ Donate Button.', 'largo' ),
 		'donate_button_text',
 		array(
 			'default'           => '',
-			'sanitize_callback' => 'force_balance_tags',
+			'sanitize_callback' => 'esc_attr',
 		)
 	);
 	$wp_customize->add_control(
@@ -108,7 +107,7 @@ Donate Button.', 'largo' ),
 		'copyright_msg',
 		array(
 			'default'           => '',
-			'sanitize_callback' => 'force_balance_tags',
+			'sanitize_callback' => 'esc_html',
 		)
 	);
 	$wp_customize->add_control(
@@ -126,7 +125,7 @@ Donate Button.', 'largo' ),
 		'posts_term_singular',
 		array(
 			'default'           => '',
-			'sanitize_callback' => 'force_balance_tags',
+			'sanitize_callback' => 'esc_attr',
 		)
 	);
 	$wp_customize->add_control(
@@ -144,7 +143,7 @@ Donate Button.', 'largo' ),
 		'posts_term_plural',
 		array(
 			'default'           => '',
-			'sanitize_callback' => 'force_balance_tags',
+			'sanitize_callback' => 'esc_attr',
 		)
 	);
 	$wp_customize->add_control(
@@ -161,7 +160,7 @@ Donate Button.', 'largo' ),
 		'facebook_link',
 		array(
 			'default'           => '',
-			'sanitize_callback' => 'force_balance_tags',
+			'sanitize_callback' => 'esc_url',
 		)
 	);
 	$wp_customize->add_control(
@@ -179,7 +178,7 @@ Donate Button.', 'largo' ),
 		'twitter_link',
 		array(
 			'default'           => '',
-			'sanitize_callback' => 'force_balance_tags',
+			'sanitize_callback' => 'esc_url',
 		)
 	);
 	$wp_customize->add_control(
@@ -197,7 +196,7 @@ Donate Button.', 'largo' ),
 		'twitter_link',
 		array(
 			'default'           => '',
-			'sanitize_callback' => 'force_balance_tags',
+			'sanitize_callback' => 'esc_url',
 		)
 	);
 	$wp_customize->add_control(
@@ -215,7 +214,7 @@ Donate Button.', 'largo' ),
 		'youtube_link',
 		array(
 			'default'           => '',
-			'sanitize_callback' => 'force_balance_tags',
+			'sanitize_callback' => 'esc_url',
 		)
 	);
 	$wp_customize->add_control(
@@ -233,7 +232,7 @@ Donate Button.', 'largo' ),
 		'instagram_link',
 		array(
 			'default'           => '',
-			'sanitize_callback' => 'force_balance_tags',
+			'sanitize_callback' => 'esc_url',
 		)
 	);
 	$wp_customize->add_control(
@@ -251,7 +250,7 @@ Donate Button.', 'largo' ),
 		'linkedin_link',
 		array(
 			'default'           => '',
-			'sanitize_callback' => 'force_balance_tags',
+			'sanitize_callback' => 'esc_url',
 		)
 	);
 	$wp_customize->add_control(
@@ -269,7 +268,7 @@ Donate Button.', 'largo' ),
 		'tumblr_link',
 		array(
 			'default'           => '',
-			'sanitize_callback' => 'force_balance_tags',
+			'sanitize_callback' => 'esc_url',
 		)
 	);
 	$wp_customize->add_control(
@@ -287,7 +286,7 @@ Donate Button.', 'largo' ),
 		'pinterest_link',
 		array(
 			'default'           => '',
-			'sanitize_callback' => 'force_balance_tags',
+			'sanitize_callback' => 'esc_url',
 		)
 	);
 	$wp_customize->add_control(
@@ -305,7 +304,7 @@ Donate Button.', 'largo' ),
 		'github_link',
 		array(
 			'default'           => '',
-			'sanitize_callback' => 'force_balance_tags',
+			'sanitize_callback' => 'esc_url',
 		)
 	);
 	$wp_customize->add_control(
@@ -323,7 +322,7 @@ Donate Button.', 'largo' ),
 		'flickr_link',
 		array(
 			'default'           => '',
-			'sanitize_callback' => 'force_balance_tags',
+			'sanitize_callback' => 'esc_url',
 		)
 	);
 	$wp_customize->add_control(
@@ -335,5 +334,83 @@ Donate Button.', 'largo' ),
 			'type'        => 'url',
 		)
 	);
+
+	// Would you like to display share icons at the top of single posts?
+	$wp_customize->add_setting(
+		'single_social_icons',
+		array(
+			'default'           => '',
+		)
+	);
+	$wp_customize->add_control(
+		'single_social_icons',
+		array(
+			'label'       => esc_html__( 'Would you like to display share icons at the top of single posts?', 'largo' ),
+			'description' => esc_html__( 'By default social icons appear at the top of single posts but you can choose to not show them at all.', 'largo' ),
+			'section'     => 'basic_settings',
+			'type'        => 'checkbox',
+		)
+	);
+
+	// Select the share icons to display at the top of single posts.
+	$wp_customize->add_setting(
+		'article_utilities',
+		array(
+			'default'           => '',
+		)
+	);
+	// @TODO this needs to be converted to checkboxes
+	$wp_customize->add_control(
+		'article_utilities',
+		array(
+			'label'       => esc_html__( 'Select the share icons to display at the top of single posts.', 'largo' ),
+			'section'     => 'basic_settings',
+			'type'        => 'radio',
+			'choices'     => array(
+				'facebook'  => 'Facebook',
+				'twitter'   => 'Twitter',
+				'email'     => 'Email',
+				'print'     => 'Print',
+			),
+		)
+	);
+
+	// Would you like to display share icons in a floating bar beside posts using the single-column post template?
+	$wp_customize->add_setting(
+		'single_floating_social_icons',
+		array(
+			'default'           => '',
+		)
+	);
+	$wp_customize->add_control(
+		'single_floating_social_icons',
+		array(
+			'label'       => esc_html__( 'Would you like to display share icons in a floating bar beside posts using the single-column post template?', 'largo' ),
+			'section'     => 'basic_settings',
+			'type'        => 'checkbox',
+		)
+	);
+
+	// Verb to use for Facebook buttons?
+	$wp_customize->add_setting(
+		'fb_verb',
+		array(
+			'default'           => 'like',
+		)
+	);
+	$wp_customize->add_control(
+		'fb_verb',
+		array(
+			'label'       => esc_html__( 'Verb to use for Facebook buttons?', 'largo' ),
+			'section'     => 'basic_settings',
+			'type'        => 'select',
+			'choices'     => array(
+				'like'      => 'Like',
+				'recommend' => 'Recommend',
+				'share'     => 'Share',
+			),
+		)
+	);
 }
+
 add_action( 'customize_register', 'largo_customize_additional_scripts' );
