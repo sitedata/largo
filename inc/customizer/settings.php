@@ -431,10 +431,10 @@ function largo_customize_settings( $wp_customize ) {
 	$wp_customize->add_control(
 		'logo_thumbnail_sq',
 		array(
-		'label'       => esc_html__( 'Upload a Square Thumbnail Image (200x200px minimum)', 'largo' ),
-		'description' => esc_html__( ' Upload This is a default image used for Facebook posts when you do not set a featured image for your posts. We also use it as a bookmark icon for Apple devices.', 'largo' ),
-		'section'     => 'theme_images',
-		'type'        => 'text',
+			'label'       => esc_html__( 'Upload a Square Thumbnail Image (200x200px minimum)', 'largo' ),
+			'description' => esc_html__( 'Upload This is a default image used for Facebook posts when you do not set a featured image for your posts. We also use it as a bookmark icon for Apple devices.', 'largo' ),
+			'section'     => 'theme_images',
+			'type'        => 'text',
 		)
 	);
 
@@ -541,6 +541,221 @@ function largo_customize_settings( $wp_customize ) {
 			'description' => esc_html__( 'Used in the sticky navigation. This image should be 100px tall and at least 100px wide. If no logo is provided, the site name will be displayed. To display an abbreviated site name in the sticky navigation see the "Navigation" options tab above.', 'largo' ),
 			'section'     => 'theme_images',
 			'type'        => 'text', // @TODO switch to media selector
+		)
+	);
+
+	/**
+	 * Layout Section.
+	 */
+
+	// Home Template.
+	$wp_customize->add_setting(
+		'home_template',
+		array(
+			'default'           => '',
+		)
+	);
+	$wp_customize->add_control(
+		'home_template',
+		array(
+			'label'       => esc_html__( 'Home Template', 'largo' ),
+			'description' => esc_html__( 'Select the layout to use for the top of the homepage. These are Home Templates, defined much like post/page templates.', 'largo' ),
+			'section'     => 'layout',
+			'type'        => 'radio',
+			'choices'     => array(
+				'HomepageBlog' => 'Blog',
+				'HomepageSingle' => 'Big story, full-width image',
+				'HomepageSingleWithFeatured' => 'One big story and list of featured stories',
+				'TopStories' => 'Top Stories',
+				'LegacyThreeColumn' => 'Legacy Three Column',
+			),
+		)
+	);
+
+	// Show sticky posts box on homepage?
+	$wp_customize->add_setting(
+		'show_sticky_posts',
+		array(
+			'default'           => '',
+		)
+	);
+	$wp_customize->add_control(
+		'show_sticky_posts',
+		array(
+			'label'       => esc_html__( 'Show sticky posts box on homepage?', 'largo' ),
+			'description' => esc_html__( 'If checked, you will need to set at least one post as sticky for this box to appear.', 'largo' ),
+			'section'     => 'layout',
+			'type'        => 'checkbox',
+		)
+	);
+
+	// Homepage Bottom Template.
+	$wp_customize->add_setting(
+		'home_template',
+		array(
+			'default'           => '',
+		)
+	);
+	$wp_customize->add_control(
+		'home_template',
+		array(
+			'label'       => esc_html__( 'Homepage Bottom Template', 'largo' ),
+			'description' => esc_html__( 'Select the layout to use for the bottom of the homepage. Largo supports three options: a single column list of recent posts with photos and excerpts, a two column widget area, or nothing whatsoever.', 'largo' ),
+			'section'     => 'layout',
+			'type'        => 'radio',
+			'choices'     => array(
+				'list' => 'Single-column list of recent posts',
+				'widgets' => 'Two-column widget area',
+				'none' => 'Nothing',
+			),
+		)
+	);
+
+	// Number of posts to display in the main loop on the homepage.
+	$wp_customize->add_setting(
+		'num_posts_home',
+		array(
+			'default'           => '',
+			'sanitize_callback' => 'intval',
+		)
+	);
+	$wp_customize->add_control(
+		'num_posts_home',
+		array(
+			'label'       => esc_html__( 'Number of posts to display in the main loop on the homepage', 'largo' ),
+			'section'     => 'layout',
+			'type'        => 'number',
+		)
+	);
+
+	// Categories to include or exclude in the main loop on the homepage.
+	$wp_customize->add_setting(
+		'cats_home',
+		array(
+			'default'           => '',
+			'sanitize_callback' => 'esc_attr',
+		)
+	);
+	$wp_customize->add_control(
+		'cats_home',
+		array(
+			'label'       => esc_html__( 'Categories to include or exclude in the main loop on the homepage', 'largo' ),
+			'description' => esc_html__( '(Comma-separated list of values)', 'largo' ),
+			'section'     => 'layout',
+			'type'        => 'text',
+		)
+	);
+
+	// Single Article Template.
+	$wp_customize->add_setting(
+		'single_template',
+		array(
+			'default'           => 'normal',
+		)
+	);
+	$wp_customize->add_control(
+		'single_template',
+		array(
+			'label'       => esc_html__( 'Single Article Template', 'largo' ),
+			'description' => esc_html__( 'Starting with version 0.4, Largo introduced a new single-post template that more prominently highlights article content, which is the default. For backward compatibility, the pre-0.3 version is also available.', 'largo' ),
+			'section'     => 'layout',
+			'type'        => 'select',
+			'choices'     => array(
+				'normal'    => 'One Column (Standard Layout)',
+				'classic'   => 'Two Column (Classic Layout)',
+			),
+		)
+	);
+
+	// Hide the featured posts area on category pages?
+	$wp_customize->add_setting(
+		'hide_category_featured',
+		array(
+			'default'           => '',
+		)
+	);
+	$wp_customize->add_control(
+		'hide_category_featured',
+		array(
+			'label'       => esc_html__( 'Hide the featured posts area on category pages?', 'largo' ),
+			'section'     => 'layout',
+			'type'        => 'checkbox',
+		)
+	);
+
+	// Custom sidebar on archive pages?
+	$wp_customize->add_setting(
+		'use_topic_sidebar',
+		array(
+			'default'           => '',
+		)
+	);
+	$wp_customize->add_control(
+		'use_topic_sidebar',
+		array(
+			'label'       => esc_html__( 'Custom sidebar on archive pages?', 'largo' ),
+			'description' => esc_html__( 'By default Largo has two sidebars. One is used for single pages and posts and the other is used for everything else (including the homepage). Check this box if you would like to have a third sidebar to be used in place of the main sidebar on archive pages (category, tag, author and series pages).', 'largo' ),
+			'section'     => 'layout',
+			'type'        => 'checkbox',
+		)
+	);
+
+	// Add a widget area above the footer?
+	$wp_customize->add_setting(
+		'use_before_footer_sidebar',
+		array(
+			'default'           => '',
+		)
+	);
+	$wp_customize->add_control(
+		'use_before_footer_sidebar',
+		array(
+			'label'       => esc_html__( 'Add a widget area above the footer?', 'largo' ),
+			'description' => esc_html__( 'Include an additional widget region ("sidebar") just above the site footer region.', 'largo' ),
+			'section'     => 'layout',
+			'type'        => 'checkbox',
+		)
+	);
+
+	// Want to add custom sidebars?
+	$wp_customize->add_setting(
+		'custom_sidebars',
+		array(
+			'default'           => '',
+			'sanitize_callback' => 'esc_html',
+		)
+	);
+	$wp_customize->add_control(
+		'custom_sidebars',
+		array(
+			'label'       => esc_html__( 'Add a widget area above the footer?', 'largo' ),
+			'description' => esc_html__( 'Enter names of additional sidebar regions (one per line) you\'d like post authors to be able to choose to display on their posts.', 'largo' ),
+			'section'     => 'layout',
+			'type'        => 'textarea',
+		)
+	);
+
+	// Select the layout to use for the footer.
+	$wp_customize->add_setting(
+		'footer_layout',
+		array(
+			'default'           => '3col-default',
+		)
+	);
+	$wp_customize->add_control(
+		'footer_layout',
+		array(
+			'label'       => esc_html__( 'Select the layout to use for the footer.', 'largo' ),
+			'description' => esc_html__( 'The default is a 3 column footer with a wide center column. Alternatively you can choose to have 3 or 4 equal columns. Each column is a widget area that can be configured under the Appearance > Widgets menu.', 'largo' ),
+			'section'     => 'layout',
+			'type'        => 'radio',
+			'choices'     => array(
+				'3col-default' => '3 Columns ( 25% / 50% / 25% )',
+				'3col-equal' => '3 Equal Columns',
+				'4col' => '4 Equal Columns',
+				'4col-asymm' => '4 Columns ( 20% / 20% / 20% / 40% )',
+				'1col' => '1 Column'
+			)
 		)
 	);
 }
