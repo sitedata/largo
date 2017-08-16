@@ -381,7 +381,7 @@ function largo_customize_settings( $wp_customize ) {
 
 	// Would you like to display share icons in a floating bar beside posts using the single-column post template?
 	$wp_customize->add_setting(
-	'single_floating_social_icons',
+		'single_floating_social_icons',
 		array(
 			'default'           => '',
 		)
@@ -754,8 +754,135 @@ function largo_customize_settings( $wp_customize ) {
 				'3col-equal' => '3 Equal Columns',
 				'4col' => '4 Equal Columns',
 				'4col-asymm' => '4 Columns ( 20% / 20% / 20% / 40% )',
-				'1col' => '1 Column'
-			)
+				'1col' => '1 Column',
+			),
+		)
+	);
+
+	/**
+	 * Navigation Section.
+	 */
+
+	// Enable sticky navigation?
+	$wp_customize->add_setting(
+		'sticky_nav_display',
+		array(
+			'default'           => '',
+		)
+	);
+	$wp_customize->add_control(
+		'sticky_nav_display',
+		array(
+			'label'       => esc_html__( 'Enable sticky navigation?', 'largo' ),
+			'description' => esc_html__( 'By default, a floating/sticky navigation bar is visible on all pages for mobile screen sizes. The sticky navigation bar will disappear when a user scrolls down and reappear when a user begins to scroll up. When the main navigation is visible, the sticky navigation will disappear. This feature can be deactivated but we typically recommend sticking with the default behavior.', 'largo' ),
+			'section'     => 'navigation',
+			'type'        => 'checkbox',
+		)
+	);
+
+	// Hide the main navigation on article pages and display only the sticky navigation on article pages.
+	$wp_customize->add_setting(
+		'main_nav_hide_article',
+		array(
+			'default'           => '',
+		)
+	);
+	$wp_customize->add_control(
+		'main_nav_hide_article',
+		array(
+			'label'       => esc_html__( 'Hide the main navigation on article pages and display only the sticky navigation on article pages', 'largo' ),
+			'description' => esc_html__( 'NOTE: If the main navigation is hidden on article pages, readers will only see a small logo in the left-hand corner when entering the site and you will not be able to run a banner ad above the navigation.', 'largo' ),
+			'section'     => 'navigation',
+			'type'        => 'checkbox',
+		)
+	);
+
+	// Sticky navigation overflow.
+	$wp_customize->add_setting(
+		'nav_overflow_label',
+		array(
+			'default'           => esc_html__( 'More', 'largo' ),
+			'sanitize_callback' => 'esc_html',
+		)
+	);
+	$wp_customize->add_control(
+		'nav_overflow_label',
+		array(
+			'label'       => esc_html__( 'Sticky navigation overflow', 'largo' ),
+			'description' => esc_html__( 'Enter the label used for the navigation menu that houses any navigation links that would otherwise cause the navigation to wrap onto multiple lines.', 'largo' ),
+			'section'     => 'navigation',
+			'type'        => 'text',
+		)
+	);
+
+	// Alternate site name for sticky navigation.
+	$wp_customize->add_setting(
+		'nav_alt_site_name',
+		array(
+			'default'           => '',
+			'sanitize_callback' => 'esc_html',
+		)
+	);
+	$wp_customize->add_control(
+		'nav_alt_site_name',
+		array(
+			'label'       => esc_html__( 'Alternate site name for sticky navigation', 'largo' ),
+			'description' => esc_html__( 'If your site name is especially long, use this field to set an abbreviation or shorter version for use in the sticky nav on small screens.', 'largo' ),
+			'section'     => 'navigation',
+			'type'        => 'text',
+		)
+	);
+
+	// Show the "Don't Miss" menu under the main site navigation.
+	$wp_customize->add_setting(
+		'show_dont_miss_menu',
+		array(
+			'default'           => '',
+		)
+	);
+	$wp_customize->add_control(
+		'show_dont_miss_menu',
+		array(
+			'label'       => esc_html__( 'Show the "Don\'t Miss" menu under the main site navigation.', 'largo' ),
+			'description' => esc_html__( 'Add links to this menu under Appearance > Menus.', 'largo' ),
+			'section'     => 'navigation',
+			'type'        => 'checkbox',
+		)
+	);
+
+	// Enter the label that appears in front of the menu links in the "Don't Miss" menu.
+	$wp_customize->add_setting(
+		'dont_miss_label',
+		array(
+			'default'           => esc_html__( 'Don\'t Miss', 'largo' ),
+			'sanitize_callback' => 'esc_html',
+		)
+	);
+	$wp_customize->add_control(
+		'dont_miss_label',
+		array(
+			'label'       => esc_html__( 'Enter the label that appears in front of the menu links in the "Don\'t Miss" menu', 'largo' ),
+			'description' => esc_html__( 'You can delete this default and no label will appear.', 'largo' ),
+			'section'     => 'navigation',
+			'type'        => 'text',
+		)
+	);
+
+	// Enter the label that appears before the menu links in the Footer Nav Menu.
+	$wp_customize->add_setting(
+		'footer_menu_label',
+		array(
+			'default'           => '',
+			'sanitize_callback' => 'esc_html',
+		)
+	);
+	$wp_customize->add_control(
+		'footer_menu_label',
+		array(
+			'label'       => esc_html__( 'Enter the label that appears before the menu links in the Footer Nav Menu.', 'largo' ),
+			'description' => esc_html__( 'You can delete this default and no label will appear.', 'largo' ),
+			'section'     => 'navigation',
+			'type'        => 'text',
 		)
 	);
 }
