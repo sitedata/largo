@@ -12,6 +12,10 @@
  */
 function largo_customize_settings( $wp_customize ) {
 
+	/**
+	 * Basic Settings Section.
+	 */
+
 	// Site Description.
 	$wp_customize->add_setting(
 		'site_blurb',
@@ -409,6 +413,134 @@ Donate Button.', 'largo' ),
 				'recommend' => 'Recommend',
 				'share'     => 'Share',
 			),
+		)
+	);
+
+	/**
+	 * Theme Images Section.
+	 */
+
+	 // Upload a Square Thumbnail Image (200x200px minimum).
+	 $wp_customize->add_setting(
+		 'logo_thumbnail_sq',
+		 array(
+			 'default'           => '',
+			 'sanitize_callback' => 'esc_attr',
+		 )
+	 );
+	 $wp_customize->add_control(
+		 'logo_thumbnail_sq',
+		 array(
+			 'label'       => esc_html__( 'Upload a Square Thumbnail Image (200x200px minimum)', 'largo' ),
+			 'description' => esc_html__( ' Upload This is a default image used for Facebook posts when you do not set a featured image for your posts. We also use it as a bookmark icon for Apple devices.', 'largo' ),
+			 'section'     => 'theme_images',
+			 'type'        => 'text',
+		 )
+	 );
+
+	// Upload a Favicon.
+	$wp_customize->add_setting(
+	   'favicon',
+	   array(
+		   'default'           => '',
+		   'sanitize_callback' => 'esc_attr',
+	   )
+   );
+   $wp_customize->add_control(
+	   'favicon',
+	   array(
+		   'label'       => esc_html__( 'Upload a Favicon', 'largo' ),
+		   'description' => esc_html__( ' This is the small icon that appears in browser tabs and in some feed readers and other applications. Favicons must be an .ico file and are typically 16x16px square.', 'largo' ),
+		   'section'     => 'theme_images',
+		   'type'        => 'text',
+	   )
+   );
+
+	// Use only text in the place of a banner image (uses site title and description).
+	$wp_customize->add_setting(
+		'no_header_image',
+		array(
+			'default'           => '',
+		)
+	);
+	$wp_customize->add_control(
+		'no_header_image',
+		array(
+			'label'       => esc_html__( 'Use only text in the place of a banner image (uses site title and description).', 'largo' ),
+			'section'     => 'theme_images',
+			'type'        => 'checkbox',
+		)
+	);
+
+	// Small Banner Image (768px wide).
+	$wp_customize->add_setting(
+		'banner_image_sm',
+		array(
+			'default'           => '',
+			'sanitize_callback' => 'esc_attr',
+		)
+	);
+	$wp_customize->add_control(
+		'banner_image_sm',
+		array(
+			'label'       => esc_html__( 'Small Banner Image (768px wide)', 'largo' ),
+			'description' => esc_html__( 'Used for viewports below 768px wide (mostly phones and some tablets). Recommended height: 240px.', 'largo' ),
+			'section'     => 'theme_images',
+			'type'        => 'text', // @TODO switch to media selector
+		)
+	);
+
+	// Medium Banner Image (980px wide).
+	$wp_customize->add_setting(
+		'banner_image_med',
+		array(
+			'default'           => '',
+			'sanitize_callback' => 'esc_attr',
+		)
+	);
+	$wp_customize->add_control(
+		'banner_image_med',
+		array(
+			'label'       => esc_html__( 'Medium Banner Image (980px wide)', 'largo' ),
+			'description' => esc_html__( 'Upload Used for viewports between 768px and 980 px (mostly tablets). Recommended height: 180px.', 'largo' ),
+			'section'     => 'theme_images',
+			'type'        => 'text', // @TODO switch to media selector
+		)
+	);
+
+	// Large Banner Image (1170px wide).
+	$wp_customize->add_setting(
+		'banner_image_lg',
+		array(
+			'default'           => '',
+			'sanitize_callback' => 'esc_attr',
+		)
+	);
+	$wp_customize->add_control(
+		'banner_image_lg',
+		array(
+			'label'       => esc_html__( 'Large Banner Image (1170px wide)', 'largo' ),
+			'description' => esc_html__( 'Used for viewports above 980 px (landscape tablets and desktops). Recommended height: 150px. Recommended height: 180px.', 'largo' ),
+			'section'     => 'theme_images',
+			'type'        => 'text', // @TODO switch to media selector
+		)
+	);
+
+	// Sticky Header Logo.
+	$wp_customize->add_setting(
+		'sticky_header_logo',
+		array(
+			'default'           => '',
+			'sanitize_callback' => 'esc_attr',
+		)
+	);
+	$wp_customize->add_control(
+		'sticky_header_logo',
+		array(
+			'label'       => esc_html__( 'Sticky Header Logo', 'largo' ),
+			'description' => esc_html__( 'Used in the sticky navigation. This image should be 100px tall and at least 100px wide. If no logo is provided, the site name will be displayed. To display an abbreviated site name in the sticky navigation see the "Navigation" options tab above.', 'largo' ),
+			'section'     => 'theme_images',
+			'type'        => 'text', // @TODO switch to media selector
 		)
 	);
 }
