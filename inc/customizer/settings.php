@@ -47,7 +47,7 @@ function largo_customize_settings( $wp_customize ) {
 		array(
 			'label'       => esc_html__( 'Feed URL', 'largo' ),
 			'description' => esc_html__( 'Enter the URL for your primary RSS feed. You can override the default if you use Feedburner or some other service to generate or track your RSS feed
-Donate Button.', 'largo' ),
+			Donate Button.', 'largo' ),
 			'section'     => 'basic_settings',
 			'type'        => 'url',
 		)
@@ -381,7 +381,7 @@ Donate Button.', 'largo' ),
 
 	// Would you like to display share icons in a floating bar beside posts using the single-column post template?
 	$wp_customize->add_setting(
-		'single_floating_social_icons',
+	'single_floating_social_icons',
 		array(
 			'default'           => '',
 		)
@@ -420,41 +420,41 @@ Donate Button.', 'largo' ),
 	 * Theme Images Section.
 	 */
 
-	 // Upload a Square Thumbnail Image (200x200px minimum).
-	 $wp_customize->add_setting(
-		 'logo_thumbnail_sq',
-		 array(
-			 'default'           => '',
-			 'sanitize_callback' => 'esc_attr',
-		 )
-	 );
-	 $wp_customize->add_control(
-		 'logo_thumbnail_sq',
-		 array(
-			 'label'       => esc_html__( 'Upload a Square Thumbnail Image (200x200px minimum)', 'largo' ),
-			 'description' => esc_html__( ' Upload This is a default image used for Facebook posts when you do not set a featured image for your posts. We also use it as a bookmark icon for Apple devices.', 'largo' ),
-			 'section'     => 'theme_images',
-			 'type'        => 'text',
-		 )
-	 );
+	// Upload a Square Thumbnail Image (200x200px minimum).
+	$wp_customize->add_setting(
+		'logo_thumbnail_sq',
+		array(
+			'default'           => '',
+			'sanitize_callback' => 'esc_attr',
+		)
+	);
+	$wp_customize->add_control(
+		'logo_thumbnail_sq',
+		array(
+		'label'       => esc_html__( 'Upload a Square Thumbnail Image (200x200px minimum)', 'largo' ),
+		'description' => esc_html__( ' Upload This is a default image used for Facebook posts when you do not set a featured image for your posts. We also use it as a bookmark icon for Apple devices.', 'largo' ),
+		'section'     => 'theme_images',
+		'type'        => 'text',
+		)
+	);
 
 	// Upload a Favicon.
 	$wp_customize->add_setting(
-	   'favicon',
-	   array(
-		   'default'           => '',
-		   'sanitize_callback' => 'esc_attr',
-	   )
-   );
-   $wp_customize->add_control(
-	   'favicon',
-	   array(
-		   'label'       => esc_html__( 'Upload a Favicon', 'largo' ),
-		   'description' => esc_html__( ' This is the small icon that appears in browser tabs and in some feed readers and other applications. Favicons must be an .ico file and are typically 16x16px square.', 'largo' ),
-		   'section'     => 'theme_images',
-		   'type'        => 'text',
-	   )
-   );
+		'favicon',
+		array(
+			'default'           => '',
+			'sanitize_callback' => 'esc_attr',
+		)
+	);
+	$wp_customize->add_control(
+		'favicon',
+		array(
+			'label'       => esc_html__( 'Upload a Favicon', 'largo' ),
+			'description' => esc_html__( ' This is the small icon that appears in browser tabs and in some feed readers and other applications. Favicons must be an .ico file and are typically 16x16px square.', 'largo' ),
+			'section'     => 'theme_images',
+			'type'        => 'text',
+		)
+	);
 
 	// Use only text in the place of a banner image (uses site title and description).
 	$wp_customize->add_setting(
