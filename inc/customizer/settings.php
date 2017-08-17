@@ -591,13 +591,13 @@ function largo_customize_settings( $wp_customize ) {
 
 	// Homepage Bottom Template.
 	$wp_customize->add_setting(
-		'home_template',
+		'homepage_bottom',
 		array(
 			'default'           => '',
 		)
 	);
 	$wp_customize->add_control(
-		'home_template',
+		'homepage_bottom',
 		array(
 			'label'       => esc_html__( 'Homepage Bottom Template', 'largo' ),
 			'description' => esc_html__( 'Select the layout to use for the bottom of the homepage. Largo supports three options: a single column list of recent posts with photos and excerpts, a two column widget area, or nothing whatsoever.', 'largo' ),
