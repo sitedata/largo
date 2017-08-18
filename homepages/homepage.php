@@ -146,7 +146,7 @@ function largo_home_single_top() {
 
 /**
  * Returns featured stories for the homepage.
- * 
+ *
  * @param int $max. The maximum number of posts to return.
  */
 function largo_home_featured_stories($max = 3) {

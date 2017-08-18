@@ -14,5 +14,5 @@ class HomepageBlog extends Homepage {
 		$options = array_merge( $defaults, $options );
 		parent::__construct( $options );
 	}
-	
+
 }

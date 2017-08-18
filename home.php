@@ -27,7 +27,7 @@ global $largo;
 if ($home_template == 'LegacyThreeColumn')
 	$span_class = 'span8';
 else
-	$span_class = ( $largo['home_rail'] ) ? 'span8' : 'span12' ;
+	$span_class = ( isset( $largo['home_rail'] ) && $largo['home_rail'] ) ? 'span8' : 'span12' ;
 ?>
 
 <div id="content" class="stories <?php echo $span_class; ?> <?php echo sanitize_html_class(basename($home_template)); ?>" role="main">
