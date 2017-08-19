@@ -13,7 +13,7 @@ get_header();
 			?>
 		</h1>
 
-		<?
+		<?php
 			/**
 			 * Fires before the Google Custom Search container
 			 *
@@ -67,7 +67,7 @@ get_header();
 			<?php } ?>
 		</div>
 
-		<?
+		<?php
 			/**
 			 * Fires after the Google Custom Search container
 			 *
