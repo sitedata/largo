@@ -327,6 +327,9 @@ function optionsframework_validate( $input ) {
  */
 
 function optionsframework_save_options_notice() {
+    if ( ! function_exists( 'add_settings_error' ) ) {
+       require  WPINC . '/template.php';
+    }
 	add_settings_error( 'options-framework', 'save_options', __( 'Options saved.', 'options_framework_theme' ), 'updated fade' );
 }
 
