@@ -25,7 +25,14 @@ add_action( 'get_avatar', 'largo_get_avatar_filter', 1, 5 );
  * Get the avatar image HTML for the given user id/email and size
  *
  * @param int|string $id_or_email a wordpress user ID or user email address;
- * @param int $string The size of the avatar
+ * @param int $size The size of the avatar
+ * @return false|array {  Returns an array, or false if no image is available.
+ *      @type string url
+ *      @type int width
+ *      @type int height
+ *      @type bool is_intermediate
+ * }
+ *
  */
 function largo_get_avatar_src( $id_or_email, $size ) {
 
@@ -33,9 +40,9 @@ function largo_get_avatar_src( $id_or_email, $size ) {
 	if ( is_numeric( $id_or_email ) ) {
 		$id = (int) $id_or_email;
 	} elseif ( is_object( $id_or_email ) ) {
-		if ( ! empty( $id_or_email->user_id ) ) {
-			$id = (int) $id_or_email->user_id;
-		}
+		$id = ! empty( $id_or_email->user_id )
+			? (int) $id_or_email->user_id
+			: null;
 	} else {
 		$user = get_user_by( 'email', $id_or_email );
 		$id = $user->ID;
