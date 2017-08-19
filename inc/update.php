@@ -1193,8 +1193,8 @@ function largo_block_theme_options_for_update() {
 		});
 
 		add_theme_page(
-			__( 'Theme Options', 'options_framework_theme' ),
-			__( 'Theme Options', 'options_framework_theme' ),
+			__( 'Theme Options', 'largo' ),
+			__( 'Theme Options', 'largo' ),
 			'update_themes',
 			'largo-block-theme-options',
 			'largo_block_theme_options'
