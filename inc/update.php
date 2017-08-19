@@ -96,8 +96,8 @@ function largo_register_update_page() {
 	if ( largo_need_updates() ) {
 		add_submenu_page(
 			'index.php',
-			esc_html__( 'Update Largo' ),
-			esc_html__( 'Update Largo' ),
+			esc_html__( 'Update Largo', 'largo' ),
+			esc_html__( 'Update Largo', 'largo' ),
 			'update_themes',
 			'update-largo',
 			'largo_update_page_template'
