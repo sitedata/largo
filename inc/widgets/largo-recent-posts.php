@@ -36,7 +36,7 @@ class largo_recent_posts_widget extends WP_Widget {
 		global $post,
 			$wp_query, // grab this to copy posts in the main column
 			$shown_ids; // an array of post IDs already on a page so we can avoid duplicating posts;
-		
+
 		// Preserve global $post
 		$preserve = $post;
 
@@ -45,7 +45,7 @@ class largo_recent_posts_widget extends WP_Widget {
 		$posts_term = of_get_option( 'posts_term_plural', 'Posts' );
 
 		// Add the link to the title.
-		$title = apply_filters( 'widget_title', empty( $instance['title'] ) ? __( 'Recent ' . $posts_term, 'largo' ) : $instance['title'], $instance, $this->id_base );
+		$title = apply_filters( 'widget_title', empty( $instance['title'] ) ? __( 'Recent ', 'largo' ) . $posts_term : $instance['title'], $instance, $this->id_base );
 
 		echo $before_widget;
 
@@ -235,7 +235,7 @@ class largo_recent_posts_widget extends WP_Widget {
 			<input class="checkbox" type="checkbox" <?php echo $show_top_term; ?> id="<?php echo $this->get_field_id( 'show_top_term' ); ?>" name="<?php echo $this->get_field_name( 'show_top_term' ); ?>" /> <label for="<?php echo $this->get_field_id( 'show_top_term' ); ?>"><?php _e( 'Show the top term on posts?', 'largo' ); ?></label>
 		</p>
 
-		<?php 
+		<?php
 			// only show this admin if the "Post Types" taxonomy is enabled.
 			if ( taxonomy_exists('post-type') && of_get_option('post_types_enabled') ) {
 		?>
