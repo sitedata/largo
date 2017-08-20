@@ -48,7 +48,7 @@ else
 		// bottom section, we'll either use a two-column widget area or a single column list of recent posts
 		if ( get_theme_mod('homepage_bottom') === 'widgets' ) {
 			get_template_part('partials/home-bottom', 'widget-area');
-		} else if (get_theme_mod('homepage_bottom') === 'list') {
+		} else if (get_theme_mod('homepage_bottom') === 'list' || ! get_theme_mod('homepage_bottom') ) {
 			get_template_part('partials/home-post-list');
 		}
 
