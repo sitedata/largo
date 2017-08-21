@@ -58,7 +58,7 @@ function largo_register_sidebars() {
 		);
 	}
 
-	if ( get_theme_mod( 'use_topic_sidebar' ) ) {
+	if ( get_theme_mod( 'use_topic_sidebar', false ) ) {
 		$sidebars[] = array(
 			'name' 	=> __( 'Archive/Topic Sidebar', 'largo' ),
 			'desc' 	=> __( 'The sidebar for category, tag and other archive pages', 'largo' ),
@@ -66,7 +66,7 @@ function largo_register_sidebars() {
 		);
 	}
 
-	if ( get_theme_mod( 'use_before_footer_sidebar' ) ) {
+	if ( get_theme_mod( 'use_before_footer_sidebar', 0 ) ) {
 		$sidebars[] = array(
 			'name' 	=> __( 'Before Footer', 'largo' ),
 			'desc' 	=> __( 'Full-width area immediately above footer', 'largo' ),
@@ -82,7 +82,7 @@ function largo_register_sidebars() {
 		);
 	}
 
-	if ( get_theme_mod( 'leaderboard_enabled' ) ) {
+	if ( get_theme_mod( 'leaderboard_enabled', 0 ) ) {
 		$sidebars[] = array(
 			'name' 	=> __( 'Header Ad Zone', 'largo'),
 			'desc' 	=> __( 'An optional leaderboard (728x90) ad zone above the main site header', 'largo' ),
@@ -90,7 +90,7 @@ function largo_register_sidebars() {
 		);
 	}
 
-	if ( get_theme_mod( 'header_widget_enabled' ) ) {
+	if ( get_theme_mod( 'header_widget_enabled', false ) ) {
 		$sidebars[] = array(
 			'name' 	=> __( 'Header Widget', 'largo'),
 			'desc' 	=> __( 'An optional area to place one widget in the header next to the site logo.', 'largo' ),
@@ -183,7 +183,7 @@ if( !function_exists( 'largo_custom_sidebars_dropdown' ) ) {
 		}
 
 		if ( $admin_page->base == 'edit-tags' ) {
-			if ( get_theme_mod( 'use_topic_sidebar' ) && is_active_sidebar( 'topic-sidebar' ) ) {
+			if ( get_theme_mod( 'use_topic_sidebar', false ) && is_active_sidebar( 'topic-sidebar' ) ) {
 				$default_label = sprintf( __( 'Default (%s)', 'largo' ), $wp_registered_sidebars['topic-sidebar']['name'] );
 			} else {
 				$default_label = sprintf( __( 'Default (%s)', 'largo' ), $wp_registered_sidebars['sidebar-main']['name'] );

@@ -325,7 +325,7 @@ function optionsframework_options() {
 	if (count($home_templates)) {
 		$home_std= 'HomepageBlog';
 
-		$home_template = get_theme_mod('home_template');
+		$home_template = get_theme_mod( 'home_template', 'HomepageBlog' );
 		if (empty($home_template)) {
 			if (get_theme_mod('homepage_layout') == '3col')
 				$home_std= 'LegacyThreeColumn';

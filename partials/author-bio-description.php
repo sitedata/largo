@@ -20,7 +20,7 @@ if ( largo_has_avatar( $author_obj->user_email ) ) {
 }
 
 // Job!
-$show_job_titles = get_theme_mod('show_job_titles');
+$show_job_titles = get_theme_mod( 'show_job_titles', false );
 if ( $job = $author_obj->job_title && $show_job_titles ) {
 	echo '<p class="job-title">' . esc_attr( $author_obj->job_title ) . '</p>';
 }

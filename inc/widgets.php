@@ -44,7 +44,7 @@ function largo_widgets() {
 	}
 
 	/* If disclaimer is enabled */
-	if( get_theme_mod('disclaimer_enabled') )
+	if ( get_theme_mod( 'disclaimer_enabled', false ) )
 		$register['largo_disclaimer_widget'] = '/inc/widgets/largo-disclaimer-widget.php';
 
 	foreach ( $register as $key => $val ) {
@@ -258,9 +258,9 @@ function largo_populate_article_bottom_widget_area($theme) {
 
 	// Otherwise, if there's no largo_version or the 'article-bottom' area is empty,
 	// we're on a clean install and should set the default widgets
-	if (!get_theme_mod('largo_version') || !is_active_sidebar('article-bottom')) {
-		largo_instantiate_widget('largo-author', array(), 'article-bottom');
-		largo_instantiate_widget('largo-related-posts', array(), 'article-bottom');
+	if ( ! get_theme_mod( 'largo_version', false ) || ! is_active_sidebar( 'article-bottom' ) ) {
+		largo_instantiate_widget( 'largo-author', array(), 'article-bottom' );
+		largo_instantiate_widget( 'largo-related-posts', array(), 'article-bottom' );
 	}
 }
-add_action('after_switch_theme', 'largo_populate_article_bottom_widget_area');
+add_action( 'after_switch_theme', 'largo_populate_article_bottom_widget_area' );

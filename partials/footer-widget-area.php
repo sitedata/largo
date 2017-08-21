@@ -18,7 +18,7 @@
  */
 
 // Get the layout from the options.
-$layout = get_theme_mod( 'footer_layout' );
+$layout = get_theme_mod( 'footer_layout', '3col-default' );
 
 // If the specified template does not exist in the child or parent theme, use 3col-default.
 if ( locate_template( 'partials/footer-widget-' . $layout . '.php' ) == '' ) {

@@ -26,7 +26,7 @@ if ( ! function_exists( 'largo_add_dont_miss_label' ) ) {
 	function largo_add_dont_miss_label( $items, $args ) {
 
 		// Get theme options label
-		$theme_option = esc_html( get_theme_mod( 'dont_miss_label') );
+		$theme_option = esc_html( get_theme_mod( 'dont_miss_label', __('Don\'t Miss', 'largo') ) );
 		if ( ! empty( $theme_option ) ) {
 			return '<li class="menu-label">' . $theme_option . '</li>' . $items;
 		} else {
@@ -51,7 +51,7 @@ add_filter( 'wp_nav_menu_objects', 'largo_modify_nav_menu_args', 10, 2 );
 
 if ( ! function_exists( 'largo_add_footer_menu_label' ) ) {
 	function largo_add_footer_menu_label( $items, $args ) {
-	    return '<li class="menu-label">' . esc_html( get_theme_mod( 'footer_menu_label') ) . '</li>' . $items;
+	    return '<li class="menu-label">' . esc_html( get_theme_mod( 'footer_menu_label', get_bloginfo( 'name' ) ) ) . '</li>' . $items;
 	}
 }
 add_filter( 'wp_nav_menu_footer-navigation_items', 'largo_add_footer_menu_label', 10, 2 );

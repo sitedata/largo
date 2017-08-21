@@ -12,7 +12,7 @@
  * @return bool Whether or not the Series taxonomy option is enabled in the Theme Options > Advanced
  */
 function largo_is_series_enabled() {
-	$series_enabled = get_theme_mod( 'series_enabled' );
+	$series_enabled = get_theme_mod( 'series_enabled', false );
 	return !empty( $series_enabled );
 }
 
@@ -23,7 +23,7 @@ function largo_is_series_enabled() {
  * @return bool Whether or not the Series Landing Page  option is enabled in the Theme Options > Advanced
  */
 function largo_is_series_landing_enabled() {
-	$series_landing_enabled = get_theme_mod( 'custom_landing_enabled' );
+	$series_landing_enabled = get_theme_mod( 'custom_landing_enabled', 0 );
 	return !empty( $series_landing_enabled );
 }
 
@@ -89,8 +89,8 @@ function largo_custom_taxonomies() {
 	$largoProminenceTerms = apply_filters( 'largo_prominence_terms', $termsDefinitions );
 
 	$changed = false;
-	$terms = get_terms( 
-		'prominence', 
+	$terms = get_terms(
+		'prominence',
 		array(
 			'hide_empty' => false,
 			'fields' => 'all'

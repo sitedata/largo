@@ -130,7 +130,7 @@ if ( ! function_exists ( 'largo_seo' ) ) {
 		// noindex for date archives (and optionally on all archive pages)
 		// if the blog is set to private wordpress already adds noindex,nofollow
 		if ( get_option( 'blog_public') ) {
-			if ( is_date() || ( is_archive() &&  get_theme_mod( 'noindex_archives' ) ) ) {
+			if ( is_date() || ( is_archive() &&  get_theme_mod( 'noindex_archives', false ) ) ) {
 				echo '<meta name="robots" content="noindex,follow" />';
 			}
 		}

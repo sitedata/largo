@@ -6,7 +6,7 @@ get_header();
 ?>
 
 <div id="content" class="stories archive search-results span8" role="main">
-	<?php if (get_theme_mod('use_gcs') && get_theme_mod('gcs_id')) { ?>
+	<?php if ( get_theme_mod( 'use_gcs', false ) && get_theme_mod( 'gcs_id', false ) ) { ?>
 		<h1>
 			<?php
 				printf( __('Search results for <span class="search-term">%s</span>', 'largo'), get_search_query() );

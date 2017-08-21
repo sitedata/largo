@@ -94,7 +94,7 @@ largo_add_meta_box(
 
 // Disclaimer
 
-if( get_theme_mod('disclaimer_enabled') ) {
+if ( get_theme_mod( 'disclaimer_enabled', false ) ) {
 	largo_add_meta_box(
 		'largo_custom_disclaimer',
 		__( 'Disclaimer', 'largo' ),
@@ -247,7 +247,7 @@ largo_register_meta_input( 'largo_custom_related_posts', 'sanitize_text_field' )
 /**
  * Disclaimer text area for the Additional Options metabox
  *
- * If the post's disclaimer field is empty, then the default disclaimer 
+ * If the post's disclaimer field is empty, then the default disclaimer
  * is the option set in the theme options.
  *
  * @global $post

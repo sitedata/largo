@@ -21,7 +21,7 @@ get_header();
  */
 $shown_ids = array();
 $home_template = largo_get_active_homepage_layout();
-$layout_class = get_theme_mod('home_template');
+$layout_class = get_theme_mod( 'home_template' );
 
 global $largo;
 if ($home_template == 'LegacyThreeColumn')
@@ -39,17 +39,17 @@ else
 		do_action('largo_before_sticky_posts');
 
 		// sticky posts box if this site uses it
-		if ( get_theme_mod( 'show_sticky_posts' ) ) {
+		if ( get_theme_mod( 'show_sticky_posts', 1 ) ) {
 			get_template_part( 'partials/sticky-posts', 'home' );
 		}
 
 		do_action('largo_after_sticky_posts');
 
 		// bottom section, we'll either use a two-column widget area or a single column list of recent posts
-		if ( get_theme_mod('homepage_bottom') === 'widgets' ) {
-			get_template_part('partials/home-bottom', 'widget-area');
-		} else if (get_theme_mod('homepage_bottom') === 'list' || ! get_theme_mod('homepage_bottom') ) {
-			get_template_part('partials/home-post-list');
+		if ( 'widgets' === get_theme_mod( 'homepage_bottom' ) ) {
+			get_template_part( 'partials/home-bottom', 'widget-area' );
+		} elseif ( 'list' === get_theme_mod( 'homepage_bottom' ) || ! get_theme_mod( 'homepage_bottom' ) ) {
+			get_template_part( 'partials/home-post-list' );
 		}
 
 		do_action('largo_after_homepage_bottom');
