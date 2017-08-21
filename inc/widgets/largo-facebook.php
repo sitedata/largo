@@ -26,7 +26,7 @@ class largo_facebook_widget extends WP_Widget {
 
 			$page_url = esc_url( $instance['fb_page_url'] );
 			$height = isset( $instance['widget_height'] ) ? $instance['widget_height'] : 350;
-			
+
 			$output = '<div class="fb-page" data-adapt-container-width="true" data-href="' . $page_url . '"';
 			$output .= ' data-height="' . (int) $height . '"';
 			$output .= ! empty( $instance['show_faces'] ) ? ' data-show-facepile="true"' : ' data-show-facepile="false"';
@@ -53,7 +53,7 @@ class largo_facebook_widget extends WP_Widget {
 
 	function form( $instance ) {
 		$defaults = array(
-			'fb_page_url' 		=> get_theme_mod( 'facebook_link' ),
+			'fb_page_url' 		=> get_theme_mod( 'facebook_link', '' ),
 			'widget_height' 	=> 350,
 			'show_faces' 		=> 1,
 			'show_stream' 		=> 0,

@@ -50,10 +50,10 @@ $site_name = ( get_theme_mod( 'nav_alt_site_name', false ) ) ? get_theme_mod( 'n
 							 * @link https://largo.readthedocs.io/users/themeoptions.html
 							 */
 							if ( get_theme_mod( 'show_donate_button') ) {
-								if ($donate_link = get_theme_mod('donate_link')) { ?>
+								if ($donate_link = get_theme_mod( 'donate_link', '' )) { ?>
 								<li class="donate">
 									<a class="donate-link" href="<?php echo esc_url($donate_link); ?>">
-										<span><i class="icon-heart"></i><?php echo esc_html(get_theme_mod('donate_button_text')); ?></span>
+										<span><i class="icon-heart"></i><?php echo esc_html( get_theme_mod( 'donate_button_text', __('Donate Now', 'largo') ) ); ?></span>
 									</a>
 								</li><?php
 								}
@@ -138,10 +138,10 @@ $site_name = ( get_theme_mod( 'nav_alt_site_name', false ) ) ? get_theme_mod( 'n
 							largo_nav_menu($args);
 
 							if ( get_theme_mod( 'show_donate_button') ) {
-								if ($donate_link = get_theme_mod('donate_link')) { ?>
+								if ($donate_link = get_theme_mod( 'donate_link', '' )) { ?>
 								<li class="donate">
 									<a class="donate-link" href="<?php echo esc_url($donate_link); ?>">
-										<span><?php echo esc_html(get_theme_mod('donate_button_text')); ?></span>
+										<span><?php echo esc_html( get_theme_mod( 'donate_button_text', __('Donate Now', 'largo') ) ); ?></span>
 									</a>
 								</li><?php
 								}

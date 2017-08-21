@@ -71,7 +71,7 @@ if ( ! function_exists( 'largo_post_social_links' ) ) {
 
 			// Use the site Twitter handle if that exists and there isn't yet a via
 			if ( empty( $via ) ) {
-				$site = get_theme_mod( 'twitter_link' );
+				$site = get_theme_mod( 'twitter_link', '' );
 				if ( !empty( $site ) ) {
 					$via = '&via=' . rawurlencode( largo_twitter_url_to_username( $site ) ) ;
 				}
@@ -86,7 +86,7 @@ if ( ! function_exists( 'largo_post_social_links' ) ) {
 				__( 'Tweet', 'largo' )
 			);
 		}
-		
+
 		if ( $utilities['email'] === '1' ) {
 			$output .= sprintf(
 				'<span data-service="email" class="email share-button"><a href="mailto:?subject=%2$s&body=%3$s%0D%0A%4$s" target="_blank"><i class="icon-mail"></i> <span class="hidden-phone">%1$s</span></a></span>',
@@ -97,12 +97,12 @@ if ( ! function_exists( 'largo_post_social_links' ) ) {
 			);
 		}
 
-		
+
 		if ( $utilities['print'] === '1' ) {
 			$output .= '<span class="print"><a href="#" onclick="window.print()" title="' . esc_attr( __( 'Print this article', 'largo' ) ) . '" rel="nofollow"><i class="icon-print"></i><span class="hidden-phone">' . esc_attr( __( 'Print', 'largo' ) ) . '</span></a></span>';
 		}
 
-		
+
 		// More social links
 		$more_social_links = array();
 
@@ -157,7 +157,7 @@ if ( ! function_exists( 'largo_post_social_links' ) ) {
 		if ( count( $more_social_links ) ) {
 			$more_social_links_str = implode( $more_social_links, "\n" );
 			$more = __( 'More', 'largo' );
-			
+
 			$output .= <<<EOD
 <span class="more-social-links">
 	<a class="popover-toggle" href="#"><i class="icon-plus"></i><span class="hidden-phone">${more}</span></a>

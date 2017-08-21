@@ -27,7 +27,7 @@ if ( ! function_exists( 'largo_header' ) ) {
 		$header_tag = is_home() ? 'h1' : 'h2'; // use h1 for the homepage, h2 for internal pages
 
 		// if we're using the text only header, display the output, otherwise this is just replacement text for the banner image
-		$header_class = get_theme_mod( 'no_header_image' ) ? 'branding' : 'visuallyhidden';
+		$header_class = get_theme_mod( 'no_header_image', 1 ) ? 'branding' : 'visuallyhidden';
 		$divider = $header_class == 'branding' ? '' : ' - ';
 
 		// print the text-only version of the site title
@@ -64,7 +64,7 @@ if ( ! function_exists( 'largo_header' ) ) {
  */
 if ( ! function_exists( 'largo_copyright_message' ) ) {
 	function largo_copyright_message() {
-		$msg = get_theme_mod( 'copyright_msg' );
+		$msg = get_theme_mod( 'copyright_msg', false );
 		if ( ! $msg )
 			$msg = __( 'Copyright %s', 'largo' );
 		printf( $msg, date( 'Y' ) );

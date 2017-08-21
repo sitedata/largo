@@ -30,7 +30,7 @@ class largo_follow_widget extends WP_Widget {
 		} else {
 			// Display the widget title if one was input
 			if ( $title ) echo $before_title . $title . $after_title;
-			
+
 			// Display the usual buttons and whatnot
 			$networks = array(
 				'facebook' => 'Like Us on Facebook',
@@ -46,14 +46,14 @@ class largo_follow_widget extends WP_Widget {
 				'rss' => 'Subscribe via RSS'
 			);
 			$networks = apply_filters( 'largo_additional_networks', $networks );
-			
+
 			foreach ( $networks as $network => $btn_text ) {
 				if ( $network == 'rss' ) {
-					$link = get_theme_mod( 'rss_link' ) ? esc_url( get_theme_mod( 'rss_link' ) ) : get_feed_link();
+					$link = get_theme_mod( 'rss_link', get_feed_link() ) ? esc_url( get_theme_mod( 'rss_link', get_feed_link() ) ) : get_feed_link();
 				} else {
 					$link = esc_url( get_theme_mod( $network . '_link' ) );
 				}
-				
+
 				if ( $link ) {
 					printf( __( '<a class="%1$s subscribe btn social-btn" href="%2$s"><i class="icon-%1$s"></i>%3$s</a>', 'largo'),
 						$network,

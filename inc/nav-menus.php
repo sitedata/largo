@@ -8,10 +8,10 @@
  */
 if ( ! function_exists( 'largo_donate_button' ) ) {
 	function largo_donate_button () {
-		if ( $donate_link = get_theme_mod( 'donate_link' ) )
+		if ( $donate_link = get_theme_mod( 'donate_link', '' ) )
 			printf('<div class="donate-btn"><a href="%1$s"><i class="icon-heart"></i>%2$s</a></div> ',
 				esc_url( $donate_link ),
-				esc_html( get_theme_mod( 'donate_button_text' ) )
+				esc_html( get_theme_mod( 'donate_button_text', __('Donate Now', 'largo') ) )
 			);
 	}
 }
@@ -31,7 +31,7 @@ if ( ! function_exists( 'largo_add_dont_miss_label' ) ) {
 			return '<li class="menu-label">' . $theme_option . '</li>' . $items;
 		} else {
 			return $items;
-		}	
+		}
 	}
 }
 

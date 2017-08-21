@@ -13,12 +13,12 @@ the_widget('largo_follow_widget', array(
 	'title' => __('Follow Us', 'largo'))
 );
 
-if (get_theme_mod('donate_link')) {
+if ( get_theme_mod( 'donate_link', '' ) ) {
 	the_widget('largo_donate_widget', array(
 		'title' => __('Support ' . get_bloginfo('name'), 'largo'),
 		'cta_text' => __('We depend on your support. A generous gift in any amount helps us continue to bring you this service.', 'largo'),
 		'button_text' => __('Donate Now', 'largo'),
-		'button_url' => esc_url( get_theme_mod( 'donate_link' ) ),
+		'button_url' => esc_url( get_theme_mod( 'donate_link', '' ) ),
 		'widget_class' => 'default'
 		)
 	);

@@ -26,15 +26,15 @@ if ( ! function_exists( 'largo_opengraph' ) ) {
 		<meta name="twitter:card" content="summary">
 
 		<?php
-			if ( get_theme_mod( 'twitter_link' ) )
-				echo '<meta name="twitter:site" content="@' . largo_twitter_url_to_username( get_theme_mod( 'twitter_link' ) ) . '">';
+			if ( get_theme_mod( 'twitter_link', false ) )
+				echo '<meta name="twitter:site" content="@' . largo_twitter_url_to_username( get_theme_mod( 'twitter_link', '' ) ) . '">';
 		?>
 
 		<?php // output appropriate OG tags by page type
 			if ( is_single() ) {
 				if ( have_posts() ) {
 					the_post(); // we need to queue up the post to get the post specific info
-					
+
 					if ( get_the_author_meta( 'twitter' ) && !get_post_meta( $post->ID, 'largo_byline_text' ) )
 						echo '<meta name="twitter:creator" content="@' . largo_twitter_url_to_username( get_the_author_meta( 'twitter' ) ) . '">';
 					?>
@@ -90,8 +90,8 @@ if ( ! function_exists( 'largo_opengraph' ) ) {
 
 			// google author/publisher markup
 			// see: https://support.google.com/webmasters/answer/1408986
-			if ( get_theme_mod( 'gplus_link' ) )
-				echo '<link href="' . esc_url( get_theme_mod( 'gplus_link' ) ) . '" rel="publisher" />';
+			if ( get_theme_mod( 'gplus_link', false ) )
+				echo '<link href="' . esc_url( get_theme_mod( 'gplus_link', '' ) ) . '" rel="publisher" />';
 	}
 }
 add_action( 'wp_head', 'largo_opengraph' );

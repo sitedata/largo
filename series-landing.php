@@ -138,7 +138,7 @@ if ( isset( $wp_query->query_vars['term'] )
 	wp_reset_postdata();
 
 	// Enqueue the LMP data
-	$posts_term = get_theme_mod( 'posts_term_plural' );
+	$posts_term = get_theme_mod( 'posts_term_plural', 'Posts' );
 	largo_render_template('partials/load-more-posts', array(
 		'nav_id' => 'nav-below',
 		'the_query' => $series_query,

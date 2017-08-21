@@ -128,14 +128,14 @@ if ( ! function_exists( 'largo_content_nav' ) ) {
 							$image = wp_get_attachment_image_src( get_post_thumbnail_id( $prev->ID ) );
 							printf( __('<div class="previous"><a href="%1$s"><img class="thumb" src="%4$s" /><h5>Previous %2$s</h5><span class="meta-nav">%3$s</span></a></div>', 'largo'),
 								get_permalink( $prev->ID ),
-								get_theme_mod( 'posts_term_singular' ),
+								get_theme_mod( 'posts_term_singular', 'Post' ),
 								$prev->post_title,
 								$image[0]
 							);
 						} else {
 							printf( __('<div class="previous"><a href="%1$s"><h5>Previous %2$s</h5><span class="meta-nav">%3$s</span></a></div>', 'largo'),
 								get_permalink( $prev->ID ),
-								get_theme_mod( 'posts_term_singular' ),
+								get_theme_mod( 'posts_term_singular', 'Post' ),
 								$prev->post_title
 							);
 						}
@@ -145,14 +145,14 @@ if ( ! function_exists( 'largo_content_nav' ) ) {
 							$image = wp_get_attachment_image_src( get_post_thumbnail_id( $next->ID ) );
 							printf( __('<div class="next"><a href="%1$s"><img class="thumb" src="%4$s" /><h5>Next %2$s</h5><span class="meta-nav">%3$s</span></a></div>', 'largo'),
 								get_permalink( $next->ID ),
-								get_theme_mod( 'posts_term_singular' ),
+								get_theme_mod( 'posts_term_singular', 'Post' ),
 								$next->post_title,
 								$image[0]
 							);
 						} else {
 							printf( __('<div class="next"><a href="%1$s"><h5>Next %2$s</h5><span class="meta-nav">%3$s</span></a></div>', 'largo'),
 								get_permalink( $next->ID ),
-								get_theme_mod( 'posts_term_singular' ),
+								get_theme_mod( 'posts_term_singular', 'Post' ),
 								$next->post_title
 							);
 						}
@@ -161,7 +161,7 @@ if ( ! function_exists( 'largo_content_nav' ) ) {
 			</nav><!-- #nav-below -->
 
 		<?php } elseif ( $wp_query->max_num_pages > 1 ) {
-			$posts_term = get_theme_mod( 'posts_term_plural' );
+			$posts_term = get_theme_mod( 'posts_term_plural', 'Posts' );
 
 			largo_render_template('partials/load-more-posts', array(
 				'nav_id' => $nav_id,

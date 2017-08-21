@@ -18,7 +18,7 @@
 		<?php endif; ?>
 		<h5 class="byline"><?php largo_byline(); ?></h5>
 
-		<?php if ( ! get_theme_mod( 'single_social_icons' ) == false ) {
+		<?php if ( get_theme_mod( 'single_social_icons', 1 ) ) {
 			largo_post_social_links();
 		} ?>
 
@@ -37,9 +37,9 @@
 	<?php get_sidebar(); ?>
 
 	<section class="entry-content clearfix" itemprop="articleBody">
-		
+
 		<?php largo_entry_content( $post ); ?>
-		
+
 	</section>
 
 	<?php do_action('largo_after_post_content'); ?>

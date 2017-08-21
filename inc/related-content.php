@@ -270,7 +270,7 @@ if ( ! function_exists( 'largo_categories_and_tags' ) ) {
 						__( '<%1$s class="post-category-link"><a href="%2$s" title="Read %3$s in the %4$s category">%5$s%4$s</a></%1$s>', 'largo' ),
 						$item_wrapper,
 						( $rss ? get_category_feed_link( $cat->term_id ) : get_category_link( $cat->term_id ) ),
-						get_theme_mod( 'posts_term_plural' ),
+						get_theme_mod( 'posts_term_plural', 'Posts' ),
 						$cat->name,
 						$icon
 					);
@@ -291,7 +291,7 @@ if ( ! function_exists( 'largo_categories_and_tags' ) ) {
 						__( '<%1$s class="post-tag-link"><a href="%2$s" title="Read %3$s tagged with: %4$s">%5$s%4$s</a></%1$s>', 'largo' ),
 						$item_wrapper,
 						( $rss ?  get_tag_feed_link( $tag->term_id ) : get_tag_link( $tag->term_id ) ),
-						get_theme_mod( 'posts_term_plural' ),
+						get_theme_mod( 'posts_term_plural', 'Posts' ),
 						$tag->name,
 						$icon
 					);
@@ -370,7 +370,7 @@ function largo_top_term( $options = array() ) {
 			'<%1$s class="post-category-link">'.$link[0].'%5$s%4$s'.$link[1].'</%1$s>',
 			$args['wrapper'],
 			get_term_link( $term ),
-			get_theme_mod( 'posts_term_plural' ),
+			get_theme_mod( 'posts_term_plural', 'Posts' ),
 			$term->name,
 			$icon
 		);
