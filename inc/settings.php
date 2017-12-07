@@ -7,7 +7,7 @@
 $settings = new Largo_Settings();
 
 class Largo_Settings {
-	function largo_settings() {
+	function __construct() {
 		add_filter( 'admin_init' , array( &$this, 'register_fields' ) );
 	}
 
