@@ -12,9 +12,11 @@ We are making regular updates that may or may not always play nice with previous
 
 For released versions of Largo, please see the [list of tagged releases](https://github.com/INN/Largo/releases).
 
-The `master` branch is the latest stable version and what INN is using for our sites in production (with a few minor tweaks specific to our hosting environment). Please do not submit pull requests to this branch unless they are minor hotfixes that can be directly merged.
+The `0.5` branch is what INN is using for our sites in production. Please do not submit pull requests to this branch unless they are minor hotfixes that can be directly merged.
 
-The `develop` branch contains work in progress slated for our next point release. Feel free to try it out, report issues, etc. but we DO NOT recommend using it in production. This is also typically the branch to submit pull requests to if you want to contribute to the project.
+The `0.5-dev` branch is contains work in progress slated for our next point release. Feel free to try it out, report issues, etc. but we DO NOT recommend using it in production. This is also typically the branch to submit pull requests to if you want to contribute to the project.
+
+The `master`, `develop`, and `1.0` branches contain work in progress slated for an eventual rewrite of Largo.
 
 Feedback, comments and questions to: [largo@inn.org](mailto:largo@inn.org)
 
