@@ -9,8 +9,8 @@ class Largo_Term_Sidebars {
 		add_action( 'edit_category_form_fields', array( $this, 'display_fields' ) );
 		add_action( 'edit_tag_form_fields', array( $this, 'display_fields' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts') );
-		add_action( 'edit_terms', array( $this, 'edit_terms' ) );
-		add_action( 'create_term', array( $this, 'edit_terms' ) );
+		add_action( 'edit_terms', array( $this, 'edit_terms' ), 10, 2 );
+		add_action( 'create_term', array( $this, 'edit_terms' ), 10, 2 );
 	}
 
 	/**
@@ -85,15 +85,19 @@ class Largo_Term_Sidebars {
 
 	/**
 	 * Save the results from the term edit page
+	 *
+	 * @filter edit_terms
 	 */
-	function edit_terms( $term_id ) {
+	function edit_terms( $term_id, $taxonomy ) {
 		if (isset($_POST['action']) && $_POST['action'] == 'add-tag')
 			$nonce_action = 'custom_sidebar-new';
 		else
 			$nonce_action = 'custom_sidebar-' . $term_id;
 
 		if ( isset($_POST['_custom_sidebar_nonce']) && wp_verify_nonce($_POST['_custom_sidebar_nonce'], $nonce_action ) ) {
-			$taxonomy = $_REQUEST['taxonomy'];
+			if ( ! isset( $taxonomy ) ) {
+				$taxonomy = $_REQUEST['taxonomy'];
+			}
 			largo_update_term_meta( $taxonomy, $term_id, 'custom_sidebar', $_POST['custom_sidebar'] );
 		}
 	}
