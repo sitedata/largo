@@ -33,7 +33,7 @@ function largo_get_term_meta_post( $taxonomy, $term_id ) {
 		'tax_query'      => array(
 			array(
 				'taxonomy'         => $taxonomy,
-				'field'            => 'id',
+				'field'            => 'term_id',
 				'terms'            => $term_id,
 				'include_children' => false
 			)
