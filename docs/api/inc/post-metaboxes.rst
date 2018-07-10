@@ -64,15 +64,6 @@ inc/post-metaboxes.php
 
    :global: $post
 
-.. php:function:: largo_custom_disclaimer_meta_box_display()
-
-   Disclaimer text area for the Additional Options metabox
-
-   If the post's disclaimer field is empty, then the default disclaimer
-   is the option set in the theme options.
-
-   :global: $post
-
 .. php:function:: largo_top_tag_display()
 
    Metabox option to choose the top tag for the posto

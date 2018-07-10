@@ -92,19 +92,6 @@ largo_add_meta_box(
 	'core'
 );
 
-// Disclaimer
-
-if( of_get_option('disclaimer_enabled') ) {
-	largo_add_meta_box(
-		'largo_custom_disclaimer',
-		__( 'Disclaimer', 'largo' ),
-		'largo_custom_disclaimer_meta_box_display', //could also be added with largo_add_meta_content('largo_custom_related_meta_box_display', 'largo_additional_options')
-		'post',
-		'normal',
-		'core'
-	);
-}
-
 
 /**
  * Add our prominence taxonomy meta box with custom behavior.
@@ -243,29 +230,6 @@ function largo_custom_related_meta_box_display() {
 	echo '<input type="text" name="largo_custom_related_posts" value="' . esc_attr( $value ) . '" />';
 }
 largo_register_meta_input( 'largo_custom_related_posts', 'sanitize_text_field' );
-
-/**
- * Disclaimer text area for the Additional Options metabox
- *
- * If the post's disclaimer field is empty, then the default disclaimer 
- * is the option set in the theme options.
- *
- * @global $post
- */
-function largo_custom_disclaimer_meta_box_display() {
-	global $post;
-
-	$value = get_post_meta( $post->ID, 'disclaimer', true );
-
-	if ( empty( $value ) ) {
-		$value = of_get_option( 'default_disclaimer' );
-	}
-
-	echo '<p><strong>' . __('Disclaimer', 'largo') . '</strong><br />';
-	echo '<textarea name="disclaimer" style="width: 98%;">' . esc_textarea( $value ) . '</textarea>';
-
-}
-largo_register_meta_input( 'disclaimer', 'wp_filter_post_kses' );
 
 /**
  * Metabox option to choose the top tag for the posto

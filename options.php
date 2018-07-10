@@ -598,22 +598,6 @@ function optionsframework_options() {
 	}
 
 
-	/* Disclaimer */
-
-	$options[] = array(
-		'name'	=> __('Disclaimer', 'largo'),
-		'desc' 	=> __('Enable Disclaimer Widget.', 'largo'),
-		'id' 	=> 'disclaimer_enabled',
-		'std' 	=> '0',
-		'type' 	=> 'checkbox');
-
-	$options[] = array(
-		'desc' 	=> __('Enter a default disclaimer', 'largo'),
-		'id' 	=> 'default_disclaimer',
-		'std' 	=> '',
-		'type' 	=> 'textarea');
-
-
 	/* Search Options */
 
 	$options[] = array(
@@ -755,15 +739,6 @@ jQuery(document).ready(function($) {
 	if ($('#show_donate_button:checked').val() !== undefined) {
 		$('#section-donate_link').show();
 		$('#section-donate_button_text').show();
-	}
-
-	// show/hide disclaimer.
-	$('#disclaimer_enabled').click(function() {
-		$('#section-default_disclaimer').fadeToggle(400);
-	});
-
-	if ($('#disclaimer_enabled:checked').val() == undefined) {
-		$('#section-default_disclaimer').hide();
 	}
 
 	// show/hide show tags.

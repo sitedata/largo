@@ -35,7 +35,7 @@ class SeriesPostsWidgetTestFunctions extends WP_UnitTestCase {
 
 		largo_widgets();
 
-		// $wp_widget_factory shouldn't know anything about the disclaimer widget anymore.
+		// $wp_widget_factory shouldn't know anything about the series posts widget anymore.
 		$this->assertFalse( array_key_exists('largo_series_posts_widget',$wp_widget_factory->widgets) );
 
 	}
