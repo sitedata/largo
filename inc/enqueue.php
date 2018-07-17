@@ -242,11 +242,12 @@ if ( ! function_exists( 'largo_google_analytics' ) ) {
 	 * @since 0.3
 	 */
 	function largo_google_analytics() {
-		if ( !current_user_can('edit_posts') ) : // don't track editors ?>
-			<?php if ( of_get_option( 'ga_id', true ) ) : // make sure the ga_id setting is defined ?>
+		if ( ! current_user_can( 'edit_posts' ) ) { // don't track editors or authors or admins.
+			if ( of_get_option( 'ga_id', true ) ) { // make sure the ga_id setting is defined.
+				?>
 				<script>
 					var _gaq = _gaq || [];
-					_gaq.push(['_setAccount', '<?php echo of_get_option( "ga_id" ) ?>']);
+					_gaq.push(['_setAccount', '<?php echo of_get_option( 'ga_id' ); ?>']);
 					_gaq.push(['_trackPageview']);
 					(function() {
 						var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
@@ -254,8 +255,9 @@ if ( ! function_exists( 'largo_google_analytics' ) ) {
 						var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 					})();
 				</script>
-			<?php endif; ?>
-		<?php endif;
+				<?php
+			}
+		}
 	}
 }
 add_action( 'wp_head', 'largo_google_analytics' );
