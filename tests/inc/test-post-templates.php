@@ -53,32 +53,49 @@ class PostTemplatesTestFunctions extends WP_UnitTestCase {
 		$attachment_url = wp_get_attachment_image_src( $attachment_id, 'large' );
 		$attachment_url = $attachment_url[0];
 
+		// create our post and set it up.
+		$post_id = $this->factory->post->create();
+		add_post_meta( $post_id, '_thumbnail_id', $attachment_id );
+		$this->go_to( '/?p=' . $post_id );
+
+		// with a post set up like so, remove the thing
 		$c1 = '<p><img src="' . $attachment_url . '" alt="1559758083_cef4ef63d2_o" width="771" height="475" class="alignnone size-large wp-image-' . $attachment_id . '" /></p>
 <h2>Headings</h2>
 <p>Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Sed posuere consectetur est at lobortis. Nulla vitae elit libero, a pharetra augue. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Donec sed odio dui.</p>';
-
 		$c1final = '<h2>Headings</h2>
 <p>Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Sed posuere consectetur est at lobortis. Nulla vitae elit libero, a pharetra augue. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Donec sed odio dui.</p>';
+		$final1 = largo_remove_hero( $c1 );
+		$this->assertEquals( $c1final, $final1, "C1" );
 
+		// with a post set up like so, remove the thing
+		// @todo: how is this setup different that the above setup?
 		$c2 = '<p><img src="' . $attachment_url . '" alt="1559758083_cef4ef63d2_o" width="771" height="475" class="alignnone size-medium wp-image-' . $attachment_id . '" /></p>
 <h2>Headings</h2>
 <p>Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Sed posuere consectetur est at lobortis. Nulla vitae elit libero, a pharetra augue. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Donec sed odio dui.</p>';
-
 		$c2final = '<p><img src="' . $attachment_url . '" alt="1559758083_cef4ef63d2_o" width="771" height="475" class="alignnone size-medium wp-image-' . $attachment_id . '" /></p>
 <h2>Headings</h2>
 <p>Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Sed posuere consectetur est at lobortis. Nulla vitae elit libero, a pharetra augue. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Donec sed odio dui.</p>';
-
-		$post_id = $this->factory->post->create();
-
-		add_post_meta( $post_id, '_thumbnail_id', $attachment_id );
-
-		$this->go_to( '/?p=$post_id' );
-
-		$final1 = largo_remove_hero( $c1 );
 		$final2 = largo_remove_hero( $c2 );
-		$this->assertEquals( $c1final, $final1, "C1" );
 		$this->assertEquals( $c2final, $final2, "C2" );
 
+		// test for https://github.com/INN/largo/pull/1503#issuecomment-407901229
+		// if the opening paragraph tag contains a matching image and other stuff,
+		// remove the matching image but nothing else
+		$c3 = '<p><img src="' . $attachment_url . '" alt="1559758083_cef4ef63d2_o" width="771" height="475" class="alignnone size-large wp-image-' . $attachment_id . '" />foo</p>
+<h2>Headings</h2>
+<p>Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Sed posuere consectetur est at lobortis. Nulla vitae elit libero, a pharetra augue. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Donec sed odio dui.</p>';
+		$c3final = '<p>foo</p>
+<h2>Headings</h2>
+<p>Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Sed posuere consectetur est at lobortis. Nulla vitae elit libero, a pharetra augue. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Donec sed odio dui.</p>';
+		$final3 = largo_remove_hero( $c3 );
+		$this->assertEquals( $c3final, $final3, "C3" );
+
+		// don't remove the image if it doesn't match the attachment URL
+		$c4 = '<p><img src="https://upload.wikimedia.org/wikipedia/commons/4/4a/Dr._James_Naismith.jpg" alt="1559758083_cef4ef63d2_o" width="771" height="475" class="alignnone size-large wp-image-' . $attachment_id . '" /></p>
+<h2>Headings</h2>
+<p>Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Sed posuere consectetur est at lobortis. Nulla vitae elit libero, a pharetra augue. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Donec sed odio dui.</p>';
+		$final4 = largo_remove_hero( $c4 );
+		$this->assertEquals( $c4, $final4, "C4" );
 	}
 
 	function _make_attachment( $upload, $parent_post_id = 0 ) {
