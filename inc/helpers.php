@@ -28,29 +28,6 @@ function largo_fb_url_to_username( $url )  {
 }
 
 /**
- * Checks to see if a given Facebook username or ID has following enabled by
- * checking the iframe of that user's "Follow" button for <table>.
- * Usernames that can be followed have <tables>.
- * Users that can't be followed don't.
- * Users that don't exist don't.
- *
- * @param   string  $username a valid Facebook username or page name. They're generally indistinguishable, except pages get to use '-'
- * @uses    wp_remote_get
- * @return  bool    The user specified by the username or ID can be followed
- */
-function largo_fb_user_is_followable( $username ) {
-	// syntax for this iframe taken from https://developers.facebook.com/docs/plugins/follow-button/
-	$get = wp_remote_get( 'https://www.facebook.com/plugins/follow.php?href=https%3A%2F%2Fwww.facebook.com%2F' . $username . '&amp;width&amp;height=80&amp;colorscheme=light&amp;layout=button&amp;show_faces=true' );
-	if ( ! is_wp_error( $get ) ) {
-		$response = $get['body'];
-		if ( strpos( $response, 'table' ) !== false ) {
-			return true; // can follow
-		}
-		return false; // cannot follow
-	}
-}
-
-/**
  * Cleans a Facebook url to the bare username or id when the user is edited
  *
  * Edits $_POST directly because there's no other way to save the corrected username
@@ -84,7 +61,6 @@ function clean_user_fb_username( $user_id ) {
  * Checks that the Facebook URL submitted is valid and the user is followable and causes an error if not
  *
  * @uses  largo_fb_url_to_username
- * @uses  largo_fb_user_is_followable
  * @param   $errors the error object
  * @param   bool    $update whether this is a user update
  * @param   object  $user a WP_User object
@@ -99,9 +75,6 @@ function validate_fb_username( $errors, $update, $user ) {
 			if ( preg_match( '/[^a-zA-Z0-9\.\-]/', $fb_user ) ) {
 				// it's not a valid Facebook username, because it uses an invalid character
 				$errors->add( 'fb_username', '<b>' . $fb_suspect . '</b> ' . __( 'is an invalid Facebook username.', 'largo' ) . '</p>' . '<p>' . __('Facebook usernames only use the uppercase and lowercase alphabet letters (a-z A-Z), the Arabic numbers (0-9), periods (.) and dashes (-)', 'largo' ) );
- 			}
- 			if ( ! largo_fb_user_is_followable( $fb_user ) ) {
- 				$errors->add( 'fb_username',' <b>' . $fb_suspect . '</b> ' . __( 'does not allow followers on Facebook.', 'largo' ) . '</p>' . '<p>' . __('<a href="https://www.facebook.com/help/201148673283205#How-can-I-let-people-follow-me?">Follow these instructions</a> to allow others to follow you.', 'largo' ) );
  			}
  		}
 	}
