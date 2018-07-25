@@ -46,7 +46,7 @@ Follow the [setup instructions in the documentation](http://largo.readthedocs.io
 
 ## Contributing
 
-We welcome contributions to any of open source projects. 
+We welcome contributions to any of our open source projects.
 
 If you're not sure where to start, [review the open issues on github](https://github.com/INN/Largo/issues) (you might be particularly interested in the issues labelled [help wanted](https://github.com/INN/Largo/labels/help%20wanted) or [good for beginners](https://github.com/INN/Largo/issues?q=label%3A%22good+for+beginners%22)) and then see [our contributing guidelines](/contributing.md) to get started.
 
