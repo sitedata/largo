@@ -56,13 +56,12 @@ If you're still not sure where to start, that's totally fine! [Just shoot us an 
 
 Built and maintained by the [Institute for Nonprofit News](http://inn.org) product and technology team ([@INNNerds](http://twitter.com/INNNerds)):
 
--  **[Adam Schweigert](https://github.com/aschweigert)** ([@aschweig](http://twitter.com/aschweig)), Senior Director of Product and Technology
--  **[RC Lations](https://github.com/rclations)** ([@rclations](https://twitter.com/rclations)), Lead Developer
--  **[Julia Smith](https://github.com/julia67)** ([@julia67](https://twitter.com/julia67)), Lead Designer
--  **[Ben Keith](https://github.com/benlk)** ([@benlkeith](http://twitter.com/benlkeith)), News Apps Developer
--  **[Gabriel Hongsdusit](https://github.com/gabehong)** ([@ghongsdusit](https://twitter.com/ghongsdusit)), Design Apprentice
+- **[Kay Lima](https://github.com/kaylima)**, Acting Director
+- **[Ben Keith](https://github.com/benlk)** ([@benlkeith](http://twitter.com/benlkeith)), Lead Developer
+- **[Tyler Machado](https://github.com/tylermachado)** ([@tylermachado](https://twitter.com/tylermachado)), Front-End Developer
+- **Paola Baradello**, Account Director
 
-Special thanks to everyone who has contributed to the project, including: [rnagle](https://github.com/rnagle), [kaeti](https://github.com/kaeti), [jackbrighton](http://github.com/jackbrighton), [danielbachhuber](http://github.com/danielbachhuber), [willhaynes](http://github.com/willhaynes), [drywall](http://github.com/drywall), [nacin](http://github.com/nacin), [meredithinn](http://github.com/meredithinn), [tothebeat](http://github.com/tothebeat), [lindamood](http://github.com/lindamood), [mospaw](http://github.com/mospaw), [DrewAPicture](http://github.com/drewapicture), [nipoez](http://github.com/nipoez), [palewire](http://github.com/palewire), [GaryJones](http://github.com/garyjones), [seamusleahy](http://github.com/seamusleahy), [joshuarrrr](http://github.com/joshuarrrr), [yayannabelle](https://github.com/yayannabelle), [jmusal](https://github.com/jmusal), [ntwb](https://github.com/ntwb) and [MsPseudolus](https://github.com/MsPseudolus).
+Special thanks to everyone who has contributed to the project, including: [rnagle](https://github.com/rnagle), [kaeti](https://github.com/kaeti), [jackbrighton](http://github.com/jackbrighton), [danielbachhuber](http://github.com/danielbachhuber), [willhaynes](http://github.com/willhaynes), [drywall](http://github.com/drywall), [nacin](http://github.com/nacin), [meredithinn](http://github.com/meredithinn), [tothebeat](http://github.com/tothebeat), [lindamood](http://github.com/lindamood), [mospaw](http://github.com/mospaw), [DrewAPicture](http://github.com/drewapicture), [nipoez](http://github.com/nipoez), [palewire](http://github.com/palewire), [GaryJones](http://github.com/garyjones), [seamusleahy](http://github.com/seamusleahy), [joshuarrrr](http://github.com/joshuarrrr), [yayannabelle](https://github.com/yayannabelle), [jmusal](https://github.com/jmusal), [ntwb](https://github.com/ntwb), [MsPseudolus](https://github.com/MsPseudolus), [@gabehong](https://github.com/gabehong), [@julia67](https://github.com/julia67), [@rclations](https://github.com/rclations), [@aschweigert Schweigert](https://github.com/aschweigert) and the whole news nerd and WordPress communities.
 
 This project builds on a number of great open source projects, including:
 
