@@ -34,11 +34,11 @@ The project extends work done by [NPR's Project Argo](http://argoproject.org/).
 
 **Support** is available [via our helpdesk system](http://support.largoproject.org/) or by emailing [support@largoproject.org](mailto:support@largoproject.org).
 
-**Current version:** v0.5.5.2
+**Current version:** v0.5.5.4
 
-**Minimum supported PHP version:** 5.3
+**Minimum PHP version:** We only support the [currently-maintained versions of PHP](https://secure.php.net/supported-versions.php).
 
-**Minimum supported WordPress version:** 4.1, though we usually recommend using the current version of WordPress
+**Minimum supported WordPress version:** We recommend using [the current version of WordPress](https://wordpress.org/download/releases/). To see what versions of WordPress automated tests are run against, check out [the Travis CI configuration file](./.travis.yml).
 
 ## Setup
 
