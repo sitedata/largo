@@ -210,7 +210,7 @@ function largo_remove_hero( $content ) {
 		$minus_image = str_replace( $matches[0], '', $content );
 		// remove leading <p></p> tag, even if it contains HTML attributes,
 		// but not if it's not empty
-		return preg_replace( '/^<p[^>]?><\/p>/m', '', $minus_image, 1 );
+		return trim( preg_replace( '/^<p[^>]?><\/p>/m', '', $minus_image, 1 ) );
 	}
 
 	return $content;
