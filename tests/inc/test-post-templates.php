@@ -50,7 +50,7 @@ class PostTemplatesTestFunctions extends WP_UnitTestCase {
 		$c0 = '<p><img src="' . $attachment_url . '" alt="1559758083_cef4ef63d2_o" width="771" height="475" class="alignnone size-large wp-image-' . $attachment_id . '" /></p>
 <h2>Headings</h2>
 <p>Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Sed posuere consectetur est at lobortis. Nulla vitae elit libero, a pharetra augue. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Donec sed odio dui.</p>';
-		$final1 = largo_remove_hero( $c0 );
+		$final0 = largo_remove_hero( $c0 );
 		$this->assertEquals( $c0, $final0, "C0" );
 	}
 
@@ -237,8 +237,8 @@ class PostTemplatesTestFunctions extends WP_UnitTestCase {
 		$c5 = '<p><img src="' . $attachment_url . '" alt="1559758083_cef4ef63d2_o" width="771" height="475" class="alignnone size-large wp-image-' . $attachment_id . '" /></p>
 <h2>Headings</h2>
 <p>Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Sed posuere consectetur est at lobortis. Nulla vitae elit libero, a pharetra augue. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Donec sed odio dui.</p>';
-		$final1 = largo_remove_hero( $c5 );
-		$this->assertEquals( $c5, $final1, "C5" );
+		$final5 = largo_remove_hero( $c5 );
+		$this->assertEquals( $c5, $final5, "C5" );
 	}
 
 	function _make_attachment( $upload, $parent_post_id = 0 ) {
