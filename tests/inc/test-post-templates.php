@@ -76,8 +76,8 @@ class PostTemplatesTestFunctions extends WP_UnitTestCase {
 
 		$final1 = largo_remove_hero( $c1 );
 		$final2 = largo_remove_hero( $c2 );
-		$this->assertEquals( $c1final, $final1 );
-		$this->assertEquals( $c2final, $final2 );
+		$this->assertEquals( $c1final, $final1, "C1" );
+		$this->assertEquals( $c2final, $final2, "C2" );
 
 	}
 
