@@ -38,10 +38,19 @@ function of_sanitize_checkbox( $input ) {
 }
 add_filter( 'of_sanitize_checkbox', 'of_sanitize_checkbox' );
 
-/* Multicheck */
-
+/**
+ * Multicheck sanitization function for the options framework
+ *
+ * This sanitizes the submitted option for a multiple-checkbox input
+ * based on the argument $option
+ *
+ * @since 0.1
+ * @param Array $input An array of options as descriped in the Options Framework.
+ * @param Array $option An array of valid checkbox values for the input
+ * @return Array sanitized options
+ */
 function of_sanitize_multicheck( $input, $option ) {
-	$output = '';
+	$output = array();
 	if ( is_array( $input ) ) {
 		foreach( $option['options'] as $key => $value ) {
 			$output[$key] = "0";
