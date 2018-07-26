@@ -195,8 +195,7 @@ function largo_remove_hero( $content ) {
 	// Creates the array:
 	// 		$matches[0] = <img src="..." class="..." id="..." />
 	//		$matches[1] = image id from class="wp-image-[id]"
-	//		$matches[2] = value of src.
-	$pattern = '/<img\s+[^>]*class="[^"]*?wp-image-(\d+)[^"]*?"\s+[^>]*src="([^"]*)"[^>]*>/';
+	$pattern = '/<img\s+[^>]*class="[^"]*?wp-image-(\d+)[^"]*?"\s+[^>]*[^>]*>/';
 	$has_img = preg_match( $pattern, $p[0], $matches );
 
 	// 3: if there's no image, there's nothing to worry about.
@@ -208,7 +207,10 @@ function largo_remove_hero( $content ) {
 	$post_img_id = $matches[1];
 
 	if ( $featured_img_id === $post_img_id ) {
-		return str_replace( $matches[0], '', $content );
+		$minus_image = str_replace( $matches[0], '', $content );
+		// remove leading <p></p> tag, even if it contains HTML attributes,
+		// but not if it's not empty
+		return trim( preg_replace( '/^<p[^>]?><\/p>/m', '', $minus_image, 1 ) );
 	}
 
 	return $content;
