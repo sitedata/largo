@@ -473,6 +473,20 @@ class UpdateTestFunctions extends WP_UnitTestCase {
 		$this->assertEquals($return['thumbnail_display'], $deprecated['thumb']);
 		$this->assertEquals($return['foo'], $replacement['foo']);
 	}
+
+	/**
+	 * @link https://github.com/INN/largo/pull/1501/
+	 */
+	function test_largo_disclaimers_plugin_compatibility() {
+		$message = 'test message:' . md5( date( 'N' ) );
+		$option_key = 'inn_disclaimers_sitewide';
+
+		of_set_option( $option_key, $message );
+		largo_disclaimers_plugin_compatibility();
+		$migrated = get_option( $option_key );
+
+		$this->assertEquals( $message, $migrated, 'The function largo_disclaimers_plugin_compatibility did not work as expected.' );
+	}
 }
 
 class LargoUpdateTestAjaxFunctions extends WP_Ajax_UnitTestCase {

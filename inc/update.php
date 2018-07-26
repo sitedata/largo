@@ -89,6 +89,11 @@ function largo_perform_update() {
 			largo_remove_topstory_prominence_term();
 		}
 
+		// Updating from 0.5.5.4 and before
+		if ( version_compare( $previous_options['largo_version'], '0.5' ) < 0 ) {
+			largo_disclaimers_plugin_compatibility();
+		}
+
 		// Always run
 		largo_update_custom_less_variables();
 		largo_replace_deprecated_widgets();
@@ -740,6 +745,29 @@ function largo_deprecated_callback_largo_featured( $deprecated, $replacement ) {
 	}
 	return $replacement;
 }
+
+/**
+ * Migrate Largo's settings for disclaimers to the INN/Disclaimers plugin format
+ *
+ * This copies the disclaimers setting from the Options Framework Options
+ * into the general options table under the option key set in version 0.1.0
+ * of that plugin.
+ *
+ * @link https://github.com/INN/largo/blob/v0.5.5.4/options.php#L601-L614
+ * @link https://github.com/INN/disclaimers/blob/v0.1.0/disclaimers.php#L72
+ * @link https://github.com/INN/largo/pull/1501
+ * @since 0.6
+ * @return whether or not the option was updated.
+ */
+function largo_disclaimers_plugin_compatibility() {
+	// Largo has two OF options for disclaimers:
+	// - disclaimer_enabled
+	// - default_disclaimer
+	$option = of_get_option( 'default_disclaimer' );
+	$option_key = 'inn_disclaimers_sitewide';
+	return update_option( $option_key, $option );
+}
+
 /* --------------------------------------------------------
  * Update helper functions
  * ------------------------------------------------------ */
