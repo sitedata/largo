@@ -28,3 +28,27 @@ if ( ! function_exists( 'largo_hero_with_caption' ) ) {
 		largo_featured_image_hero($post_id);
 	}
 }
+
+/**
+ * Deprecated function to check whether a Facebook user/page was followable.
+ *
+ * This function used to use the Facebook Follow button's HTML markup
+ * https://developers.facebook.com/docs/archive/docs/plugins/follow-button/
+ * to determine whether a page or user could be followed. The button was
+ * deprecated by Facebook on February 5, 2018, and as a result, this function
+ * stopped working.
+ *
+ * There are no plans to provide similar functionality in the future, because
+ * the relevant Facebook Graph API calls require Facebook API tokens,
+ * and it seems excessive to require theme users to get one just for this check.
+ *
+ * @param   string  $username a valid Facebook username or page name. They're generally indistinguishable, except pages get to use '-'
+ * @return  bool    False
+ */
+function largo_fb_user_is_followable( $username = '' ) {
+	if ( WP_DEBUG || LARGO_DEBUG ) {
+		error_log( 'largo_db_user_is_followable is deprecated and should not be used.' );
+	}
+	return false;
+}
+
