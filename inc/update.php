@@ -66,6 +66,8 @@ function largo_perform_update() {
 		// Stash the options from the previous version of the theme for later use
 		$previous_options = largo_preserve_previous_options();
 
+	error_log(var_export( 'option: ' . var_export( of_get_option('default_disclaimer'), true ) , true));
+
 		if ( ! isset( $previous_options['largo_version'] ) )
 			$previous_options['largo_version'] = null;
 
@@ -765,10 +767,20 @@ function largo_disclaimers_plugin_compatibility() {
 	// - disclaimer_enabled
 	// - default_disclaimer
 	$option = of_get_option( 'default_disclaimer' );
-	error_log(var_export( 'option: ' . $option, true));
 	$option_key = 'inn_disclaimers_sitewide';
-	return update_option( $option_key, $option );
+
+	error_log(var_export( 'option: ' . var_export( $option, true ) , true));
+	if ( ! empty( $option ) ) {
+		return update_option( $option_key, $option );
+	} else {
+		error_log(var_export( "something's wrong with the default disclaimer", true));
+	}
+	return false;
 }
+
+add_action( 'admin_init', function() {
+	error_log(var_export( of_get_option('default_disclaimer'), true));
+});
 
 /* --------------------------------------------------------
  * Update helper functions
