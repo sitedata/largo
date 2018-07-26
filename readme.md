@@ -32,11 +32,11 @@ The project extends work done by [NPR's Project Argo](http://argoproject.org/).
 
 **Documentation** and more information at: [largo.inn.org](https://largo.inn.org)
 
-**Support** is available [via our helpdesk system](http://support.largoproject.org/) or by emailing [support@largoproject.org](mailto:support@largoproject.org).
+**Support** is available via our [Support Center](http://support.inn.org/) or by emailing [support@inn.org](mailto:support@inn.org).
 
-**Current version:** v0.5.5.2
+**Current version:** v0.5.5.4
 
-**Minimum supported PHP version:** 5.3
+**Minimum supported PHP version:** 5.5
 
 **Minimum supported WordPress version:** 4.1, though we usually recommend using the current version of WordPress
 
