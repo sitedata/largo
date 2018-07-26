@@ -90,8 +90,9 @@ function largo_perform_update() {
 		}
 
 		// Updating from 0.5.5.4 and before
-		if ( version_compare( $previous_options['largo_version'], '0.5' ) < 0 ) {
-			largo_disclaimers_plugin_compatibility();
+		if ( version_compare( $previous_options['largo_version'], '0.5.5.4' ) < 0 ) {
+			$return = largo_disclaimers_plugin_compatibility();
+			error_log(var_export( 'return: ' . $return, true));
 		}
 
 		// Always run
@@ -764,6 +765,7 @@ function largo_disclaimers_plugin_compatibility() {
 	// - disclaimer_enabled
 	// - default_disclaimer
 	$option = of_get_option( 'default_disclaimer' );
+	error_log(var_export( 'option: ' . $option, true));
 	$option_key = 'inn_disclaimers_sitewide';
 	return update_option( $option_key, $option );
 }
