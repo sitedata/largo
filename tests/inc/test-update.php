@@ -482,9 +482,10 @@ class UpdateTestFunctions extends WP_UnitTestCase {
 		$option_key = 'inn_disclaimers_sitewide';
 
 		of_set_option( $option_key, $message );
-		largo_disclaimers_plugin_compatibility();
+		$return = largo_disclaimers_plugin_compatibility();
 		$migrated = get_option( $option_key );
 
+		$this->assertTrue( $return, 'It looks like update_option() failed?' );
 		$this->assertEquals( $message, $migrated, 'The function largo_disclaimers_plugin_compatibility did not work as expected.' );
 	}
 }
