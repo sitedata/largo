@@ -66,13 +66,15 @@ function largo_perform_update() {
 		// Stash the options from the previous version of the theme for later use
 		$previous_options = largo_preserve_previous_options();
 
-	error_log(var_export( 'option: ' . var_export( of_get_option('default_disclaimer'), true ) , true));
+		error_log(var_export( 'running updates: ' . var_export( of_get_option('default_disclaimer'), true ) , true));
 
 		if ( ! isset( $previous_options['largo_version'] ) )
 			$previous_options['largo_version'] = null;
 
 		// this must run before any other function that makes use of of_set_option()
 		largo_set_new_option_defaults();
+
+		error_log(var_export( 'post setting defaults: ' . var_export( of_get_option('default_disclaimer'), true ) , true));
 
 		// Run when updating from pre-0.4
 		if ( version_compare( $previous_options['largo_version'], '0.4' ) < 0 ) {
@@ -103,6 +105,7 @@ function largo_perform_update() {
 
 		// Set version.
 		of_set_option( 'largo_version', largo_version() );
+
 	}
 
 	return true;
@@ -769,18 +772,11 @@ function largo_disclaimers_plugin_compatibility() {
 	$option = of_get_option( 'default_disclaimer' );
 	$option_key = 'inn_disclaimers_sitewide';
 
-	error_log(var_export( 'option: ' . var_export( $option, true ) , true));
 	if ( ! empty( $option ) ) {
 		return update_option( $option_key, $option );
-	} else {
-		error_log(var_export( "something's wrong with the default disclaimer", true));
 	}
 	return false;
 }
-
-add_action( 'admin_init', function() {
-	error_log(var_export( of_get_option('default_disclaimer'), true));
-});
 
 /* --------------------------------------------------------
  * Update helper functions
