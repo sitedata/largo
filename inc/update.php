@@ -66,16 +66,27 @@ function largo_perform_update() {
 		// Stash the options from the previous version of the theme for later use
 		$previous_options = largo_preserve_previous_options();
 
-		error_log(var_export( 'running updates: ' . var_export( of_get_option('default_disclaimer'), true ) , true));
-
 		if ( ! isset( $previous_options['largo_version'] ) )
 			$previous_options['largo_version'] = null;
 
-		// this must run before any other function that makes use of of_set_option()
+		/*
+		 * Functions preserving options removed from Largo
+		 * These functions cannot use of_set_option()
+		 */
+
+		if ( version_compare( $previous_options['largo_version'], '0.5.5.4' ) < 0 ) {
+			largo_disclaimers_plugin_compatibility();
+		}
+
+		/*
+		 * Set new defaults
+		 * this must run before any other function that makes use of of_set_option()
+		 */
 		largo_set_new_option_defaults();
 
-		error_log(var_export( "And this is it immediately afterwards, using of_get_option", true));
-		error_log(var_export( 'post setting defaults: ' . var_export( of_get_option('default_disclaimer'), true ) , true));
+		/*
+		 * Update functions
+		 */
 
 		// Run when updating from pre-0.4
 		if ( version_compare( $previous_options['largo_version'], '0.4' ) < 0 ) {
@@ -94,13 +105,9 @@ function largo_perform_update() {
 			largo_remove_topstory_prominence_term();
 		}
 
-		// Updating from 0.5.5.4 and before
-		if ( version_compare( $previous_options['largo_version'], '0.5.5.4' ) < 0 ) {
-			$return = largo_disclaimers_plugin_compatibility();
-			error_log(var_export( 'return: ' . $return, true));
-		}
-
-		// Always run
+		/*
+		 * Always-run functions
+		 */
 		largo_update_custom_less_variables();
 		largo_replace_deprecated_widgets();
 
@@ -564,10 +571,6 @@ function largo_set_new_option_defaults() {
 
 		$previous_options = largo_retrieve_previous_options();
 		$options = wp_parse_args( $previous_options, $defaults );
-
-		ksort( $options );
-		error_log(var_export( "so here's the baffling thing. This is the default disclaimer as written to the database.", true));
-		error_log(var_export( $options['default_disclaimer'], true));
 
 		update_option( $config['id'], $options );
 	}
