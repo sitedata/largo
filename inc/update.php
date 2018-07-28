@@ -74,6 +74,7 @@ function largo_perform_update() {
 		// this must run before any other function that makes use of of_set_option()
 		largo_set_new_option_defaults();
 
+		error_log(var_export( "And this is it immediately afterwards, using of_get_option", true));
 		error_log(var_export( 'post setting defaults: ' . var_export( of_get_option('default_disclaimer'), true ) , true));
 
 		// Run when updating from pre-0.4
@@ -559,9 +560,15 @@ function largo_set_new_option_defaults() {
 	// Gets the unique id, returning a default if it isn't defined
 	$config = get_option( 'optionsframework' );
 	if ( isset( $config['id'] ) ) {
-		$defaults = of_get_default_values(); // the list of default values.
+		$defaults = of_get_default_values(); // the list of default values
+
 		$previous_options = largo_retrieve_previous_options();
 		$options = wp_parse_args( $previous_options, $defaults );
+
+		ksort( $options );
+		error_log(var_export( "so here's the baffling thing. This is the default disclaimer as written to the database.", true));
+		error_log(var_export( $options['default_disclaimer'], true));
+
 		update_option( $config['id'], $options );
 	}
 }
