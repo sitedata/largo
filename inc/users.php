@@ -225,7 +225,6 @@ function largo_render_user_list($users, $show_users_with_empty_desc=false) {
  */
 function more_profile_info($user) {
 	$show_email = get_user_meta( $user->ID, "show_email", true );
-	$hide = get_user_meta( $user->ID, "hide", true );
 	?>
 	<h3><?php _e( 'More profile information', 'largo' ); ?></h3>
 	<table class="form-table">
@@ -246,16 +245,6 @@ function more_profile_info($user) {
 			</td>
 		</tr>
 
-		<?php if (current_user_can('edit_users')) { ?>
-		<tr>
-			<th><label for="staff_widget"><?php _e( 'Staff status', 'largo' ); ?></label></th>
-			<td>
-				<input type="checkbox" name="hide" id="hide"
-					<?php if (esc_attr($hide) == "on") { ?>checked<?php }?> />
-				<label for="hide"><?php _e( 'Hide in roster', 'largo' ); ?></label><br />
-			</td>
-		</tr>
-		<?php } ?>
 		<?php do_action('largo_more_profile_information', $user); ?>
 	</table>
 <?php }
@@ -278,14 +267,10 @@ function save_more_profile_info($user_id) {
 
 	$values = wp_parse_args($_POST, array(
 		'show_email' => 'on',
-		'hide' => 'off'
 	));
 
-	extract($values);
-
-	update_user_meta($user_id, 'job_title', $job_title);
-	update_user_meta($user_id, 'show_email', $show_email);
-	update_user_meta($user_id, 'hide', $hide);
+	update_user_meta($user_id, 'job_title', $values['job_title']);
+	update_user_meta($user_id, 'show_email', $values['show_email']);
 }
 add_action('personal_options_update', 'save_more_profile_info');
 add_action('edit_user_profile_update', 'save_more_profile_info');
