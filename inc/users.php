@@ -218,51 +218,6 @@ function largo_render_user_list($users, $show_users_with_empty_desc=false) {
 }
 
 /**
- * Shortcode version of `largo_render_user_list`
- *
- * @param $atts array The attributes of the shortcode.
- *
- * Example of possible attributes:
- *
- * 	[roster roles="author,contributor" include="292,12312" exclude="5002,2320" show_users_with_empty_desc="true"]
- *
- * @since 0.4
- */
-function largo_render_staff_list_shortcode($atts=array()) {
-	$options = array();
-
-	$show_users_with_empty_desc = false;
-	if (!empty($atts['show_users_with_empty_desc'])) {
-		$show_users_with_empty_desc = ($atts['show_users_with_empty_desc'] == 'false')? false : true;
-		unset($atts['show_users_with_empty_desc']);
-	}
-
-	if (!empty($atts['roles'])) {
-		$roles = explode(',', $atts['roles']);
-		$options['roles'] = array_map(function($arg) { return trim($arg); }, $roles);
-	}
-
-	if (!empty($atts['exclude'])) {
-		$exclude = explode(',', $atts['exclude']);
-		$options['exclude'] = array_map(function($arg) { return trim($arg); }, $exclude);
-	}
-
-	if (!empty($atts['include'])) {
-		$exclude = explode(',', $atts['include']);
-		$options['include'] = array_map(function($arg) { return trim($arg); }, $exclude);
-	}
-
-	$defaults = array(
-		'roles' => array(
-			'author'
-		)
-	);
-	$args = array_merge($defaults, $options);
-	largo_render_user_list(largo_get_user_list($args), $show_users_with_empty_desc);
-}
-add_shortcode('roster', 'largo_render_staff_list_shortcode');
-
-/**
  * Display extra profile fields related to staff member status
  *
  * @param $users array The WP_User object for the current profile.

@@ -1,4 +1,7 @@
 <?php
+/**
+ * Deprecated functions
+ */
 
 /**
  * Wrapper for wp_nav_menu() that previously cached nav menus. Removed caching mechanism and
@@ -52,3 +55,16 @@ function largo_fb_user_is_followable( $username = '' ) {
 	return false;
 }
 
+/**
+ * Former shortcode version of `largo_render_user_list`
+ *
+ * This function has been superceded by the correspondign shortcode in
+ * https://github.com/INN/staff
+ *
+ * @param $atts array The attributes of the shortcode.
+ * @since 0.4
+ * @link https://github.com/INN/staff
+ */
+function largo_render_staff_list_shortcode($atts=array()) {
+	error_log(var_export( 'This function is deprecated. Use INN\'s Staff plugin instead', true));
+}

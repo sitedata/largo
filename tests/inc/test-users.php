@@ -169,10 +169,6 @@ class UsersTestFunctions extends WP_UnitTestCase {
 
 	}
 
-	function test_largo_render_staff_list_shortcode() {
-		$this->markTestIncomplete('This test has not been implemented yet.');
-	}
-
 	function test_more_profile_info() {
 		$vars = $this->_more_profile_info_setup();
 
