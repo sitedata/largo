@@ -191,31 +191,6 @@ function largo_get_user_list($args=array()) {
 	return $users;
 }
 
-/**
- * Render a list of user profiles based on the array of users passed
- *
- * @param $users array The WP_User objects to use in rendering the list.
- * @param $show_users_with_empty_desc bool Whether we should skip users that have no bio/description.
- * @since 0.4
- */
-function largo_render_user_list($users, $show_users_with_empty_desc=false) {
-	echo '<div class="user-list">';
-	foreach ($users as $user) {
-		$desc = trim($user->description);
-		if (empty($desc) && ($show_users_with_empty_desc == false))
-			continue;
-
-		$hide = get_user_meta($user->ID, 'hide', true);
-		if ($hide == 'on')
-			continue;
-
-		$ctx = array('author_obj' => $user);
-		echo '<div class="author-box row-fluid">';
-		largo_render_template('partials/author-bio', 'description', $ctx);
-		echo '</div>';
-	}
-	echo '</div>';
-}
 
 /**
  * Display extra profile fields related to staff member status

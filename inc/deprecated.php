@@ -58,13 +58,30 @@ function largo_fb_user_is_followable( $username = '' ) {
 /**
  * Former shortcode version of `largo_render_user_list`
  *
- * This function has been superceded by the correspondign shortcode in
+ * This function has been superceded by the corresponding shortcode in
  * https://github.com/INN/staff
  *
  * @param $atts array The attributes of the shortcode.
  * @since 0.4
  * @link https://github.com/INN/staff
+ * @link https://github.com/INN/largo/issues/1505
  */
 function largo_render_staff_list_shortcode($atts=array()) {
-	error_log(var_export( 'This function is deprecated. Use INN\'s Staff plugin instead', true));
+	error_log(var_export( 'function largo_render_staff_list_shortcode is deprecated. Use INN\'s Staff plugin instead', true));
+}
+
+/**
+ * Formerly, a list of user profiles based on the array of users passed
+ *
+ * This function has been superceded by the corresponding shortcode in
+ * https://github.com/INN/staff
+ *
+ * @param $users array The WP_User objects to use in rendering the list.
+ * @param $show_users_with_empty_desc bool Whether we should skip users that have no bio/description.
+ * @since 0.4
+ * @link https://github.com/INN/staff
+ * @link https://github.com/INN/largo/issues/1505
+ */
+function largo_render_user_list($users, $show_users_with_empty_desc=false) {
+	error_log(var_export( 'function largo_render_user_list is deprecated. Use INN\'s Staff plugin instead', true));
 }
