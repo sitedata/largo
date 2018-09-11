@@ -14,7 +14,6 @@ function largo_widgets() {
 		'WP_Widget_Tag_Cloud',
 		'WP_Widget_Meta',
 		'WP_Widget_Recent_Comments',
-		'WP_Widget_RSS',
 		'WP_Widget_Recent_Posts'
 	);
 	foreach ( $unregister as $widget ) {
