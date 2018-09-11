@@ -77,7 +77,7 @@ function largo_register_sidebars() {
 	if ( of_get_option('homepage_bottom') == 'widgets' ) {
 		$sidebars[] = array(
 			'name' 	=> __( 'Homepage Bottom', 'largo' ),
-			'desc' 	=> __( 'An optional widget area at the bottom of the homepage', 'largo' ),
+			'desc' 	=> __( 'An optional widget area at the bottom of the homepage, enabled when you choose the widget area homepage bottom in Theme Options > Layout', 'largo' ),
 			'id' 	=> 'homepage-bottom'
 		);
 	}
