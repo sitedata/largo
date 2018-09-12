@@ -268,6 +268,9 @@ add_action( 'wp_head', 'largo_google_analytics' );
  * @since 0.6
  */
 function largo_gutenberg_frontend_css_js() {
+	$suffix = ( LARGO_DEBUG ) ? '' : '.min';
+	$version = largo_version();
+
 	if (
 		function_exists( 'the_gutenberg_project' )
 		// @todo add a conditional that checks that we're on a Gutenberg post
