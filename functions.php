@@ -423,6 +423,8 @@ if ( ! function_exists( 'largo_setup' ) ) {
 		//Add support for <title> tags
 		add_theme_support( 'title-tag' );
 
+		// Gutenberg alignment classes
+		add_theme_support( 'align-wide' );
 	}
 }
 add_action( 'after_setup_theme', 'largo_setup' );

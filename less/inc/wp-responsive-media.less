@@ -43,6 +43,25 @@ img[class*="wp-image-"] {
    clear:both;
 }
 
+.alignfull,
+.alignwide {
+  width: 100%;
+
+  img {
+    width: 100%;
+    display: block;
+  }
+}
+.alignfull {
+  width: 100vw;
+  margin-left: 50%;
+  transform: translateX(-50%);
+  max-width: none;
+}
+.alignwide {
+  max-width: none;
+}
+
 // --------------------------------------------
 // SUPPORT FOR IFRAME/OBJECT/EMBED
 // --------------------------------------------
