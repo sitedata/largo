@@ -11,7 +11,7 @@ if ( ! function_exists( 'largo_enqueue_js' ) ) {
 		/*
 		 * Use minified assets if LARGO_DEBUG is false.
 		 */
-		$suffix = (LARGO_DEBUG)? '' : '.min';
+		$suffix = ( LARGO_DEBUG ) ? '' : '.min';
 		$version = largo_version();
 
 		// Our primary stylesheet. Often overridden by custom-less-variables version.
@@ -260,3 +260,40 @@ if ( ! function_exists( 'largo_google_analytics' ) ) {
 	}
 }
 add_action( 'wp_head', 'largo_google_analytics' );
+
+
+/**
+ * Enqueue Largo's Gutenberg-supporting stylesheets and scripts, for the frontend
+ *
+ * @since 0.6
+ */
+function largo_gutenberg_frontend_css_js() {
+	if (
+		function_exists( 'the_gutenberg_project' )
+		// @todo add a conditional that checks that we're on a Gutenberg post
+	) {
+		// Gutenberg support stylesheet
+		wp_enqueue_style(
+			'largo-stylesheet-gutenberg',
+			get_template_directory_uri() . '/css/gutenberg' . $suffix . '.css',
+			null,
+			$version
+		);
+	} else {
+		error_log(var_export( 'aaa', true));
+	}
+}
+add_action( 'wp_enqueue_scripts', 'largo_gutenberg_frontend_css_js' );
+
+/**
+ * Enqueue Largo's Gutenberg-supporting stylesheets and scripts, for the admin editor
+ *
+ * @since 0.6
+ * @see https://wordpress.org/gutenberg/handbook/blocks/writing-your-first-block-type/#enqueuing-block-scripts
+ */
+function largo_gutenberg_editor_css_js() {
+	// add_editor_style()
+	// wp_register_script()
+	// see what we do in pym shortcode
+}
+add_action( 'after_setup_theme', 'largo_gutenberg_editor_css_js' );

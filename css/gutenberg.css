@@ -1,0 +1,12 @@
+/**
+ * Gutenberg-specific frontend styles
+ *
+ * This file should be enqueued on single templates, if Gutenberg is active.
+ *
+ * These styles are *not* to be enqueued in the post editor;
+ * Gutenberg provides appropriate styles for them there.
+ */
+/**
+ * Block styles
+ */
+/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsInNvdXJjZXNDb250ZW50IjpbXX0= */

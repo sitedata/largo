@@ -13,6 +13,7 @@ module.exports = function(grunt) {
   var path = process.cwd().replace(/^[\s\S]+\/wp-content/, "\/wp-content");
 
   var cssLessFiles = {
+    'css/gutenberg.css': 'less/gutenberg.less',
     'css/style.css': 'less/style.less',
     'css/editor-style.css': 'less/editor-style.less',
     'homepages/assets/css/single.css': 'homepages/assets/less/single.less',
