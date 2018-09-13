@@ -45,22 +45,43 @@ img[class*="wp-image-"] {
 
 .alignfull,
 .alignwide {
-  width: 100%;
-
   img {
     width: 100%;
     display: block;
   }
 }
 .alignfull {
+  // full width of frame
   width: 100vw;
   margin-left: 50%;
   transform: translateX(-50%);
   max-width: none;
 }
 .alignwide {
+  // width is halfway from column width to width of frame
   max-width: none;
+  width: auto;
+  // the width of the column, the padding-(left|right) of that, halved
+  margin-left: ~"calc(-0.5 * (95vw * 0.17021276594) )";
+  margin-right: ~"calc(-0.5 * (95vw * 0.17021276594) )";
 }
+@media @tabletDown {
+  .alignwide {
+    // these values match the padding on #page, plus the padding on #entry-content, halved
+    margin-left: ~"calc(-0.5 * (2.5vw + 6.38297872%) )";
+    margin-right: ~"calc(-0.5 * (2.5vw + 6.38297872%) )";
+  }
+}
+
+// classic layout alignment CSS
+.classic {
+  .alignfull{
+  }
+  .alignwide {
+  }
+}
+// full-width layout alignment CSS
+// @todo
 
 // --------------------------------------------
 // SUPPORT FOR IFRAME/OBJECT/EMBED
@@ -86,4 +107,7 @@ img[class*="wp-image-"] {
     left: 0;
     width: 100%;
     height: 100%;
+}
+figure iframe {
+  max-width: 100%;
 }
