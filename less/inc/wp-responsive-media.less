@@ -101,6 +101,8 @@ img[class*="wp-image-"] {
     }
 
   }
+
+  // Rather than being the "full" width, align-wide just escapes the column a little.
   .alignwide {
     @media ( min-width: 1229px ) {
       width: ~"calc( 100% + ( 0.5 * ( 100vw - 1170px ) ) + ( 1170px * 0.0212765957 ) )"; // the column width plus the left margin on #page, plus the bleed figure
