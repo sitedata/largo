@@ -20,7 +20,7 @@ class largo_INN_RSS_widget extends WP_Widget {
 		$rss = fetch_feed('http://feeds.feedburner.com/INNMemberInvestigations');
 		$title = __('Stories From Other INN Members', 'largo');
 		$desc = __('View more recent stories from members of INN', 'largo');
-		$link = 'http://inn.org/network-content';
+		$link = 'https://inn.org/network-content/';
 
 		$title = "<a class='rsswidget' href='$link' title='$desc'>$title</a>";
 

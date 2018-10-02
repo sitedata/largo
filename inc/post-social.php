@@ -33,7 +33,7 @@ if ( ! function_exists( 'largo_post_social_links' ) ) {
 		$values = get_post_custom( $post->ID );
 
 		if ( isset( $utilities['facebook'] ) && '1' === $utilities['facebook'] ) {
-			$fb_share = '<span class="facebook"><a target="_blank" href="http://www.facebook.com/sharer/sharer.php?u=%1$s"><i class="icon-facebook"></i><span class="hidden-phone">%2$s</span></a></span>';
+			$fb_share = '<span class="facebook"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=%1$s"><i class="icon-facebook"></i><span class="hidden-phone">%2$s</span></a></span>';
 			$output .= sprintf(
 				$fb_share,
 				rawurlencode( get_permalink() ),
