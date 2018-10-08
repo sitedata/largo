@@ -293,7 +293,7 @@ html.nav-open body {
   }
 }
 
-// Gradient is applied to it's own element because overflow
+// Gradient is applied to its own element because overflow
 // visible is not honored by IE when filter is present
 .navbar-inner {
   float: left;
@@ -450,8 +450,8 @@ html.nav-open body {
 }
 
 @media (min-width: 769px) {
-  html.no-touch ul.nav li.dropdown:hover ul.dropdown-menu,
-  html.touch ul.nav li.dropdown.open ul.dropdown-menu {
+  .nav li.dropdown:hover ul.dropdown-menu,
+  .nav li.dropdown.open ul.dropdown-menu {
       display: block;
   }
 }
@@ -459,8 +459,9 @@ html.nav-open body {
 // Open state for the dropdown
 // ---------------------------
 .open {
-  // IE7's z-index only goes to the nearest positioned ancestor, which would
+  // IE7 only lets z-index go to the nearest positioned ancestor, which would
   // make the menu appear below buttons that appeared later on the page
+  // thus, a fix
   *z-index: @zindexDropdown;
 
   & > .dropdown-menu {

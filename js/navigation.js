@@ -11,6 +11,7 @@
   /*
    * This is a shim to cover for the case where a browser may or may not have scrollbars
    * @link https://github.com/jquery/jquery/issues/1729
+   * @link https://github.com/INN/largo/pull/1369
    */
   Navigation.prototype.windowwidth = function() {
     return Math.max(window.outerWidth, $(window).width());
@@ -19,6 +20,7 @@
   Navigation.prototype.init = function() {
     // Dropdowns on touch screens
     this.enableMobileDropdowns();
+    this.toggleTouchClass();
 
     // Stick navigation
     this.stickyNavEl = $('.sticky-nav-holder');
@@ -42,32 +44,81 @@
     return this;
   };
 
-  Navigation.prototype.enableMobileDropdowns = function () {
-    // Touch enable the drop-down menus
-    if (Modernizr.touch) {
-      // iOS Safari works with touchstart, the rest work with click
-      var mobileEvent = /Mobile\/.+Safari/.test(navigator.userAgent) ? 'touchstart' : 'click',
-      // Open the drop down
-      openMenu = false;
+  /**
+   * Run the Modernizr.touch and Modernizr.pointerevents tests at will
+   *
+   * because Modernizr doesn't allow rerunning the tests, so the availablilty of an input device changes while the page is loaded, the Modernizr.touch property will be inaccurate
+   *
+   * @link https://github.com/Modernizr/Modernizr/blob/e2c27dcd32d6185846ce3c6c83d7634cfa402d19/feature-detects/touchevents.js
+   * @link https://github.com/Modernizr/Modernizr/blob/e2c27dcd32d6185846ce3c6c83d7634cfa402d19/feature-detects/pointerevents.js
+   * @return bool whether or not this is (probably) a touch device at this time
+   */
+  Navigation.prototype.touch = function () {
+    if ( ('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch ) {
+      return true;
+    }
 
-      // Call this to close the open menu
-      var closeOpenMenu = function() {
-        if (openMenu) {
-          openMenu.removeClass('open');
-          openMenu = false;
-        }
+    domPrefixes = Modernizr._domPrefixes;
+    var bool = false,
+           i = domPrefixes.length;
+
+    // Don't forget un-prefixed...
+    bool = Modernizr.hasEvent('pointerdown');
+
+    while (i-- && !bool) {
+      if (hasEvent(domPrefixes[i] + 'pointerdown')) {
+        bool = true;
+      }
+    }
+    return bool;
+  }
+
+  /**
+   * If a nav dropdown element is open, and something outside is clicked, close the menu
+   */
+  Navigation.prototype.enableMobileDropdowns = function () {
+    // Open the drop down
+    openMenu = false;
+
+    // Call this to close the open menu
+    var closeOpenMenu = function(event) {
+      // If it is a touch event, get rid of the click events.
+      if (event.type == 'touchstart') {
+        toggleButton.off('click.touchDropdown');
       }
 
-      // Close the open menu when the user taps elsewhere
-      $('body').on(mobileEvent, closeOpenMenu);
+      if (openMenu) {
+        openMenu.removeClass('open');
+        openMenu = false;
+      }
     }
+
+    // Close the open menu when the user taps elsewhere
+    $('body').on( 'touchstart.touchDropdown click.touchDropdown' , closeOpenMenu(event) );
   };
+
+  /**
+   * Toggle the Modernizr-added .touch and .no-touch classes
+   */
+  Navigation.prototype.toggleTouchClass = function () {
+    $html = $('html');
+    if ( this.touch() ) {
+      $html.addClass( 'touch' ).removeClass( 'no-touch' );
+    } else {
+      $html.addClass( 'no-touch' ).removeClass( 'touch' );
+    }
+  }
 
   Navigation.prototype.bindEvents = function() {
     $(window).resize(this.navOverflow.bind(this));
+    $(window).resize(this.enableMobileDropdowns.bind(this));
+    $(window).resize(this.toggleTouchClass.bind(this));
     this.bindStickyNavEvents();
   };
 
+  /**
+   * Attach sticky nav resize event handlers to their events
+   */
   Navigation.prototype.bindStickyNavEvents = function() {
     var self = this;
 
@@ -85,7 +136,9 @@
     this.stickyNavSetOffset();
   };
 
-  // Hide the sticky nav if we're too close to the top of the page
+  /**
+   * Hide the sticky nav if we're too close to the top of the page
+   */
   Navigation.prototype.stickyNavScrollTopHide = function() {
     if ($(window).scrollTop() <= this.mainEl.offset().top && this.mainNavEl.is(':visible')) {
       this.stickyNavEl.removeClass('show');
@@ -172,12 +225,13 @@
   Navigation.prototype.responsiveNavigation = function() {
     var self = this;
 
-    // Responsive navigation
+    // Tap/click this button to open/close the narrower navigation.
     $('.navbar .toggle-nav-bar').each(function() {
       var toggleButton = $(this),
           navbar = toggleButton.closest('.navbar');
 
       // Support both touch and click events
+      // The .toggleNav here is namespacing the click event: https://api.jquery.com/on/#event-names
       toggleButton.on('touchstart.toggleNav click.toggleNav', function(event) {
         // If it is a touch event, get rid of the click events.
         if (event.type == 'touchstart') {
@@ -199,7 +253,7 @@
         return false;
       });
 
-      // Secondary nav
+      // Secondary nav items in the drop-down
       navbar.on('touchstart.toggleNav click.toggleNav', '.nav-shelf .caret', function(event) {
         if (toggleButton.css('display') == 'none')
           return false;
@@ -364,7 +418,8 @@
     window.Navigation = Navigation;
 
   $(document).ready(function() {
-    new Navigation();
+    // make this Navigation available to inspectors.
+    window.Largo.navigation = new Navigation();
   });
 
 })();
