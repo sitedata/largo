@@ -37,7 +37,7 @@ if ( ! function_exists( 'largo_enqueue_js' ) ) {
 			'largo-navigation',
 			get_template_directory_uri() . '/js/navigation' . $suffix . '.js',
 			array( 'largoCore' ),
-			$version,
+			filemtime( get_template_directory() . '/js/navigation' . $suffix . '.js' ),
 			true
 		);
 
