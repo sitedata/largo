@@ -17,6 +17,9 @@
     return Math.max(window.outerWidth, $(window).width());
   }
 
+  /**
+   * Set up the Navigation object
+   */
   Navigation.prototype.init = function() {
     // Dropdowns on touch screens
     this.enableMobileDropdowns();
@@ -28,6 +31,9 @@
     this.mainEl = $('#main');
     this.mainNavEl = $('#main-nav');
 
+    // the currently-open menu Element (not a jQuery object);
+    this.openMenu = false;
+
     if ( this.windowwidth() > 768) {
       this.stickyNavTransition();
     }
@@ -38,8 +44,11 @@
     // Deal with long/wrapping navs
     setTimeout(this.navOverflow.bind(this), 0);
 
-    // Sticky nav on small viewports
+    // Nav on small viewports
     this.responsiveNavigation();
+
+    // Nav on touch devices on large viewports
+    this.touchDropdowns();
 
     return this;
   };
@@ -77,24 +86,27 @@
    * If a nav dropdown element is open, and something outside is clicked, close the menu
    */
   Navigation.prototype.enableMobileDropdowns = function () {
-    // Open the drop down
-    openMenu = false;
+    var self = this;
 
     // Call this to close the open menu
     var closeOpenMenu = function(event) {
       // If it is a touch event, get rid of the click events.
       if (event.type == 'touchstart') {
-        toggleButton.off('click.touchDropdown');
+        $(this).off('click.touchDropdown');
       }
 
-      if (openMenu) {
-        openMenu.removeClass('open');
-        openMenu = false;
+      if (self.openMenu) {
+        self.openMenu.classList.remove('open');
+        self.openMenu = false;
+        // we can't event.preventDefault here because of Chrome/Opera:
+        // https://www.chromestatus.com/feature/5093566007214080
       }
     }
 
     // Close the open menu when the user taps elsewhere
-    $('body').on( 'touchstart.touchDropdown click.touchDropdown' , closeOpenMenu(event) );
+    // Should this be scoped to not be on document/html/body?
+    // No; because #page and div.footer-bg
+    $('body').on( 'touchstart.touchDropdown click.touchDropdown' , closeOpenMenu );
   };
 
   /**
@@ -222,12 +234,65 @@
     }
   };
 
+  /**
+   * Touch/click event handler for sticky nav and main nav items
+   *
+   * Goals:
+   * - open when tapped, e.preventDefault
+   * - when open, click on link follows that link
+   *
+   * Largo does not support a three-level menu, so no need to worry about dropdowns off the dropdown.
+   *
+   * @todo: prevent this from triggering on the mobile nav
+   */
+  Navigation.prototype.touchDropdowns = function() {
+    console.log( 'running');
+    var self = this;
+    // a selector that applies to both main-nav and sticky nav elements
+    $('.nav li').each( function() {
+      var button = $(this);
+
+      button.on('touchstart.toggleNav click.toggleNav', function(event) {
+        console.log( this );
+        if ( this.classList.contains('open') ) {
+          console.log('doing nothing');
+        } else {
+          // If it is a touch event, get rid of the click events.
+          if (event.type == 'touchstart') {
+            button.off('click.toggleNav');
+          }
+          console.log('opening');
+          this.classList.add( 'open' );
+          self.openMenu = this;
+          event.preventDefault();
+        }
+
+        // if the touch is canceled, close the nav
+        button.on('touchcancel.toggleNav', function(event) {
+          console.log( 'touchcancel' );
+          button.removeClass('open')
+        });
+
+        // cleanup
+        button.on('touchend.toggleNav', function(event) {
+          console.log( 'touchend' );
+          button.off('touchcancel.toggleNav');
+        });
+      });
+    });
+  }
+
+  /**
+   * Touch menu interactions and menu appearance on "phone" screen sizes.
+   */
   Navigation.prototype.responsiveNavigation = function() {
     var self = this;
 
-    // Tap/click this button to open/close the narrower navigation.
+    // Tap/click this button to open/close the phone navigation, which shows on narrower viewports
     $('.navbar .toggle-nav-bar').each(function() {
+      // the hamburger
       var toggleButton = $(this),
+          // the parent nav of the hamburger
           navbar = toggleButton.closest('.navbar');
 
       // Support both touch and click events
@@ -255,6 +320,8 @@
 
       // Secondary nav items in the drop-down
       navbar.on('touchstart.toggleNav click.toggleNav', '.nav-shelf .caret', function(event) {
+        // prevents this from running when the sandwich menu button is not visible:
+        // prevents this from running when we're not doing the "phone" menu
         if (toggleButton.css('display') == 'none')
           return false;
 
@@ -417,9 +484,11 @@
   if (typeof window.Navigation == 'undefined')
     window.Navigation = Navigation;
 
+  /**
+   * Initialize the Navigation
+   */
   $(document).ready(function() {
     // make this Navigation available to inspectors.
     window.Largo.navigation = new Navigation();
   });
-
 })();
