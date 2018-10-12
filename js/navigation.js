@@ -34,7 +34,7 @@
     // the currently-open menu Element (not a jQuery object);
     this.openMenu = false;
 
-    if ( this.windowwidth() > 768) {
+    if (this.windowwidth() > 768) {
       this.stickyNavTransition();
     }
 
@@ -63,7 +63,7 @@
    * @return bool whether or not this is (probably) a touch device at this time
    */
   Navigation.prototype.touch = function () {
-    if ( ('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch ) {
+    if (('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch) {
       return true;
     }
 
@@ -96,7 +96,7 @@
       }
 
       if (self.openMenu) {
-        self.openMenu.classList.remove('open');
+        self.openMenu.parentNode.classList.remove('open');
         self.openMenu = false;
         // we can't event.preventDefault here because of Chrome/Opera:
         // https://www.chromestatus.com/feature/5093566007214080
@@ -106,7 +106,7 @@
     // Close the open menu when the user taps elsewhere
     // Should this be scoped to not be on document/html/body?
     // No; because #page and div.footer-bg
-    $('body').on( 'touchstart.touchDropdown click.touchDropdown' , closeOpenMenu );
+    $('body').on('touchstart.touchDropdown click.touchDropdown' , closeOpenMenu);
   };
 
   /**
@@ -114,10 +114,10 @@
    */
   Navigation.prototype.toggleTouchClass = function () {
     $html = $('html');
-    if ( this.touch() ) {
-      $html.addClass( 'touch' ).removeClass( 'no-touch' );
+    if (this.touch()) {
+      $html.addClass('touch').removeClass('no-touch');
     } else {
-      $html.addClass( 'no-touch' ).removeClass( 'touch' );
+      $html.addClass('no-touch').removeClass('touch');
     }
   }
 
@@ -162,13 +162,13 @@
   Navigation.prototype.stickyNavResizeCallback = function() {
     if (
       this.windowwidth() <= 768 ||
-      ( Largo.sticky_nav_options.main_nav_hide_article && ($('body').hasClass('single') || $('body').hasClass('page')) )
-    ) {
+      (Largo.sticky_nav_options.main_nav_hide_article && ($('body').hasClass('single') || $('body').hasClass('page')))
+   ) {
       this.stickyNavEl.addClass('show');
       this.stickyNavEl.parent().css('height', this.stickyNavEl.outerHeight());
     } else if (
       Largo.sticky_nav_options.sticky_nav_display
-    ) {
+   ) {
       this.stickyNavScrollTopHide();
       this.stickyNavEl.parent().css('height', '');
     } else {
@@ -192,7 +192,7 @@
     this.stickyNavSetOffset();
 
     // Abort if the scroll direction is the same as it was, or if the page has not been scrolled.
-    if (this.previousScroll == direction || !this.previousScroll ) {
+    if (this.previousScroll == direction || !this.previousScroll) {
       this.previousScroll = direction;
       return;
     }
@@ -238,7 +238,7 @@
    * Touch/click event handler for sticky nav and main nav items
    *
    * Goals:
-   * - open when tapped, e.preventDefault
+   * - open when tapped, event.preventDefault
    * - when open, click on link follows that link
    *
    * Largo does not support a three-level menu, so no need to worry about dropdowns off the dropdown.
@@ -246,39 +246,42 @@
    * @todo: prevent this from triggering on the mobile nav
    */
   Navigation.prototype.touchDropdowns = function() {
-    console.log( 'running');
     var self = this;
     // a selector that applies to both main-nav and sticky nav elements
-    $('.nav li').each( function() {
-      var button = $(this);
+    $('.nav li > .dropdown-toggle').each(function() {
+      var $button = $(this);
 
-      button.on('touchstart.toggleNav click.toggleNav', function(event) {
-        console.log( this );
-        if ( this.classList.contains('open') ) {
+      // Open the drawer when touched or clicked
+      function touchstart(event) {
+        // prevents this from running when the sandwich menu button is visible:
+        // prevents this from running when we're doing the "phone" menu
+        if ($('.navbar .toggle-nav-bar').css('display') !== 'none') {
+          return false;
+        }
+
+        if ($(this).parent('.dropdown').hasClass('open')) {
           console.log('doing nothing');
         } else {
           // If it is a touch event, get rid of the click events.
           if (event.type == 'touchstart') {
-            button.off('click.toggleNav');
+            $(this).off('click.toggleNav');
           }
-          console.log('opening');
-          this.classList.add( 'open' );
+          $(this).parent('.dropdown').addClass('open');
+          $(this).parent('.dropdown').addClass('open');
+          console.log('opening', $(this).parent('.dropdown'));
           self.openMenu = this;
           event.preventDefault();
         }
+      }
 
-        // if the touch is canceled, close the nav
-        button.on('touchcancel.toggleNav', function(event) {
-          console.log( 'touchcancel' );
-          button.removeClass('open')
-        });
+      // if the touch is canceled, close the nav
+      function touchcancel(event) {
+        console.log('touchcancel');
+        $(this).parent('.dropdown').removeClass('open');
+      }
 
-        // cleanup
-        button.on('touchend.toggleNav', function(event) {
-          console.log( 'touchend' );
-          button.off('touchcancel.toggleNav');
-        });
-      });
+      $button.on('touchstart.toggleNav click.toggleNav', touchstart);
+      $button.on('touchcancel.toggleNav', touchcancel);
     });
   }
 
@@ -292,8 +295,8 @@
     $('.navbar .toggle-nav-bar').each(function() {
       // the hamburger
       var toggleButton = $(this),
-          // the parent nav of the hamburger
-          navbar = toggleButton.closest('.navbar');
+        // the parent nav of the hamburger
+        navbar = toggleButton.closest('.navbar');
 
       // Support both touch and click events
       // The .toggleNav here is namespacing the click event: https://api.jquery.com/on/#event-names
@@ -322,14 +325,15 @@
       navbar.on('touchstart.toggleNav click.toggleNav', '.nav-shelf .caret', function(event) {
         // prevents this from running when the sandwich menu button is not visible:
         // prevents this from running when we're not doing the "phone" menu
-        if (toggleButton.css('display') == 'none')
+        if (toggleButton.css('display') == 'none') {
           return false;
+        }
 
         if (event.type == 'touchstart') {
           navbar.off('click.toggleNav', '.nav-shelf .dropdown-toggle');
         }
 
-        var li = $( event.target ).closest('li');
+        var li = $(event.target).closest('li');
 
         if (!li.hasClass('open')) {
           navbar.find('.nav-shelf li.open').removeClass('open');
@@ -358,7 +362,7 @@
       return;
     }
 
-    if ( ! this.windowwidth() <= 768 ) {
+    if (! this.windowwidth() <= 768) {
       $('html').removeClass('nav-open');
     }
 
@@ -380,7 +384,7 @@
        * Calculate the width of the nav
        */
       var navWidth = 0;
-      shelf.find('ul.nav > li').each( function() {
+      shelf.find('ul.nav > li').each(function() {
         if ($(this).is(':visible'))
           navWidth += $(this).outerWidth();
       });
@@ -431,7 +435,7 @@
        * If the nav is still wrapping, call navOverflow again.
        */
       var navWidth = 0;
-      shelf.find('ul.nav > li').each( function() {
+      shelf.find('ul.nav > li').each(function() {
         if ($(this).is(':visible'))
           navWidth += $(this).outerWidth();
       });
@@ -476,7 +480,7 @@
       shelf.find('ul.nav > li.menu-item').last().after(li);
     });
 
-    if (overflow.find('ul li').length == 0 ) {
+    if (overflow.find('ul li').length == 0) {
       overflow.remove();
     }
   };
