@@ -279,7 +279,7 @@ msgstr ""
 
 #: inc/avatars/admin.php:38
 msgid ""
-"Currently using Gravatar. Change at <a href=\"http://gravatar.com/"
+"Currently using Gravatar. Change at <a href=\"https://gravatar.com/"
 "\">gravatar.com</a> or choose a different image below."
 msgstr ""
 
@@ -3015,35 +3015,35 @@ msgstr ""
 
 #: options.php:189
 msgid ""
-"<strong>Link to YouTube Channel</strong> (http://www.youtube.com/user/"
+"<strong>Link to YouTube Channel</strong> (https://www.youtube.com/user/"
 "username)"
 msgstr ""
 
 #: options.php:195
-msgid "<strong>Link to Instagram Page</strong> (http://instagram.com/username)"
+msgid "<strong>Link to Instagram Page</strong> (https://instagram.com/username)"
 msgstr ""
 
 #: options.php:201
 msgid ""
-"<strong>Link to LinkedIn Group or Profile</strong> (http://www.linkedin.com/"
+"<strong>Link to LinkedIn Group or Profile</strong> (https://www.linkedin.com/"
 "in/username/)"
 msgstr ""
 
 #: options.php:207
-msgid "<strong>Link to Tumblr</strong> (http://yoursite.tumblr.com)"
+msgid "<strong>Link to Tumblr</strong> (https://yoursite.tumblr.com)"
 msgstr ""
 
 #: options.php:213
-msgid "<strong>Link to Pinterest Page</strong> (http://pinterest.com/username)"
+msgid "<strong>Link to Pinterest Page</strong> (https://pinterest.com/username)"
 msgstr ""
 
 #: options.php:219
-msgid "<strong>Link to Github Page</strong> (http://github.com/username)"
+msgid "<strong>Link to Github Page</strong> (https://github.com/username)"
 msgstr ""
 
 #: options.php:225
 msgid ""
-"<strong>Link to Flickr Photostream</strong> (http://www.flickr.com/photos/"
+"<strong>Link to Flickr Photostream</strong> (https://www.flickr.com/photos/"
 "username/)"
 msgstr ""
 
@@ -3210,7 +3210,7 @@ msgstr ""
 #: options.php:384
 msgid ""
 "<strong>Categories to include or exclude</strong> in the main loop on the "
-"homepage (comma-separated list of values, see: http://bit.ly/XmDGgd for "
+"homepage (comma-separated list of values, see: https://bit.ly/XmDGgd for "
 "correct format)."
 msgstr ""
 

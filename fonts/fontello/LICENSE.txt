@@ -7,7 +7,7 @@ Font license info
 
    Author:    Dave Gandy
    License:   SIL ()
-   Homepage:  http://fortawesome.github.com/Font-Awesome/
+   Homepage:  https://fortawesome.github.com/Font-Awesome/
 
 
 ## Brandico
@@ -15,7 +15,7 @@ Font license info
    (C) 2012 by Vitaly Puzrin
 
    Author:    Crowdsourced, for Fontello project
-   License:   SIL (http://scripts.sil.org/OFL)
+   License:   SIL (https://scripts.sil.org/OFL)
    Homepage:  
 
 
@@ -24,7 +24,7 @@ Font license info
    Copyright (C) 2012 by Daniel Bruce
 
    Author:    Daniel Bruce
-   License:   CC BY-SA (http://creativecommons.org/licenses/by-sa/2.0/)
+   License:   CC BY-SA (https://creativecommons.org/licenses/by-sa/2.0/)
    Homepage:  http://www.entypo.com
 
 
@@ -33,7 +33,7 @@ Font license info
    Copyright (C) 2012 by Sam Collins
 
    Author:    Sam Collins
-   License:   MIT (http://opensource.org/licenses/mit-license.php)
-   Homepage:  http://zocial.smcllns.com/
+   License:   MIT (https://opensource.org/licenses/mit-license.php)
+   Homepage:  https://zocial.smcllns.com/
 
 

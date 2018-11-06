@@ -14,7 +14,7 @@ options.php
 
    If you are making your theme translatable, you should replace 'options_framework_theme'
    with the actual text domain for your theme.  Read more:
-   http://codex.wordpress.org/Function_Reference/load_theme_textdomain
+   https://codex.wordpress.org/Function_Reference/load_theme_textdomain
 
 .. php:function:: optionsframework_custom_scripts()
 

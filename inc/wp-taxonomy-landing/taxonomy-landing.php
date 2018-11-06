@@ -5,20 +5,20 @@ Plugin URI: https://github.com/crowdfavorite/wp-taxonomy-landing
 Description: Allow separately designed landing pages for taxonomy archives.
 Version: 1.1.2
 Author: Crowd Favorite
-Author URI: http://crowdfavorite.com
+Author URI: https://crowdfavorite.com
 */
 
 /**
  * @package taxonomy-landing
  *
  * This file is part of Taxonomy Landing for WordPress
- * http://github.com/crowdfavorite/wp-taxonomy-landing
+ * https://github.com/crowdfavorite/wp-taxonomy-landing
  *
  * Copyright (c) 2009-2012 Crowd Favorite, Ltd. All rights reserved.
- * http://crowdfavorite.com
+ * https://crowdfavorite.com
  *
  * Released under the GPL license
- * http://www.opensource.org/licenses/gpl-license.php
+ * https://www.opensource.org/licenses/gpl-license.php
  *
  * **********************************************************************
  * This program is distributed in the hope that it will be useful, but

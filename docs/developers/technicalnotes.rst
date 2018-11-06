@@ -8,7 +8,7 @@ Pluggable (overridable) Largo functions
 
 Many of Largo's core functions are pluggable so you can write your own version of them by using the same function name in a child theme's ``functions.php``.
 
-You can read up on how that works in the `WordPress codex section about child themes <http://codex.wordpress.org/Child_Themes>`_.
+You can read up on how that works in the `WordPress codex section about child themes <https://codex.wordpress.org/Child_Themes>`_.
 
 See: `Function Reference <../api/index.html>`_.
 

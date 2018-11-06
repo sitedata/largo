@@ -2,7 +2,7 @@
 
 /**
  * lessphp v0.3.9
- * http://leafo.net/lessphp
+ * https://leafo.net/lessphp
  *
  * LESS css compiler, adapted from http://lesscss.org
  *
