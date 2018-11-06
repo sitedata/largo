@@ -9,7 +9,12 @@
  * @link http://largo.readthedocs.io/users/themeoptions.html#navigation
  */
 
-if ( ! is_single() && ! is_singular() || ! of_get_option( 'main_nav_hide_article', false ) ) {
+if (
+	! is_single() && ! is_singular()
+	|| ! of_get_option( 'main_nav_hide_article', false )
+	|| is_front_page()
+) {
+error_log(var_export( 'foo', true));
 ?>
 <nav id="main-nav" class="navbar clearfix">
 	<div class="navbar-inner">
@@ -23,7 +28,7 @@ if ( ! is_single() && ! is_singular() || ! of_get_option( 'main_nav_hide_article
 				 *
 				 * @link https://codex.wordpress.org/Function_Reference/add_action
 				 * @since 0.5.5
-     			 */
+				 */
 				do_action( 'largo_before_main_nav_shelf' ); 
 			?>
 			
@@ -38,7 +43,7 @@ if ( ! is_single() && ! is_singular() || ! of_get_option( 'main_nav_hide_article
 					 *
 					 * @link https://codex.wordpress.org/Function_Reference/add_action
 					 * @since 0.5.5
-     			 	 */
+					 */
 					do_action( 'largo_before_main_nav_list_items' );
 					
 					/*

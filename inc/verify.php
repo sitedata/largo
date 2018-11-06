@@ -9,7 +9,7 @@
 function largo_verify() {
 
 	// These services only require the verification meta tag on the homepage
-	if ( is_home() ) {
+	if ( is_front_page() ) {
 		if ( of_get_option( 'twitter_acct_id') ) {
 			echo '<meta property="twitter:account_id" content="' . of_get_option( 'twitter_acct_id') . '" />';
 		}
