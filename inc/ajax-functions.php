@@ -56,7 +56,7 @@ if ( !function_exists( 'largo_load_more_posts_data' ) ) {
 			'ajax_url' => admin_url( 'admin-ajax.php' ),
 			'paged' => ( !empty( $the_query->query_vars['paged'] ) )? $the_query->query_vars['paged'] : 1,
 			'query' => $query,
-			'is_home' => $the_query->is_home(),
+			'is_home' => $the_query->is_front_page(),
 			'is_series_landing' => $post->post_type == 'cftl-tax-landing' ? true : false,
 			'no_more_posts' => apply_filters( 'largo_no_more_posts_text', "You've reached the end!", $nav_id, $the_query )
 		);

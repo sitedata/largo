@@ -10,7 +10,11 @@
  * @link http://largo.readthedocs.io/users/menus.html#available-menu-areas
  */
 
-if ( ! is_single() && ! is_singular() || ! of_get_option( 'main_nav_hide_article', false ) ) {
+if (
+	! is_single() && ! is_singular()
+	|| ! of_get_option( 'main_nav_hide_article', false )
+	|| is_front_page()
+) {
 ?>
 	<div class="global-nav-bg">
 		<div class="global-nav">

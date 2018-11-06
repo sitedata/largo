@@ -112,7 +112,7 @@ filter: **largo_lmp_args**
 
     *args: $args*
 
-    Passed in this are the arguments for the Load More Posts WP_Query. An example usage would be to check if ``is_home()`` and then restrict the posts returned by the query to those in the homepage featured prominence term.
+    Passed in this are the arguments for the Load More Posts WP_Query. An example usage would be to check if ``is_front_page()`` and then restrict the posts returned by the query to those in the homepage featured prominence term.
 
 filter: **largo_lmp_template_partial**
 

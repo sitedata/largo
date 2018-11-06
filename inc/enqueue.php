@@ -44,7 +44,7 @@ if ( ! function_exists( 'largo_enqueue_js' ) ) {
 		// Largo configuration object for use in frontend JS
 		wp_localize_script(
 			'largoCore', 'Largo', array(
-			'is_home' => is_home(),
+			'is_home' => is_front_page(),
 			'is_single' => is_single() || is_singular(),
 			'sticky_nav_options' => array(
 				'sticky_nav_display' => (bool) of_get_option( 'sticky_nav_display', 0 ),
