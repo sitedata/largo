@@ -32,7 +32,7 @@ Child Themes
 What *is* a child theme?
 ````````````````````````
 
-From the `WordPress Codex <http://codex.wordpress.org/Child_Themes>`_:
+From the `WordPress Codex <https://codex.wordpress.org/Child_Themes>`_:
 
   A child theme is a theme that inherits the functionality and styling of another theme, called the parent theme. Child themes are the recommended way of modifying an existing theme.
 

@@ -34,7 +34,7 @@
 				echo ' | ' . 'Page ' . max( $paged, $page );
 		?>
 	</title>
-	<link rel="profile" href="http://gmpg.org/xfn/11" />
+	<link rel="profile" href="https://gmpg.org/xfn/11" />
 	<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
 <?php
 	if ( is_singular() && get_option( 'thread_comments' ) )

@@ -35,7 +35,7 @@ function largo_add_avatar_field($user) {
 						if (empty($image_src) && largo_has_gravatar($user->user_email)) {
 								echo get_avatar($user->ID);
 								echo '<br />';
-								_e('Currently using Gravatar. Change at <a href="http://gravatar.com/">gravatar.com</a> or choose a different image below.', 'largo');
+								_e('Currently using Gravatar. Change at <a href="https://gravatar.com/">gravatar.com</a> or choose a different image below.', 'largo');
 						} ?>
 					</p>
 

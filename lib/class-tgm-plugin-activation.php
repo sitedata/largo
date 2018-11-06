@@ -1576,7 +1576,7 @@ if ( ! class_exists( 'TGM_Plugin_Activation' ) ) {
 		 * Retrieve the URL to the TGMPA Install page.
 		 *
 		 * I.e. depending on the config settings passed something along the lines of:
-		 * http://example.com/wp-admin/themes.php?page=tgmpa-install-plugins
+		 * https://example.com/wp-admin/themes.php?page=tgmpa-install-plugins
 		 *
 		 * @since 2.5.0
 		 *
@@ -1605,7 +1605,7 @@ if ( ! class_exists( 'TGM_Plugin_Activation' ) ) {
 		 * Retrieve the URL to the TGMPA Install page for a specific plugin status (view).
 		 *
 		 * I.e. depending on the config settings passed something along the lines of:
-		 * http://example.com/wp-admin/themes.php?page=tgmpa-install-plugins&plugin_status=install
+		 * https://example.com/wp-admin/themes.php?page=tgmpa-install-plugins&plugin_status=install
 		 *
 		 * @since 2.5.0
 		 *

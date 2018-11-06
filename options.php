@@ -30,7 +30,7 @@ function optionsframework_option_name() {
  *
  * If you are making your theme translatable, you should replace 'options_framework_theme'
  * with the actual text domain for your theme.  Read more:
- * http://codex.wordpress.org/Function_Reference/load_theme_textdomain
+ * https://codex.wordpress.org/Function_Reference/load_theme_textdomain
  */
 function optionsframework_options() {
 	$imagepath =  get_template_directory_uri() . '/lib/options-framework/images/';

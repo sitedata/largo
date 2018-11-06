@@ -7,7 +7,7 @@
  * https://github.com/crowdfavorite/wp-taxonomy-landing
  *
  * Copyright (c) 2009-2012 Crowd Favorite, Ltd. All rights reserved.
- * http://crowdfavorite.com
+ * https://crowdfavorite.com
  *
  * **********************************************************************
  * This program is distributed in the hope that it will be useful, but

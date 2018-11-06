@@ -255,7 +255,7 @@ class Largo_CoAuthors_Byline extends Largo_Byline {
 		}
 
 		// If there are multiple coauthors, join them with commas and 'and'
-		if ( count( $out ) > 1 ) {
+		if ( count( $out ) > 1 && !is_author()) {
 			end( $out );
 			$key = key( $out );
 			reset( $out );

@@ -155,7 +155,7 @@ function largo_widget_custom_fields_form( $widget, $args, $instance ) {
   </p>
 
   <p>
-  	<label for="<?php echo $widget->get_field_id('title_link'); ?>"><?php _e('Widget Title Link <small class="description">(Example: http://google.com)</small>', 'largo'); ?></label>
+  	<label for="<?php echo $widget->get_field_id('title_link'); ?>"><?php _e('Widget Title Link <small class="description">(Example: https://google.com)</small>', 'largo'); ?></label>
     <input type="text" name="<?php echo $widget->get_field_name('title_link'); ?>" id="<?php echo $widget->get_field_id('title_link'); ?>"" class="widefat" value="<?php echo esc_attr( $instance['title_link'] ); ?>"" />
   </p>
 <?php

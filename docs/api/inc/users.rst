@@ -21,7 +21,7 @@ inc/users.php
 
    In a multisite network, allow site admins to edit user profiles
 
-   :link: http://thereforei.am/2011/03/15/how-to-allow-administrators-to-edit-users-in-a-wordpress-network/
+   :link: https://thereforei.am/2011/03/15/how-to-allow-administrators-to-edit-users-in-a-wordpress-network/
 
    :since: 0.3
 
