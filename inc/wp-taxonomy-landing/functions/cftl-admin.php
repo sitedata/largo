@@ -155,7 +155,7 @@ function cftl_tax_landing_messages($messages) {
 		7 => __('Landing Page saved.', 'cf-tax-landing'),
 		8 => sprintf(__('Landing Page submitted.  %s', 'cf-tax-landing'), $taxonomy_links),
 		9 => sprintf(__('Landing Page scheduled for: <strong>%1$s</strong>.', 'cf-tax-landing'),
-			// translators: Publish box date format, see https://secure.php.net/manual/es/function.date.php
+			// translators: Publish box date format, see https://secure.php.net/manual/en/function.date.php
 			date_i18n(__('M j, Y @ G:i'), strtotime($post->post_date))),
 		10 => sprintf(__('Landing Page updated.', 'cf-tax-landing')),
 	);
