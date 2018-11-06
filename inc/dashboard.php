@@ -22,11 +22,6 @@ function largo_dashboard_widgets_member() {
 
 	wp_add_dashboard_widget( 'dashboard_quick_links', __( 'Project Largo Help', 'largo' ), 'largo_dashboard_quick_links' );
 
-	wp_add_dashboard_widget( 'dashboard_member_news', __( 'Recent Stories from INN Members', 'largo' ), 'largo_dashboard_member_news' );
-	$my_widget = $wp_meta_boxes['dashboard']['normal']['core']['dashboard_member_news'];
-	unset($wp_meta_boxes['dashboard']['normal']['core']['dashboard_member_news']);
-	$wp_meta_boxes['dashboard']['side']['core']['dashboard_member_news'] = $my_widget;
-
 	wp_add_dashboard_widget( 'dashboard_network_news', __( 'INN Network News', 'largo' ), 'largo_dashboard_network_news' );
 	$my_widget = $wp_meta_boxes['dashboard']['normal']['core']['dashboard_network_news'];
 	unset($wp_meta_boxes['dashboard']['normal']['core']['dashboard_network_news']);
@@ -57,7 +52,7 @@ function largo_dashboard_widgets_nonmember() {
 function largo_dashboard_network_news() {
 	echo '<div class="rss-widget">';
 	wp_widget_rss_output( array(
-		'url' => 'http://feeds.feedburner.com/INNArticles',
+		'url' => 'https://feeds.feedburner.com/INNArticles',
 		'title' => __( 'INN Network News', 'largo' ),
 		'items' => 1,
 		'show_summary' => 1,
@@ -66,28 +61,20 @@ function largo_dashboard_network_news() {
 	));
 	echo '</div>';
 }
-function largo_dashboard_member_news() {
-	echo '<div class="rss-widget">';
-	wp_widget_rss_output(array(
-		'url' => 'http://feeds.feedburner.com/INNMemberInvestigations',
-		'title' => __( 'Recent Stories from INN Members', 'largo' ),
-		'items' => 3,
-		'show_summary' => 1,
-		'show_author' => 1,
-		'show_date' => 1
-	));
-	echo "</div>";
-}
+
+/**
+ * Largo dashboard quick links
+ */
 function largo_dashboard_quick_links() {
 	echo '
 		<div class="list-widget">
 			<p>If you\'re having trouble with your site, want to request a new feature or are just interested in learning more about Project Largo, here are a few helpful links:</p>
 			<ul>
-				<li><a href="http://largoproject.org/">Largo Project Website</a></li>
-				<li><a href="http://largo.readthedocs.io/">Largo Documentation</a></li>
-				<li><a href="http://support.largoproject.org">Help Desk</a></li>
-				<li><a href="http://support.largoproject.org/support/solutions">Knowledge Base</a></li>
-				<li><a href="mailto:support@largoproject.org">Contact Us</a></li>
+				<li><a href="https://largo.inn.org/">Largo Project Website</a></li>
+				<li><a href="https://largo.readthedocs.io/">Largo Documentation</a></li>
+				<li><a href="mailto:support@inn.org">Contact Us</a></li>
+				<li><a href="https://support.inn.org/">Help Desk</a></li>
+				<li><a href="https://support.inn.org/">Knowledge Base</a></li>
 			</ul>
 			<p>Developers can also log issues on <a href="https://github.com/INN/Largo">our public github repository</a> and if you would like to be included in our Largo users\' group, <a href="http://inn.us1.list-manage1.com/subscribe?u=81670c9d1b5fbeba1c29f2865&id=913028b23c">sign up here</a>.</p>
 		</div>
@@ -120,60 +107,60 @@ if ( INN_MEMBER === TRUE ) {
  * Largo Dashboard / Admin Bar Menu
  * -- Priority 15 Places between WordPress Logo and My Sites
  * -- To move menu to end of items use something like priority 999
- */ 
+ */
 
 add_action( 'admin_bar_menu', 'largo_dash_admin_menu', 15 );
 function largo_dash_admin_menu( $wp_admin_bar ) {
 
 	// Add Top Level Text Node for Dropdown
-	$args = array( 'id' => 'largo_admin_mega', 'title' => 'Largo' ); 
+	$args = array( 'id' => 'largo_admin_mega', 'title' => 'Largo' );
 	$wp_admin_bar->add_node( $args );
-	
+
 	// Main Website
-	$args = array( 'id' => 'website', 'title' => 'Main Website', 'href' => 'http://largoproject.org/', 'parent' => 'largo_admin_mega' ); 
+	$args = array( 'id' => 'website', 'title' => 'Main Website', 'href' => 'https://largo.inn.org//', 'parent' => 'largo_admin_mega' );
 	$wp_admin_bar->add_node( $args );
-	
+
 	// Documentation
-	$args = array( 'id' => 'largo_docs', 'title' => 'Documentation', 'href' => 'http://largo.readthedocs.io/', 'parent' => 'largo_admin_mega' ); 
+	$args = array( 'id' => 'largo_docs', 'title' => 'Documentation', 'href' => 'https://largo.readthedocs.io/', 'parent' => 'largo_admin_mega' );
 	$wp_admin_bar->add_node( $args );
-	
+
 	// Knowledge Base
-	$args = array( 'id' => 'knowledge_base', 'title' => 'Knowledge Base', 'href' => 'http://support.largoproject.org/support/solutions', 'parent' => 'largo_admin_mega' ); 
+	$args = array( 'id' => 'knowledge_base', 'title' => 'Knowledge Base', 'href' => 'https://support.inn.org/', 'parent' => 'largo_admin_mega' );
 	$wp_admin_bar->add_node( $args );
-	
+
 	// Member Help Desk
-	$args = array( 'id' => 'support', 'title' => 'Help Desk', 'href' => 'http://support.largoproject.org', 'parent' => 'largo_admin_mega' ); 
+	$args = array( 'id' => 'support', 'title' => 'Help Desk', 'href' => 'https://support.inn.org/', 'parent' => 'largo_admin_mega' );
 	$wp_admin_bar->add_node( $args );
-	
+
 	// Member Forums
-	$args = array( 'id' => 'user_forums', 'title' => 'Community Forums', 'href' => 'http://support.largoproject.org/support/discussions', 'parent' => 'largo_admin_mega' ); 
+	$args = array( 'id' => 'user_forums', 'title' => 'Community Forums', 'href' => 'https://support.inn.org/', 'parent' => 'largo_admin_mega' );
 	$wp_admin_bar->add_node( $args );
-	
+
 	// Largo on GitHub
-	$args = array( 'id' => 'github', 'title' => 'Largo on GitHub', 'href' => 'https://github.com/inn/largo', 'parent' => 'largo_admin_mega' ); 
+	$args = array( 'id' => 'github', 'title' => 'Largo on GitHub', 'href' => 'https://github.com/inn/largo', 'parent' => 'largo_admin_mega' );
 	$wp_admin_bar->add_node( $args );
-	
+
 	// Largo on Twitter
-	$args = array( 'id' => 'twitter', 'title' => '@LargoProject on Twitter', 'href' => 'https://twitter.com/largoproject', 'parent' => 'largo_admin_mega'); 
+	$args = array( 'id' => 'twitter', 'title' => '@LargoProject on Twitter', 'href' => 'https://twitter.com/largoproject', 'parent' => 'largo_admin_mega');
 	$wp_admin_bar->add_node( $args );
-	
+
 	// INN Nerds
-	$args = array(' id' => 'inn_nerds', 'title' => 'INN Nerds', 'href' => 'http://nerds.inn.org', 'parent' => 'largo_admin_mega' ); 
+	$args = array( 'id' => 'inn_nerds', 'title' => 'INN Nerds', 'href' => 'https://labs.inn.org/', 'parent' => 'largo_admin_mega' );
 	$wp_admin_bar->add_node( $args );
-	
-	// About INN	
-	$args = array( 'id' => 'about_inn', 'title' => 'About INN', 'href' => 'http://inn.org', 'parent' => 'largo_admin_mega' ); 
+
+	// About INN
+	$args = array( 'id' => 'about_inn', 'title' => 'About INN', 'href' => 'https://inn.org', 'parent' => 'largo_admin_mega' );
 	$wp_admin_bar->add_node( $args );
-	
+
 	// Donate
-	$args = array( 'id' => 'donate_inn', 'title' => 'Donate', 'href' => 'https://inn.org/donate', 'parent' => 'largo_admin_mega' ); 
+	$args = array( 'id' => 'donate_inn', 'title' => 'Donate', 'href' => 'https://inn.org/donate/', 'parent' => 'largo_admin_mega' );
 	$wp_admin_bar->add_node( $args );
 
 }
 
 // add a credit line to the admin footer
 function largo_admin_footer_text( $default_text ) {
-	return '<span id="footer-thankyou">This website powered by <a href="http://largoproject.org">Project Largo</a> from <a href="http://inn.org">INN</a> and <a href="http://wordpress.org">WordPress</a>.</span>';
+	return '<span id="footer-thankyou">This website powered by <a href="https://largo.inn.org/">Project Largo</a> from <a href="https://inn.org/">INN</a> and <a href="https://wordpress.org">WordPress</a>.</span>';
 }
 add_filter( 'admin_footer_text', 'largo_admin_footer_text' );
 

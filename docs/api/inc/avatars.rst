@@ -4,7 +4,7 @@ inc/avatars.php
 .. php:function:: largo_has_gravatar()
 
    Determine whether or not an author has a valid gravatar image
-   see: http://codex.wordpress.org/Using_Gravatars
+   see: https://codex.wordpress.org/Using_Gravatars
 
    :param $email $tring: an author's email address
 

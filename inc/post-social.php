@@ -32,8 +32,8 @@ if ( ! function_exists( 'largo_post_social_links' ) ) {
 
 		$values = get_post_custom( $post->ID );
 
-		if ( $utilities['facebook'] === '1' ) {
-			$fb_share = '<span class="facebook"><a target="_blank" href="http://www.facebook.com/sharer/sharer.php?u=%1$s"><i class="icon-facebook"></i><span class="hidden-phone">%2$s</span></a></span>';
+		if ( isset( $utilities['facebook'] ) && '1' === $utilities['facebook'] ) {
+			$fb_share = '<span class="facebook"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=%1$s"><i class="icon-facebook"></i><span class="hidden-phone">%2$s</span></a></span>';
 			$output .= sprintf(
 				$fb_share,
 				rawurlencode( get_permalink() ),
@@ -41,7 +41,7 @@ if ( ! function_exists( 'largo_post_social_links' ) ) {
 			);
 		}
 
-		if ( $utilities['twitter'] === '1' ) {
+		if ( isset( $utilities['twitter'] ) && '1' === $utilities['twitter'] ) {
 			$twitter_share = '<span class="twitter"><a target="_blank" href="https://twitter.com/intent/tweet?text=%1$s&url=%2$s%3$s"><i class="icon-twitter"></i><span class="hidden-phone">%4$s</span></a></span>';
 
 			// By default, don't set a via.
@@ -86,8 +86,8 @@ if ( ! function_exists( 'largo_post_social_links' ) ) {
 				__( 'Tweet', 'largo' )
 			);
 		}
-		
-		if ( $utilities['email'] === '1' ) {
+
+		if ( isset( $utilities['email'] ) && '1' === $utilities['email'] ) {
 			$output .= sprintf(
 				'<span data-service="email" class="email share-button"><a href="mailto:?subject=%2$s&body=%3$s%0D%0A%4$s" target="_blank"><i class="icon-mail"></i> <span class="hidden-phone">%1$s</span></a></span>',
 				esc_attr( __( 'Email', 'largo' ) ),
@@ -97,8 +97,7 @@ if ( ! function_exists( 'largo_post_social_links' ) ) {
 			);
 		}
 
-		
-		if ( $utilities['print'] === '1' ) {
+		if ( isset( $utilities['print'] ) && '1' === $utilities['print'] ) {
 			$output .= '<span class="print"><a href="#" onclick="window.print()" title="' . esc_attr( __( 'Print this article', 'largo' ) ) . '" rel="nofollow"><i class="icon-print"></i><span class="hidden-phone">' . esc_attr( __( 'Print', 'largo' ) ) . '</span></a></span>';
 		}
 

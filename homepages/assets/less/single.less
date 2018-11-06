@@ -1,8 +1,5 @@
-@import "../../../less/inc/mixins.less";
-
-@sky: #6cb9e1;
-@fog: #ddd;
-@grey: #666;
+@import (reference) "../../../less/inc/mixins.less";
+@import (reference) "../../../less/inc/variables.less";
 
 #main,
 .home-top {
@@ -54,7 +51,8 @@
     font-weight: bold;
   }
   .view-list & {
-    color: @grey;
+    // change color of the control when the backgorund image is gone
+    color: @grayDark;
     text-shadow: none;
     a {
       color: inherit;
@@ -100,7 +98,7 @@
       font-size: 80%;
     }
     h5.byline {
-      color: @fog;
+      color: @grayLighter;
     }
     article {
       border-top: solid 3px rgba(red(@sky), green(@sky), blue(@sky), 0.5);
@@ -170,7 +168,7 @@
   .byline,
   .byline a,
   section {
-    color: @fog;
+    color: @grayLighter;
   }
   .byline {
     font-weight: bold;

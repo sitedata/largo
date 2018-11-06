@@ -9,7 +9,7 @@
  */
 if ( ! is_single() && ! is_singular() || ! of_get_option( 'main_nav_hide_article', false ) ) {
 ?>
-<header id="site-header" class="clearfix nocontent" itemscope itemtype="http://schema.org/Organization">
+<header id="site-header" class="clearfix nocontent" itemscope itemtype="https://schema.org/Organization">
 	<?php
 	/**
 	 * Before largo_header()

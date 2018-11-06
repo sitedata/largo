@@ -67,8 +67,8 @@
 				return {
 					longname : 'Largo Plugin',
 					author : 'Institute for Nonprofit News',
-					authorurl : 'http://largoproject.org/',
-					infourl : 'http://largoproject.org/',
+					authorurl : 'https://largo.inn.org/',
+					infourl : 'https://largo.inn.org/',
 					version : "1.0"
 				};
 			}
