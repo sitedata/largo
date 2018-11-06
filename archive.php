@@ -109,7 +109,6 @@ $queried_object = get_queried_object();
 				while ( have_posts() ) : the_post();
 					$post_type = get_post_type();
 					$partial = largo_get_partial_by_post_type( 'archive', $post_type, 'archive' );
-					echo $partial;
 					get_template_part( 'partials/content', $partial );
 					do_action( 'largo_loop_after_post_x', $counter, $context = 'archive' );
 					$counter++;
