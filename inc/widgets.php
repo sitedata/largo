@@ -14,7 +14,6 @@ function largo_widgets() {
 		'WP_Widget_Tag_Cloud',
 		'WP_Widget_Meta',
 		'WP_Widget_Recent_Comments',
-		'WP_Widget_RSS',
 		'WP_Widget_Recent_Posts'
 	);
 	foreach ( $unregister as $widget ) {
@@ -26,7 +25,6 @@ function largo_widgets() {
 		'largo_facebook_widget' => '/inc/widgets/largo-facebook.php',
 		'largo_follow_widget' => '/inc/widgets/largo-follow.php',
 		'largo_image_widget' => '/inc/widgets/largo-image-widget.php',
-		'largo_INN_RSS_widget' => '/inc/widgets/largo-inn-rss.php',
 		'largo_recent_comments_widget' => '/inc/widgets/largo-recent-comments.php',
 		'largo_recent_posts_widget' => '/inc/widgets/largo-recent-posts.php',
 		'largo_taxonomy_list_widget' => '/inc/widgets/largo-taxonomy-list.php',
