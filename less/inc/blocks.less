@@ -1,3 +1,18 @@
 /**
  * Block styles
  */
+@import (reference) "variables.less";
+@import (reference) "mixins.less";
+@import (reference) "buttons.less";
+
+.wp-block-button {
+  .wp-block-button__link {
+    .btn;
+  }
+}
+.wp-block-pullquote {
+  text-align: unset;
+  &.aligncenter {
+    text-align: center;
+  }
+}

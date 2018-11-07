@@ -146,6 +146,8 @@ if( !function_exists( 'largo_custom_sidebars_dropdown' ) ) {
 		$default = ( of_get_option( 'single_template' ) == 'classic' ) ? 'sidebar-single' : 'none';
 		$val = $default;
 
+		$admin_page = get_current_screen();
+
 		// for new posts
 		if ( $admin_page->action == 'add' )
 			$val = 'none';
@@ -154,7 +156,6 @@ if( !function_exists( 'largo_custom_sidebars_dropdown' ) ) {
 		if ( $custom && $custom !== 'default' )
 			$val = $custom;
 
-		$admin_page = get_current_screen();
 		$output = '';
 		if ( $admin_page->base == 'post' ) {
 
@@ -229,6 +230,8 @@ if( !function_exists( 'largo_landing_page_custom_sidebars_dropdown' ) ) {
 		$default = ( of_get_option( 'single_template' ) == 'classic' ) ? 'sidebar-single' : 'none';
 		$val = $default;
 
+		$admin_page = get_current_screen();
+
 		// for new posts
 		if ( $admin_page->action == 'add' )
 			$val = 'none';
@@ -237,7 +240,6 @@ if( !function_exists( 'largo_landing_page_custom_sidebars_dropdown' ) ) {
 		if ( $custom && $custom !== 'default' )
 			$val = $custom;
 
-		$admin_page = get_current_screen();
 		$output = '';
 		if ( isset( $admin_page->post_type ) and $admin_page->post_type == 'cftl-tax-landing' ) {
 			$default = of_get_option(
