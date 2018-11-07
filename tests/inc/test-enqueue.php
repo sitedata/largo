@@ -58,8 +58,8 @@ class EnqueueTestFunctions_Gutenberg extends WP_UnitTestCase {
 
 		// test that Gutenberg exists as we expect it to exist
 		$this->assertTrue(
-			function_exists( 'the_gutenberg_project' ),
-			'Attempted to activate Gutenberg, but it looks like the function `the_gutenberg_project()` was not defined. Did that function name change? It is what we use to decide whether to enqueue css/gutenberg.css'
+			function_exists( 'register_block_type' ),
+			'Attempted to activate Gutenberg, but it looks like the function `register_block_type()` was not defined. Did that function name change? It is what we use to decide whether to enqueue css/gutenberg.css'
 		);
 		$this->activate_gutenberg();
 		$this->deactivate_gutenberg();

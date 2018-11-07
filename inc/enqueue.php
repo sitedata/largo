@@ -273,7 +273,7 @@ function largo_gutenberg_frontend_css_js() {
 	$version = largo_version();
 
 	if (
-		function_exists( 'the_gutenberg_project' )
+		function_exists( 'register_block_type' )
 		// @todo add a conditional that checks that we're on a Gutenberg post
 	) {
 		// Gutenberg support stylesheet
