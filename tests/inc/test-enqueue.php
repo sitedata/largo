@@ -38,7 +38,12 @@ class EnqueueTestFunctions extends WP_UnitTestCase {
 
 class EnqueueTestFunctions_Gutenberg extends WP_UnitTestCase {
 	function setUp() {
-		if ( getenv( 'GUTENBERG' ) != 1 ) {
+		// @see wp_version_check();
+		require( ABSPATH . WPINC . '/version.php' );
+		if (
+			getenv( 'GUTENBERG' ) != 1
+			|| -1 === version_compare( '4.999', $wp_version ) // 4.999 > 4.9.8 or any release in the 4.9 branch; 4.999 < 5.0-beta1
+		) {
 			$this->markTestSkipped( 'Skipping Gutenberg tests in non-gutenberg environment' );
 		}
 
