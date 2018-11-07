@@ -7,11 +7,11 @@ class EnqueueTestFunctions extends WP_UnitTestCase {
 	}
 
 	// helper to activate gutenberg
-	function activate_gutenbderg() {
+	function activate_gutenberg() {
 	}
 
 	// helper to deactivate gutenberg
-	function deactivate_gutenbderg() {
+	function deactivate_gutenberg() {
 	}
 
 	function test_largo_enqueue_js() {
