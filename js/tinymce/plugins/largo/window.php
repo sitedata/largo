@@ -3,7 +3,7 @@
 	require( '../../../../../../../wp-load.php' );	// we're a long way from home, Toto
 
 ?><!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="https://www.w3.org/1999/xhtml">
 <head>
 	<title>Wrap content in module</title>
 	<script language="javascript" type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>

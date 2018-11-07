@@ -102,7 +102,7 @@ html_theme = 'default'
 
 
 # -- START Change the local theme
-# @see http://docs.readthedocs.io/en/latest/theme.html
+# @see https://docs.readthedocs.io/en/latest/theme.html
 
 # on_rtd is whether we are on readthedocs.io
 import os

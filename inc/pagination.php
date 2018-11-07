@@ -37,10 +37,10 @@ if ( ! function_exists( 'largo_entry_content' ) ) {
 
 /**
  * Adds pagination to single posts
- * Based on: http://bavotasan.com/2012/a-better-wp_link_pages-for-wordpress/
+ * Based on: https://bavotasan.com/2012/a-better-wp_link_pages-for-wordpress/
  *
  * @params $args same array of arguments as accepted by wp_link_pages
- * See: http://codex.wordpress.org/Function_Reference/wp_link_pages
+ * See: https://codex.wordpress.org/Function_Reference/wp_link_pages
  * @return formatted output in html (or echo)
  * @since 0.3
  */

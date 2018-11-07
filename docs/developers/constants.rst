@@ -33,7 +33,7 @@ The other constants
 
 .. php:const:: INN_MEMBER
 
-	``INN_MEMBER`` indicates whether or not a WordPress site belongs to `a member of the Institute for Nonprofit News <http://inn.org/members/>`_. 
+	``INN_MEMBER`` indicates whether or not a WordPress site belongs to `a member of the Institute for Nonprofit News <https://inn.org/members/>`_. 
 
 	``INN_MEMBER`` is defined as true in ``functions.php`` if it is not otherwise defined and if ``INN_HOSTED`` is true. If ``INN_HOSTED`` is false, then ``INN_MEMBER`` will also be false unless ``INN_MEMBER`` is explicitly defined in ``wp_config.php`` or in the ``functions.php`` of a child theme.
 

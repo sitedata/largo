@@ -27,14 +27,14 @@ Browser compatibility
  
 Usage
 -----
-You can source Select2 directly from a [CDN like JSDliver](http://www.jsdelivr.com/#!select2), [download it from this GitHub repo](https://github.com/ivaynberg/select2/tags), or use one of the integrations below.
+You can source Select2 directly from a [CDN like JSDliver](https://www.jsdelivr.com/#!select2), [download it from this GitHub repo](https://github.com/ivaynberg/select2/tags), or use one of the integrations below.
 
 Integrations
 ------------
 
-* [Wicket-Select2](https://github.com/ivaynberg/wicket-select2) (Java / [Apache Wicket](http://wicket.apache.org))
+* [Wicket-Select2](https://github.com/ivaynberg/wicket-select2) (Java / [Apache Wicket](https://wicket.apache.org))
 * [select2-rails](https://github.com/argerim/select2-rails) (Ruby on Rails)
-* [AngularUI](http://angular-ui.github.com/#directives-select2) ([AngularJS](angularjs.org))
+* [AngularUI](https://angular-ui.github.com/#directives-select2) ([AngularJS](angularjs.org))
 * [Django](https://github.com/applegrew/django-select2)
 * [Symfony](https://github.com/19Gerhard85/sfSelect2WidgetsPlugin)
 * [Symfony2](https://github.com/avocode/FormExtensions)
@@ -81,8 +81,8 @@ License or the GPL License.
 
 You may obtain a copy of the Apache License and the GPL License in the LICENSE file, or at:
 
-http://www.apache.org/licenses/LICENSE-2.0
-http://www.gnu.org/licenses/gpl-2.0.html
+https://www.apache.org/licenses/LICENSE-2.0
+https://www.gnu.org/licenses/gpl-2.0.html
 
 Unless required by applicable law or agreed to in writing, software distributed under the Apache License
 or the GPL License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,

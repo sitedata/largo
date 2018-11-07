@@ -26,7 +26,7 @@ The plugin has minimal configuration and can be used out of the box. It is inten
  * Multi-language.
  * Supports custom styling using CSS.
 
-This plugin is licensed under GPL v2.0 and is made available by the Checkfront [Online Reservation System](http://www.checkfront.com/tour/).
+This plugin is licensed under GPL v2.0 and is made available by the Checkfront [Online Reservation System](https://www.checkfront.com/tour/).
 
 Clean-contact can be translated using the provided pot file.  If you would like to contribute a translation file, please let me know (use the contact address in the translate.txt file).
 

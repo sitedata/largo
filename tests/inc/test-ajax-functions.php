@@ -146,7 +146,7 @@ class AjaxFunctionsTestAjaxFunctions extends WP_Ajax_UnitTestCase {
 	/*
 	 * Make sure `largo_load_more_posts` works when `cats_home` option is set.
 	 *
-	 * Regression test for issue: http://github.com/inn/largo/issues/499
+	 * Regression test for issue: https://github.com/inn/largo/issues/499
 	 */
 	function test_largo_load_more_posts_cats_home_option() {
 		$this->markTestSkipped('Unable to read the ajax return, even when it is filled with dumb <h1>foo</h1> tags that do not depend upon categories or posts or queries.');

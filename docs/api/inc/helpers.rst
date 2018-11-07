@@ -41,9 +41,9 @@ inc/helpers.php
 
    :uses: largo_fb_url_to_username
 
-   :link: http://codex.wordpress.org/Plugin_API/Action_Reference/edit_user_profile_update
+   :link: https://codex.wordpress.org/Plugin_API/Action_Reference/edit_user_profile_update
 
-   :link: http://codex.wordpress.org/Plugin_API/Action_Reference/personal_options_update
+   :link: https://codex.wordpress.org/Plugin_API/Action_Reference/personal_options_update
 
 .. php:function:: validate_fb_username()
 
@@ -56,7 +56,7 @@ inc/helpers.php
    :param bool $update: whether this is a user update
    :param object $user: a WP_User object
 
-   :link: http://codex.wordpress.org/Plugin_API/Action_Reference/user_profile_update_errors
+   :link: https://codex.wordpress.org/Plugin_API/Action_Reference/user_profile_update_errors
 
    :since: 0.4
 
@@ -86,9 +86,9 @@ inc/helpers.php
 
    :uses: largo_twitter_url_to_username
 
-   :link: http://codex.wordpress.org/Plugin_API/Action_Reference/edit_user_profile_update
+   :link: https://codex.wordpress.org/Plugin_API/Action_Reference/edit_user_profile_update
 
-   :link: http://codex.wordpress.org/Plugin_API/Action_Reference/personal_options_update
+   :link: https://codex.wordpress.org/Plugin_API/Action_Reference/personal_options_update
 
 .. php:function:: validate_twitter_username()
 
@@ -101,7 +101,7 @@ inc/helpers.php
 
    :uses: largo_twitter_url_to_username
 
-   :link: http://codex.wordpress.org/Plugin_API/Action_Reference/user_profile_update_errors
+   :link: https://codex.wordpress.org/Plugin_API/Action_Reference/user_profile_update_errors
 
    :since: 0.4
 

@@ -112,7 +112,7 @@ filter: **largo_lmp_args**
 
     *args: $args*
 
-    Passed in this are the arguments for the Load More Posts WP_Query. An example usage would be to check if ``is_home()`` and then restrict the posts returned by the query to those in the homepage featured prominence term.
+    Passed in this are the arguments for the Load More Posts WP_Query. An example usage would be to check if ``is_front_page()`` and then restrict the posts returned by the query to those in the homepage featured prominence term.
 
 filter: **largo_lmp_template_partial**
 
@@ -258,11 +258,11 @@ Template Hooks
 
 Sometimes you may want to fire certain functions or include additional blocks of markup on a page without having to modify or override an entire template file.
 
-WordPress allows you to define custom action hooks using the `do_action() <http://codex.wordpress.org/Function_Reference/do_action>`_ function like so: ::
+WordPress allows you to define custom action hooks using the `do_action() <https://codex.wordpress.org/Function_Reference/do_action>`_ function like so: ::
 
     do_action( 'largo_top' );
 
-and then from functions.php in a child theme you can use the `add_action() <http://codex.wordpress.org/Function_Reference/add_action>`_ function to fire another function you define to insert markup or perform some other action when the do_action() function is executed, for example: ::
+and then from functions.php in a child theme you can use the `add_action() <https://codex.wordpress.org/Function_Reference/add_action>`_ function to fire another function you define to insert markup or perform some other action when the do_action() function is executed, for example: ::
 
     add_action( 'largo_top', 'largo_render_network_header' );
 
