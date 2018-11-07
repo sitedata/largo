@@ -76,7 +76,7 @@ before_script:
     - export WP_TESTS_DIR=/tmp/wordpress/tests/phpunit
     - export WP_CORE_DIR=/tmp/wordpress/
     - git clone --depth=1 --branch="$WP_VERSION" git://develop.git.wordpress.org/ $WP_CORE_DIR
-    - if [ GUTENBERG ]; then git clone --depth=1 --branch="v4.2.0" https://github.com/WordPress/gutenberg.git $WP_CORE_DIR'wp-content/plugins/gutenberg'; fi
+    - if [ GUTENBERG ]; then git clone --depth=1 --branch="v4.2.0" https://github.com/WordPress/gutenberg.git $WP_CORE_DIR'src/wp-content/plugins/gutenberg'; fi
     - cd ..
     - mv $SLUG "$WP_CORE_DIR/src/wp-content/themes/$SLUG"
     - cd $WP_CORE_DIR
