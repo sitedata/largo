@@ -223,40 +223,41 @@ add_action( 'wp_footer', 'largo_footer_js' );
 
 if ( ! function_exists( 'largo_google_analytics' ) ) {
 	/**
-	 * Add Google Analytics code to the footer, you need to add your GA ID to the theme settings for this to work
+	 * Add Google Analytics code to the footer
 	 *
-	 * @since 1.0
+	 * You need to add your GA ID to the theme settings for this to work.
+	 *
+	 * Through version 0.5.5.4, this function output a Google Analytics
+	 * tag even if the site didn't have GA configured in the theme. This
+	 * tag was used to send GA tracking events to properties for INN and
+	 * for the Largo Project.
+	 *
+	 * In this current version of the plugin, it only outputs a GA tag
+	 * if you've added a GA ID to the theme settings. If you're using a different
+	 * GA script, leave that setting blank.
+	 *
+	 * If you're using Largo, please send us an email to say hi!
+	 * https://labs.inn.org/contact/
+	 *
+	 * @since 0.3
 	 */
 	function largo_google_analytics() {
-		if ( !current_user_can('edit_posts') ) : // don't track editors ?>
-			<script>
-			    var _gaq = _gaq || [];
-			<?php if ( of_get_option( 'ga_id', true ) ) : // make sure the ga_id setting is defined ?>
-				_gaq.push(['_setAccount', '<?php echo of_get_option( "ga_id" ) ?>']);
-				_gaq.push(['_trackPageview']);
-			<?php endif; ?>
-				<?php if (defined('INN_MEMBER') && INN_MEMBER) { ?>
-				_gaq.push(
-					["inn._setAccount", "UA-17578670-2"],
-					["inn._setCustomVar", 1, "MemberName", "<?php bloginfo('name') ?>"],
-					["inn._trackPageview"]
-				);
-				<?php } ?>
-			    _gaq.push(
-					["largo._setAccount", "UA-17578670-4"],
-					["largo._setCustomVar", 1, "SiteName", "<?php bloginfo('name') ?>"],
-					["largo._setDomainName", "<?php echo parse_url( home_url(), PHP_URL_HOST ); ?>"],
-					["largo._setAllowLinker", true],
-					["largo._trackPageview"]
-				);
-
-			    (function() {
-				    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-				    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-				    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-				})();
-			</script>
-	<?php endif;
+		if ( ! current_user_can( 'edit_posts' ) ) { // don't track editors or authors or admins.
+			if ( of_get_option( 'ga_id', true ) ) { // make sure the ga_id setting is defined.
+				?>
+				<script>
+					var _gaq = _gaq || [];
+					_gaq.push(['_setAccount', '<?php echo of_get_option( 'ga_id' ); ?>']);
+					_gaq.push(['_trackPageview']);
+					(function() {
+						var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+						ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+						var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+					})();
+				</script>
+				<?php
+			}
+		}
 	}
 }
 add_action( 'wp_head', 'largo_google_analytics' );
