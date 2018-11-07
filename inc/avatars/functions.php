@@ -24,21 +24,26 @@ add_action( 'get_avatar', 'largo_get_avatar_filter', 1, 5 );
 /**
  * Get the avatar image HTML for the given user id/email and size
  *
- * @param int|string $id_or_email a wordpress user ID or user email address;
- * @param int $string The size of the avatar
+ * @param int|string|WP_Comment $id_or_email a wordpress user ID or user email address, or a comment.
+ * @param int $string The size of the avatar.
  */
 function largo_get_avatar_src( $id_or_email, $size ) {
 
 	// get the user ID
 	if ( is_numeric( $id_or_email ) ) {
 		$id = (int) $id_or_email;
-	} elseif ( is_object( $id_or_email ) ) {
-		if ( ! empty( $id_or_email->user_id ) ) {
+	} elseif (
+		is_object( $id_or_email )
+		&& isset( $id_or_email->user_id )
+	) {
 			$id = (int) $id_or_email->user_id;
-		}
 	} else {
 		$user = get_user_by( 'email', $id_or_email );
-		$id = $user->ID;
+		if ( is_object( $user ) && ! empty( $user->ID ) ) {
+			$id = $user->ID;
+		} else {
+			return false;
+		}
 	}
 
 	$avatar_id = largo_get_user_avatar_id( $id );
@@ -46,7 +51,7 @@ function largo_get_avatar_src( $id_or_email, $size ) {
 	if ( empty( $avatar_id ) ) {
 		return false;
 	}
-	
+
 	global $_wp_additional_image_sizes;
 
 	$copy = $_wp_additional_image_sizes;

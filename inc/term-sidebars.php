@@ -91,6 +91,10 @@ class Largo_Term_Sidebars {
 	 */
 	public function admin_enqueue_scripts( $hook_suffix ) {
 		// @todo: does this need nonce verification?
+		if ( ! isset( $_REQUEST['taxonomy'] ) ) {
+			return;
+		}
+
 		$taxonomy = wp_unslash( $_REQUEST['taxonomy'] );
 
 		if ( 'edit-tags.php' === $hook_suffix && ! empty( $taxonomy ) ) {
