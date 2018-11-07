@@ -27,10 +27,6 @@ tests_add_filter( 'muplugins_loaded', function($arg) {
 		$plugins = get_option( 'active_plugins' );
 		$plugins[] = 'gutenberg/gutenberg.php';
 		$ret = update_option( 'active_plugins', $plugins );
-		error_log(var_export( $ret, true));
-		error_log(var_export( $plugins, true));
-	} else {
-		error_log(var_export( 'gutenberg not activated', true));
 	}
 	return $arg;
 });
