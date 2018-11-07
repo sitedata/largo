@@ -24,7 +24,7 @@ function largo_sticky_nav_active() {
  */
 if ( ! function_exists( 'largo_header' ) ) {
 	function largo_header() {
-		$header_tag = is_home() ? 'h1' : 'h2'; // use h1 for the homepage, h2 for internal pages
+		$header_tag = is_front_page() ? 'h1' : 'h2'; // use h1 for the homepage, h2 for internal pages
 
 		// if we're using the text only header, display the output, otherwise this is just replacement text for the banner image
 		$header_class = of_get_option( 'no_header_image' ) ? 'branding' : 'visuallyhidden';

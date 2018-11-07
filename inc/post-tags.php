@@ -193,7 +193,7 @@ if ( ! function_exists( 'largo_excerpt' ) ) {
 		if (!empty($the_post->post_excerpt)) {
 			// if a post has a custom excerpt set, we'll use that
 			$content = apply_filters('get_the_excerpt', $the_post->post_excerpt);
-		} else if (is_home() && preg_match('/<!--more(.*?)?-->/', $the_post->post_content, $matches) > 0) {
+		} else if ( is_front_page() && preg_match( '/<!--more(.*?)?-->/', $the_post->post_content, $matches ) > 0 ) {
 			// if we're on the homepage and the post has a more tag, use that
 			$parts = explode($matches[0], $the_post->post_content, 2);
 			$content = $parts[0];

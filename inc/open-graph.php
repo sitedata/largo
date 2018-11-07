@@ -48,7 +48,7 @@ if ( ! function_exists( 'largo_opengraph' ) ) {
 
 				rewind_posts();
 
-			} elseif ( is_home() ) { ?>
+			} elseif ( is_front_page() ) { ?>
 
 				<meta property="og:title" content="<?php bloginfo( 'name' ); echo ' - '; bloginfo( 'description' ); ?>" />
 				<meta property="og:type" content="website" />
