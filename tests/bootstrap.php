@@ -24,10 +24,15 @@ tests_add_filter('filesystem_method', function($arg) {
 tests_add_filter( 'muplugins_loaded', function($arg) {
 	if ( getenv( 'GUTENBERG' ) == 1 ) {
 		require ABSPATH . 'wp-content/plugins/gutenberg/gutenberg.php';
+		$plugins = get_option( 'active_plugins' );
+		$plugins[] = 'gutenberg/gutenberg.php';
+		$ret = update_option( 'active_plugins', $plugins );
+		error_log(var_export( $ret, true));
+		error_log(var_export( $plugins, true));
+	} else {
+		error_log(var_export( 'gutenberg not activated', true));
 	}
-	$plugins = get_option( 'active_plugins' );
-	$plugins[] = 'gutenberg/gutenberg.php';
-	update_option( 'active_plugins', $plugins );
+	return $arg;
 });
 
 require dirname(__FILE__) . '/mock/mock-options-framework.php';
