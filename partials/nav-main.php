@@ -14,7 +14,6 @@ if (
 	|| ! of_get_option( 'main_nav_hide_article', false )
 	|| is_front_page()
 ) {
-error_log(var_export( 'foo', true));
 ?>
 <nav id="main-nav" class="navbar clearfix">
 	<div class="navbar-inner">
