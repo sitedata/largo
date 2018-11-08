@@ -181,7 +181,7 @@ class Navis_Media_Credit {
         ), $atts );
         $atts = apply_filters( 'navis_image_layout_defaults', $atts );
 
-        if ( $atts['id'] && empty( $atts['credit'] ) {
+        if ( $atts['id'] && empty( $atts['credit'] ) ) {
             $post_id = str_replace( 'attachment_', '', $atts['id'] );
             $creditor = navis_get_media_credit( $post_id );
             $credit = ! empty( $creditor ) ? $creditor->to_string() : '';
@@ -203,7 +203,7 @@ class Navis_Media_Credit {
 			);
 		}
 
-        if ( !empty( $atts['caption'] ) {
+        if ( !empty( $atts['caption'] ) ) {
             $out .= sprintf( '<p class="wp-caption-text">%s</p>', wp_kses_post( $atts['caption'] ) );
         }
 
