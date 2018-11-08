@@ -194,15 +194,14 @@ function optionsframework_mlu_get_silentpost ( $_token ) {
 		foreach ( $_args as $k => $v ) {
 			$query .= ' AND ' . $k . ' = "' . $v . '"';
 		} // End FOREACH Loop
-		
+
 		$query .= ' LIMIT 1';
 		$_posts = $wpdb->get_row( $query );
-		
+
 		// If we've got a post, loop through and get it's ID.
-		if ( count( $_posts ) ) {
+		if ( is_object( $_posts ) ) {
 			$_id = $_posts->ID;
 		} else {
-		
 			// If no post is present, insert one.
 			// Prepare some additional data to go with the post insertion.
 			$_words = explode( '_', $_token );
@@ -211,7 +210,7 @@ function optionsframework_mlu_get_silentpost ( $_token ) {
 			$_post_data = array( 'post_title' => $_title );
 			$_post_data = array_merge( $_post_data, $_args );
 			$_id = wp_insert_post( $_post_data );
-		}	
+		}
 	}
 	return $_id;
 }
