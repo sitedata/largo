@@ -18,24 +18,23 @@ class largo_series_posts_widget extends WP_Widget {
 		$preserve = $post;
 
 		// instance: num, series (id), title, heading
-		extract( $args );
 
 		//get the posts
- 		$series_posts = largo_get_series_posts( $instance['series'], $instance['num'] );
+		$series_posts = largo_get_series_posts( $instance['series'], $instance['num'] );
 
- 		if ( ! $series_posts ) return; //output nothing if no posts found
+		if ( empty( $series_posts ) ) return; //output nothing if no posts found
 
 
 		$instance['title_link'] = get_term_link( (int) $instance['series'], 'series' );
 		$term = get_term( $instance['series'], 'series' );
 		$title = apply_filters( 'widget_title', $term->name, $instance, $this->id_base );
 
-		echo $before_widget;
+		echo $args['before_widget'];
 
-		if ( $title ) echo $before_title . $title . $after_title;
+		if ( ! empty( $title ) ) echo $args['before_title'] . $title . $args['after_title'];
 
-	 	//first post
-	 	$series_posts->the_post();
+		//first post
+		$series_posts->the_post();
 
 		$context = array(
 			'instance' => $instance,
@@ -62,9 +61,9 @@ class largo_series_posts_widget extends WP_Widget {
 			echo '</ul>';
 		}
 
- 		echo '<a class="more" href="' . get_term_link( (int) $instance['series'], 'series' ) . '">' . __('Complete Coverage', 'largo') . "</a>";
+		echo '<a class="more" href="' . get_term_link( (int) $instance['series'], 'series' ) . '">' . __('Complete Coverage', 'largo') . "</a>";
 
-		echo $after_widget;
+		echo $args['after_widget'];
 
 		// Restore global $post
 		wp_reset_postdata();
