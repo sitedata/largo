@@ -190,15 +190,16 @@ address {
   margin: 0 0 @baseline;
   font-style: italic;
 }
+strike,
+s,
 del {
-  color: @grayLight;
+  color: @gray;
 }
 
 // --------------------------------------------
 // Fancy Post Formatting
 // --------------------------------------------
 
-.wp-block-pullquote,
 blockquote {
   box-sizing: border-box;
   clear: both;
@@ -206,10 +207,19 @@ blockquote {
   // sigh
   margin: @baseline;
   border-left: 5px solid @grayLighter;
-  &.alignleft {
+
+  .alignleft & {
     border-right: 5px solid @grayLighter;
     border-left: none;
+    margin-left: 0;
   }
+  .alignright & {
+    margin-right: 0;
+  }
+  .aligncenter & {
+    border: none;
+  }
+
   p {
     font-size: @baseFontSize;
     margin: @baseline/2 0;
