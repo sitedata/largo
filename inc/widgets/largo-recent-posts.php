@@ -40,16 +40,14 @@ class largo_recent_posts_widget extends WP_Widget {
 		// Preserve global $post
 		$preserve = $post;
 
-		extract( $args );
-
 		$posts_term = of_get_option( 'posts_term_plural', 'Posts' );
 
 		// Add the link to the title.
 		$title = apply_filters( 'widget_title', empty( $instance['title'] ) ? __( 'Recent ' . $posts_term, 'largo' ) : $instance['title'], $instance, $this->id_base );
 
-		echo $before_widget;
+		echo $args['before_widget'];
 
-		if ( $title ) echo $before_title . $title . $after_title;
+		if ( $title ) echo $args['before_title'] . $title . $args['after_title'];
 
 		$thumb = isset( $instance['thumbnail_display'] ) ? $instance['thumbnail_display'] : 'small';
 		$excerpt = isset( $instance['excerpt_display'] ) ? $instance['excerpt_display'] : 'num_sentences';
@@ -117,7 +115,7 @@ class largo_recent_posts_widget extends WP_Widget {
 		if( $instance['linkurl'] !='' ) {
 			echo '<p class="morelink"><a href="' . esc_url( $instance['linkurl'] ) . '">' . esc_html( $instance['linktext'] ) . '</a></p>';
 		}
-		echo $after_widget;
+		echo $args['after_widget'];
 
 		// Restore global $post
 		wp_reset_postdata();
