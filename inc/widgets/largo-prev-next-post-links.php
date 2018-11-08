@@ -14,16 +14,15 @@ class largo_prev_next_post_links_widget extends WP_Widget {
 
 	function widget( $args, $instance ) {
 		global $post;
-		extract( $args );
 
 		// only useful on post pages
 		if ( !is_single() ) return;
 
-		echo $before_widget;
+		echo $args['before_widget'];
 
 		largo_content_nav( 'single-post-nav-below', $instance['in_same_cat'] );
 
-		echo $after_widget;
+		echo $args['after_widget'];
 	}
 
 	function update( $new_instance, $old_instance ) {
