@@ -163,7 +163,7 @@ if ( ! function_exists( 'largo_content_nav' ) ) {
 		<?php } elseif ( $wp_query->max_num_pages > 1 ) {
 			$posts_term = of_get_option('posts_term_plural');
 
-			largo_render_template('partials/load-more-posts', array(
+			largo_render_template('partials/load-more-posts', null, array(
 				'nav_id' => $nav_id,
 				'the_query' => $wp_query,
 				'posts_term' => ($posts_term)? $posts_term : 'Posts'

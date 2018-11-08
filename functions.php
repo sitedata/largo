@@ -410,9 +410,10 @@ if ( ! function_exists( 'largo_setup' ) ) {
 	 * functions.php file.
 	 */
 	function largo_setup() {
+		$suffix = ( LARGO_DEBUG ) ? '' : '.min';
 
 		// This theme styles the visual editor with editor-style.css to match the theme style.
-		add_editor_style('/css/editor-style.css');
+		add_editor_style('/css/editor-style' . $suffix . '.css');
 
 		// Add default posts and comments RSS feed links to <head>.
 		add_theme_support( 'automatic-feed-links' );
@@ -423,6 +424,12 @@ if ( ! function_exists( 'largo_setup' ) ) {
 		//Add support for <title> tags
 		add_theme_support( 'title-tag' );
 
+		// Gutenberg alignment classes
+		add_theme_support( 'align-wide' );
+
+		// Gutenberg support for editor styles; @link https://github.com/WordPress/gutenberg/pull/9008
+		add_theme_support( 'editor-styles' );
+		add_editor_style('/css/gutenberg' . $suffix . '.css');
 	}
 }
 add_action( 'after_setup_theme', 'largo_setup' );

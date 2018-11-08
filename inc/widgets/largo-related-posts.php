@@ -27,14 +27,18 @@ class largo_related_posts_widget extends WP_Widget {
 
 		if ( $title ) echo $before_title . $title . $after_title;
 
-		$related = new Largo_Related( $instance['qty'] );
+		if ( isset( $instance['qty'] ) ) {
+			$related = new Largo_Related( $instance['qty'] );
+		} else {
+			$related = new Largo_Related( 1 );
+		}
 
 		//get the related posts
 		$rel_posts = new WP_Query( array(
 			'post__in' => $related->ids(),
 			'nopaging' => 1,
 			'post__not_in' => array( $post->ID ),
-			'posts_per_page' => $instance['qty'],
+			'posts_per_page' => ( isset( $instance['qty'] ) ) ? $instance['qty'] : 1,
 			'ignore_sticky_posts' => 1
 		) );
 
@@ -51,7 +55,7 @@ class largo_related_posts_widget extends WP_Widget {
 
 				<h4><a href="<?php the_permalink(); ?>" title="Read: <?php esc_attr( the_title( '','', FALSE ) ); ?>"><?php the_title(); ?></a></h4>
 
-				<?php if ( $instance['show_byline'] ) { ?>
+				<?php if ( isset( $instance['show_byline'] ) && $instance['show_byline'] ) { ?>
 					<h5 class="byline">
 						<span class="by-author"><?php largo_byline( true, false ); ?></span>
 					</h5>
