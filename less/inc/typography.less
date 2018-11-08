@@ -121,13 +121,16 @@ p {
     color: @grayLight;
   }
   &.xsmall {
-	font-size: @baseFontSize * 0.667;
-	color: @grayLight;
+    font-size: @baseFontSize * 0.667;
+    color: @grayLight;
   }
   &.intro {
     font-size: @baseFontSize * 1.5;
     color: @gray;
     font-style: italic;
+  }
+  &.has-drop-cap:not(:focus):first-letter {
+    font-size: 7.2em;
   }
 }
 
