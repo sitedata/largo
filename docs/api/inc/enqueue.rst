@@ -25,8 +25,6 @@ inc/enqueue.php
 
    Determine which size of the banner image to load based on the window width
 
-   TODO: this should probably use picturefill for this instead
-
    :since: 1.0
 
 .. php:function:: largo_footer_js()
