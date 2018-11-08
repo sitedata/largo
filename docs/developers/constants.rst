@@ -95,12 +95,6 @@ The other constants
 
 .. php:const:: DOING_AUTOSAVE
 
-.. php:const:: PICTUREFILL_WP_PATH
-
-.. php:const:: PICTUREFILL_WP_URL
-
-.. php:const:: PICTUREFILL_WP_VERSION
-
 .. php:const:: CFTL_SELF_DIR
 
 .. php:const:: LARGO_TEMPLATE_LANDING_VERSION
