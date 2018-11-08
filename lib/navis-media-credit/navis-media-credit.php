@@ -180,26 +180,33 @@ class Navis_Media_Credit {
             'caption' => '',
         ), $atts );
         $atts = apply_filters( 'navis_image_layout_defaults', $atts );
-        extract( $atts );
 
-        if ( $id && ! $credit ) {
-            $post_id = str_replace( 'attachment_', '', $id );
+        if ( $atts['id'] && empty( $atts['credit'] ) {
+            $post_id = str_replace( 'attachment_', '', $atts['id'] );
             $creditor = navis_get_media_credit( $post_id );
             $credit = ! empty( $creditor ) ? $creditor->to_string() : '';
         }
 
-        if ( $id ) {
-            $id = 'id="' . esc_attr($id) . '" ';
+        // XXX: maybe remove module and image classes at some point
+		$out = sprintf(
+			'<div id="%s" class="wp-caption module image %s" style="max-width: %spx;">%s',
+			esc_attr( $atts['id'] ),
+			esc_attr( $atts['align'] ),
+			esc_attr( $atts['width'] ),
+			do_shortcode( $content )
+		);
+
+		if ( isset( $credit ) ) {
+			$out .= sprintf(
+				'<p class="wp-media-credit">%s</p>',
+				wp_kses_post( $credit )
+			);
+		}
+
+        if ( !empty( $atts['caption'] ) {
+            $out .= sprintf( '<p class="wp-caption-text">%s</p>', wp_kses_post( $atts['caption'] ) );
         }
 
-        // XXX: maybe remove module and image classes at some point
-        $out = sprintf( '<div %s class="wp-caption module image %s" style="max-width: %spx;">%s', $id, $align, $width, do_shortcode( $content ) );
-        if ( $credit ) {
-            $out .= sprintf( '<p class="wp-media-credit">%s</p>', $credit );
-        }
-        if ( $caption ) {
-            $out .= sprintf( '<p class="wp-caption-text">%s</p>', $caption );
-        }
         $out .= "</div>";
 
         return $out;
