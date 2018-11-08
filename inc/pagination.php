@@ -59,32 +59,31 @@ if ( ! function_exists( 'largo_custom_wp_link_pages' ) ) {
 
 		$r = wp_parse_args( $args, $defaults );
 		$r = apply_filters( 'wp_link_pages_args', $r );
-		extract( $r, EXTR_SKIP );
 
 		global $page, $numpages, $multipage, $more, $pagenow;
 
 		$output = '';
 		if ( $multipage ) {
 			//if ( 'number' == $next_or_number ) {
-				$output .= $before;
+				$output .= $r['before'];
 
 				//previous page
 				$i = $page - 1;
 				if ( $i && $more ) {
 					$output .= _wp_link_page( $i );
-					$output .= $text_before . $previouspagelink . $text_after . '</a>|';
+					$output .= $r['text_before'] . $r['previouspagelink'] . $r['text_after'] . '</a>|';
 				}
 
 				//list of page #s
 				for ( $i = 1; $i < ( $numpages + 1 ); $i = $i + 1 ) {
-					$j = str_replace( '%', $i, $pagelink );
+					$j = str_replace( '%', $i, $r['pagelink'] );
 					$output .= ' ';
 					if ( $i != $page || ( ( ! $more ) && ( $page == 1 ) ) )
 						$output .= _wp_link_page( $i );
 					else
 						$output .= '<span class="current-post-page">';
 
-					$output .= $text_before . $j . $text_after;
+					$output .= $r['text_before'] . $j . $r['text_after'];
 					if ( $i != $page || ( ( ! $more ) && ( $page == 1 ) ) )
 						$output .= '</a>';
 					else
@@ -95,15 +94,15 @@ if ( ! function_exists( 'largo_custom_wp_link_pages' ) ) {
 				$i = $page + 1;
 				if ( $i <= $numpages && $more ) {
 					$output .= '|' . _wp_link_page( $i );
-					$output .= $text_before . $nextpagelink . $text_after . '</a>';
+					$output .= $r['text_before'] . $r['nextpagelink'] . $r['text_after'] . '</a>';
 				}
 
 				$output .= '|<a href="' . add_query_arg( array( 'all' => '1'), get_permalink() ) . '" title="View all pages">View As Single Page</a>';
 
-				$output .= $after;
+				$output .= $r['after'];
 		}
 
-		if ( $echo )
+		if ( $r['echo'] )
 			echo $output;
 
 		return $output;
