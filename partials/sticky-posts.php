@@ -14,8 +14,8 @@ $query = new WP_Query( $args );
 
 if ( $query->have_posts() ) {
 	while ( $query->have_posts() ) {
-	   	$query->the_post();
-	   	$shown_ids[] = get_the_ID();
+		$query->the_post();
+		$shown_ids[] = get_the_ID();
 
 		if ( $sticky && $sticky[0] && ! is_paged() ) { ?>
 
@@ -50,7 +50,7 @@ if ( $query->have_posts() ) {
 						<?php } ?>
 
 						<h2 class="entry-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
-						<h5 class="byline"><?php largo_byline(); ?></h5>
+						<h5 class="byline"><?php largo_byline( null, null, get_the_ID() ); ?></h5>
 
 						<div class="entry-content">
 						<?php
@@ -71,11 +71,12 @@ if ( $query->have_posts() ) {
 									?>
 								</ul>
 								<?php
-								if ( count( $feature_posts ) == 3 )
-											printf( '<p class="sticky-all"><a href="%1$s">%2$s &raquo;</a></p>',
-												esc_url( get_term_link( $feature ) ),
-												__( 'Full Coverage', 'largo' )
-											);
+									if ( count( $feature_posts ) == 3 ) {
+										printf( '<p class="sticky-all"><a href="%1$s">%2$s &raquo;</a></p>',
+											esc_url( get_term_link( $feature ) ),
+											__( 'Full Coverage', 'largo' )
+										);
+									}
 								?>
 							</div>
 						<?php } // feature_posts ?>

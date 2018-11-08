@@ -14,7 +14,7 @@
 		<?php if ( $subtitle = get_post_meta( $post->ID, 'subtitle', true ) )
 			echo '<h2 class="subtitle">' . $subtitle . '</h2>';
 		?>
-		<h5 class="byline"><?php largo_byline(); ?></h5>
+		<h5 class="byline"><?php largo_byline( null, null, get_the_ID() ); ?></h5>
 
 		<?php
 			if ( !of_get_option( 'single_social_icons' ) == false ) {
