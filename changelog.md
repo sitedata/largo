@@ -7,6 +7,9 @@ though this project doesn't succeed in adhering to [Semantic Versioning](https:/
 
 ## [Unreleased](https://github.com/INN/largo/compare/0.5...0.5-dev)
 
+Thanks to Mike Schinkel for his work on [pull request 1469](https://github.com/INN/largo/pull/1469) at WordCamp for Publishers 2017's Contributor Day.
+
+### New Features
 - Adds Gutenberg support, with
 	- editor styles
 	- support for the `.alignwide` and `.alignfull` CSS classes and their use in blocks
@@ -19,6 +22,7 @@ though this project doesn't succeed in adhering to [Semantic Versioning](https:/
 ### Removed
 - Removes the default inclusion of Google Analytics with INN's Largo Project IDs. [PR #1502](https://github.com/INN/largo/pull/1502) as part of [issue #1495](https://github.com/INN/largo/issues/1495), and by request.
 - Removes the INN Member RSS widget, because the RSS feed it draws from is no longer supported or maintained by INN. Because the RSS feed was occasionally empty, the widget would result in 500 errors. [RP #1535](https://github.com/INN/largo/pulls/1535) for [issue #1511](https://github.com/INN/largo/issues/1511) and [#893](https://github.com/INN/largo/issues/893).
+- Removes lingering traces of the Largo Featured Widget. [PR #1563](https://github.com/INN/largo/pull/1563) and [#1469](https://github.com/INN/largo/pull/1469) for [issue 1467](https://github.com/INN/largo/issues/1467), from Github user [mikeschinkel](https://github.com/mikeschinkel).
 
 ### Upgrade notices
 - If your child theme has significant custom styling, or has custom post templates, your theme may need to provide additional styles to ensure Gutenberg compatibility.
