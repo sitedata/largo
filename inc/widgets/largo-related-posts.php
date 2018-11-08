@@ -57,7 +57,7 @@ class largo_related_posts_widget extends WP_Widget {
 
 				<?php if ( isset( $instance['show_byline'] ) && $instance['show_byline'] ) { ?>
 					<h5 class="byline">
-						<span class="by-author"><?php largo_byline( true, false ); ?></span>
+						<span class="by-author"><?php largo_byline( true, false, get_the_ID() ); ?></span>
 					</h5>
 				<?php } ?>
 

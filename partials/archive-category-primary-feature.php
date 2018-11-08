@@ -15,7 +15,7 @@
 					rel="bookmark"><?php echo $featured_post->post_title; ?></a>
 			</h2>
 
-			<h5 class="byline"><?php largo_byline(true, false, $featured_post); ?></h5>
+			<h5 class="byline"><?php largo_byline( true, false, $featured_post ); ?></h5>
 		</header>
 
 		<div class="entry-content">

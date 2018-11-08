@@ -22,6 +22,7 @@ though this project doesn't succeed in adhering to [Semantic Versioning](https:/
 
 ### Upgrade notices
 - If your child theme has significant custom styling, or has custom post templates, your theme may need to provide additional styles to ensure Gutenberg compatibility.
+- A future version of Largo will require the third parameter of `largo_byline()` to be specified in all calls. [PR #1561](https://github.com/INN/largo/pull/1561) for [issue #1517](https://github.com/INN/largo/issues/1517) adds code that, in testing environments with `WP_DEBUG` or `LARGO_DEBUG` set to `true`, will result in server log messages. This is necessary to prevent mismatches between the Loop's global `$post` and the desired byline output. The third parameter of `largo_byline()` may be a `WP_Post` instance or a post ID. Example call: `largo_byline( null, null, get_the_ID() );`.
 
 ## [Largo 0.5.5.4](https://github.com/INN/largo/releases/tag/v0.5.5.4)
 

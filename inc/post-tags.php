@@ -131,6 +131,10 @@ if ( ! function_exists( 'largo_byline' ) ) {
 				$post_id = $post;
 		} else {
 			$post_id = get_the_ID();
+
+			if ( WP_DEBUG || LARGO_DEBUG ) {
+				_doing_it_wrong( 'largo_byline', 'largo_byline must be called with a post or post ID specified as the third argument. For more information, see https://github.com/INN/largo/issues/1517 .', '0.6' );
+			}
 		}
 
 		// Set us up the options
