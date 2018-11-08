@@ -11,11 +11,14 @@ though this project doesn't succeed in adhering to [Semantic Versioning](https:/
 	- editor styles
 	- support for the `.alignwide` and `.alignfull` CSS classes and their use in blocks
 	- pullquote styles
-- Removes the INN Member RSS widget, because the RSS feed it draws from is no longer supported or maintained by INN. Because the RSS feed was occasionally empty, the widget would result in 500 errors. [RP #1535](https://github.com/INN/largo/pulls/1535) for [issue #1511](https://github.com/INN/largo/issues/1511) and [#893](https://github.com/INN/largo/issues/893).
+
+## Changes
 - Fixes numerous undefined variable errors.
+- Users who have the capability to edit a given post will see the edit link on the frontend, where before users with the capability to edit published posts in general saw the link to edit the post in the frontend. [PR #1559](https://github.com/INN/largo/pull/1559) for [issue #1543](https://github.com/INN/largo/issues/1543).
 
 ### Removed
 - Removes the default inclusion of Google Analytics with INN's Largo Project IDs. [PR #1502](https://github.com/INN/largo/pull/1502) as part of [issue #1495](https://github.com/INN/largo/issues/1495), and by request.
+- Removes the INN Member RSS widget, because the RSS feed it draws from is no longer supported or maintained by INN. Because the RSS feed was occasionally empty, the widget would result in 500 errors. [RP #1535](https://github.com/INN/largo/pulls/1535) for [issue #1511](https://github.com/INN/largo/issues/1511) and [#893](https://github.com/INN/largo/issues/893).
 
 ### Upgrade notices
 - If your child theme has significant custom styling, or has custom post templates, your theme may need to provide additional styles to ensure Gutenberg compatibility.
