@@ -326,11 +326,9 @@ function save_more_profile_info($user_id) {
 		'hide' => 'off'
 	));
 
-	extract($values);
-
-	update_user_meta($user_id, 'job_title', $job_title);
-	update_user_meta($user_id, 'show_email', $show_email);
-	update_user_meta($user_id, 'hide', $hide);
+	update_user_meta($user_id, 'job_title', $values['job_title']);
+	update_user_meta($user_id, 'show_email', $values['show_email']);
+	update_user_meta($user_id, 'hide', $values['hide']);
 }
 add_action('personal_options_update', 'save_more_profile_info');
 add_action('edit_user_profile_update', 'save_more_profile_info');
