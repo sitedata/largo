@@ -139,8 +139,12 @@ if( !function_exists( 'largo_custom_sidebars_dropdown' ) ) {
 	function largo_custom_sidebars_dropdown( $selected='', $skip_default=false, $post_id=NULL ) {
 		global $wp_registered_sidebars, $post;
 
-		$the_id = ( $post_id ) ? $post_id:$post->ID;
-		$custom = ( $selected ) ? $selected:get_post_meta( $the_id, 'custom_sidebar', true );
+		if ( ! empty( $post_id ) || ! empty( $post ) ) {
+			$the_id = ( $post_id ) ? $post_id : $post->ID;
+			$custom = ( $selected ) ? $selected:get_post_meta( $the_id, 'custom_sidebar', true );
+		} else {
+			$custom = null;
+		}
 
 		// for the ultimate in backwards compatibility, if nothing's set or using deprecated 'default'
 		$default = ( of_get_option( 'single_template' ) == 'classic' ) ? 'sidebar-single' : 'none';
@@ -223,8 +227,12 @@ if( !function_exists( 'largo_landing_page_custom_sidebars_dropdown' ) ) {
 	function largo_landing_page_custom_sidebars_dropdown( $left_or_right, $selected, $post_id=null ) {
 		global $wp_registered_sidebars, $post;
 
-		$the_id = ( $post_id )? $post_id : $post->ID;
-		$custom = ( $selected )? $selected : get_post_meta( $the_id, 'custom_sidebar', true );
+		if ( ! empty( $post_id ) || ! empty( $post ) ) {
+			$the_id = ( $post_id )? $post_id : $post->ID;
+			$custom = ( $selected )? $selected : get_post_meta( $the_id, 'custom_sidebar', true );
+		} else {
+			$custom = null;
+		}
 
 		// for the ultimate in backwards compatibility, if nothing's set or using deprecated 'default'
 		$default = ( of_get_option( 'single_template' ) == 'classic' ) ? 'sidebar-single' : 'none';
@@ -237,7 +245,7 @@ if( !function_exists( 'largo_landing_page_custom_sidebars_dropdown' ) ) {
 			$val = 'none';
 
 		// for posts and taxonomies with values set
-		if ( $custom && $custom !== 'default' )
+		if ( isset( $custom ) && $custom !== 'default' )
 			$val = $custom;
 
 		$output = '';
@@ -249,7 +257,7 @@ if( !function_exists( 'largo_landing_page_custom_sidebars_dropdown' ) ) {
 			$default_label = sprintf( __( 'Default (%s)', 'largo' ), $wp_registered_sidebars[$default]['name']);
 
 			$output .= '<option value="' . $default . '" ';
-			$output .= selected('none', $val, false);
+			$output .= selected( 'none', $val, false );
 			$output .= '>' . $default_label . '</option>';
 		}
 
