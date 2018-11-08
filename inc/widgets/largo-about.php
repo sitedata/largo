@@ -1,6 +1,6 @@
 <?php
 /*
- * About this site
+ * "About this site" widget.
  */
 
 /**
@@ -50,13 +50,13 @@ class largo_about_widget extends WP_Widget {
 		if ( of_get_option( 'site_blurb' ) ) {
 			echo '<p>' . of_get_option( 'site_blurb' ) . '</p>';
 		} else {
-		    $link_title = __( 'The Largo Theme Options page', 'largo' );
-		    $options_url = site_url( '/wp-admin/themes.php?page=options-framework' );
+			$link_title = __( 'The Largo Theme Options page', 'largo' );
+			$options_url = site_url( '/wp-admin/themes.php?page=options-framework' );
 			$message = sprintf(
 				__( '%sYou have not set a description for your site.%s Add a site description by visiting %sthe Largo Theme Options page%s.', 'largo' ),
-                '<strong>','</strong>',
-                "<a href=\"{$options_url}\" title=\"{$link_title}\">", '</a>'
-            );
+				'<strong>','</strong>',
+				"<a href=\"{$options_url}\" title=\"{$link_title}\">", '</a>'
+			);
 			echo "<p class=\"error\">{$message}</p>";
 		}
 
@@ -94,7 +94,7 @@ class largo_about_widget extends WP_Widget {
 
 	/**
 	 * Returns defaults for an instance, or ensures an instance has a title
-     *
+	 *
 	 * @param array $instance     The widget instance info
 	 * @return array
 	 */
