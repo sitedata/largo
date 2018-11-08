@@ -20,9 +20,7 @@ class largo_facebook_widget extends WP_Widget {
 	}
 
 	function widget( $args, $instance ) {
-		extract( $args );
-
-		echo $before_widget;
+		echo $args['before_widget'];
 
 			$page_url = esc_url( $instance['fb_page_url'] );
 			$height = isset( $instance['widget_height'] ) ? $instance['widget_height'] : 350;
@@ -37,7 +35,7 @@ class largo_facebook_widget extends WP_Widget {
 
 		echo $output;
 
-		echo $after_widget;
+		echo $args['after_widget'];
 
 		self::$rendered = true;
 	}

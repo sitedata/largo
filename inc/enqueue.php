@@ -178,11 +178,6 @@ if ( ! function_exists( 'largo_footer_js' ) ) {
 			}(document, 'script', 'facebook-jssdk'));</script>
 		<?php }
 
-		if ( largo_twitter_widget::is_rendered() ) { ?>
-			<!--Twitter-->
-			<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
-		<?php }
-
 		/*
 		 * Load Facebook Tracking Pixel if defined in Theme Options
 		 *

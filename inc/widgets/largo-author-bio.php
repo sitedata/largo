@@ -26,13 +26,12 @@ class largo_author_widget extends WP_Widget {
 
 		global $post;
 
-		extract( $args );
-
 		$authors = array();
 		$bios = '';
 
-		if( get_post_meta( $post->ID, 'largo_byline_text' ) )
+		if( get_post_meta( $post->ID, 'largo_byline_text' ) ) {
 			$byline_text = esc_attr( get_post_meta( $post->ID, 'largo_byline_text', true ) );
+		}
 
 		$is_series_landing = ( function_exists( 'largo_is_series_landing') ) ? largo_is_series_landing( $post ) : false;
 
@@ -59,7 +58,7 @@ class largo_author_widget extends WP_Widget {
 		}
 
 		if ( is_author() || ! empty( $bios ) ) {
-			echo $before_widget;
+			echo $args['before_widget'];
 
 			foreach( $authors as $author_obj ) {
 				$context = array('author_obj' => $author_obj); ?>
@@ -70,7 +69,7 @@ class largo_author_widget extends WP_Widget {
 					</div>
 			<?php }
 
-			echo $after_widget;
+			echo $args['after_widget'];
 		}
 	}
 

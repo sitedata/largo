@@ -72,6 +72,9 @@ class Homepage {
 					$vars[$zone] = call_user_func(array($this, $zone));
 			}
 		}
+
+		// this turns the list of zones into actual variables in the current scope.
+		// the $vars array here is not affected by user input.
 		extract($vars);
 		include_once $this->template;
 	}

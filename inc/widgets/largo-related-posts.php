@@ -16,16 +16,15 @@ class largo_related_posts_widget extends WP_Widget {
 		global $post;
 		// Preserve global $post
 		$preserve = $post;
-		extract( $args );
 
 		// only useful on post pages
 		if ( !is_single() ) return;
 
 		$title = apply_filters('widget_title', empty( $instance['title'] ) ? __( 'Read Next', 'largo' ) : $instance['title'], $instance, $this->id_base);
 
-		echo $before_widget;
+		echo $args['before_widget'];
 
-		if ( $title ) echo $before_title . $title . $after_title;
+		if ( ! empty( $title ) ) echo $args['before_title'] . $title . $args['after_title'];
 
 		if ( isset( $instance['qty'] ) ) {
 			$related = new Largo_Related( $instance['qty'] );
@@ -68,7 +67,7 @@ class largo_related_posts_widget extends WP_Widget {
 
 			echo "</ul>";
 		}
-		echo $after_widget;
+		echo $args['after_widget'];
 		// Restore global $post
 		wp_reset_postdata();
 		$post = $preserve;
@@ -78,7 +77,7 @@ class largo_related_posts_widget extends WP_Widget {
 		$instance = $old_instance;
 		$instance['title'] = sanitize_text_field($new_instance['title']);
 		$instance['qty'] = (int) $new_instance['qty'];
-		$instance['show_byline'] = (int) $new_instance['show_byline'];
+		$instance['show_byline'] = isset( $new_instance['show_byline'] ) ? (int) $new_instance['show_byline'] : 0 ;
 		return $instance;
 	}
 

@@ -14,14 +14,13 @@ class largo_tag_list_widget extends WP_Widget {
 
 	function widget( $args, $instance ) {
 		global $post;
-		extract( $args );
 
 		// only useful on post pages
 		if ( !is_single() ) return;
 
 		$title = apply_filters('widget_title', empty( $instance['title'] ) ? __( 'Tags ', 'largo' ) : $instance['title'], $instance, $this->id_base);
 
-		echo $before_widget;
+		echo $args['before_widget'];
 		?>
 		  <!-- Post tags -->
 		<?php if ( largo_has_categories_or_tags() ): ?>
@@ -33,7 +32,7 @@ class largo_tag_list_widget extends WP_Widget {
 			</div>
 		<?php endif;
 
-		echo $after_widget;
+		echo $args['after_widget'];
 	}
 
 	function update( $new_instance, $old_instance ) {

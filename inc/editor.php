@@ -30,13 +30,13 @@ add_action( 'init', 'largo_add_mce_buttons' );
  * @since 0.3
  */
 function largo_module_shortcode( $atts, $content, $code ) {
-    extract( shortcode_atts( array(
+    $atts = shortcode_atts( array(
         'align' => 'left',
         'width' => 'half',
         'type' => 'aside',
-    ), $atts ) );
+    ), $atts );
 
-    return sprintf( '<aside class="module %s %s %s">%s</aside>', $type, $align, $width, $content );
+    return sprintf( '<aside class="module %s %s %s">%s</aside>', $atts['type'], $atts['align'], $atts['width'], $atts['content'] );
 }
 add_shortcode( 'module', 'largo_module_shortcode' );
 

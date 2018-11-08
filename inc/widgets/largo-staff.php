@@ -81,13 +81,15 @@ class largo_staff_widget extends WP_Widget {
 	public function form( $instance ) {
 		$roles = get_editable_roles();
 
-		if (isset($instance['title']))
+		if (isset($instance['title'])) {
 			$title = $instance['title'];
-		else
+		} else {
 			$title = 'Staff Members';
+		}
 
-		if (empty($instance['roles']))
+		if (empty($instance['roles'])) {
 			$instance['roles']['author'] = 'on';
+		}
 
 		?>
 		<p>
@@ -97,11 +99,22 @@ class largo_staff_widget extends WP_Widget {
 
 		<p>
 			<label><?php _e( 'Include:' ); ?></label><br/>
-			<?php foreach ($roles as $key => $role) { ?>
-			<label><input <?php checked($instance['roles'][$key], 'on', true); ?>
+			<?php foreach ($roles as $key => $role) {
+				if (
+					isset( $instance['roles'] )
+					&& isset( $instance['roles'][$key] )
+				) {
+					$checked = checked( $instance['roles'][$key], 'on', false );
+				} else {
+					$checked = '';
+				}
+				?>
+				<label><input <?php echo $checked; ?>
 					type="checkbox"
 					id="<?php echo $this->get_field_id($key); ?>"
-					name="<?php echo $this->get_field_name($key); ?>"> <?php echo $role['name']; ?>s</label><br />
+					name="<?php echo $this->get_field_name($key); ?>"> <?php echo $role['name']; ?>s
+				</label>
+				<br />
 			<?php } ?>
 		</p>
 
