@@ -638,12 +638,14 @@ add_action( 'wp_ajax_largo_fetch_video_oembed', 'largo_fetch_video_oembed' );
 function largo_featured_media_post_classes( $classes ) {
 	global $post;
 
-	$featured = largo_get_featured_media( $post->ID );
-	if ( !empty( $featured ) ) {
-		$classes = array_merge( $classes, array(
-			'featured-media',
-			'featured-media-' . $featured['type']
-		));
+	if ( is_a( $post, 'WP_Post' ) ) {
+		$featured = largo_get_featured_media( $post->ID );
+		if ( !empty( $featured ) ) {
+			$classes = array_merge( $classes, array(
+				'featured-media',
+				'featured-media-' . $featured['type']
+			));
+		}
 	}
 
 	return $classes;
