@@ -91,7 +91,8 @@ function _tags_associated_with_category( $cat_id, $max = 5 ) {
         $tag_keys = array_keys( $tags );
     }
     else {
-        $tag_keys = array_splice( array_keys( $tags ), 0, $max );
+		$temporary_array_keys = array_keys( $tags );
+		$tag_keys = array_splice( $temporary_array_keys, 0, $max );
     }
 
     // Create an array of the selected tag objects
