@@ -2,7 +2,7 @@
 /*
 Description: A framework for building theme options.
 Author: Devin Price
-Author URI: http://www.wptheming.com
+Author URI: https://www.wptheming.com
 License: GPLv2
 Version: 1.4
 */
@@ -51,7 +51,7 @@ function optionsframework_load_sanitization() {
  * we won't have to save settings for headers, descriptions, or arguments.
  *
  * Read more about the Settings API in the WordPress codex:
- * http://codex.wordpress.org/Settings_API
+ * https://codex.wordpress.org/Settings_API
  *
  */
 
@@ -96,7 +96,7 @@ function optionsframework_init() {
 
 /**
  * Ensures that a user with the 'edit_theme_options' capability can actually set the options
- * See: http://core.trac.wordpress.org/ticket/14365
+ * See: https://core.trac.wordpress.org/ticket/14365
  *
  * @param string $capability The capability used for the page, which is manage_options by default.
  * @return string The capability to actually use.

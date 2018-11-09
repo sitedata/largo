@@ -17,20 +17,19 @@ class largo_disclaimer_widget extends WP_Widget {
 			return;
 		}
 
-		extract( $args );
+		echo $args['before_widget'];
 
-		echo $before_widget;
 		?>
 			<?php if ( get_post_meta(get_the_ID(), 'disclaimer', true ) ): ?>
 				<?php echo get_post_meta(get_the_ID(), 'disclaimer', true ); ?>
 			<?php elseif ( of_get_option( 'default_disclaimer' ) ) : ?>
-        <?php echo of_get_option( 'default_disclaimer' ); ?>
+				<?php echo of_get_option( 'default_disclaimer' ); ?>
 			<?php else: ?>
-    			<p class="error"><strong><?php _e('You have not set a disclaimer for your site.</strong> Add a site disclaimer by visiting the Largo Theme Options page.', 'largo'); ?></p>
-      <?php endif; ?>
-
+				<p class="error"><strong><?php _e('You have not set a disclaimer for your site.</strong> Add a site disclaimer by visiting the Largo Theme Options page.', 'largo'); ?></p>
+			<?php endif; ?>
 		<?php
-		echo $after_widget;
+
+		echo $args['after_widget'];
 	}
 
 	function update( $new_instance, $old_instance ) {

@@ -27,7 +27,6 @@ class largo_taxonomy_list_widget extends WP_Widget {
 	 * @uses largo_taxonomy_list_widget::render_term_list
 	 */
 	function widget( $args, $instance ) {
-		extract( $args );
 
 		$title = apply_filters( 'widget_title', empty( $instance['title'] ) ? __( 'Series', 'largo' ) : $instance['title'], $instance, $this->id_base );
 		$is_dropdown = ! empty( $instance['dropdown'] ) ? '1' : '0';
@@ -35,9 +34,10 @@ class largo_taxonomy_list_widget extends WP_Widget {
 		/*
 		 * Before the widget
 		 */
-		echo $before_widget;
-		if ( $title )
-			echo $before_title . $title . $after_title;
+		echo $args['before_widget'];
+		if ( ! empty( $title ) ) {
+			echo $args['before_title'] . $title . $args['after_title'];
+		}
 
 		// Set us up the term args
 		$term_args = array(
@@ -105,7 +105,7 @@ class largo_taxonomy_list_widget extends WP_Widget {
 			echo '</ul>';
 		}
 
-		echo $after_widget;
+		echo $args['after_widget'];
 	}
 
 	/**
@@ -254,12 +254,12 @@ class largo_taxonomy_list_widget extends WP_Widget {
 		$instance = wp_parse_args( (array) $instance, array( 'title' => '', 'taxonomy' => '' ) );
 		$title = esc_attr( $instance['title'] );
 		$count = isset( $instance['count'] ) ? esc_attr( $instance['count'] ) : 5;
-		$sort = esc_attr( $instance['sort'] );
+		$sort = isset( $instance['sort'] ) ? esc_attr( $instance['sort'] ) : '';
 		$instance['taxonomy'] = isset( $instance['taxonomy'] ) ? $instance['taxonomy'] : 'series';
 		$dropdown = isset( $instance['dropdown'] ) ? (bool) $instance['dropdown'] : false;
 		$thumbnails = isset( $instance['thumbnails'] ) ? (bool) $instance['thumbnails'] : false;
 		$use_headline = isset( $instance['use_headline'] ) ? (bool) $instance['use_headline'] : false;
-		$exclude = $instance['exclude'];
+		$exclude = isset( $instance['exclude'] ) ? $instance['exclude'] : '';
 
 		// Create <option>s of taxonomies for the <select>
 		$taxonomies = get_taxonomies( null, 'objects' );
@@ -281,12 +281,13 @@ class largo_taxonomy_list_widget extends WP_Widget {
 			'id_desc' => __( 'Most Recent First', 'largo' )
 		); // list from https://developer.wordpress.org/reference/functions/get_terms/
 		$sort_order_options = '';
+
 		foreach ( $sort_orders as $order => $label ) {
 			$sort_order_options .= sprintf(
 				'<option value="%1$s" %2$s>%3$s</option>',
 					$order,
-					selected( $instance['sort'], $order, false ),
-					$label
+					selected( $sort, $order, false ),
+					wp_kses_post( $label )
 			);
 		}
 
@@ -306,7 +307,7 @@ class largo_taxonomy_list_widget extends WP_Widget {
 
 		<p>
 			<label for="<?php echo $this->get_field_id( 'sort' ); ?>"><?php _e( 'How should the terms be ordered?', 'largo' ); ?></label>
-			<select class="widefat" id="<?php echo $this->get_field_id( 'sort' ); ?>" name="<?php echo $this->get_field_name( 'sort' ); ?>" type="text" value="<?php echo $instance['sort'] ?>">
+			<select class="widefat" id="<?php echo $this->get_field_id( 'sort' ); ?>" name="<?php echo $this->get_field_name( 'sort' ); ?>" type="text" value="<?php echo $sort; ?>">
 				<?php echo $sort_order_options; ?>
 			</select>
 		</p>

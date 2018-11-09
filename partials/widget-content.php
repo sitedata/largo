@@ -36,7 +36,7 @@ if ($thumb == 'small') {
 
 <?php // byline on posts
 if ( isset( $instance['show_byline'] ) && $instance['show_byline'] == true) { ?>
-	<span class="byline"><?php echo largo_byline( false, $instance['hide_byline_date'] ); ?></span>
+	<span class="byline"><?php echo largo_byline( false, $instance['hide_byline_date'], get_the_ID() ); ?></span>
 <?php }
 
 // the excerpt

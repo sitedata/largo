@@ -52,7 +52,6 @@ class largo_image_widget extends WP_Widget {
 	 * @author Modern Tribe, Inc.
 	 */
 	function widget( $args, $instance ) {
-		extract( $args );
 		$instance = wp_parse_args( (array) $instance, self::get_defaults() );
 		if ( !empty( $instance['imageurl'] ) || !empty( $instance['attachment_id'] ) ) {
 
@@ -73,22 +72,19 @@ class largo_image_widget extends WP_Widget {
 			}
 			$instance['imageurl'] = apply_filters( 'image_widget_image_url', esc_url( $instance['imageurl'] ), $args, $instance );
 
-			// Using extracted vars now
-			extract( $instance );
-
 			//output the widget
-			echo $before_widget;
+			echo $args['before_widget'];
 
-			if ( !empty( $title ) ) { echo $before_title . $title . $after_title; }
+			if ( !empty( $title ) ) { echo $args['before_title'] . $instance['title'] . $args['after_title']; }
 
 			echo self::get_image_html( $instance, true );
 
-			if ( !empty( $description ) ) {
+			if ( !empty( $instance['description'] ) ) {
 				echo '<div class="' . $this->widget_options['classname'] . '-description" >';
-				echo wpautop( $description );
+				echo wpautop( $instance['description'] );
 				echo "</div>";
 			}
-			echo $after_widget;
+			echo $args['after_widget'];
 		}
 	}
 

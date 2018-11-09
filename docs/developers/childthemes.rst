@@ -6,7 +6,7 @@ Child themes are `a feature of WordPress <https://largo.readthedocs.io/en/write-
 Creating Child Themes
 ---------------------
 
-In order to make it easier to upgrade to future versions of the Largo parent theme, you will want to add any customizations that are unique to your site by creating a child theme. WordPress has a `tutorial you can follow <http://codex.wordpress.org/Child_Themes>`_ that explains how to create and configure a child theme.
+In order to make it easier to upgrade to future versions of the Largo parent theme, you will want to add any customizations that are unique to your site by creating a child theme. WordPress has a `tutorial you can follow <https://codex.wordpress.org/Child_Themes>`_ that explains how to create and configure a child theme.
 
 NEVER modify the Largo parent theme directly, even to make small changes. It will make your life much harder when we release a new version because your changes are highly likely to be overwritten.
 

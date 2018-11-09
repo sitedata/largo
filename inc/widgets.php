@@ -14,7 +14,6 @@ function largo_widgets() {
 		'WP_Widget_Tag_Cloud',
 		'WP_Widget_Meta',
 		'WP_Widget_Recent_Comments',
-		'WP_Widget_RSS',
 		'WP_Widget_Recent_Posts'
 	);
 	foreach ( $unregister as $widget ) {
@@ -26,7 +25,6 @@ function largo_widgets() {
 		'largo_facebook_widget' => '/inc/widgets/largo-facebook.php',
 		'largo_follow_widget' => '/inc/widgets/largo-follow.php',
 		'largo_image_widget' => '/inc/widgets/largo-image-widget.php',
-		'largo_INN_RSS_widget' => '/inc/widgets/largo-inn-rss.php',
 		'largo_recent_comments_widget' => '/inc/widgets/largo-recent-comments.php',
 		'largo_recent_posts_widget' => '/inc/widgets/largo-recent-posts.php',
 		'largo_taxonomy_list_widget' => '/inc/widgets/largo-taxonomy-list.php',
@@ -157,7 +155,7 @@ function largo_widget_custom_fields_form( $widget, $args, $instance ) {
   </p>
 
   <p>
-  	<label for="<?php echo $widget->get_field_id('title_link'); ?>"><?php _e('Widget Title Link <small class="description">(Example: http://google.com)</small>', 'largo'); ?></label>
+  	<label for="<?php echo $widget->get_field_id('title_link'); ?>"><?php _e('Widget Title Link <small class="description">(Example: https://google.com)</small>', 'largo'); ?></label>
     <input type="text" name="<?php echo $widget->get_field_name('title_link'); ?>" id="<?php echo $widget->get_field_id('title_link'); ?>"" class="widefat" value="<?php echo esc_attr( $instance['title_link'] ); ?>"" />
   </p>
 <?php

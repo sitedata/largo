@@ -15,17 +15,16 @@ class largo_post_series_links_widget extends WP_Widget {
 
 	function widget( $args, $instance ) {
 		global $post;
-		extract( $args );
 
 		// only useful on post pages
 		if ( !is_single() || !largo_post_in_series() ) return;
 
 		$title = apply_filters('widget_title', empty( $instance['title'] ) ? __('Related Series', 'largo') : $instance['title'], $instance, $this->id_base);
 
-		echo $before_widget;
+		echo $args['before_widget'];
 
 		/* Display the widget title if one was input */
-		if ( $title ) echo $before_title . $title . $after_title;
+		if ( $title ) echo $args['before_title'] . $title . $args['after_title'];
 
 		global $post;
 		$post_terms = largo_custom_taxonomy_terms( $post->ID );		//this is the only invocation of this function anywhere in Largo
@@ -35,7 +34,7 @@ class largo_post_series_links_widget extends WP_Widget {
 			echo largo_term_to_label( $term ); //this is the only invocation of this function anywhere in Largo
 		}
 
-		echo $after_widget;
+		echo $args['after_widget'];
 	}
 
 	/**

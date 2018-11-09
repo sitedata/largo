@@ -131,6 +131,10 @@ if ( ! function_exists( 'largo_byline' ) ) {
 				$post_id = $post;
 		} else {
 			$post_id = get_the_ID();
+
+			if ( WP_DEBUG || LARGO_DEBUG ) {
+				_doing_it_wrong( 'largo_byline', 'largo_byline must be called with a post or post ID specified as the third argument. For more information, see https://github.com/INN/largo/issues/1517 .', '0.6' );
+			}
 		}
 
 		// Set us up the options
@@ -193,7 +197,7 @@ if ( ! function_exists( 'largo_excerpt' ) ) {
 		if (!empty($the_post->post_excerpt)) {
 			// if a post has a custom excerpt set, we'll use that
 			$content = apply_filters('get_the_excerpt', $the_post->post_excerpt);
-		} else if (is_home() && preg_match('/<!--more(.*?)?-->/', $the_post->post_content, $matches) > 0) {
+		} else if ( is_front_page() && preg_match( '/<!--more(.*?)?-->/', $the_post->post_content, $matches ) > 0 ) {
 			// if we're on the homepage and the post has a more tag, use that
 			$parts = explode($matches[0], $the_post->post_content, 2);
 			$content = $parts[0];

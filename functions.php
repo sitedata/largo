@@ -2,8 +2,8 @@
 /**
  * Largo functions and definitions
  *
- * When using a child theme (see http://codex.wordpress.org/Theme_Development and
- * http://codex.wordpress.org/Child_Themes), you can override certain functions
+ * When using a child theme (see https://codex.wordpress.org/Theme_Development and
+ * https://codex.wordpress.org/Child_Themes), you can override certain functions
  * (those wrapped in a function_exists() call) by defining them first in your child theme's
  * functions.php file. The child theme's functions.php file is included before the parent
  * theme's file, so the child theme functions would be used.
@@ -24,7 +24,7 @@
  * }
  * </code>
  *
- * For more information on hooks, actions, and filters, see http://codex.wordpress.org/Plugin_API.
+ * For more information on hooks, actions, and filters, see https://codex.wordpress.org/Plugin_API.
  *
  * @package Largo
  */
@@ -410,9 +410,10 @@ if ( ! function_exists( 'largo_setup' ) ) {
 	 * functions.php file.
 	 */
 	function largo_setup() {
+		$suffix = ( LARGO_DEBUG ) ? '' : '.min';
 
 		// This theme styles the visual editor with editor-style.css to match the theme style.
-		add_editor_style('/css/editor-style.css');
+		add_editor_style('/css/editor-style' . $suffix . '.css');
 
 		// Add default posts and comments RSS feed links to <head>.
 		add_theme_support( 'automatic-feed-links' );
@@ -423,6 +424,12 @@ if ( ! function_exists( 'largo_setup' ) ) {
 		//Add support for <title> tags
 		add_theme_support( 'title-tag' );
 
+		// Gutenberg alignment classes
+		add_theme_support( 'align-wide' );
+
+		// Gutenberg support for editor styles; @link https://github.com/WordPress/gutenberg/pull/9008
+		add_theme_support( 'editor-styles' );
+		add_editor_style('/css/gutenberg' . $suffix . '.css');
 	}
 }
 add_action( 'after_setup_theme', 'largo_setup' );

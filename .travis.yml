@@ -24,6 +24,9 @@ language: php
 #     - WP_VERSION=4.7
 #     - WP_VERSION=4.6
 #     - WP_VERSION=4.5
+#
+# The GUTENBERG env var should be set in WordPress versions where we want to run Gutenberg tests, but Gutenberg has not yet been included in WordPress Core. For 5.0, there is no need to set the GUTENBERG variable.
+#
 
 # For a breakdown of why these versions were chosen, see https://github.com/INN/WP-DS-NPR-API/issues/12#issuecomment-374730094
 # This list should be rechecked periodically.
@@ -31,30 +34,34 @@ matrix:
     include:
       # PHPunit 5
       - php: 5.6
-        env: WP_VERSION=4.5 WP_TESTS_DIR=/tmp/wordpress/tests/phpunit WP_CORE_DIR=/tmp/wordpress
+        env: WP_VERSION=4.6
       - php: 5.6
-        env: WP_VERSION=4.6 WP_TESTS_DIR=/tmp/wordpress/tests/phpunit WP_CORE_DIR=/tmp/wordpress
+        env: WP_VERSION=4.7
       - php: 5.6
-        env: WP_VERSION=4.7 WP_TESTS_DIR=/tmp/wordpress/tests/phpunit WP_CORE_DIR=/tmp/wordpress
+        env: WP_VERSION=4.8
       - php: 5.6
-        env: WP_VERSION=4.8 WP_TESTS_DIR=/tmp/wordpress/tests/phpunit WP_CORE_DIR=/tmp/wordpress
-      - php: 5.6
-        env: WP_VERSION=4.9 WP_TESTS_DIR=/tmp/wordpress/tests/phpunit WP_CORE_DIR=/tmp/wordpress
+        env: WP_VERSION=4.9
+      # - php: 5.6
+      #   env: WP_VERSION=4.9 GUTENBERG=1
       # PHPUnit 6
       - php: 7.0
-        env: WP_VERSION=4.8 WP_TESTS_DIR=/tmp/wordpress/tests/phpunit WP_CORE_DIR=/tmp/wordpress
+        env: WP_VERSION=4.8
       - php: 7.0
-        env: WP_VERSION=4.9 WP_TESTS_DIR=/tmp/wordpress/tests/phpunit WP_CORE_DIR=/tmp/wordpress
+        env: WP_VERSION=4.9
+      # - php: 7.0
+      #   env: WP_VERSION=4.9 GUTENBERG=1
       # PHPUnit 6
       - php: 7.1
-        env: WP_VERSION=4.8 WP_TESTS_DIR=/tmp/wordpress/tests/phpunit WP_CORE_DIR=/tmp/wordpress
+        env: WP_VERSION=4.9
+      # - php: 7.1
+      #   env: WP_VERSION=4.9 GUTENBERG=1
       - php: 7.1
-        env: WP_VERSION=4.9 WP_TESTS_DIR=/tmp/wordpress/tests/phpunit WP_CORE_DIR=/tmp/wordpress
+        env: WP_VERSION=5.0
       # PHPUnit 7 support will come with https://core.trac.wordpress.org/ticket/43218
       # - php: 7.2
-      #   env: WP_VERSION=4.8 WP_TESTS_DIR=/tmp/wordpress/tests/phpunit WP_CORE_DIR=/tmp/wordpress
-      # - php: 7.2
       #   env: WP_VERSION=4.9 WP_TESTS_DIR=/tmp/wordpress/tests/phpunit WP_CORE_DIR=/tmp/wordpress
+      # - php: 7.2
+      #   env: WP_VERSION=5.0 WP_TESTS_DIR=/tmp/wordpress/tests/phpunit WP_CORE_DIR=/tmp/wordpress
 
 
 # Only test the main development branches for now
@@ -69,6 +76,7 @@ before_script:
     - export WP_TESTS_DIR=/tmp/wordpress/tests/phpunit
     - export WP_CORE_DIR=/tmp/wordpress/
     - git clone --depth=1 --branch="$WP_VERSION" git://develop.git.wordpress.org/ $WP_CORE_DIR
+    - if [ GUTENBERG ]; then git clone --depth=1 --branch="v4.2.0" https://github.com/WordPress/gutenberg.git $WP_CORE_DIR'src/wp-content/plugins/gutenberg'; fi
     - cd ..
     - mv $SLUG "$WP_CORE_DIR/src/wp-content/themes/$SLUG"
     - cd $WP_CORE_DIR

@@ -5,18 +5,7 @@
 </div>
 
 <div class="span4 widget-area" role="complementary">
-	<?php if ( ! dynamic_sidebar( 'footer-2' ) ) {
-		the_widget( 'largo_featured_widget', array(
-				'term' => 'footer-featured',
-				'title' => __('In Case You Missed It', 'largo'),
-				'widget_class' => 'default',
-				'num_posts' => 2,
-				'num_sentences' => 2,
-				'thumb' => 'before'
-			)
-		);
-	}
-	?>
+	<?php dynamic_sidebar( 'footer-2' ); ?>
 </div>
 
 <div class="span4 widget-area" role="complementary">

@@ -96,13 +96,13 @@ class Largo_Byline {
 	 * This supports both Largo_Byline and Largo_CoAuthors_Byline
 	 */
 	function avatar() {
-		
 		// only do avatars if it's a single post
 		if ( ! is_single() ) {
-			$output = '';
+			$output = ' ';
 		} else {
+			$output = '';
 			$author_email = get_the_author_meta( 'email', $this->author_id );
-			if ( $this->author->type == 'guest-author' && get_the_post_thumbnail( $this->author->ID ) ) {
+			if ( isset( $this->author ) && $this->author->type == 'guest-author' && get_the_post_thumbnail( $this->author->ID ) ) {
 				$output = get_the_post_thumbnail( $this->author->ID, array( 60,60 ) );
 				$output = str_replace( 'attachment-32x32', 'avatar avatar-32 photo', $output );
 				$output = str_replace( 'wp-post-image', '', $output );
@@ -181,7 +181,7 @@ class Largo_Byline {
 	 */
 	function edit_link() {
 		// Add the edit link if the current user can edit the post
-		if ( current_user_can( 'edit_published_posts' ) ) {
+		if ( current_user_can( 'edit_post', $this->post_id ) ) {
 			echo ' <span class="edit-link"><a href="' . get_edit_post_link( $this->post_id ) . '">' . __( 'Edit This Post', 'largo' ) . '</a></span>';
 		}
 	}

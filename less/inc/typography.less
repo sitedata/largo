@@ -45,6 +45,7 @@ ol,
 ul,
 pre,
 table,
+figure,
 address,
 fieldset {
   margin: 0 0 @baseline;
@@ -120,19 +121,25 @@ p {
     color: @grayLight;
   }
   &.xsmall {
-	font-size: @baseFontSize * 0.667;
-	color: @grayLight;
+    font-size: @baseFontSize * 0.667;
+    color: @grayLight;
   }
   &.intro {
     font-size: @baseFontSize * 1.5;
     color: @gray;
     font-style: italic;
   }
+  &.has-drop-cap:not(:focus):first-letter {
+    font-size: 7.2em;
+  }
 }
 
 ul, ol {
   padding: 0;
   margin: 0 0 @baseline 25px;
+  &.aligncenter {
+    padding-left: 25px;
+  }
 }
 .entry-content {
   ul,
@@ -186,8 +193,10 @@ address {
   margin: 0 0 @baseline;
   font-style: italic;
 }
+strike,
+s,
 del {
-  color: @grayLight;
+  color: @gray;
 }
 
 // --------------------------------------------
@@ -195,10 +204,25 @@ del {
 // --------------------------------------------
 
 blockquote {
+  box-sizing: border-box;
   clear: both;
-  padding: 5px 15px 5px 30px;
+  padding: 5px 20px 5px 20px;
+  // sigh
   margin: @baseline;
   border-left: 5px solid @grayLighter;
+
+  .alignleft & {
+    border-right: 5px solid @grayLighter;
+    border-left: none;
+    margin-left: 0;
+  }
+  .alignright & {
+    margin-right: 0;
+  }
+  .aligncenter & {
+    border: none;
+  }
+
   p {
     font-size: @baseFontSize;
     margin: @baseline/2 0;

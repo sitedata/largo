@@ -25,7 +25,7 @@ class FeaturedMediaTestFunctions extends WP_UnitTestCase {
 				'caption' => 'Lipsum video caption',
 				'title' => 'Lipsum vidoe title',
 				'credit' => 'Lipsum video credit',
-				'url' => 'http://test.com/path/',
+				'url' => 'https://test.com/path/',
 				'embed' => '<iframe id="test-iframe-embed-code"></iframe>',
 				'type' => 'video'
 			),
@@ -34,7 +34,7 @@ class FeaturedMediaTestFunctions extends WP_UnitTestCase {
 				'caption' => 'Lipsum embed caption',
 				'title' => 'Lipsum embed title',
 				'credit' => 'Lipsum embed credit',
-				'url' => 'http://test.com/path/',
+				'url' => 'https://test.com/path/',
 				'embed' => '<iframe id="test-iframe-embed-code"></iframe>',
 				'type' => 'embed-code'
 			)

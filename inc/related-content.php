@@ -91,7 +91,8 @@ function _tags_associated_with_category( $cat_id, $max = 5 ) {
         $tag_keys = array_keys( $tags );
     }
     else {
-        $tag_keys = array_splice( array_keys( $tags ), 0, $max );
+		$temporary_array_keys = array_keys( $tags );
+		$tag_keys = array_splice( $temporary_array_keys, 0, $max );
     }
 
     // Create an array of the selected tag objects
@@ -382,7 +383,9 @@ function largo_top_term( $options = array() ) {
 	 */
 	if ( empty( $output ) ) {
 		$output = largo_categories_and_tags( 1, false, $args['link'], $args['use_icon'], '', $args['wrapper'], $args['exclude']);
-		$output = ( is_array( $output ) ) ? $output[0] : '';
+		if ( is_array( $output ) && ! empty( $output[0] ) ) {
+			$output = ( is_array( $output ) ) ? $output[0] : '';
+		}
 	}
 
 	/*
@@ -408,12 +411,14 @@ function largo_top_term( $options = array() ) {
  */
 function largo_post_class_top_term( $classes ) {
 	global $post;
-	$top_term = get_post_meta( $post->ID, 'top_term', TRUE );
-	$term = get_term_by( 'id', $top_term, 'post_tag' );
+	if ( is_a( $post, 'WP_Post' ) ) {
+		$top_term = get_post_meta( $post->ID, 'top_term', TRUE );
+		$term = get_term_by( 'id', $top_term, 'post_tag' );
 
-	// Don't output the class .top-term-- if there isn't a top term saved
-	if ( !empty( $term ) ) {
-		$classes[] = 'top-term-' . $term->taxonomy . '-' . $term->slug;
+		// Don't output the class .top-term-- if there isn't a top term saved
+		if ( !empty( $term ) ) {
+			$classes[] = 'top-term-' . $term->taxonomy . '-' . $term->slug;
+		}
 	}
 
 	return $classes;

@@ -43,13 +43,11 @@ class largo_recent_comments_widget extends WP_Widget {
 			return;
 		}
 
-		extract( $args );
-		$output = '';
-
 		$title = apply_filters('widget_title', empty( $instance['title'] ) ? __('Recent Comments', 'largo') : $instance['title'], $instance, $this->id_base);
 
-		if ( empty( $instance['number'] ) || ! $number = absint( $instance['number'] ) )
+		if ( empty( $instance['number'] ) || ! $number = absint( $instance['number'] ) ) {
 			$number = 5;
+		}
 
 		$comments = get_comments(apply_filters('widget_comments_args', array(
 			'number' => $number,
@@ -58,9 +56,11 @@ class largo_recent_comments_widget extends WP_Widget {
 			'type' => 'comment'
 		)));
 
-		$output .= $before_widget;
-		if ( $title )
-			$output .= $before_title . $title . $after_title;
+		// Begin widget output generation
+		$output = $args['before_widget'];
+		if ( $title ) {
+			$output .= $args['before_title'] . $title . $args['after_title'];
+		}
 
 		$output .= '<ul id="recentcomments">';
 		if ( $comments ) {
@@ -72,7 +72,7 @@ class largo_recent_comments_widget extends WP_Widget {
 			}
  		}
 		$output .= '</ul>';
-		$output .= $after_widget;
+		$output .= $args['after_widget'];
 
 		echo $output;
 		$cache[$args['widget_id']] = $output;
