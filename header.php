@@ -18,30 +18,26 @@
 	 * @since 0.1
 	 */
 	?>
-	<title>
-		<?php
-			global $page, $paged;
-			wp_title( '|', true, 'right' );
-			bloginfo( 'name' ); // Add the blog name.
-
-			// Add the blog description for the home/front page.
-			$site_description = get_bloginfo( 'description', 'display' );
-			if ( $site_description && ( is_home() || is_front_page() ) )
-				echo " | $site_description";
-
-			// Add a page number if necessary:
-			if ( $paged >= 2 || $page >= 2 )
-				echo ' | ' . 'Page ' . max( $paged, $page );
-		?>
-	</title>
+	<?php
+		// Fallback <title> tag on WP pre 4.1
+		// @link https://make.wordpress.org/core/2014/10/29/title-tags-in-4-1/
+		// @since 0.6
+		if ( ! function_exists( '_wp_render_title_tag' ) ) {
+			printf(
+				'<title>%1$s</title>',
+				wp_title( '|', false, 'right' )
+			);
+		}
+	?>
 	<link rel="profile" href="https://gmpg.org/xfn/11" />
 	<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
-<?php
-	if ( is_singular() && get_option( 'thread_comments' ) )
-		wp_enqueue_script( 'comment-reply' );
+	<?php
+		if ( is_singular() && get_option( 'thread_comments' ) ) {
+			wp_enqueue_script( 'comment-reply' );
+		}
 
-	wp_head();
-?>
+		wp_head();
+	?>
 </head>
 
 <body <?php body_class(); ?>>
