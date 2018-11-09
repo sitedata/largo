@@ -16,16 +16,16 @@ Thanks to Mike Schinkel for his work on [pull request 1469](https://github.com/I
 	- pullquote styles
 
 ## Changes
-- Fixes numerous undefined variable errors.
+- Fixes numerous undefined variable errors, as part of [issue 1492](https://github.com/INN/largo/issues/1492).
 - Users who have the capability to edit a given post will see the edit link on the frontend, where before users with the capability to edit published posts in general saw the link to edit the post in the frontend. [PR #1559](https://github.com/INN/largo/pull/1559) for [issue #1543](https://github.com/INN/largo/issues/1543).
-- Largo now uses WordPress' `title-tag` support for `<title>` tag output, which means that site title tags shoud now be modifiable by plugins. [PR #]() for [issue 1470](https://github.com/INN/largo/issues/1470).
+- Largo now uses WordPress' `title-tag` support for `<title>` tag output, which means that site title tags shoud now be modifiable by plugins. [PR #1566](https://github.com/INN/largo/pull/1566) for [issue 1470](https://github.com/INN/largo/issues/1470).
 
 ### Removed
 - Removes the default inclusion of Google Analytics with INN's Largo Project IDs. [PR #1502](https://github.com/INN/largo/pull/1502) as part of [issue #1495](https://github.com/INN/largo/issues/1495), and by request.
 - Removes the INN Member RSS widget, because the RSS feed it draws from is no longer supported or maintained by INN. Because the RSS feed was occasionally empty, the widget would result in 500 errors. [RP #1535](https://github.com/INN/largo/pulls/1535) for [issue #1511](https://github.com/INN/largo/issues/1511) and [#893](https://github.com/INN/largo/issues/893).
 - Removes lingering traces of the Largo Featured Widget. [PR #1563](https://github.com/INN/largo/pull/1563) and [#1469](https://github.com/INN/largo/pull/1469) for [issue 1467](https://github.com/INN/largo/issues/1467), from Github user [mikeschinkel](https://github.com/mikeschinkel).
 - Removes many uses of `extract()` in widgets and theme functions, and improves code quality in widgets.
-- Removes the `<title>` element from `header.php`, since Largo declares `title-tag` theme support. [PR #]() for [issue 1470](https://github.com/INN/largo/issues/1470).
+- Removes the `<title>` element from `header.php`, since Largo declares `title-tag` theme support. [PR #1566](https://github.com/INN/largo/pull/1566) for [issue 1470](https://github.com/INN/largo/issues/1470).
 
 ### Upgrade notices
 - If your child theme has significant custom styling, or has custom post templates, your theme may need to provide additional styles to ensure Gutenberg compatibility.
