@@ -96,6 +96,13 @@
       }
 
       if (self.openMenu) {
+        if (self.openMenu.parentElement.contains( event.target ) ) {
+          // gotta navigate.
+          window.location = event.target.href;
+          // for top-level items, the link is handled natively.
+          // items in the dropdown, it isn't.
+        }
+
         self.openMenu.parentNode.classList.remove('open');
         self.openMenu = false;
         // we can't event.preventDefault here because of Chrome/Opera:
@@ -105,7 +112,8 @@
 
     // Close the open menu when the user taps elsewhere
     // Should this be scoped to not be on document/html/body?
-    // No; because #page and div.footer-bg
+    // No; because div.global-nav-bg #page and div.footer-bg are separate things,
+    // and together they do not cover all of body.
     $('body').on('touchstart.touchDropdown click.touchDropdown' , closeOpenMenu);
   };
 
@@ -259,8 +267,7 @@
           return false;
         }
 
-        if ($(this).parent('.dropdown').hasClass('open')) {
-          console.log('doing nothing');
+        if ($(this).closest('.dropdown').hasClass('open')) {
         } else {
           // If it is a touch event, get rid of the click events.
           if (event.type == 'touchstart') {
@@ -268,7 +275,6 @@
           }
           $(this).parent('.dropdown').addClass('open');
           $(this).parent('.dropdown').addClass('open');
-          console.log('opening', $(this).parent('.dropdown'));
           self.openMenu = this;
           event.preventDefault();
           event.stopPropagation();
@@ -277,7 +283,6 @@
 
       // if the touch is canceled, close the nav
       function touchcancel(event) {
-        console.log('touchcancel');
         $(this).parent('.dropdown').removeClass('open');
       }
 
