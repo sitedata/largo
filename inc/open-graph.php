@@ -95,3 +95,49 @@ if ( ! function_exists( 'largo_opengraph' ) ) {
 	}
 }
 add_action( 'wp_head', 'largo_opengraph' );
+
+/**
+ * Filter wp_title() to add our custom metadata
+ *
+ * @since 0.6
+ * @link https://github.com/INN/largo/issues/1470
+ * @param Array $parts An array of title parts.
+ * @return Array.
+ */
+function largo_wp_title_parts_filter( $parts ) {
+	global $page, $paged;
+
+	// Add the blog description for the home/front page.
+	if ( is_home() || is_front_page() ) {
+		$site_description = get_bloginfo( 'description', 'display' );
+		if ( ! empty ( $site_description ) ) {
+			$parts[] = $site_description;
+		}
+	}
+
+	// Add a page number if necessary:
+	if ( isset( $paged ) || isset( $page ) ) {
+		if ( $paged >= 2 || $page >= 2 ) {
+			$parts[] = sprintf(
+				// translators: %1$s is the page number.
+				__( 'Page %1$s' , 'largo' ),
+				max( $paged, $page )
+			);
+		}
+	}
+
+	$parts[] = get_bloginfo( 'name' ); // Add the blog name.
+	error_log(var_export( $parts, true));
+
+
+	foreach ( $parts as $i => $part ) {
+		if ( empty( $part ) ) {
+			unset( $parts[$i] );
+		}
+	}
+
+	add_filter( 'wp_title', 'largo_wp_title_filter', 10, 3 );
+
+	return $parts;
+}
+add_filter( 'wp_title_parts', 'largo_wp_title_parts_filter' );
