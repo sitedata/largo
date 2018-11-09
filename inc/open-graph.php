@@ -94,7 +94,10 @@ if ( ! function_exists( 'largo_opengraph' ) ) {
 				echo '<link href="' . esc_url( of_get_option( 'gplus_link' ) ) . '" rel="publisher" />';
 	}
 }
-add_action( 'wp_head', 'largo_opengraph' );
+// don't add this if Yoast is active
+if ( ! class_exists( 'WPSEO_OpenGraph' ) ) {
+	add_action( 'wp_head', 'largo_opengraph' );
+}
 
 /**
  * Filter wp_title() to add our custom metadata
