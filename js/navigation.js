@@ -271,6 +271,7 @@
           console.log('opening', $(this).parent('.dropdown'));
           self.openMenu = this;
           event.preventDefault();
+          event.stopPropagation();
         }
       }
 
