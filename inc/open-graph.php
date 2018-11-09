@@ -141,3 +141,13 @@ function largo_wp_title_parts_filter( $parts ) {
 	return $parts;
 }
 add_filter( 'wp_title_parts', 'largo_wp_title_parts_filter' );
+
+/**
+ * Return to using |
+ *
+ * @since Largo 0.6
+ * @link https://developer.wordpress.org/reference/functions/wp_get_document_title/
+ */
+add_filter( 'document_title_separator', function( $sep ) {
+	return '|';
+});
