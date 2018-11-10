@@ -130,16 +130,12 @@ function largo_wp_title_parts_filter( $parts ) {
 	}
 
 	$parts[] = get_bloginfo( 'name' ); // Add the blog name.
-	error_log(var_export( $parts, true));
-
 
 	foreach ( $parts as $i => $part ) {
 		if ( empty( $part ) ) {
 			unset( $parts[$i] );
 		}
 	}
-
-	add_filter( 'wp_title', 'largo_wp_title_filter', 10, 3 );
 
 	return $parts;
 }
