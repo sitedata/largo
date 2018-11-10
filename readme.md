@@ -30,11 +30,13 @@ Feedback, comments and questions to: [largo@inn.org](mailto:largo@inn.org)
 
 The project extends work done by [NPR's Project Argo](http://argoproject.org/).
 
+**Current version:** v0.6
+
+**Changelog** is available in this repository: [changelog.md](./changelog.md)
+
 **Documentation** and more information at: [largo.inn.org](https://largo.inn.org)
 
 **Support** is available [via our helpdesk system](http://support.largoproject.org/) or by emailing [support@largoproject.org](mailto:support@largoproject.org).
-
-**Current version:** v0.6
 
 **Minimum PHP version:** We only support the [currently-maintained versions of PHP](https://secure.php.net/supported-versions.php).
 
