@@ -38,16 +38,18 @@ class Navis_Slideshows {
 		if ( ! is_admin() )
 			return;
 
-		add_action('save_post', array( &$this, 'tag_post_as_slideshow' ), 10, 2);
-		remove_shortcode('gallery');
-		add_shortcode('gallery', array(&$this, 'handle_slideshow'), 10, 2);
+		add_action( 'save_post', array( &$this, 'tag_post_as_slideshow' ), 10, 2);
+		remove_shortcode( 'gallery' );
+		add_shortcode( 'gallery', array( &$this, 'handle_slideshow' ), 10, 2);
 	}
 
 	/**
 	 *
 	 * @uses global $post WP Post object
+	 * @uses largo_gallery_enqueue();
 	 */
 	function handle_slideshow( $output, $attr ) {
+		largo_gallery_enqueue();
 		/**
 		 * Grab attachments
 		 */
