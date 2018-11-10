@@ -48,8 +48,13 @@ class largo_author_widget extends WP_Widget {
 
 			// make sure we have at least one bio before we show the widget
 			foreach ( $authors as $key => $author ) {
-				$bio = trim( $author->description );
-				if ( !is_author() && empty( $bio ) ) {
+				if ( is_object( $author ) && isset( $author->description ) ) {
+					$bio = trim( $author->description );
+				} else {
+					$bio = '';
+				}
+
+				if ( ! is_author() && empty( $bio ) ) {
 					unset( $authors[$key] );
 				} else {
 					$bios .= $bio;

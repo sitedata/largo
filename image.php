@@ -5,6 +5,7 @@
  * @package Largo
  */
 
+add_action( 'wp_enqueue_scripts', 'largo_gallery_enqueue' );
 get_header(); ?>
 
 		<div id="content" class="row-fluid" role="main">

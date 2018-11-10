@@ -86,13 +86,13 @@ if ( ! function_exists( 'largo_gallery_enqueue' ) ) {
 	 */
 	function largo_gallery_enqueue() {
 		$slick_css = get_template_directory_uri() . '/lib/navis-slideshows/vendor/slick/slick.css';
-		wp_enqueue_style( 'navis-slick', $slick_css, array(), '1.0' );
+		wp_enqueue_style( 'navis-slick', $slick_css, array(), '1.0', true );
 
 		$slides_src = get_template_directory_uri() . '/lib/navis-slideshows/vendor/slick/slick.min.js';
 		wp_enqueue_script( 'jquery-slick', $slides_src, array( 'jquery' ), '3.0', true );
 
 		$slides_css = get_template_directory_uri() . '/lib/navis-slideshows/css/slides.css';
-		wp_enqueue_style( 'navis-slides', $slides_css, array(), '1.0' );
+		wp_enqueue_style( 'navis-slides', $slides_css, array(), '1.0', true );
 
 		$show_src = get_template_directory_uri() . '/lib/navis-slideshows/js/navis-slideshows.js';
 		wp_enqueue_script( 'navis-slideshows', $show_src, array( 'jquery-slick' ), '0.11', true );
