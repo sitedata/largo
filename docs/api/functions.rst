@@ -44,3 +44,11 @@ functions.php
 
    Would be nice if optionsframework included this natively
    See https://github.com/devinsays/options-framework-plugin/issues/167
+
+.. php:function:: theme_gallery_defaults()
+
+   Gallery Default Settings
+
+   :param Array $settings:
+
+   :returns: Array $settings

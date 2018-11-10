@@ -41,17 +41,6 @@ inc/post-templates.php
 
    :returns: String $iltered post content.
 
-.. php:function:: largo_url_to_attachmentid()
-
-   Retrieves the attachment ID from the file URL
-   (or that of any thumbnail image)
-
-   :since: 0.4
-
-   :see: https://pippinsplugins.com/retrieve-attachment-id-from-image-url/
-
-   :returns: Int $D of post attachment (or false if not found)
-
 .. php:function:: largo_get_partial_by_post_type()
 
    Given a post type and an optional context, return the partial that should be loaded for that sort of post.

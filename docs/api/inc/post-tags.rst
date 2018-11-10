@@ -51,6 +51,10 @@ inc/post-tags.php
 
    Output largo_edited_date() on the single post template
 
+   This is disabled in Largo by default. To add it to your child theme, paste in this:
+
+       #add_action( 'largo_after_hero', 'largo_after_hero_largo_edited_date', 5 );
+
    :since: 0.5.5
 
    :action: largo_after_hero
