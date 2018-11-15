@@ -111,7 +111,12 @@ if ( ! function_exists( 'largo_enqueue_child_theme_css' ) ) {
 		$theme = wp_get_theme();
 
 		if (is_object($theme->parent())) {
-			wp_enqueue_style( 'largo-child-styles', get_stylesheet_directory_uri() . '/style.css', array('largo-stylesheet'));
+			wp_enqueue_style(
+				'largow-child-styles',
+				get_stylesheet_directory_uri() . '/style.css',
+				array(),
+				filemtime( get_stylesheet_directory() . '/style.css'
+			);
 		}
 	}
 	add_action( 'wp_enqueue_scripts', 'largo_enqueue_child_theme_css' );
