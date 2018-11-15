@@ -112,10 +112,10 @@ if ( ! function_exists( 'largo_enqueue_child_theme_css' ) ) {
 
 		if (is_object($theme->parent())) {
 			wp_enqueue_style(
-				'largow-child-styles',
+				'largo-child-styles',
 				get_stylesheet_directory_uri() . '/style.css',
 				array(),
-				filemtime( get_stylesheet_directory() . '/style.css'
+				filemtime( get_stylesheet_directory() . '/style.css' )
 			);
 		}
 	}
