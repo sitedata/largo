@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 though this project doesn't succeed in adhering to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## Largo 0.6.1
+
+This release contains bugfixes for Largo 0.6.
+
+### Fixes
+
+- Updates templates to make sure that bylines are output. [Pull request #1574](https://github.com/INN/largo/pull/1574).
+
 ## [Largo 0.6](https://github.com/INN/largo/compare/v0.5.5.4...v0.6)
 
 Special thanks to our community contributors:
@@ -46,7 +54,7 @@ Special thanks to our community contributors:
 
 ### Upgrade notices
 - If your child theme has significant custom styling, or has custom post templates, your theme may need to provide additional styles to ensure Gutenberg compatibility.
-- A future version of Largo will require the third parameter of `largo_byline()` to be specified in all calls. [PR #1561](https://github.com/INN/largo/pull/1561) for [issue #1517](https://github.com/INN/largo/issues/1517) adds code that, in testing environments with `WP_DEBUG` or `LARGO_DEBUG` set to `true`, will result in server log messages. This is necessary to prevent mismatches between the Loop's global `$post` and the desired byline output. The third parameter of `largo_byline()` may be a `WP_Post` instance or a post ID. Example call: `largo_byline( null, null, get_the_ID() );`.
+- A future version of Largo will require the third parameter of `largo_byline()` to be specified in all calls. [PR #1561](https://github.com/INN/largo/pull/1561) for [issue #1517](https://github.com/INN/largo/issues/1517) adds code that, in testing environments with `WP_DEBUG` or `LARGO_DEBUG` set to `true`, will result in server log messages. This is necessary to prevent mismatches between the Loop's global `$post` and the desired byline output. The third parameter of `largo_byline()` may be a `WP_Post` instance or a post ID. Example call: `largo_byline( true, false, get_the_ID() );`.
 
 ## [Largo 0.5.5.4](https://github.com/INN/largo/releases/tag/v0.5.5.4)
 
