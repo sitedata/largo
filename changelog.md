@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 though this project doesn't succeed in adhering to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## Largo 0.6.1
+
+This release contains bugfixes for Largo 0.6.
+
+### Fixes
+
+- Updates templates to make sure that bylines are output. [Pull request #1574](https://github.com/INN/largo/pull/1574).
+
 ## [Largo 0.6](https://github.com/INN/largo/compare/v0.5.5.4...v0.6)
 
 Special thanks to our community contributors:
