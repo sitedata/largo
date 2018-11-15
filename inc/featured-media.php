@@ -293,8 +293,8 @@ function largo_enqueue_featured_media_js( $hook ) {
 		'largo_featured_media',
 		get_template_directory_uri() . '/js/featured-media' . $suffix . '.js',
 		array( 'media-models', 'media-views' ),
-		false,
-		1
+		largo_version(),
+		true
 	);
 	wp_localize_script(
 		'largo_featured_media',
@@ -313,7 +313,9 @@ function largo_enqueue_featured_media_js( $hook ) {
 	);
 	wp_enqueue_style(
 		'largo_featured_media',
-		get_template_directory_uri(). '/css/featured-media' . $suffix . '.css'
+		get_template_directory_uri(). '/css/featured-media' . $suffix . '.css',
+		array(),
+		largo_version()
 	);
 
 	wp_localize_script( 'largo_featured_media', 'LFM', array(
