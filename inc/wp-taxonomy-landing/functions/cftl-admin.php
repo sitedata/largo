@@ -676,8 +676,19 @@ function cftl_admin_scripts() {
 
 	if( $screen->base == 'post' && $screen->post_type == 'cftl-tax-landing') {
 		$url = get_template_directory_uri();
-		wp_enqueue_script( 'series', $url.'/inc/wp-taxonomy-landing/series.js', array('jquery', 'jquery-ui-sortable'), '0.0.1', true );
-		wp_enqueue_style( 'series', $url.'/inc/wp-taxonomy-landing/series.css' );
+		wp_enqueue_script(
+			'series',
+			$url . '/inc/wp-taxonomy-landing/series.js',
+			array('jquery', 'jquery-ui-sortable'),
+			largo_version(),
+			true
+		);
+		wp_enqueue_style(
+			'series',
+			$url . '/inc/wp-taxonomy-landing/series.css',
+			array(),
+			largo_version()
+		);
 	}
 }
 add_action( 'admin_enqueue_scripts', 'cftl_admin_scripts');
