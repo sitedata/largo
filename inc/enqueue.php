@@ -110,7 +110,12 @@ if ( ! function_exists( 'largo_enqueue_child_theme_css' ) ) {
 		$theme = wp_get_theme();
 
 		if (is_object($theme->parent())) {
-			wp_enqueue_style( 'largo-child-styles', get_stylesheet_directory_uri() . '/style.css', array('largo-stylesheet'));
+			wp_enqueue_style(
+				'largo-child-styles',
+				get_stylesheet_directory_uri() . '/style.css',
+				array(),
+				filemtime( get_stylesheet_directory() . '/style.css' )
+			);
 		}
 	}
 	add_action( 'wp_enqueue_scripts', 'largo_enqueue_child_theme_css' );
@@ -125,8 +130,19 @@ function largo_enqueue_admin_scripts() {
 
 	// Use minified assets if LARGO_DEBUG isn't true.
 	$suffix = (LARGO_DEBUG)? '' : '.min';
-	wp_enqueue_style( 'largo-admin-widgets', get_template_directory_uri().'/css/widgets-php' . $suffix . '.css' );
-	wp_enqueue_script( 'largo-admin-widgets', get_template_directory_uri() . '/js/widgets-php' . $suffix . '.js', array( 'jquery' ), '1.0', true );
+	wp_enqueue_style(
+		'largo-admin-widgets',
+		get_template_directory_uri() . '/css/widgets-php' . $suffix . '.css',
+		array(),
+		largo_version()
+	);
+	wp_enqueue_script(
+		'largo-admin-widgets',
+		get_template_directory_uri() . '/js/widgets-php' . $suffix . '.js',
+		array( 'jquery' ),
+		largo_version(),
+		true
+	);
 }
 add_action( 'admin_enqueue_scripts', 'largo_enqueue_admin_scripts' );
 

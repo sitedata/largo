@@ -983,10 +983,11 @@ function largo_update_page_enqueue_js() {
 	if ( isset( $_GET['page']) && $_GET['page'] == 'update-largo' ) {
 		$suffix = ( LARGO_DEBUG ) ? '' : '.min';
 		wp_enqueue_script(
-			'largo_update_page', get_template_directory_uri() . '/js/update-page' . $suffix . '.js',
+			'largo_update_page',
+			get_template_directory_uri() . '/js/update-page' . $suffix . '.js',
 			array( 'jquery' ),
-			false,
-			1
+			filemtime( get_template_directory() . '/js/update-page' . $suffix . '.js' ),
+			true
 		);
 	}
 }

@@ -13,6 +13,12 @@ inc/wp-taxonomy-landing/functions/cftl-admin.php
 
    Remove Categories and Tags submenu items
 
+.. php:function:: cftl_field_defaults()
+
+   The default values for the footer landing page
+
+   :since: 0.3
+
 .. php:function:: cftl_custom_sidebars()
 
    Instantiate all our necessary widget regions

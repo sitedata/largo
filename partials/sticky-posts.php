@@ -50,7 +50,7 @@ if ( $query->have_posts() ) {
 						<?php } ?>
 
 						<h2 class="entry-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
-						<h5 class="byline"><?php largo_byline( null, null, get_the_ID() ); ?></h5>
+						<h5 class="byline"><?php largo_byline( true, false, get_the_ID() ); ?></h5>
 
 						<div class="entry-content">
 						<?php

@@ -13,6 +13,7 @@ if ( !defined('ABSPATH') )
  **/
 class largo_image_widget extends WP_Widget {
 
+	// not really sure what this means?
 	const VERSION = '4.0.7';
 
 	const CUSTOM_IMAGE_SIZE_SLUG = 'largo_image_widget_custom';
@@ -37,7 +38,12 @@ class largo_image_widget extends WP_Widget {
 	 */
 	function admin_setup() {
 		wp_enqueue_media();
-		wp_enqueue_script( 'largo-image-widget', get_template_directory_uri() . '/js/image-widget.js', array( 'jquery', 'media-upload', 'media-views' ), self::VERSION );
+		wp_enqueue_script(
+			'largo-image-widget',
+			get_template_directory_uri() . '/js/image-widget.js',
+			array( 'jquery', 'media-upload', 'media-views' ),
+			self::VERSION
+		);
 		wp_localize_script( 'largo-image-widget', 'LargoImageWidget', array(
 			'frame_title' => __( 'Select an Image', 'largo' ),
 			'button_title' => __( 'Insert Into Widget', 'largo' ),

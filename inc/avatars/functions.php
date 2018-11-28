@@ -60,7 +60,19 @@ function largo_get_avatar_src( $id_or_email, $size ) {
 	});
 
 	$square_image_sizes = array_filter( $copy, function( $arg ) {
-		return ( $arg['width'] / $arg['height'] ) == 1;
+		// a function to filter whether the image size is square
+		if (
+			( isset( $arg['width'] ) && isset( $arg['height'] ) )
+			&&
+			( is_numeric( $arg['width'] ) && is_numeric( $arg['height'] ) )
+			&&
+			( $arg['width'] > 0  && $arg['height'] > 0 )
+		) {
+			$divided = $arg['width'] / $arg['height'];
+			return ( $divided  == 1 );
+		} else {
+			return false;
+		}
 	} );
 
 	$requested_size = array( $size, $size );
