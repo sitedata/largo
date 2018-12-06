@@ -93,4 +93,3 @@ This project builds on a number of great open source projects, including:
 * Twitter Bootstrap: [getbootstrap.com](http://getbootstrap.com/)
 * LESS CSS: [lesscss.org](http://lesscss.org/)
 * Options Framework: [devinsays/options-framework-theme](https://github.com/devinsays/options-framework-theme)
-* TGM Plugin Activation Library: [thomasgriffin/TGM-Plugin-Activation](https://github.com/thomasgriffin/TGM-Plugin-Activation)
