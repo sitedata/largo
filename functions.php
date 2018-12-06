@@ -149,7 +149,6 @@ class Largo {
 			'/largo-apis.php',
 			'/inc/ajax-functions.php',
 			'/inc/helpers.php',
-			'/inc/plugin-init.php',
 			'/inc/dashboard.php',
 			'/inc/custom-feeds.php',
 			'/inc/users.php',
