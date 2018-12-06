@@ -13,11 +13,12 @@ This release contains bugfixes for Largo 0.6.
 
 - Uses [`filemtime()`](https://secure.php.net/manual/en/function.filemtime.php) as the version number for more enqueued assets, meaning that cachebusting will be handled by file modification time and not by Largo version. [Pull Request #1575](https://github.com/INN/largo/pull/1575) for [issue #1550](https://github.com/INN/largo/issues/1550).
 - For many assets where no version number was provided for enqueued assets, `largo_version()` is now used.  [Pull Request #1575](https://github.com/INN/largo/pull/1575) for [issue #1550](https://github.com/INN/largo/issues/1550).
-- Removes the list of recommended plugins displayed on new installations of Largo. [Pull Request #1580](https://github.com/INN/largo/pull/1580) for [issue #1570](https://github.com/INN/largo/issues/1570).
+- Removes the list of recommended plugins displayed on new installations of Largo. [Pull Request #1580](https://github.com/INN/largo/pull/1580) for [issue #1570](https://github.com/INN/largo/issues/1570). We'll be bringing this list back in an updated form on an INN website; stay tuned.
 
 ### Fixes
 
 - Updates templates to make sure that bylines are output. [Pull request #1574](https://github.com/INN/largo/pull/1574).
+- Allows the Largo Taxonomy List Widget to have an empty title. [Pull request #1582](https://github.com/INN/largo/pull/1582) for [issue #1581](https://github.com/INN/largo/issues/1581).
 
 ## [Largo 0.6](https://github.com/INN/largo/compare/v0.5.5.4...v0.6)
 

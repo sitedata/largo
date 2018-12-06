@@ -28,7 +28,7 @@ class largo_taxonomy_list_widget extends WP_Widget {
 	 */
 	function widget( $args, $instance ) {
 
-		$title = apply_filters( 'widget_title', empty( $instance['title'] ) ? __( 'Series', 'largo' ) : $instance['title'], $instance, $this->id_base );
+		$title = apply_filters( 'widget_title', empty( $instance['title'] ) ? '' : $instance['title'], $instance, $this->id_base );
 		$is_dropdown = ! empty( $instance['dropdown'] ) ? '1' : '0';
 
 		/*
