@@ -18,7 +18,7 @@ This release contains bugfixes for Largo 0.6.
 ### Fixes
 
 - Updates templates to make sure that bylines are output. [Pull request #1574](https://github.com/INN/largo/pull/1574).
-- Allows the Largo Taxonomy List Widget to have an empty title. [Pull request #1582](https://github.com/INN/largo/pull/1582) for [issue #1581](https://github.com/INN/largo/issues/1581).
+- Allows the Largo Taxonomy List Widget to have an empty title. [Pull request #1583](https://github.com/INN/largo/pull/1583) for [issue #1581](https://github.com/INN/largo/issues/1581).
 
 ## [Largo 0.6](https://github.com/INN/largo/compare/v0.5.5.4...v0.6)
 
