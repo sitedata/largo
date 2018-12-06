@@ -14,6 +14,7 @@ This release contains bugfixes for Largo 0.6.
 - Uses [`filemtime()`](https://secure.php.net/manual/en/function.filemtime.php) as the version number for more enqueued assets, meaning that cachebusting will be handled by file modification time and not by Largo version. [Pull Request #1575](https://github.com/INN/largo/pull/1575) for [issue #1550](https://github.com/INN/largo/issues/1550).
 - For many assets where no version number was provided for enqueued assets, `largo_version()` is now used.  [Pull Request #1575](https://github.com/INN/largo/pull/1575) for [issue #1550](https://github.com/INN/largo/issues/1550).
 - Removes the list of recommended plugins displayed on new installations of Largo. [Pull Request #1580](https://github.com/INN/largo/pull/1580) for [issue #1570](https://github.com/INN/largo/issues/1570).
+- Adds a `rect_thumb_half` image size of 400x300, cropped, for use in areas where the fixed aspect ratio of `rect_thumb` is desired, but `rect_thumb` is too big. [PR #1584](https://github.com/INN/largo/pull/1584).
 
 ### Fixes
 
