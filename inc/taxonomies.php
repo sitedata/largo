@@ -61,6 +61,7 @@ function largo_custom_taxonomies() {
 				),
 				'query_var'     => true,
 				'rewrite'       => true,
+				'show_in_rest'  => true,
 			)
 		);
 	}
@@ -147,6 +148,7 @@ function largo_custom_taxonomies() {
 				'show_admin_column' => $enabled,
 				'show_in_nav_menus' => $enabled,
 				'hierarchical' => true,
+				'show_in_rest'  => true,
 			)
 		);
 	}
@@ -181,6 +183,7 @@ function largo_custom_taxonomies() {
 				'show_in_nav_menus' => $series_enabled,
 				'query_var' => true,
 				'rewrite' => true,
+				'show_in_rest'  => true,
 			)
 		);
 	}
