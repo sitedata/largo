@@ -148,33 +148,6 @@ module.exports = function(grunt) {
         src: 'lang/*.po',
         expand: true
       }
-    },
-
-    version: {
-      src: [
-        'package.json'
-      ],
-      docs: {
-        src: [
-          'docs/conf.py'
-        ]
-      },
-      css: {
-        options: {
-          prefix: 'Version: '
-        },
-        src: [
-          'style.css',
-        ]
-      },
-      readme: {
-        options: {
-          prefix: '\\*\\*Current version:\\*\\* v'
-        },
-        src: [
-          'readme.md'
-        ]
-      }
     }
   });
 
@@ -196,10 +169,5 @@ module.exports = function(grunt) {
     'docs',
     'pot',
     'shell:msmerge'
-  ]);
-
-  // Increment version numbers and run a full build
-  grunt.registerTask('build-release', 'Increment version numbers (based on package.json) and run a full build', [
-    'version', 'build'
   ]);
 }
