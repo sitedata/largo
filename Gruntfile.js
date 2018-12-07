@@ -114,7 +114,15 @@ module.exports = function(grunt) {
           'msgmerge -o lang/es_ES.po.merged lang/es_ES.po lang/largo.pot',
           'mv lang/es_ES.po.merged lang/es_ES.po'
         ].join('&&')
-      }
+      },
+      pot: {
+        command: [
+          'wp i18n make-pot . lang/largo.pot'
+        ].join('&&'),
+        options: {
+          stdout: true
+        }
+      },
     },
 
     watch: {
@@ -132,33 +140,6 @@ module.exports = function(grunt) {
       sphinx: {
         files: ['docs/*.rst', 'docs/*/*.rst'],
         tasks: ['docs']
-      }
-    },
-
-    pot: {
-      options: {
-        text_domain: 'largo',
-        dest: 'lang/',
-        keywords: [ //WordPress localization functions
-          '__:1',
-          '_e:1',
-          '_x:1,2c',
-          'esc_html__:1',
-          'esc_html_e:1',
-          'esc_html_x:1,2c',
-          'esc_attr__:1',
-          'esc_attr_e:1',
-          'esc_attr_x:1,2c',
-          '_ex:1,2c',
-          '_n:1,2',
-          '_nx:1,2,4c',
-          '_n_noop:1,2',
-          '_nx_noop:1,2,3c'
-        ]
-      },
-      files: {
-        src: '**/*.php',
-        expand: true
       }
     },
 
@@ -246,6 +227,9 @@ module.exports = function(grunt) {
 
   // Build ALL docs
   grunt.registerTask('docs', ['shell:sphinx']);
+
+  // Former grunt-pot
+  grunt.registerTask('pot', ['shell:pot']);
 
   // Build assets, docs and language files
   grunt.registerTask('build', 'Build assets, docs and language files', [
