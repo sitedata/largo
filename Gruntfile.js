@@ -175,50 +175,6 @@ module.exports = function(grunt) {
           'readme.md'
         ]
       }
-    },
-
-    gittag: {
-      release: {
-        options: {
-          tag: 'v<%= pkg.version %>',
-          message: 'tagging v<%= pkg.version %>'
-        }
-      }
-    },
-
-    gitpush: {
-      release: {
-        options: {
-          tags: true,
-          branch: 'master'
-        }
-      }
-    },
-
-    gitmerge: {
-      release: {
-        options: {
-          branch: 'develop',
-          message: 'Merge branch develop to master'
-        }
-      }
-    },
-
-    gitcheckout: {
-      release: {
-        options: {
-          branch: 'master'
-        }
-      }
-    },
-
-    confirm: {
-      release: {
-        options: {
-          question: 'Are you sure you want to publish a release?',
-          input: 'yes,YES,y,Y'
-        }
-      }
     }
   });
 
@@ -245,14 +201,5 @@ module.exports = function(grunt) {
   // Increment version numbers and run a full build
   grunt.registerTask('build-release', 'Increment version numbers (based on package.json) and run a full build', [
     'version', 'build'
-  ]);
-
-  // Checkout master, merge develop to master, tag and push to remote
-  grunt.registerTask('publish', 'Checkout master, merge develop to master, tag and push to remote', [
-    'confirm:release',
-    'gitcheckout:release',
-    'gitmerge:release',
-    'gittag:release',
-    'gitpush:release'
   ]);
 }

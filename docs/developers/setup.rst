@@ -13,15 +13,12 @@ Software to install first
 From `INN's computer setup guide <https://github.com/INN/docs/blob/master/staffing/onboarding/os-x-setup.md#command-line-utilities>`_, install the following software:
 
 - git
-- wget
-- curl
-- phpunit
+- homebrew
+- wp-cli
 - virtualenv and virtualenvwrapper
-- an SSH key
-- VirtualBox
 - Vagrant
 - npm and grunt-cli
-- xgettext (only needed for rebuilding translation files and releasing)
+- xgettext and msgmerge (only needed for rebuilding translation files and releasing)
 
 If you're on OSX, you will also want to install Homebrew, to assist in the installation of the above.
 
