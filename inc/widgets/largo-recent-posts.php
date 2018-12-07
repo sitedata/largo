@@ -43,7 +43,7 @@ class largo_recent_posts_widget extends WP_Widget {
 		$posts_term = of_get_option( 'posts_term_plural', 'Posts' );
 
 		// Add the link to the title.
-		$title = apply_filters( 'widget_title', empty( $instance['title'] ) ? __( 'Recent ' . $posts_term, 'largo' ) : $instance['title'], $instance, $this->id_base );
+		$title = apply_filters( 'widget_title', empty( $instance['title'] ) ? '' : $instance['title'], $instance, $this->id_base );
 
 		echo $args['before_widget'];
 
