@@ -109,7 +109,7 @@ module.exports = function(grunt) {
           stdout: true
         }
       },
-      msmerge: {
+      msgmerge: {
         command: [
           'msgmerge -o lang/es_ES.po.merged lang/es_ES.po lang/largo.pot',
           'mv lang/es_ES.po.merged lang/es_ES.po'
@@ -168,6 +168,6 @@ module.exports = function(grunt) {
     'apidocs',
     'docs',
     'pot',
-    'shell:msmerge'
+    'shell:msgmerge'
   ]);
 }
