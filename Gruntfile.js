@@ -109,7 +109,7 @@ module.exports = function(grunt) {
           stdout: true
         }
       },
-      msmerge: {
+      msgmerge: {
         command: [
           'msgmerge -o lang/es_ES.po.merged lang/es_ES.po lang/largo.pot',
           'mv lang/es_ES.po.merged lang/es_ES.po'
@@ -148,33 +148,6 @@ module.exports = function(grunt) {
         src: 'lang/*.po',
         expand: true
       }
-    },
-
-    version: {
-      src: [
-        'package.json'
-      ],
-      docs: {
-        src: [
-          'docs/conf.py'
-        ]
-      },
-      css: {
-        options: {
-          prefix: 'Version: '
-        },
-        src: [
-          'style.css',
-        ]
-      },
-      readme: {
-        options: {
-          prefix: '\\*\\*Current version:\\*\\* v'
-        },
-        src: [
-          'readme.md'
-        ]
-      }
     }
   });
 
@@ -195,11 +168,6 @@ module.exports = function(grunt) {
     'apidocs',
     'docs',
     'pot',
-    'shell:msmerge'
-  ]);
-
-  // Increment version numbers and run a full build
-  grunt.registerTask('build-release', 'Increment version numbers (based on package.json) and run a full build', [
-    'version', 'build'
+    'shell:msgmerge'
   ]);
 }

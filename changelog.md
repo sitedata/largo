@@ -5,21 +5,30 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 though this project doesn't succeed in adhering to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## Largo 0.6.1
+## [Largo 0.6.1](https://github.com/INN/largo/compare/v0.6...v0.6.1)
 
 This release contains bugfixes for Largo 0.6.
 
 ### Changes
 
 - Uses [`filemtime()`](https://secure.php.net/manual/en/function.filemtime.php) as the version number for more enqueued assets, meaning that cachebusting will be handled by file modification time and not by Largo version. [Pull Request #1575](https://github.com/INN/largo/pull/1575) for [issue #1550](https://github.com/INN/largo/issues/1550).
-- For many assets where no version number was provided for enqueued assets, `largo_version()` is now used.  [Pull Request #1575](https://github.com/INN/largo/pull/1575) for [issue #1550](https://github.com/INN/largo/issues/1550).
+- For many assets where no version number was provided for enqueued assets, `largo_version()` is now used. [Pull Request #1575](https://github.com/INN/largo/pull/1575) for [issue #1550](https://github.com/INN/largo/issues/1550).
 - Removes the list of recommended plugins displayed on new installations of Largo. [Pull Request #1580](https://github.com/INN/largo/pull/1580) for [issue #1570](https://github.com/INN/largo/issues/1570). We'll be bringing this list back in an updated form on an INN website; stay tuned.
 
 ### Fixes
 
 - Updates templates to make sure that bylines are output. [Pull request #1574](https://github.com/INN/largo/pull/1574).
+- Fixes a division-by-zero bug in avatar functions. [Pull request #1578](https://github.com/INN/largo/pull/1578) as part of [issue #1492](https://github.com/INN/largo/issues/1492).
 - Allows the Largo Taxonomy List Widget to have an empty title. [Pull request #1583](https://github.com/INN/largo/pull/1583) for [issue #1581](https://github.com/INN/largo/issues/1581).
 - Allows the Largo Recent Posts Widget to have an empty title. [Pull request #1588](https://github.com/INN/largo/pull/1588) for [issue #1405](https://github.com/INN/largo/issues/1405).
+- Makes sure that the series, post type, and post prominence taxonomies appear in the REST API and in the Gutenberg editor. [Pull request #1586](https://github.com/INN/largo/pull/1586) for [issue #1582](https://github.com/INN/largo/issues/1582).
+
+### Documentation and administrative improvements
+
+- Lays groundwork for testing Largo under PHP 7.3. [Pull request #1587](https://github.com/INN/largo/pull/1587) for [issue #1579](https://github.com/INN/largo/issues/1579).
+- Adds a pip `requirements.txt` for Sphinx dependencies required by Grunt tasks used during the development process. [Pull request #1585](https://github.com/INN/largo/pull/1585) for [issue #1359](https://github.com/INN/largo/issues/1359).
+- Removes several unneccessary Grunt tasks from the Gruntfile, and their dependencies. [Pull request #1585](https://github.com/INN/largo/pull/1585) for [issue #1540](https://github.com/INN/largo/issues/1540).
+- Removes some old developer setup instructions from the largo.readthedocs.io setup instructions. [Pull request #1585](https://github.com/INN/largo/pull/1585).
 
 ## [Largo 0.6](https://github.com/INN/largo/compare/v0.5.5.4...v0.6)
 
