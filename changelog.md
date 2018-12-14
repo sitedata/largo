@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 though this project doesn't succeed in adhering to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Largo 0.6.2](https://github.com/INN/largo/compare/v0.6.1...0.5-dev)
+
+### Fixes
+
+- Fixes a regression in the behavior of the Largo Follow widget. [Pull request #1600](https://github.com/INN/largo/pull/1600) for [issue #1599](https://github.com/INN/largo/issues/1599).
+
 ## [Largo 0.6.1](https://github.com/INN/largo/compare/v0.6...v0.6.1)
 
 This release contains bugfixes for Largo 0.6.
