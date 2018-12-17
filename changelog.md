@@ -7,13 +7,24 @@ though this project doesn't succeed in adhering to [Semantic Versioning](https:/
 
 ## [Largo 0.6.2](https://github.com/INN/largo/compare/v0.6.1...0.5-dev)
 
+This release contains bug fixes for Largo 0.6.
+
 ### Fixes
 
 - Fixes a regression in the behavior of the Largo Follow widget. [Pull request #1600](https://github.com/INN/largo/pull/1600) for [issue #1599](https://github.com/INN/largo/issues/1599).
+- Fixes issue where post excerpt and featured media were not being used for open graph tags on post types that are `is_singular()` but not `is_single()`. [Pull request #1604)(https://github.com/INN/largo/pull/1604) for [issue #1602](https://github.com/INN/largo/issues/1602).
+- Removes duplicate site title in opengraph tags for non-archive, non-`is_front_page()`, non-`is_singular()` URLs. [Pull request #1604](https://github.com/INN/largo/pull/1604) for [issue #1602](https://github.com/INN/largo/issues/1602).
+- Removes search form from global nav bar when on the search page, so that there's only one search form. [Pull request #1604](https://github.com/INN/largo/pull/1604).
+- Cleans up the search page when no query has been entered. [Pull request #1604](https://github.com/INN/largo/pull/1604) for [issue #1603](https://github.com/INN/largo/issues/1603).
+
+### Upgrade notices
+
+- If you have a custom `partials/nav-global.php` you may want to copy the `if ( ! is_search() ) { ... }` logic from [pull request #1604](https://github.com/INN/largo/pull/1604/) to reduce user confusion about which search form to use.
+
 
 ## [Largo 0.6.1](https://github.com/INN/largo/compare/v0.6...v0.6.1)
 
-This release contains bugfixes for Largo 0.6.
+This release contains bug fixes for Largo 0.6.
 
 ### Changes
 
