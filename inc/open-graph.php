@@ -58,7 +58,7 @@ if ( ! function_exists( 'largo_opengraph' ) ) {
 		<?php
 			} else {
 		?>
-				<meta property="og:title" content="<?php bloginfo( 'name' ); wp_title(); ?>" />
+				<meta property="og:title" content="<?php wp_title(); ?>" />
 				<meta property="og:type" content="article" />
 				<meta property="og:url" content="<?php echo esc_url( largo_get_current_url() ); ?>"/>
 			<?php
