@@ -31,7 +31,7 @@ if ( ! function_exists( 'largo_opengraph' ) ) {
 		?>
 
 		<?php // output appropriate OG tags by page type
-			if ( is_single() ) {
+			if ( is_singular() ) {
 				if ( have_posts() ) {
 					the_post(); // we need to queue up the post to get the post specific info
 					
