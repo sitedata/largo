@@ -23,7 +23,7 @@ if ($thumb == 'small') {
 	<?php
 } elseif ($thumb == 'large') {
 	$img_attr = array();
-	$img_attr['class'] .= " attachment-large";
+	$img_attr['class'] = " attachment-large";
 	?>
 		<a href="<?php echo get_permalink(); ?>"><?php echo get_the_post_thumbnail( get_the_ID(), 'large', $img_attr); ?></a>
 	<?php
