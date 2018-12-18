@@ -41,13 +41,19 @@ if ($thumb == 'small') {
 </h5>
 
 <?php // byline on posts
-if ( isset( $instance['show_byline'] ) && $instance['show_byline'] == true) { ?>
-	<span class="byline"><?php echo largo_byline( false, $instance['hide_byline_date'], get_the_ID() ); ?></span>
-<?php }
+if ( isset( $instance['show_byline'] ) && $instance['show_byline'] == true) {
+	$hide_byline_date = ( ! empty( $instance['hide_byline_date'] ) ) ? $instance['hide_byline_date'] : true;
+	?>
+		<span class="byline"><?php echo largo_byline( false, $hide_byline_date, get_the_ID() ); ?></span>
+	<?php
+}
 
 // the excerpt
-if ( $excerpt == 'num_sentences' ) { ?>
-	<p><?php echo largo_trim_sentences( get_the_content(), $instance['num_sentences'] ); ?></p>
-<?php } elseif ( $excerpt == 'custom_excerpt' ) { ?>
-	<p><?php echo get_the_excerpt(); ?></p>
-<?php }
+if ( $excerpt == 'num_sentences' ) {
+	$num_sentences = ( ! empty( $instance['num_sentences'] ) ) ? $instance['num_sentences'] : 2;
+	?>
+		<p><?php echo largo_trim_sentences( get_the_content(), $num_sentences ); ?></p>
+	<?php } elseif ( $excerpt == 'custom_excerpt' ) { ?>
+		<p><?php echo get_the_excerpt(); ?></p>
+	<?php
+}
