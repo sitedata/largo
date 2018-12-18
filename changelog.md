@@ -17,11 +17,12 @@ This release contains bug fixes for Largo 0.6.
 - Removes search form from global nav bar when on the search page, so that there's only one search form. [Pull request #1604](https://github.com/INN/largo/pull/1604).
 - Cleans up the search page when no query has been entered. [Pull request #1604](https://github.com/INN/largo/pull/1604) for [issue #1603](https://github.com/INN/largo/issues/1603).
 - Defines the index 'class' in `partials/widget-content.php` when using a large image. [Pull request #1606](https://github.com/INN/largo/pull/1606) for issues [#1605](https://github.com/INN/largo/issues/1605) and [#1492](https://github.com/INN/largo/issues/1492).
+- If Co-Authors Plus is active, and if a post has an `author` term, but the term has no corresponding `guest-author` post, when running `largo_byline()`, the byline will now contain an HTML comment informing why the byline is empty. If the `WP_DEBUG` or `LARGO_DEBUG` constants are true, Largo will add a message to the server's error log of the form "post 123 should have at least one co-author, but has none!" [Pull request #1607](https://github.com/INN/largo/pull/1607) for [Automattic/Co-Authors-Plus#637](https://github.com/Automattic/Co-Authors-Plus/issues/637) and as part of the general cleanup ticket [#1492](https://github.com/INN/largo/issues/1492).
+- Further cleans up undefined variables.
 
 ### Upgrade notices
 
 - If you have a custom `partials/nav-global.php` you may want to copy the `if ( ! is_search() ) { ... }` logic from [pull request #1604](https://github.com/INN/largo/pull/1604/) to reduce user confusion about which search form to use.
-
 
 ## [Largo 0.6.1](https://github.com/INN/largo/compare/v0.6...v0.6.1)
 
