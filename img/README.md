@@ -10,7 +10,7 @@ If you would like to use a light background, add this to your theme's `functions
 function inn_logo() {
 		?>
 			<a href="//inn.org/">
-				<img id="inn-logo" src="<?php echo(get_template_directory_uri() . "/img/inn_dark.png"); ?>" alt="<?php printf(__("%s is a member of the Institute for Nonprofit News", "largo"), get_bloginfo('name')); ?>" />
+				<img id="inn-logo" src="<?php echo(get_template_directory_uri() . "/img/inn_dark.svg"); ?>" alt="<?php printf(__("%s is a member of the Institute for Nonprofit News", "largo"), get_bloginfo('name')); ?>" />
 			</a>
 		<?php
 
