@@ -2,7 +2,7 @@ Note:
 
 `less/inc/footer.less` expects that the image output by `inn_logo()` will be 1669px wide and 385px tall.
 
-The default image output by `inn_logo()` is `inn_light.png`, which has white text and is good for dark backgrounds.
+The default image output by `inn_logo()` is `inn_light.svg`, which has white text and is good for dark backgrounds.
 
 If you would like to use a light background, add this to your theme's `functions.php`:
 
