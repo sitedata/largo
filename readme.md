@@ -10,7 +10,7 @@ A responsive WordPress framework designed for news publishers and developed by t
 
 The project extends work done by [NPR's Project Argo](http://argoproject.org/).
 
-**Current version:** v0.6
+**Current version:** v0.6.1
 
 **Changelog** is available in this repository: [changelog.md](./changelog.md)
 
@@ -93,4 +93,3 @@ This project builds on a number of great open source projects, including:
 * Twitter Bootstrap: [getbootstrap.com](http://getbootstrap.com/)
 * LESS CSS: [lesscss.org](http://lesscss.org/)
 * Options Framework: [devinsays/options-framework-theme](https://github.com/devinsays/options-framework-theme)
-* TGM Plugin Activation Library: [thomasgriffin/TGM-Plugin-Activation](https://github.com/thomasgriffin/TGM-Plugin-Activation)

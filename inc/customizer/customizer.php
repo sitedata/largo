@@ -338,10 +338,18 @@ class Largo_Customizer {
 	 * Enqueue scripts and styles specific to the Largo Customizer
 	 */
 	public function action_customize_controls_enqueue_scripts() {
-
-		wp_enqueue_script( 'largo-customizer', get_template_directory_uri() . '/inc/customizer/js/customizer.js', array( 'jquery' ) );
-		wp_enqueue_style( 'largo-customizer', get_template_directory_uri() . '/inc/customizer/css/customizer.css' );
-
+		wp_enqueue_script(
+			'largo-customizer',
+			get_template_directory_uri() . '/inc/customizer/js/customizer.js',
+			array( 'jquery' ),
+			largo_version()
+		);
+		wp_enqueue_style(
+			'largo-customizer',
+			get_template_directory_uri() . '/inc/customizer/css/customizer.css',
+			array(),
+			largo_version()
+		);
 	}
 
 	/**

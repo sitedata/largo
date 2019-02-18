@@ -172,9 +172,19 @@ if ( !function_exists( 'optionsframework_add_page' ) ) {
 /* Loads the CSS */
 
 function optionsframework_load_styles() {
-	wp_enqueue_style('optionsframework', OPTIONS_FRAMEWORK_DIRECTORY . 'css/optionsframework.css');
+	wp_enqueue_style(
+		'optionsframework',
+		OPTIONS_FRAMEWORK_DIRECTORY . 'css/optionsframework.css',
+		array(),
+		largo_version()
+	);
 	if ( !wp_style_is( 'wp-color-picker','registered' ) ) {
-		wp_register_style('wp-color-picker', OPTIONS_FRAMEWORK_DIRECTORY . 'css/color-picker.min.css');
+		wp_register_style(
+			'wp-color-picker',
+			OPTIONS_FRAMEWORK_DIRECTORY . 'css/color-picker.min.css',
+			array(),
+			largo_version()
+		);
 	}
 	wp_enqueue_style( 'wp-color-picker' );
 }
@@ -201,7 +211,12 @@ function optionsframework_load_scripts($hook) {
 	}
 
 	// Enqueue custom option panel JS
-	wp_enqueue_script( 'options-custom', OPTIONS_FRAMEWORK_DIRECTORY . 'js/options-custom.js', array( 'jquery','wp-color-picker' ) );
+	wp_enqueue_script(
+		'options-custom',
+		OPTIONS_FRAMEWORK_DIRECTORY . 'js/options-custom.js',
+		array( 'jquery','wp-color-picker' ),
+		largo_version()
+	);
 
 	// Inline scripts from options-interface.php
 	add_action( 'admin_head', 'of_admin_head' );

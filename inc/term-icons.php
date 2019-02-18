@@ -122,7 +122,10 @@ class Largo_Term_Icons {
 	 */
 	function admin_enqueue_scripts( $hook_suffix ) {
 
-		if ( $hook_suffix == 'edit-tags.php' && !empty($_REQUEST['taxonomy']) ) {
+		if (
+			( $hook_suffix == 'edit-tags.php' || $hook_suffix == 'term.php' )
+			&& !empty($_REQUEST['taxonomy'])
+		) {
 			if ( !in_array( $_REQUEST['taxonomy'], $this->get_icon_taxonomies() ) ) {
 				// abort if the term doesn't belong to the taxonomies to have icons
 				return;
@@ -132,23 +135,53 @@ class Largo_Term_Icons {
 
 			$this->get_icons_config();
 
-			wp_enqueue_style( 'fontello', $this->_css_file );
+			wp_enqueue_style(
+				'fontello',
+				$this->_css_file,
+				array(),
+				largo_version()
+			);
 
 			$path = get_template_directory();
 			$dir = get_template_directory_uri();
 			$locale = explode( '_', get_locale() );
 
-			wp_enqueue_style( 'select2', $dir.'/js/select2/select2.css' );
-			wp_enqueue_script( 'select2', $dir.'/js/select2/select2.min.js', array( 'jquery' ) );
+			wp_enqueue_style(
+				'select2',
+				$dir.'/js/select2/select2.css',
+				array(),
+				largo_version()
+			);
+			wp_enqueue_script(
+				'select2',
+				$dir.'/js/select2/select2.min.js',
+				array( 'jquery' ),
+				largo_version()
+			);
 
 			if ( is_file( $path . '/js/select2/select2_locale_' . implode( '-', $locale ) . '.js' ) ) {
-				wp_enqueue_script( 'select2-locale-'. implode( '-', $locale ), $dir . '/js/select2/select2_locale_' . implode( '-', $locale ) . '.js' );
+				wp_enqueue_script(
+					'select2-locale-'. implode( '-', $locale ),
+					$dir . '/js/select2/select2_locale_' . implode( '-', $locale ) . '.js',
+					array(),
+					largo_version()
+				);
 			} elseif ( is_file( $path . '/js/select2/select2_locale_' . $locale[0] . '.js' ) ) {
-				wp_enqueue_script( 'select2-locale-'. $locale[0], $dir . '/js/select2/select2_locale_' . $locale[0] . '.js' );
+				wp_enqueue_script(
+					'select2-locale-'. $locale[0],
+					$dir . '/js/select2/select2_locale_' . $locale[0] . '.js',
+					array(),
+					largo_version()
+				);
 			}
 
 			$suffix = (LARGO_DEBUG)? '' : '.min';
-			wp_enqueue_script( 'custom-term-icons', $dir.'/js/custom-term-icons' . $suffix . '.js' );
+			wp_enqueue_script(
+				'custom-term-icons',
+				$dir.'/js/custom-term-icons' . $suffix . '.js',
+				array(),
+				largo_version()
+			);
 
 		}
 	}

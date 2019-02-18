@@ -109,12 +109,20 @@ module.exports = function(grunt) {
           stdout: true
         }
       },
-      msmerge: {
+      msgmerge: {
         command: [
           'msgmerge -o lang/es_ES.po.merged lang/es_ES.po lang/largo.pot',
           'mv lang/es_ES.po.merged lang/es_ES.po'
         ].join('&&')
-      }
+      },
+      pot: {
+        command: [
+          'wp i18n make-pot . lang/largo.pot'
+        ].join('&&'),
+        options: {
+          stdout: true
+        }
+      },
     },
 
     watch: {
@@ -135,108 +143,10 @@ module.exports = function(grunt) {
       }
     },
 
-    pot: {
-      options: {
-        text_domain: 'largo',
-        dest: 'lang/',
-        keywords: [ //WordPress localization functions
-          '__:1',
-          '_e:1',
-          '_x:1,2c',
-          'esc_html__:1',
-          'esc_html_e:1',
-          'esc_html_x:1,2c',
-          'esc_attr__:1',
-          'esc_attr_e:1',
-          'esc_attr_x:1,2c',
-          '_ex:1,2c',
-          '_n:1,2',
-          '_nx:1,2,4c',
-          '_n_noop:1,2',
-          '_nx_noop:1,2,3c'
-        ]
-      },
-      files: {
-        src: '**/*.php',
-        expand: true
-      }
-    },
-
     po2mo: {
       files: {
         src: 'lang/*.po',
         expand: true
-      }
-    },
-
-    version: {
-      src: [
-        'package.json'
-      ],
-      docs: {
-        src: [
-          'docs/conf.py'
-        ]
-      },
-      css: {
-        options: {
-          prefix: 'Version: '
-        },
-        src: [
-          'style.css',
-        ]
-      },
-      readme: {
-        options: {
-          prefix: '\\*\\*Current version:\\*\\* v'
-        },
-        src: [
-          'readme.md'
-        ]
-      }
-    },
-
-    gittag: {
-      release: {
-        options: {
-          tag: 'v<%= pkg.version %>',
-          message: 'tagging v<%= pkg.version %>'
-        }
-      }
-    },
-
-    gitpush: {
-      release: {
-        options: {
-          tags: true,
-          branch: 'master'
-        }
-      }
-    },
-
-    gitmerge: {
-      release: {
-        options: {
-          branch: 'develop',
-          message: 'Merge branch develop to master'
-        }
-      }
-    },
-
-    gitcheckout: {
-      release: {
-        options: {
-          branch: 'master'
-        }
-      }
-    },
-
-    confirm: {
-      release: {
-        options: {
-          question: 'Are you sure you want to publish a release?',
-          input: 'yes,YES,y,Y'
-        }
       }
     }
   });
@@ -247,6 +157,9 @@ module.exports = function(grunt) {
   // Build ALL docs
   grunt.registerTask('docs', ['shell:sphinx']);
 
+  // Former grunt-pot
+  grunt.registerTask('pot', ['shell:pot']);
+
   // Build assets, docs and language files
   grunt.registerTask('build', 'Build assets, docs and language files', [
     'less',
@@ -255,20 +168,6 @@ module.exports = function(grunt) {
     'apidocs',
     'docs',
     'pot',
-    'shell:msmerge'
-  ]);
-
-  // Increment version numbers and run a full build
-  grunt.registerTask('build-release', 'Increment version numbers (based on package.json) and run a full build', [
-    'version', 'build'
-  ]);
-
-  // Checkout master, merge develop to master, tag and push to remote
-  grunt.registerTask('publish', 'Checkout master, merge develop to master, tag and push to remote', [
-    'confirm:release',
-    'gitcheckout:release',
-    'gitmerge:release',
-    'gittag:release',
-    'gitpush:release'
+    'shell:msgmerge'
   ]);
 }

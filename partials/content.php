@@ -72,7 +72,7 @@ if ( $featured ) {
 
 		<?php
 			if ( $show_byline ) { ?>
-				<h5 class="byline"><?php largo_byline( null, null, get_the_ID() ); ?></h5>
+				<h5 class="byline"><?php largo_byline( true, false, get_the_ID() ); ?></h5>
 			<?php }
 		?>
 

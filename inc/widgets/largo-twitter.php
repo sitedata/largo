@@ -64,7 +64,7 @@ class largo_twitter_widget extends WP_Widget {
 			'largo_twitter_widget',
 			'//platform.twitter.com/widgets.js',
 			array(),
-			null,
+			largo_version(),
 			true
 		);
 
