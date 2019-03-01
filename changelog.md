@@ -9,6 +9,10 @@ though this project doesn't succeed in adhering to [Semantic Versioning](https:/
 
 This release contains bug fixes for Largo 0.6.
 
+### Feature updates
+
+- Updates INN's logos in the `img/` folder. If your child theme redefines the function `inn_logo()`, please update that function to reference the new SVG image locations in `img/`. [Pull request #1633](https://github.com/INN/largo/pull/1633) for [issue #1621](https://github.com/INN/largo/issues/1631)
+
 ### Fixes
 
 - Fixes PHP notices in class `Bootstrap_Walker_Nav_Menu`. [Pull request #1624](https://github.com/INN/largo/pull/1624) and [#1625](https://github.com/INN/largo/pull/1625) for [issue #1623](https://github.com/INN/largo/issues/1623) as part of [issue #1492](https://github.com/INN/largo/issues/1492).
@@ -24,6 +28,7 @@ This release contains bug fixes for Largo 0.6.
 ### Upgrade notices
 
 - If you have a custom `partials/nav-global.php` you may want to copy the `if ( ! is_search() ) { ... }` logic from [pull request #1604](https://github.com/INN/largo/pull/1604/) to reduce user confusion about which search form to use.
+- If your child theme redefines the function `inn_logo()`, please update that function to reference the new INN logo SVG image locations in `img/`.
 
 ## [Largo 0.6.1](https://github.com/INN/largo/compare/v0.6...v0.6.1)
 
