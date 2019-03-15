@@ -268,12 +268,17 @@ if ( ! function_exists( 'largo_categories_and_tags' ) ) {
 
 				if ( $link ) {
 					$output[] = sprintf(
-						__( '<%1$s class="post-category-link"><a href="%2$s" title="Read %3$s in the %4$s category">%5$s%4$s</a></%1$s>', 'largo' ),
+						__( '<%1$s class="post-category-link %6$s"><a href="%2$s" title="Read %3$s in the %4$s category">%5$s%4$s</a></%1$s>', 'largo' ),
 						$item_wrapper,
 						( $rss ? get_category_feed_link( $cat->term_id ) : get_category_link( $cat->term_id ) ),
 						of_get_option( 'posts_term_plural' ),
 						$cat->name,
-						$icon
+						$icon,
+						sprintf(
+							'%1$s-%2$s',
+							$cat->taxonomy,
+							$cat->slug
+						)
 					);
 				} else {
 					$output[] = $cat->name;
@@ -289,12 +294,17 @@ if ( ! function_exists( 'largo_categories_and_tags' ) ) {
 
 				if ( $link ) {
 					$output[] = sprintf(
-						__( '<%1$s class="post-tag-link"><a href="%2$s" title="Read %3$s tagged with: %4$s">%5$s%4$s</a></%1$s>', 'largo' ),
+						__( '<%1$s class="post-tag-link %6$s"><a href="%2$s" title="Read %3$s tagged with: %4$s">%5$s%4$s</a></%1$s>', 'largo' ),
 						$item_wrapper,
 						( $rss ?  get_tag_feed_link( $tag->term_id ) : get_tag_link( $tag->term_id ) ),
 						of_get_option( 'posts_term_plural' ),
 						$tag->name,
-						$icon
+						$icon,
+						sprintf(
+							'%1$s-%2$s',
+							$tag->taxonomy,
+							$tag->slug
+						)
 					);
 				} else {
 					$output[] = $tag->name;
@@ -363,17 +373,26 @@ function largo_top_term( $options = array() ) {
 	 */
 	if ( $term_id && $term_id !== 'none' && !empty( $taxonomy ) ) {
 		$icon = ( $args['use_icon'] ) ?  '<i class="icon-white icon-tag"></i>' : '' ;	//this will probably change to a callback largo_term_icon() someday
+
 		$link = ( $args['link'] ) ? array( '<a href="%2$s" title="Read %3$s in the %4$s category">','</a>' ) : array( '', '' ) ;
+
 		// get the term object
 		$term = get_term( $term_id, $taxonomy );
+
 		if ( is_wp_error( $term ) ) return;
+
 		$output = sprintf(
-			'<%1$s class="post-category-link">'.$link[0].'%5$s%4$s'.$link[1].'</%1$s>',
+			'<%1$s class="post-category-link _top_term_output %6$s">'.$link[0].'%5$s%4$s'.$link[1].'</%1$s>',
 			$args['wrapper'],
 			get_term_link( $term ),
 			of_get_option( 'posts_term_plural' ),
 			$term->name,
-			$icon
+			$icon,
+			sprintf(
+				'%1$s-%2$s',
+				$term->taxonomy,
+				$term->slug
+			)
 		);
 	}
 
