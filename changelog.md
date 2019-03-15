@@ -16,6 +16,7 @@ This release contains bug fixes for Largo 0.6.
 ### Fixes
 
 - Increases contrast of the floating social button icons against the background, to improve accessibility. [Pull request #1635](https://github.com/INN/largo/pull/1635/).
+- Fixes issue where `[module]content[/module]` was not rendering `content` in the output of the `largo_module_shortcode()` function. [Pull request #1645](https://github.com/INN/largo/pull/1645) for [issue #1639](https://github.com/INN/largo/issues/1639).
 - Fixes issue where floating social buttons were not clickable, because of z-index ordering. [Pull request #1635](https://github.com/INN/largo/pull/1635/) for [issue #1576](https://github.com/INN/largo/issues/1576).
 - Fixes links in social media buttons not respecting the blog's character set. [Pull request #1635](https://github.com/INN/largo/pull/1635/) for [issue #1283](https://github.com/INN/largo/issues/1283).
 - Function `largo_post_social_links` now respects the blog character set option. [Pull request #1635](https://github.com/INN/largo/pull/1635/) for [issue #1283](https://github.com/INN/largo/issues/1283).
