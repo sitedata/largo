@@ -333,7 +333,7 @@ function largo_top_term( $options = array() ) {
 		'echo' => TRUE,
 		'link' => TRUE,
 		'use_icon' => FALSE,
-		'wrapper' => 'span',
+		'wrapper' => 'span', // an HTML tag ID
 		'exclude' => array(),	//only for compatibility with largo_categories_and_tags
 	);
 
@@ -400,10 +400,33 @@ function largo_top_term( $options = array() ) {
 	 * No output?
 	 * generate a link to the post's category or tags
 	 */
-	if ( empty( $output ) ) {
-		$output = largo_categories_and_tags( 1, false, $args['link'], $args['use_icon'], '', $args['wrapper'], $args['exclude']);
-		if ( is_array( $output ) && ! empty( $output[0] ) ) {
-			$output = ( is_array( $output ) ) ? $output[0] : '';
+	if (
+		empty( $output )
+		&& 'none' !== $term_id
+		&& (int) $args['post'] === get_the_ID()
+	) {
+
+		// Can't pass a post ID to largo_categories_and_tags, so this may return the wrong links.
+		$lcat_output = largo_categories_and_tags( 1, false, $args['link'], $args['use_icon'], '', $args['wrapper'], $args['exclude'] );
+
+		if ( is_string( $lcat_output ) ) {
+			$output = $lcat_output;
+		} elseif ( is_array( $lcat_output ) ) {
+			if ( empty( $lcat_output ) ) {
+				$output = '';
+			} else {
+				foreach ( $lcat_output as $o ) {
+					if ( empty( $o ) ) {
+						continue;
+					}
+					if ( is_string( $o ) ) {
+						$output = $o;
+						break;
+					}
+				}
+			}
+		} else {
+			$output = '';
 		}
 	}
 
