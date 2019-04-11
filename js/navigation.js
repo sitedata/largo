@@ -82,15 +82,25 @@
     $(window).on('resize', this.stickyNavResizeCallback.bind(this));
 
     this.stickyNavResizeCallback();
-    this.stickyNavSetOffset();
   };
 
   // Hide the sticky nav if we're too close to the top of the page
   Navigation.prototype.stickyNavScrollTopHide = function() {
-    if ($(window).scrollTop() <= this.mainEl.offset().top && this.mainNavEl.is(':visible')) {
-      this.stickyNavEl.removeClass('show');
-      clearTimeout(this.scrollTimeout);
-      return;
+    if ( $(window).scrollTop() <= this.mainEl.offset().top ) {
+      // we're near the top of the page, so now let's consider whether to hide the sticky nav
+      if ( this.mainNavEl.is(':visible') ) {
+        // the main nav exists and is visible,
+        // so we should hide the sticky nav
+        this.stickyNavEl.removeClass('show');
+        clearTimeout(this.scrollTimeout);
+        return;
+      } else {
+        // the main nav either doesn't exist or isn't visible,
+        // so we shouldn't hide the sticky nav
+        this.stickyNavEl.addClass('show');
+        clearTimeout(this.scrollTimeout);
+        return;
+      }
     }
   }
 
@@ -109,7 +119,6 @@
     } else {
       this.stickyNavEl.parent().css('height', '');
     }
-    this.stickyNavSetOffset();
     this.stickyNavTransitionDone();
   };
 
@@ -124,7 +133,6 @@
 
     this.stickyNavScrollTopHide();
 
-    this.stickyNavSetOffset();
 
     // Abort if the scroll direction is the same as it was, or if the page has not been scrolled.
     if (this.previousScroll == direction || !this.previousScroll ) {
@@ -159,16 +167,6 @@
     return direction;
   };
 
-  Navigation.prototype.stickyNavSetOffset = function() {
-    if ($('body').hasClass('admin-bar')) {
-      if ($(window).scrollTop() <= $('#wpadminbar').outerHeight()) {
-        this.stickyNavEl.css('top', $('#wpadminbar').outerHeight());
-      } else {
-        this.stickyNavEl.css('top', '');
-      }
-    }
-  };
-
   Navigation.prototype.responsiveNavigation = function() {
     var self = this;
 
@@ -186,7 +184,6 @@
 
         navbar.toggleClass('open');
         $('html').addClass('nav-open');
-        self.stickyNavSetOffset();
         navbar.find('.nav-shelf').css({
           top: self.stickyNavEl.position().top + self.stickyNavEl.outerHeight()
         });
