@@ -259,6 +259,7 @@ class Largo {
 		add_image_size( 'third-full', FULL_WIDTH / 3, 500, true ); // large width scaling
 		add_image_size( 'two-third-full', FULL_WIDTH / 3 * 2, 500, true ); // large width scaling
 		add_image_size( 'rect_thumb', 800, 600, true ); // used for cat/tax archive pages
+		add_image_size( 'rect_thumb_half', 400, 300, true ); // smaller version of rect_thumb
 
 		add_filter( 'pre_option_thumbnail_size_w', function(){
 			return 140;
