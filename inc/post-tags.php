@@ -370,7 +370,7 @@ function largo_maybe_top_term( $args = array() ) {
 	$args = array_merge( $args, array( 'echo' => False ) );
 	$top_term = largo_top_term( $args );
 
-	if ( $top_term ) { ?>
+	if ( ! empty( $top_term ) ) { ?>
 		<h5 class="top-tag"><?php echo $top_term; ?></h5>
 	<?php }
 }
