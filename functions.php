@@ -104,7 +104,9 @@ if ( ! isset( $largo ) )
  */
 if ( ! function_exists( 'optionsframework_init' ) ) {
 	define( 'OPTIONS_FRAMEWORK_DIRECTORY', get_template_directory_uri() . '/lib/options-framework/' );
-	require_once dirname( __FILE__ ) . '/lib/options-framework/options-framework.php';
+	if ( 0 == validate_file( get_template_directory() . '/lib/options-framework/options-framework.php' ) ) {
+		require_once get_template_directory() . '/lib/options-framework/options-framework.php';
+	}
 }
 
 /**
@@ -186,21 +188,23 @@ class Largo {
 			$includes[] = '/inc/custom-less-variables.php';
 		}
 
-		foreach ( $includes as $include ) {
-			require_once( get_template_directory() . $include );
-		}
-
 		// If the plugin is already active, don't cause fatals
 		if ( ! class_exists( 'Navis_Media_Credit' ) ) {
-			require_once dirname( __FILE__ ) . '/lib/navis-media-credit/navis-media-credit.php';
+			$includes[] = '/lib/navis-media-credit/navis-media-credit.php';
 		}
 
 		if ( ! class_exists( 'Navis_Slideshows' ) ) {
-			require_once dirname( __FILE__ ) . '/lib/navis-slideshows/navis-slideshows.php';
+			$includes[] = '/lib/navis-slideshows/navis-slideshows.php';
 		}
 
 		if ( ! function_exists( 'clean_contact_func' ) ) {
-			require_once dirname( __FILE__ ) . '/lib/clean-contact/clean_contact.php';
+			$includes[] = '/lib/clean-contact/clean_contact.php';
+		}
+
+		foreach ( $includes as $include ) {
+			if ( 0 === validate_file( get_template_directory() . $include ) ) {
+				require_once( get_template_directory() . $include );
+			}
 		}
 
 	}
@@ -388,14 +392,17 @@ $includes = array();
 /*
  * This functionality is probably not for everyone so we'll make it easy to turn it on or off
  */
-if ( of_get_option( 'custom_landing_enabled' ) && of_get_option( 'series_enabled' ) )
+if ( of_get_option( 'custom_landing_enabled' ) && of_get_option( 'series_enabled' ) ) {
 	$includes[] = '/inc/wp-taxonomy-landing/taxonomy-landing.php'; // adds taxonomy landing plugin
+}
 
 /*
  * Perform load
  */
 foreach ( $includes as $include ) {
-	require_once( get_template_directory() . $include );
+	if ( 0 === validate_file( get_template_directory() . $include ) ) {
+		require_once( get_template_directory() . $include );
+	}
 }
 
 if ( ! function_exists( 'largo_setup' ) ) {
