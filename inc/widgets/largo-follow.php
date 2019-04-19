@@ -23,7 +23,7 @@ class largo_follow_widget extends WP_Widget {
 
 		echo $args['before_widget'];
 
-		if ( is_single() && isset($id) && $id == 'article-bottom' ) {
+		if ( is_single() && isset($args['id']) && $args['id'] == 'article-bottom' ) {
 			// display the post social bar
 			largo_post_social_links();
 		} else {
@@ -34,7 +34,6 @@ class largo_follow_widget extends WP_Widget {
 			$networks = array(
 				'facebook' => 'Like Us on Facebook',
 				'twitter' => 'Follow Us on Twitter',
-				'gplus' => 'Follow Us on Google+',
 				'youtube' => 'Follow Us on YouTube',
 				'instagram' => 'Follow Us on Instagram',
 				'linkedin' => 'Find Us on LinkedIn',
