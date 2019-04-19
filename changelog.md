@@ -37,6 +37,7 @@ This release contains bug fixes for Largo 0.6.
 - If Co-Authors Plus is active, and if a post has an `author` term, but the term has no corresponding `guest-author` post, when running `largo_byline()`, the byline will now contain an HTML comment informing why the byline is empty. If the `WP_DEBUG` or `LARGO_DEBUG` constants are true, Largo will add a message to the server's error log of the form "post 123 should have at least one co-author, but has none!" [Pull request #1607](https://github.com/INN/largo/pull/1607) for [Automattic/Co-Authors-Plus#637](https://github.com/Automattic/Co-Authors-Plus/issues/637) and as part of the general cleanup ticket [#1492](https://github.com/INN/largo/issues/1492).
 - Fix for posts with "Featured in category" selected not displaying on category RSS feeds. [Pull request #1668](https://github.com/INN/largo/pull/1668) for [issue #1598](https://github.com/INN/largo/issues/1598).
 - Fixes issue where prominence terms were not saving with the Block Editor, because the "Post Prominence" metabox was output twice. [Pull request #1655](https://github.com/INN/largo/pull/1655) for [issue #1654](https://github.com/INN/largo/issues/1654).
+- Uses `validate_file()` when using `require_once`. [Pull request #1589](https://github.com/INN/largo/pull/1589) for [issue #1494](https://github.com/INN/largo/issues/1494).
 - Further cleans up undefined variables.
 
 ### Upgrade notices
