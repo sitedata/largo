@@ -14,6 +14,7 @@ This release contains bug fixes for Largo 0.6.
 - Updates INN's logos in the `img/` folder. If your child theme redefines the function `inn_logo()`, please update that function to reference the new SVG image locations in `img/`. [Pull request #1633](https://github.com/INN/largo/pull/1633) for [issue #1621](https://github.com/INN/largo/issues/1631)
 - Adds the term's taxonomy slug and term slug in the format `taxonomy-term` as a class on the term in the output of `largo_top_term()`, `largo_category_and_tags()`, and `largo_maybe_top_term()`. [Pull request](https://github.com/INN/largo/pull/1648) for [issue #1646](https://github.com/INN/largo/issues/1646).
 - The arguments set on `largo_byline()` are now passed to the `largo_byline` filter as an array of argument name => argument value. [Pull request #1657](https://github.com/INN/largo/pull/1657) for [issue #1646](https://github.com/INN/largo/issues/1656).
+- Makes the function `largo_get_term_meta_post()` pluggable. [Pull request #1666](https://github.com/INN/largo/pull/1666) by GitHub user [@megabulk](https://github.com/megabulk).
 
 ### Fixes
 
