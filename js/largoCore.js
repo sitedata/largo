@@ -89,18 +89,6 @@ jQuery(document).ready(function($) {
         });
       },
 
-      // Handle the Google+ service
-      do_googleplus: function( data ) {
-        var url = 'https://plus.google.com/share?' + $.param({
-          url: data.url
-        });
-
-        this.popup({
-          url: url,
-          name: 'googleplus_share'
-        });
-      },
-
       // Handle the LinkedIn service
       do_linkedin: function( data ) {
         var url = 'http://www.linkedin.com/shareArticle?' + $.param({

@@ -26,15 +26,18 @@ Some commands require you to have external applications installed. Instructions 
     ``shell:sphinx``
         Converts all available reStructuredText files into HTML documentation, which is saved locally in ``docs/_build/html/``. If you want to preview these docs without pushing them to `largo.readthedocs.io <https://largo.readthedocs.io>`_, run ``python -m SimpleHTTPServer`` as described in `the documentation contribution instructions <setup-documentation.html#setting-up>`_.
 
-    ``shell:msmerge``
+    ``shell:msgmerge``
         Runs `msgmerge <https://www.gnu.org/software/gettext/manual/html_node/msgmerge-Invocation.html>`_ to merge translation files.
+
+    ``shell:pot``
+        Runs `wp i18n make-pot <https://developer.wordpress.org/cli/commands/i18n/make-pot/>`_ to create a POT file for the project.
 
 ``watch``
     Runs ``less`` if a ``.less`` file in ``less/`` or ``homepages/assets/less/`` is modified.
     Runs ``docs`` if a reStructuredText ``.rst`` file changes in ``docs/``.
 
 ``pot``
-    Scans the Largo code for the WordPress localization functions and generates ``.po`` files for working with localization software.
+    Runs ``shell:pot``, rebuilding translation files.
 
     Running this command requires your computer to have ``xgettext`` installed. Installation instructions vary based on operating system; your best bet is Google. ``xgettext`` is usually installed in the same package as ``gettext``.
 

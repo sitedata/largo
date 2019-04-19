@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Output a donate button from theme options
  * used by default in the global nav area
@@ -64,7 +63,7 @@ add_filter( 'wp_nav_menu_footer-navigation_items', 'largo_add_footer_menu_label'
  */
 class Bootstrap_Walker_Nav_Menu extends Walker_Nav_Menu {
 
-	function start_lvl( &$output, $depth = 0, $args = array() ) {
+	public function start_lvl( &$output, $depth = 0, $args = array() ) {
 
 		$indent = str_repeat( "\t", $depth );
 		if ($depth == 1) {
@@ -76,15 +75,14 @@ class Bootstrap_Walker_Nav_Menu extends Walker_Nav_Menu {
 		}
 	}
 
-	function start_el( &$output, $item, $depth = 0, $args = array(), $id = 0 ) {
-
+	public function start_el( &$output, $item, $depth = 0, $args = array(), $id = 0 ) {
 		$indent = ( $depth ) ? str_repeat( "\t", $depth ) : '';
 
 		$li_attributes = '';
 		$class_names = $value = '';
 
 		$classes = empty( $item->classes ) ? array() : (array) $item->classes;
-		$classes[] = ($args->has_children) ? 'dropdown' : '';
+		$classes[] = ( isset( $args->has_children ) && $args->has_children ) ? 'dropdown' : '';
 		$classes[] = ($item->current || $item->current_item_ancestor) ? 'active' : '';
 		$classes[] = 'menu-item-' . $item->ID;
 
@@ -100,29 +98,30 @@ class Bootstrap_Walker_Nav_Menu extends Walker_Nav_Menu {
 		$attributes .= ! empty( $item->target )     ? ' target="' . esc_attr( $item->target     ) .'"' : '';
 		$attributes .= ! empty( $item->xfn )        ? ' rel="'    . esc_attr( $item->xfn        ) .'"' : '';
 		$attributes .= ! empty( $item->url )        ? ' href="'   . esc_attr( $item->url        ) .'"' : '';
-		$attributes .= (($args->has_children) && ($depth == 0))	    ? ' class="dropdown-toggle"' : '';
+		$attributes .= (( $args->has_children ) && ($depth == 0)) ? ' class="dropdown-toggle"' : '';
 
 		$item_output = $args->before;
 		$item_output .= '<a'. $attributes .'>';
 		$item_output .= $args->link_before . apply_filters( 'the_title', $item->title, $item->ID ) . $args->link_after;
-		$item_output .= (($args->has_children) && ($depth == 0)) ? ' <b class="caret"></b></a>' : '';
-		$item_output .= (($args->has_children) && ($depth != 0)) ? ' <i class="icon-arrow-right"></i></a>' : '</a>';
+		$item_output .= ( ( $args->has_children ) && ($depth == 0)) ? ' <b class="caret"></b></a>' : '';
+		$item_output .= ( ( $args->has_children ) && ($depth != 0)) ? ' <i class="icon-arrow-right"></i></a>' : '</a>';
 		$item_output .= $args->after;
 
 		$output .= apply_filters( 'walker_nav_menu_start_el', $item_output, $item, $depth, $args );
 	}
 
-	function display_element( $element, &$children_elements, $max_depth, $depth=0, $args, &$output ) {
+	public function display_element( $element, &$children_elements, $max_depth, $depth=0, $args, &$output ) {
 		if ( !$element )
 			return;
 
 		$id_field = $this->db_fields['id'];
 
 		//display this element
-		if ( is_array( $args[0] ) )
+		if ( is_array( $args[0] ) ) {
 			$args[0]['has_children'] = ! empty( $children_elements[$element->$id_field] );
-		else if ( is_object( $args[0] ) )
+		} else if ( is_object( $args[0] ) ) {
 			$args[0]->has_children = ! empty( $children_elements[$element->$id_field] );
+		}
 		$cb_args = array_merge( array(&$output, $element, $depth), $args);
 		call_user_func_array(array(&$this, 'start_el'), $cb_args);
 

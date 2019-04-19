@@ -25,9 +25,6 @@ function largo_contactmethods( $contactmethods ) {
 	    	$contactmethods[$service] = $format;
 	}
 
-	// Add a format hint for G+
-	$contactmethods['googleplus'] = 'Google+<br><em>https://plus.google.com/userID/</em>';
-
 	return $contactmethods;
 }
 add_filter( 'user_contactmethods', 'largo_contactmethods' );
@@ -63,11 +60,6 @@ function largo_filter_guest_author_fields( $fields_to_return, $groups ) {
 		$fields_to_return[] = array(
 			'key'      => 'linkedin',
 			'label'    => 'LinkedIn<br><em>http://www.linkedin.com/in/username</em>',
-			'group'    => 'contact-info',
-		);
-		$fields_to_return[] = array(
-			'key'      => 'googleplus',
-			'label'    => 'Google+<br><em>https://plus.google.com/userID/</em>',
 			'group'    => 'contact-info',
 		);
 		$fields_to_return[] = array(
