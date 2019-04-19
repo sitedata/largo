@@ -34,7 +34,6 @@ class HeaderFooterTestFunctions extends WP_UnitTestCase {
 			'youtube_link',
 			'flickr_link',
 			'tumblr_link',
-			'gplus_link',
 			'linkedin_link',
 			'github_link'
 		);

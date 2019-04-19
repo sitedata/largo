@@ -180,12 +180,6 @@ function optionsframework_options() {
 		'type' 	=> 'text');
 
 	$options[] = array(
-		'desc' 	=> __('<strong>Link to Google+ Page</strong> (https://plus.google.com/userID/)', 'largo'),
-		'id' 	=> 'gplus_link',
-		'std' 	=> '',
-		'type' 	=> 'text');
-
-	$options[] = array(
 		'desc' 	=> __('<strong>Link to YouTube Channel</strong> (http://www.youtube.com/user/username)', 'largo'),
 		'id' 	=> 'youtube_link',
 		'std' 	=> '',
