@@ -84,6 +84,7 @@ Special thanks to everyone who has contributed to the project, including the fol
 - [rclations](https://github.com/rclations)
 - [rnagle](https://github.com/rnagle)
 - [seamusleahy](http://github.com/seamusleahy)
+- [seanchayes](https://github.com/seanchayes)
 - [tothebeat](http://github.com/tothebeat)
 - [tylermachado](https://github.com/tylermachado)
 - [willhaynes](http://github.com/willhaynes)
