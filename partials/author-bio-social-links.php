@@ -39,12 +39,6 @@ if (isset($user_meta['show_email'][0])) {
 		</li>
 	<?php } ?>
 
-	<?php if ( $googleplus = $author_obj->googleplus ) { ?>
-		<li class="gplus">
-			<a href="<?php echo esc_url( $googleplus ); ?>" title="<?php echo esc_attr( $author_obj->display_name ); ?> on Google+" rel="me"><i class="icon-gplus"></i></a>
-		</li>
-	<?php } ?>
-
 	<?php if ( $linkedin = $author_obj->linkedin ) { ?>
 		<li class="linkedin">
 			<a href="<?php echo esc_url( $linkedin ); ?>" title="<?php echo esc_attr( $author_obj->display_name ); ?> on LinkedIn"><i class="icon-linkedin"></i></a>

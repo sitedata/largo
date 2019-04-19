@@ -34,7 +34,6 @@ class largo_follow_widget extends WP_Widget {
 			$networks = array(
 				'facebook' => 'Like Us on Facebook',
 				'twitter' => 'Follow Us on Twitter',
-				'gplus' => 'Follow Us on Google+',
 				'youtube' => 'Follow Us on YouTube',
 				'instagram' => 'Follow Us on Instagram',
 				'linkedin' => 'Find Us on LinkedIn',
