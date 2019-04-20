@@ -9,6 +9,8 @@ though this project doesn't succeed in adhering to [Semantic Versioning](https:/
 
 This release contains bug fixes for Largo 0.6.
 
+Particular thanks go to outside contributors [@seanchayes](https://github.com/seanchayes) and [@megabulk](https://github.com/megabulk).
+
 ### Feature updates
 
 - Updates INN's logos in the `img/` folder. If your child theme redefines the function `inn_logo()`, please update that function to reference the new SVG image locations in `img/`. [Pull request #1633](https://github.com/INN/largo/pull/1633) for [issue #1621](https://github.com/INN/largo/issues/1631)
@@ -20,6 +22,7 @@ This release contains bug fixes for Largo 0.6.
 
 ### Fixes
 
+- Image and embed blocks aligned left/right now are 100% of the width of the column and lose alignment on viewports that are too small to display them reasonably. [Pull request #1630](https://github.com/INN/largo/pull/1630) by [@seanchayes](https://github.com/seanchayes) for [issue #1611](https://github.com/INN/largo/issues/1611).
 - Increases contrast of the floating social button icons against the background, to improve accessibility. [Pull request #1635](https://github.com/INN/largo/pull/1635/).
 - Fixes issue where floating social buttons were not clickable, because of z-index ordering. [Pull request #1635](https://github.com/INN/largo/pull/1635/) for [issue #1576](https://github.com/INN/largo/issues/1576).
 - Fixes links in social media buttons not respecting the blog's character set. [Pull request #1635](https://github.com/INN/largo/pull/1635/) for [issue #1283](https://github.com/INN/largo/issues/1283).
