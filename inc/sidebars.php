@@ -119,7 +119,7 @@ function largo_register_sidebars() {
 			'name' 		=> $sidebar['name'],
 			'description' 	=> $sidebar['desc'],
 			'id' 		=> $sidebar['id'],
-			'before_widget' => '<aside id="%1$s" class="%2$s clearfix">',
+			'before_widget' => '<!-- Sidebar: ' . $sidebar['id'] . ' --><aside id="%1$s" class="%2$s clearfix">',
 			'after_widget' 	=> "</aside>",
 			'before_title' 	=> '<h3 class="widgettitle">',
 			'after_title' 	=> '</h3>',

@@ -99,7 +99,6 @@ if ( ! function_exists( 'largo_social_links' ) ) {
 		$networks = array(
 			'facebook' 	=> __( 'Link to Facebook Profile', 'largo' ),
 			'twitter' 	=> __( 'Link to Twitter Page', 'largo' ),
-			'gplus' 	=> __( 'Link to Google Plus Page', 'largo' ),
 			'youtube' 	=> __( 'Link to YouTube Page', 'largo' ),
 			'instagram' => __( 'Link to Instagram Page', 'largo' ),
 			'tumblr' 	=> __( 'Link to Tumblr', 'largo' ),
