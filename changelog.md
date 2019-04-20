@@ -17,6 +17,7 @@ This release contains bug fixes for Largo 0.6.
 - Removed all Google+ profile fields in the admin interface and buttons on the front-end due to [Google+ being shut down](https://support.google.com/plus/answer/9217723#whatshappening) on April 2, 2019. [Pull request #1667](https://github.com/INN/largo/pull/1667) for [issue #1546](https://github.com/INN/largo/issues/1546).
 - Makes the function `largo_get_term_meta_post()` pluggable. [Pull request #1666](https://github.com/INN/largo/pull/1666) by GitHub user [@megabulk](https://github.com/megabulk).
 - Widget area name is now output as an HTML comment on many sidebars, to ease debugging widget presentations. [Pull request #1632](https://github.com/INN/largo/pull/1632) by [@seanchayes](https://github.com/seanchayes) for [issue #1492](https://github.com/INN/largo/issues/1482).
+- Prevents search engine indexing on 404 and search results pages. This change is to keep up with SEO best practices, to preserve your crawl budget with Google, and to prevent a SEO hijacking attack whereby spammers search for their URL on your site, then get the resulting search query result page listed in search engines using your site's reputation. [Pull request #1674](https://github.com/INN/largo/pull/1673) for [issue #1615](https://github.com/INN/largo/issues/1615).
 
 ### Fixes
 
