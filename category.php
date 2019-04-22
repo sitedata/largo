@@ -44,31 +44,31 @@ $queried_object = get_queried_object();
 				); ?>
 			</div>
 
-			<?php 
+			<?php
 			
-			/**
+			/*
 			 * NOTE: If you are trying to accomplish something other than displaying no featured posts 
 			 * or displaying 5 featured posts, you will need to modify the `largo_category_archive_posts` function
 			 * located at https://github.com/INN/largo/blob/master/inc/featured-content.php#L167, since it modifies the 
 			 * category posts query in order to obtain the category featured posts. If you modify this section, but not 
 			 * `largo_category_archive_posts`, some of your posts will go missing on the category page.
-			 * 
+			 *
 			 * There are two primary ways to replace the `largo_category_archive_posts` function:
-			 * 
+			 *
 			 * 1. Modify the `largo_category_archive_posts` function to not perform the featured post removal from certain queries
-			 *  	- This will require using `remove_action( 'pre_get_posts', 'largo_category_archive_posts', 15 )` to remove
+			 *      - This will require using `remove_action( 'pre_get_posts', 'largo_category_archive_posts', 15 )` to remove
 			 *        the current function and using `add_action` to add in your replacement function.
 			 * 
 			 * 2. Modify the `largo_category_archive_posts` function to use a modified `largo_get_featured_posts_in_category`
 			 *    function that will return a different selection of posts for the specified category.
-			 * 		- This will also require using `remove_action( 'pre_get_posts', 'largo_category_archive_posts', 15 )` to remove
+			 *      - This will also require using `remove_action( 'pre_get_posts', 'largo_category_archive_posts', 15 )` to remove
 			 *        the current function and using `add_action` to add in your replacement function.
-			 * 		- This also requires creating a modified version of the `largo_get_featured_posts_in_category` function
+			 *      - This also requires creating a modified version of the `largo_get_featured_posts_in_category` function
 			 *        and replacing it in templates where it is used.
-			 * 		- In order to change the number of posts returned by your modified `largo_category_archive_posts` function,
-			 * 		  add a second arguement to `$featured_posts = largo_get_featured_posts_in_category( $query->get( 'category_name' ) );`
+			 *      - In order to change the number of posts returned by your modified `largo_category_archive_posts` function,
+			 *        ->get( 'category_name' ) );`
 			 *        to reflect your preferred number of featured posts.
-			*/
+			 */
 
 			$secondary_featured = array_slice( $featured_posts, 1 );
 			if ( count( $secondary_featured ) > 0 ) { ?>
