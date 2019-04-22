@@ -10,7 +10,7 @@ A responsive WordPress framework designed for news publishers and developed by t
 
 The project extends work done by [NPR's Project Argo](http://argoproject.org/).
 
-**Current version:** v0.6.1
+**Current version:** v0.6.2
 
 **Changelog** is available in this repository: [changelog.md](./changelog.md)
 
