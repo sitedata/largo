@@ -135,6 +135,31 @@
       margin-bottom: 0.5em;
     }
   }
+  .alignleft,
+  .alignright,
+  .alignnone,
+  .aligncenter,
+  .wp-block-image .alignleft,
+  .wp-block-image .alignright,
+  .wp-block-image .alignnone,
+  .wp-block-image .aligncenter,
+  .wp-block-embed.alignleft,
+  .wp-block-embed.alignright,
+  .wp-block-embed.alignnone,
+  .wp-block-embed.aligncenter,
+  figure .alignleft,
+  figure .alignright,
+  figure .alignnone,
+  figure .aligncenter,
+  {
+    width: 100%;
+    max-width: 100% !important; // override max-widths set in inline style attribute by 4.9 shortcode
+    display: block;
+    img {
+      width: 100%;
+      max-width: 100%;
+    }
+  }
 }
 
 // UP TO LANDSCAPE PHONE
