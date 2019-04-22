@@ -5,9 +5,12 @@
 
 /**
  * Generates a byline for a normal WordPress user
+ *
  * @param Array $args an array with the following keys:
- *     - int post_id the ID of the post that we are creating a byline for
- *     - bool exclude_date Whether or not to display the date
+ *     $args = [
+ *         'post_id' => (int) the ID of the post that we are creating a byline for
+ *         'exclude_date ' => (bool) Whether or not to display the date
+ *     ]
  */
 class Largo_Byline {
 

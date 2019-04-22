@@ -1,5 +1,5 @@
 About the ``inc/`` directory
----------------------------
+----------------------------
 
 When you download the theme you'll notice that the /inc folder contains most of the add-on functionality for the parent theme and all of these files are then loaded up via functions.php
 
