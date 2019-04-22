@@ -145,10 +145,11 @@
   figure .alignright,
   {
     width: 100%;
-    max-width: 100%;
+    max-width: 100% !important; // override max-widths set in inline style attribute by 4.9 shortcode
     display: block;
     img {
       width: 100%;
+      max-width: 100%;
     }
   }
 }
