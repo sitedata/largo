@@ -46,6 +46,7 @@ Particular thanks go to outside contributors [@seanchayes](https://github.com/se
 - Uses `validate_file()` when using `require_once`. [Pull request #1589](https://github.com/INN/largo/pull/1589) for [issue #1494](https://github.com/INN/largo/issues/1494).
 - Added note to `category.php` template explaining how to modify displaying the featured posts on category pages. [Pull request #1676](https://github.com/INN/largo/pull/1676) for [issue #1595](https://github.com/INN/largo/issues/1595).
 - Added `display: block;` style attribute to `.navis-slideshow.navis-full` to prevent full size images from not displaying properly due to the `display: table;` attribute on all `.wp-block-image` alignment classes. [Pull request #1675](https://github.com/INN/largo/pull/1675) for [issue #1664](https://github.com/INN/largo/issues/1664).
+- Overrides some default gutenberg block styles to fit Largo styling better since they were not breaking properly between 781px and 600px. [Pull request #1679](https://github.com/INN/largo/pull/1679) for [issue #1658](https://github.com/INN/largo/issues/1658).
 - Upgrades ReadTheDocs build process. [Pull request #1680](https://github.com/INN/largo/pull/1680) for issues [#1616](https://github.com/INN/largo/issues/1616) and [#1456](https://github.com/INN/largo/issues/1456).
 - Further cleans up undefined variables.
 
