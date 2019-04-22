@@ -16,6 +16,7 @@ lang/*.merged
 ## Misc
 .idea/
 node_modules
+vendor/
 
 #######################
 #  sphinx .gitignore  #
