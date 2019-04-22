@@ -45,6 +45,7 @@ Particular thanks go to outside contributors [@seanchayes](https://github.com/se
 - Fixes issue where the header ad widget area and before-footer widget area could extend beyond hte viewport, causing horizontal scrolling on narrower screens. [Pull request #1673](https://github.com/INN/largo/pull/1673) for [issue #1670](https://github.com/INN/largo/issues/1670).
 - Uses `validate_file()` when using `require_once`. [Pull request #1589](https://github.com/INN/largo/pull/1589) for [issue #1494](https://github.com/INN/largo/issues/1494).
 - Further cleans up undefined variables.
+- Added `display: block;` style attribute to `.navis-slideshow.navis-full` to prevent full size images from not displaying properly due to the `display: table;` attribute on all `.wp-block-image` alignment classes. [Pull request #1675](https://github.com/INN/largo/pull/1675) for [issue #1664](https://github.com/INN/largo/issues/1664).
 
 ### Upgrade notices
 
