@@ -41,8 +41,9 @@ This release contains bug fixes for Largo 0.6.
 - Fixes issue where prominence terms were not saving with the Block Editor, because the "Post Prominence" metabox was output twice. [Pull request #1655](https://github.com/INN/largo/pull/1655) for [issue #1654](https://github.com/INN/largo/issues/1654).
 - Fixes issue where the header ad widget area and before-footer widget area could extend beyond hte viewport, causing horizontal scrolling on narrower screens. [Pull request #1673](https://github.com/INN/largo/pull/1673) for [issue #1670](https://github.com/INN/largo/issues/1670).
 - Uses `validate_file()` when using `require_once`. [Pull request #1589](https://github.com/INN/largo/pull/1589) for [issue #1494](https://github.com/INN/largo/issues/1494).
-- Further cleans up undefined variables.
 - Added `display: block;` style attribute to `.navis-slideshow.navis-full` to prevent full size images from not displaying properly due to the `display: table;` attribute on all `.wp-block-image` alignment classes. [Pull request #1675](https://github.com/INN/largo/pull/1675) for [issue #1664](https://github.com/INN/largo/issues/1664).
+- Upgrades ReadTheDocs build process. [Pull request #1680](https://github.com/INN/largo/pull/1680) for issues [#1616](https://github.com/INN/largo/issues/1616) and [#1456](https://github.com/INN/largo/issues/1456).
+- Further cleans up undefined variables.
 
 ### Upgrade notices
 
