@@ -1,15 +1,6 @@
 inc/term-meta.php
 =================
 
-.. php:function:: largo_get_term_meta_post()
-
-   Get the proxy post for a term
-
-   :param string $taxnomy: The taxonomy of the term for which you want to retrieve a term meta post
-   :param int $term_id: The ID of the term
-
-   :returns: int $post_id The ID of the term meta post
-
 .. php:function:: largo_add_term_featured_media_button()
 
    Add the "Set Featured Media" button in the term edit page

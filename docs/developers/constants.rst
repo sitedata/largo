@@ -79,7 +79,7 @@ The other constants
 
 .. php:const:: SHOW_MAIN_NAV
 
-	The main navigation appears on the homepage and all internal pages, but not on mobile devices, governed by ``SHOW_MAIN_NAV``. ``SHOW_MAIN_NAV`` defaults to true, but child themes can set it to false with ``define( 'SHOW_GLOBAL_NAV', FALSE );`` in their theme ``functions.
+	The main navigation appears on the homepage and all internal pages, but not on mobile devices, governed by ``SHOW_MAIN_NAV``. ``SHOW_MAIN_NAV`` defaults to true, but child themes can set it to false with ``define( 'SHOW_GLOBAL_NAV', FALSE );`` in their theme ``functions.php``
 
 .. php:const:: SHOW_SECONDARY_NAV
 
