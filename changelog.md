@@ -9,6 +9,8 @@ though this project doesn't succeed in adhering to [Semantic Versioning](https:/
 
 This release contains bug fixes for Largo 0.6.
 
+Particular thanks go to outside contributors [@seanchayes](https://github.com/seanchayes) and [@megabulk](https://github.com/megabulk).
+
 ### Feature updates
 
 - Updates INN's logos in the `img/` folder. If your child theme redefines the function `inn_logo()`, please update that function to reference the new SVG image locations in `img/`. [Pull request #1633](https://github.com/INN/largo/pull/1633) for [issue #1621](https://github.com/INN/largo/issues/1631)
@@ -21,6 +23,7 @@ This release contains bug fixes for Largo 0.6.
 
 ### Fixes
 
+- Image and embed blocks aligned left/right now are 100% of the width of the column and lose alignment on viewports that are too small to display them reasonably. [Pull request #1630](https://github.com/INN/largo/pull/1630) by [@seanchayes](https://github.com/seanchayes) for [issue #1611](https://github.com/INN/largo/issues/1611).
 - Defines a new image size `96x96` for use on avatars and small square listing images. This is a bug fix; Largo has referred to such an image size for a long time but never made sure that such images existed. Sites worried about this may want to regenerate thumbnail images. [Pull request #1672](https://github.com/INN/largo/pull/1672) for [issue #1619](https://github.com/INN/largo/issues/1619).
 - Increases contrast of the floating social button icons against the background, to improve accessibility. [Pull request #1635](https://github.com/INN/largo/pull/1635/).
 - Fixes issue where floating social buttons were not clickable, because of z-index ordering. [Pull request #1635](https://github.com/INN/largo/pull/1635/) for [issue #1576](https://github.com/INN/largo/issues/1576).
@@ -41,6 +44,7 @@ This release contains bug fixes for Largo 0.6.
 - Fixes issue where prominence terms were not saving with the Block Editor, because the "Post Prominence" metabox was output twice. [Pull request #1655](https://github.com/INN/largo/pull/1655) for [issue #1654](https://github.com/INN/largo/issues/1654).
 - Fixes issue where the header ad widget area and before-footer widget area could extend beyond hte viewport, causing horizontal scrolling on narrower screens. [Pull request #1673](https://github.com/INN/largo/pull/1673) for [issue #1670](https://github.com/INN/largo/issues/1670).
 - Uses `validate_file()` when using `require_once`. [Pull request #1589](https://github.com/INN/largo/pull/1589) for [issue #1494](https://github.com/INN/largo/issues/1494).
+- Added note to `category.php` template explaining how to modify displaying the featured posts on category pages. [Pull request #1676](https://github.com/INN/largo/pull/1676) for [issue #1595](https://github.com/INN/largo/issues/1595).
 - Added `display: block;` style attribute to `.navis-slideshow.navis-full` to prevent full size images from not displaying properly due to the `display: table;` attribute on all `.wp-block-image` alignment classes. [Pull request #1675](https://github.com/INN/largo/pull/1675) for [issue #1664](https://github.com/INN/largo/issues/1664).
 - Upgrades ReadTheDocs build process. [Pull request #1680](https://github.com/INN/largo/pull/1680) for issues [#1616](https://github.com/INN/largo/issues/1616) and [#1456](https://github.com/INN/largo/issues/1456).
 - Further cleans up undefined variables.
