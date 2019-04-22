@@ -62,18 +62,9 @@ Setting up Largo and WordPress
 
 6. Our API docs/function reference uses doxphp to generate documentation based on the comments embedded in Largo's source code. You'll need to install doxphp to generate API docs.
 
-	- Installation process with PEAR: ::
-
-		pear channel-discover pear.avalanche123.com
-		pear install avalanche123/doxphp-beta
-
-
-	- Installation process with git. This requires you to know where your ``bin`` directory is ::
-
-		git clone https://github.com/avalanche123/doxphp.git
-		cd doxphp/bin
-		mv doxph* /path/to/bin/
-
+	- Installation process with git: ::
+        1. ``git clone https://github.com/avalanche123/doxphp.git`` to someplace in your filesystem
+        2. add ``doxphp/bin/`` to your ``$PATH`` by adding ``export PATH=$PATH:/path/to/doxphp/bin`` to your ``.bashrc`` or similar file
 
 	The last step may require you to use sudo.
 
