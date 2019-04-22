@@ -161,9 +161,18 @@ if ( ! function_exists( 'largo_byline' ) ) {
 		 *
 		 * @since 0.5.4
 		 * @param string $partial The HTML of the output of largo_byline(), before the edit link is added.
+		 * @param array $array Associative array of argument name => argument value, with the arguments passed to largo_byline(). Since https://github.com/INN/largo/issues/1656
 		 * @link https://github.com/INN/Largo/issues/1070
 		 */
-		$byline = apply_filters( 'largo_byline', $byline );
+		$byline = apply_filters(
+			'largo_byline',
+			$byline,
+			array(
+				'echo' => $echo,
+				'exclude_date' => $exclude_date,
+				'post' => $post
+			)
+		);
 
 		if ( $echo ) {
 			echo $byline;
@@ -361,7 +370,7 @@ function largo_maybe_top_term( $args = array() ) {
 	$args = array_merge( $args, array( 'echo' => False ) );
 	$top_term = largo_top_term( $args );
 
-	if ( $top_term ) { ?>
+	if ( ! empty( $top_term ) ) { ?>
 		<h5 class="top-tag"><?php echo $top_term; ?></h5>
 	<?php }
 }

@@ -40,13 +40,15 @@ function largo_has_gravatar( $email ) {
  */
 function largo_has_avatar( $email ) {
 	$user = get_user_by( 'email', $email );
-	$result = largo_get_user_avatar_id( $user->ID );
-	if ( ! empty ( $result ) ) {
-		return true;
-	} else {
-		if ( largo_has_gravatar( $email ) ) {
+	if ( ! empty( $user ) ) {
+		$result = largo_get_user_avatar_id( $user->ID );
+		if ( ! empty ( $result ) ) {
 			return true;
-		}	
+		} else {
+			if ( largo_has_gravatar( $email ) ) {
+				return true;
+			}
+		}
 	}
 	return false;
 }

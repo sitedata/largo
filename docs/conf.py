@@ -44,14 +44,14 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'Largo Project'
-copyright = u'2014, Institute for Nonprofit News'
+copyright = u'2018, Institute for Nonprofit News'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
 # built documents.
 #
 # The short X.Y version.
-version = '0.5.5'
+version = '0.6.1'
 # The full version, including alpha/beta/rc tags.
 release = version
 

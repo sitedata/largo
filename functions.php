@@ -104,7 +104,9 @@ if ( ! isset( $largo ) )
  */
 if ( ! function_exists( 'optionsframework_init' ) ) {
 	define( 'OPTIONS_FRAMEWORK_DIRECTORY', get_template_directory_uri() . '/lib/options-framework/' );
-	require_once dirname( __FILE__ ) . '/lib/options-framework/options-framework.php';
+	if ( 0 == validate_file( get_template_directory() . '/lib/options-framework/options-framework.php' ) ) {
+		require_once get_template_directory() . '/lib/options-framework/options-framework.php';
+	}
 }
 
 /**
@@ -149,7 +151,6 @@ class Largo {
 			'/largo-apis.php',
 			'/inc/ajax-functions.php',
 			'/inc/helpers.php',
-			'/inc/plugin-init.php',
 			'/inc/dashboard.php',
 			'/inc/custom-feeds.php',
 			'/inc/users.php',
@@ -187,21 +188,23 @@ class Largo {
 			$includes[] = '/inc/custom-less-variables.php';
 		}
 
-		foreach ( $includes as $include ) {
-			require_once( get_template_directory() . $include );
-		}
-
 		// If the plugin is already active, don't cause fatals
 		if ( ! class_exists( 'Navis_Media_Credit' ) ) {
-			require_once dirname( __FILE__ ) . '/lib/navis-media-credit/navis-media-credit.php';
+			$includes[] = '/lib/navis-media-credit/navis-media-credit.php';
 		}
 
 		if ( ! class_exists( 'Navis_Slideshows' ) ) {
-			require_once dirname( __FILE__ ) . '/lib/navis-slideshows/navis-slideshows.php';
+			$includes[] = '/lib/navis-slideshows/navis-slideshows.php';
 		}
 
 		if ( ! function_exists( 'clean_contact_func' ) ) {
-			require_once dirname( __FILE__ ) . '/lib/clean-contact/clean_contact.php';
+			$includes[] = '/lib/clean-contact/clean_contact.php';
+		}
+
+		foreach ( $includes as $include ) {
+			if ( 0 === validate_file( get_template_directory() . $include ) ) {
+				require_once( get_template_directory() . $include );
+			}
 		}
 
 	}
@@ -254,12 +257,14 @@ class Largo {
 		add_theme_support( 'post-thumbnails' );
 		set_post_thumbnail_size( 140, 140, true ); // thumbnail
 		add_image_size( '60x60', 60, 60, true ); // small thumbnail
+		add_image_size( '96x96', 96, 96, true ); // avatars
 		add_image_size( 'medium', MEDIUM_WIDTH, MEDIUM_HEIGHT ); // medium width scaling
 		add_image_size( 'large', LARGE_WIDTH, LARGE_HEIGHT ); // large width scaling
 		add_image_size( 'full', FULL_WIDTH, FULL_HEIGHT ); // full width scaling
 		add_image_size( 'third-full', FULL_WIDTH / 3, 500, true ); // large width scaling
 		add_image_size( 'two-third-full', FULL_WIDTH / 3 * 2, 500, true ); // large width scaling
 		add_image_size( 'rect_thumb', 800, 600, true ); // used for cat/tax archive pages
+		add_image_size( 'rect_thumb_half', 400, 300, true ); // smaller version of rect_thumb
 
 		add_filter( 'pre_option_thumbnail_size_w', function(){
 			return 140;
@@ -388,14 +393,17 @@ $includes = array();
 /*
  * This functionality is probably not for everyone so we'll make it easy to turn it on or off
  */
-if ( of_get_option( 'custom_landing_enabled' ) && of_get_option( 'series_enabled' ) )
+if ( of_get_option( 'custom_landing_enabled' ) && of_get_option( 'series_enabled' ) ) {
 	$includes[] = '/inc/wp-taxonomy-landing/taxonomy-landing.php'; // adds taxonomy landing plugin
+}
 
 /*
  * Perform load
  */
 foreach ( $includes as $include ) {
-	require_once( get_template_directory() . $include );
+	if ( 0 === validate_file( get_template_directory() . $include ) ) {
+		require_once( get_template_directory() . $include );
+	}
 }
 
 if ( ! function_exists( 'largo_setup' ) ) {

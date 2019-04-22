@@ -21,12 +21,13 @@ if ( !function_exists( 'largo_load_more_posts_enqueue_script' ) ) {
 	 */
 	function largo_load_more_posts_enqueue_script() {
 		$suffix = (LARGO_DEBUG)? '' : '.min';
-		$version = largo_version();
 
 		wp_enqueue_script(
 			'load-more-posts',
 			get_template_directory_uri() . '/js/load-more-posts'. $suffix . '.js',
-			array('jquery'), $version, false
+			array('jquery'),
+			filemtime( get_template_directory() . '/js/load-more-posts' . $suffix . '.js' ),
+			false
 		);
 	}
 	add_action( 'wp_enqueue_scripts', 'largo_load_more_posts_enqueue_script' );

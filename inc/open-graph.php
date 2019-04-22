@@ -12,7 +12,7 @@ if ( ! function_exists( 'largo_opengraph' ) ) {
 		global $post;
 
 		// set a default thumbnail, if a post has a featured image use that instead
-		if ( is_single() && has_post_thumbnail( $post->ID ) ) {
+		if ( is_singular() && has_post_thumbnail( $post->ID ) ) {
 			$image = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'full' );
 			$thumbnailURL = $image[0];
 		} else if ( of_get_option( 'logo_thumbnail_sq' ) ) {
@@ -31,7 +31,7 @@ if ( ! function_exists( 'largo_opengraph' ) ) {
 		?>
 
 		<?php // output appropriate OG tags by page type
-			if ( is_single() ) {
+			if ( is_singular() ) {
 				if ( have_posts() ) {
 					the_post(); // we need to queue up the post to get the post specific info
 					
@@ -58,7 +58,7 @@ if ( ! function_exists( 'largo_opengraph' ) ) {
 		<?php
 			} else {
 		?>
-				<meta property="og:title" content="<?php bloginfo( 'name' ); wp_title(); ?>" />
+				<meta property="og:title" content="<?php wp_title(); ?>" />
 				<meta property="og:type" content="article" />
 				<meta property="og:url" content="<?php echo esc_url( largo_get_current_url() ); ?>"/>
 			<?php
@@ -88,13 +88,12 @@ if ( ! function_exists( 'largo_opengraph' ) ) {
 			if ( $thumbnailURL )
 				echo '<meta property="og:image" content="' . esc_url( $thumbnailURL ) . '" />';
 
-			// google author/publisher markup
-			// see: https://support.google.com/webmasters/answer/1408986
-			if ( of_get_option( 'gplus_link' ) )
-				echo '<link href="' . esc_url( of_get_option( 'gplus_link' ) ) . '" rel="publisher" />';
 	}
 }
-add_action( 'wp_head', 'largo_opengraph' );
+// don't add this if Yoast is active
+if ( ! class_exists( 'WPSEO_OpenGraph' ) ) {
+	add_action( 'wp_head', 'largo_opengraph' );
+}
 
 /**
  * Filter wp_title() to add our custom metadata

@@ -14,6 +14,7 @@ Function reference by file
 * `inc/conditionals.php <inc/conditionals.html>`_
 * `inc/custom-feeds.php <inc/custom-feeds.html>`_
 * `inc/custom-less-variables.php <inc/custom-less-variables.html>`_
+* `inc/dashboard.php <inc/dashboard.html>`_
 * `inc/deprecated.php <inc/deprecated.html>`_
 * `inc/editor.php <inc/editor.html>`_
 * `inc/enqueue.php <inc/enqueue.html>`_
@@ -24,6 +25,7 @@ Function reference by file
 * `inc/images.php <inc/images.html>`_
 * `inc/metabox-api.php <inc/metabox-api.html>`_
 * `inc/nav-menus.php <inc/nav-menus.html>`_
+* `inc/open-graph.php <inc/open-graph.html>`_
 * `inc/plugin-init.php <inc/plugin-init.html>`_
 * `inc/post-metaboxes.php <inc/post-metaboxes.html>`_
 * `inc/post-social.php <inc/post-social.html>`_
@@ -41,6 +43,7 @@ Function reference by file
 * `inc/widgets.php <inc/widgets.html>`_
 * `inc/avatars/functions.php <inc/avatars/functions.html>`_
 * `inc/customizer/customizer.php <inc/customizer/customizer.html>`_
+* `inc/widgets/largo-about.php <inc/widgets/largo-about.html>`_
 * `inc/widgets/largo-author-bio.php <inc/widgets/largo-author-bio.html>`_
 * `inc/widgets/largo-facebook.php <inc/widgets/largo-facebook.html>`_
 * `inc/widgets/largo-image-widget.php <inc/widgets/largo-image-widget.html>`_

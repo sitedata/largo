@@ -74,7 +74,7 @@ if ( ! function_exists( 'largo_copyright_message' ) ) {
 /**
  * Output the INN logo, used in the footer
  *
- * If you want to use a light background with a dark image, simply replace this function in the child theme with one that references get_template_directory_uri() . "/img/inn_logo_blue_fimal.png"
+ * If you want to use a light background with a dark image, simply replace this function in the child theme with one that references get_template_directory_uri() . "/img/inn_dark.svg"
  *
  * @since 0.5.2
  */
@@ -82,7 +82,7 @@ if ( ! function_exists( 'inn_logo' ) ) {
 	function inn_logo() {
 		?>
 			<a href="//inn.org/" id="inn-logo-container">
-				<img id="inn-logo" src="<?php echo(get_template_directory_uri() . "/img/inn_logo_gray.png"); ?>" alt="<?php printf(__("%s is a member of the Institute for Nonprofit News", "largo"), get_bloginfo('name')); ?>" />
+				<img id="inn-logo" src="<?php echo(get_template_directory_uri() . "/img/inn_light.svg"); ?>" alt="<?php printf(__("%s is a member of the Institute for Nonprofit News", "largo"), get_bloginfo('name')); ?>" />
 			</a>
 		<?php
 	}
@@ -99,7 +99,6 @@ if ( ! function_exists( 'largo_social_links' ) ) {
 		$networks = array(
 			'facebook' 	=> __( 'Link to Facebook Profile', 'largo' ),
 			'twitter' 	=> __( 'Link to Twitter Page', 'largo' ),
-			'gplus' 	=> __( 'Link to Google Plus Page', 'largo' ),
 			'youtube' 	=> __( 'Link to YouTube Page', 'largo' ),
 			'instagram' => __( 'Link to Instagram Page', 'largo' ),
 			'tumblr' 	=> __( 'Link to Tumblr', 'largo' ),
@@ -148,9 +147,16 @@ if ( ! function_exists ( 'largo_seo' ) ) {
 		// if the blog is set to private wordpress already adds noindex,nofollow
 		if ( get_option( 'blog_public') ) {
 			if ( is_date() || ( is_archive() &&  of_get_option( 'noindex_archives' ) ) ) {
-				echo '<meta name="robots" content="noindex,follow" />';
+				wp_no_robots();
 			}
+		} else {
+			wp_no_robots();
 		}
+
+		if ( is_404() || is_search() ) {
+			wp_no_robots();
+		}
+
 		// single posts get a bunch of other google news specific meta tags
 		if ( is_single() ) {
 			if ( have_posts() ) : the_post();
