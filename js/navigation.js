@@ -14,7 +14,7 @@
    * @link https://github.com/INN/largo/pull/1369
    */
   Navigation.prototype.windowwidth = function() {
-    return Math.max(window.outerWidth, $(window).width());
+    return Math.max(window.innerWidth, $(window).width());
   }
 
   /**
@@ -254,41 +254,47 @@
    * @todo: prevent this from triggering on the mobile nav
    */
   Navigation.prototype.touchDropdowns = function() {
-    var self = this;
-    // a selector that applies to both main-nav and sticky nav elements
-    $('.nav li > .dropdown-toggle').each(function() {
-      var $button = $(this);
 
-      // Open the drawer when touched or clicked
-      function touchstart(event) {
-        // prevents this from running when the sandwich menu button is visible:
-        // prevents this from running when we're doing the "phone" menu
-        if ($('.navbar .toggle-nav-bar').css('display') !== 'none') {
-          return false;
-        }
+    // if windowwidth is greater than 768px OR window.oreintation is undefined (we aren't on a mobile device)
+    if(this.windowwidth() > 768 && (typeof window.orientation == "undefined")){
 
-        if ($(this).closest('.dropdown').hasClass('open')) {
-        } else {
-          // If it is a touch event, get rid of the click events.
-          if (event.type == 'touchstart') {
-            $(this).off('click.toggleNav');
+      var self = this;
+      // a selector that applies to both main-nav and sticky nav elements
+      $('.nav li > .dropdown-toggle').each(function() {
+        var $button = $(this);
+
+        // Open the drawer when touched or clicked
+        function touchstart(event) {
+          // prevents this from running when the sandwich menu button is visible:
+          // prevents this from running when we're doing the "phone" menu
+          if ($('.navbar .toggle-nav-bar').css('display') !== 'none') {
+            return false;
           }
-          $(this).parent('.dropdown').addClass('open');
-          $(this).parent('.dropdown').addClass('open');
-          self.openMenu = this;
-          event.preventDefault();
-          event.stopPropagation();
+
+          if ($(this).closest('.dropdown').hasClass('open')) {
+          } else {
+            // If it is a touch event, get rid of the click events.
+            if (event.type == 'touchstart') {
+              $(this).off('click.toggleNav');
+            }
+            $(this).parent('.dropdown').addClass('open');
+            $(this).parent('.dropdown').addClass('open');
+            self.openMenu = this;
+            event.preventDefault();
+            event.stopPropagation();
+          }
         }
-      }
 
-      // if the touch is canceled, close the nav
-      function touchcancel(event) {
-        $(this).parent('.dropdown').removeClass('open');
-      }
+        // if the touch is canceled, close the nav
+        function touchcancel(event) {
+          $(this).parent('.dropdown').removeClass('open');
+        }
 
-      $button.on('touchstart.toggleNav click.toggleNav', touchstart);
-      $button.on('touchcancel.toggleNav', touchcancel);
-    });
+        $button.on('touchstart.toggleNav click.toggleNav', touchstart);
+        $button.on('touchcancel.toggleNav', touchcancel);
+      });
+
+    }
   }
 
   /**
@@ -378,7 +384,6 @@
         shelfWidth = shelf.outerWidth(),
         rightWidth = right.outerWidth(),
         caretWidth = nav.find('.caret').first().outerWidth(),
-        windowWidth = this.windowwidth(),
         isMobile = button.is(':visible');
 
     if (!isMobile) {
