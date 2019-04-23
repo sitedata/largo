@@ -133,6 +133,7 @@
     $(window).resize(this.navOverflow.bind(this));
     $(window).resize(this.enableMobileDropdowns.bind(this));
     $(window).resize(this.toggleTouchClass.bind(this));
+    $(window).resize(this.touchDropdowns.bind(this));
     this.bindStickyNavEvents();
   };
 
@@ -255,46 +256,55 @@
    */
   Navigation.prototype.touchDropdowns = function() {
 
-    // if windowwidth is greater than 768px OR window.oreintation is undefined (we aren't on a mobile device)
-    if(this.windowwidth() > 768 && (typeof window.orientation == "undefined")){
+    /*
+     * Define some event handlers
+     */
 
-      var self = this;
-      // a selector that applies to both main-nav and sticky nav elements
-      $('.nav li > .dropdown-toggle').each(function() {
-        var $button = $(this);
+    // Open the drawer when touched or clicked
+    function touchstart(event) {
+      // prevents this from running when the sandwich menu button is visible:
+      // prevents this from running when we're doing the "phone" menu
+      if ($('.navbar .toggle-nav-bar').css('display') !== 'none') {
+        return false;
+      }
 
-        // Open the drawer when touched or clicked
-        function touchstart(event) {
-          // prevents this from running when the sandwich menu button is visible:
-          // prevents this from running when we're doing the "phone" menu
-          if ($('.navbar .toggle-nav-bar').css('display') !== 'none') {
-            return false;
-          }
-
-          if ($(this).closest('.dropdown').hasClass('open')) {
-          } else {
-            // If it is a touch event, get rid of the click events.
-            if (event.type == 'touchstart') {
-              $(this).off('click.toggleNav');
-            }
-            $(this).parent('.dropdown').addClass('open');
-            $(this).parent('.dropdown').addClass('open');
-            self.openMenu = this;
-            event.preventDefault();
-            event.stopPropagation();
-          }
+      if ($(this).closest('.dropdown').hasClass('open')) {
+      } else {
+        // If it is a touch event, get rid of the click events.
+        if (event.type == 'touchstart') {
+          $(this).off('click.toggleNav');
         }
+        $(this).parent('.dropdown').addClass('open');
+        $(this).parent('.dropdown').addClass('open');
+        self.openMenu = this;
+        event.preventDefault();
+        event.stopPropagation();
+      }
+    }
 
-        // if the touch is canceled, close the nav
-        function touchcancel(event) {
-          $(this).parent('.dropdown').removeClass('open');
-        }
+    // if the touch is canceled, close the nav
+    function touchcancel(event) {
+      $(this).parent('.dropdown').removeClass('open');
+    }
 
+    /*
+     * Attach or detach them as appropriate
+     */
+
+    var self = this;
+
+    // a selector that applies to both main-nav and sticky nav elements
+    $('.nav li > .dropdown-toggle').each(function() {
+      var $button = $(this);
+
+      if(self.windowwidth() > 768 ){
         $button.on('touchstart.toggleNav click.toggleNav', touchstart);
         $button.on('touchcancel.toggleNav', touchcancel);
-      });
+        $button.off('touchstart.toggleNav click.toggleNav');
+        $button.off('touchcancel.toggleNav');
+      }
+    });
 
-    }
   }
 
   /**
