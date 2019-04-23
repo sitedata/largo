@@ -10,6 +10,9 @@
 
 // make blocks full-width below 529px;
 .wp-block-columns {
+  &.no-transform {
+    transform: none;
+  }
   @media (max-width:529px) {
     &.alignwide {
       max-width: 100vw;
