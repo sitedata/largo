@@ -312,6 +312,7 @@ body.normal.single-post .navis-slideshow.navis-full p.wp-media-credit {
 /**** SINGLE LIGHTBOX ***/
 .navis-single.navis-full img {
     max-height: 100vh;
+    width: auto;
     top: 50%;
     position: absolute;
     left: 50%;
