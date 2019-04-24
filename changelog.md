@@ -13,7 +13,7 @@ Particular thanks go to outside contributors [@seanchayes](https://github.com/se
 
 ### Feature updates
 
-- Adds support for responsive embedded content, which is most noticeable with video content set to full width. [Pull request #]() for [issue #1688](https://github.com/INN/largo/issues/1688).
+- Adds support for responsive embedded content, which is most noticeable with video content set to full width. [Pull request #1689](https://github.com/INN/largo/pull/1689) for [issue #1688](https://github.com/INN/largo/issues/1688).
 - Matches the default styles for Gutenberg's Pull Quote block with Largo's styles for `<blockquote>`. Adds styles for `<cite>` elements. [Pull Request #1687](https://github.com/INN/largo/pull/1687) for [issue #1682](https://github.com/INN/largo/issues/1682).
 - Ensures that the CSS classes used by Largo's Classic Editor plugin "Module Wrapper" can be used on pull quotes. [Pull Request #1687](https://github.com/INN/largo/pull/1687) for [issue #1682](https://github.com/INN/largo/issues/1682). If you'd like to make use of these classes by adding them to a Pull Quote block in the "Additional CSS Class" control of the "Advanced" section of the pull quote's block settings, the list of classes is as follows:
 	- `type-pull-quote`: appears larger in the story, with a slightly fancier presentation
