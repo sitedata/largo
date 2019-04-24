@@ -13,8 +13,8 @@ Particular thanks go to outside contributors [@seanchayes](https://github.com/se
 
 ### Feature updates
 
-- Matches the default styles for Gutemberg's Pull Quote block with Largo's styles for `<blockquote>`. Adds styles for `<cite>` elements. [Pull Request #]() for [issue #1682](https://github.com/INN/largo/issues/1682).
-- Ensures that the CSS classes used by Largo's Classic Editor plugin "Module Wrapper" can be used on pull quotes. [Pull Request #]() for [issue #1682](https://github.com/INN/largo/issues/1682). If you'd like to make use of these classes by adding them to a Pull Quote block in the "Additional CSS Class" control of the "Advanced" section of the pull quote's block settings, the list of classesis as follows:
+- Matches the default styles for Gutenberg's Pull Quote block with Largo's styles for `<blockquote>`. Adds styles for `<cite>` elements. [Pull Request #1687](https://github.com/INN/largo/pull/1687) for [issue #1682](https://github.com/INN/largo/issues/1682).
+- Ensures that the CSS classes used by Largo's Classic Editor plugin "Module Wrapper" can be used on pull quotes. [Pull Request #1687](https://github.com/INN/largo/pull/1687) for [issue #1682](https://github.com/INN/largo/issues/1682). If you'd like to make use of these classes by adding them to a Pull Quote block in the "Additional CSS Class" control of the "Advanced" section of the pull quote's block settings, the list of classes is as follows:
 	- `type-pull-quote`: appears larger in the story, with a slightly fancier presentation
 	- `type-aside`: appears smaller, without decoration
 	- `alignleft`: block is aligned left. This class may make it impossible to select the block in the editor with your mouse, requiring use of the keyboard to move the cursor into the block.
@@ -50,7 +50,7 @@ Particular thanks go to outside contributors [@seanchayes](https://github.com/se
 - If Co-Authors Plus is active, and if a post has an `author` term, but the term has no corresponding `guest-author` post, when running `largo_byline()`, the byline will now contain an HTML comment informing why the byline is empty. If the `WP_DEBUG` or `LARGO_DEBUG` constants are true, Largo will add a message to the server's error log of the form "post 123 should have at least one co-author, but has none!" [Pull request #1607](https://github.com/INN/largo/pull/1607) for [Automattic/Co-Authors-Plus#637](https://github.com/Automattic/Co-Authors-Plus/issues/637) and as part of the general cleanup ticket [#1492](https://github.com/INN/largo/issues/1492).
 - Fix for posts with "Featured in category" selected not displaying on category RSS feeds. [Pull request #1668](https://github.com/INN/largo/pull/1668) for [issue #1598](https://github.com/INN/largo/issues/1598).
 - Fixes issue where prominence terms were not saving with the Block Editor, because the "Post Prominence" metabox was output twice. [Pull request #1655](https://github.com/INN/largo/pull/1655) for [issue #1654](https://github.com/INN/largo/issues/1654).
-- Fixes issue where the header ad widget area and before-footer widget area could extend beyond hte viewport, causing horizontal scrolling on narrower screens. [Pull request #1673](https://github.com/INN/largo/pull/1673) for [issue #1670](https://github.com/INN/largo/issues/1670).
+- Fixes issue where the header ad widget area and before-footer widget area could extend beyond the viewport, causing horizontal scrolling on narrower screens. [Pull request #1673](https://github.com/INN/largo/pull/1673) for [issue #1670](https://github.com/INN/largo/issues/1670).
 - Uses `validate_file()` when using `require_once`. [Pull request #1589](https://github.com/INN/largo/pull/1589) for [issue #1494](https://github.com/INN/largo/issues/1494).
 - Added note to `category.php` template explaining how to modify displaying the featured posts on category pages. [Pull request #1676](https://github.com/INN/largo/pull/1676) for [issue #1595](https://github.com/INN/largo/issues/1595).
 - Added `display: block;` style attribute to `.navis-slideshow.navis-full` to prevent full size images from not displaying properly due to the `display: table;` attribute on all `.wp-block-image` alignment classes. [Pull request #1675](https://github.com/INN/largo/pull/1675) for [issue #1664](https://github.com/INN/largo/issues/1664).
@@ -88,7 +88,7 @@ This release contains bug fixes for Largo 0.6.
 
 - Lays groundwork for testing Largo under PHP 7.3. [Pull request #1587](https://github.com/INN/largo/pull/1587) for [issue #1579](https://github.com/INN/largo/issues/1579).
 - Adds a pip `requirements.txt` for Sphinx dependencies required by Grunt tasks used during the development process. [Pull request #1585](https://github.com/INN/largo/pull/1585) for [issue #1359](https://github.com/INN/largo/issues/1359).
-- Removes several unneccessary Grunt tasks from the Gruntfile, and their dependencies. [Pull request #1585](https://github.com/INN/largo/pull/1585) for [issue #1540](https://github.com/INN/largo/issues/1540).
+- Removes several unnecessary Grunt tasks from the Gruntfile, and their dependencies. [Pull request #1585](https://github.com/INN/largo/pull/1585) for [issue #1540](https://github.com/INN/largo/issues/1540).
 - Removes some old developer setup instructions from the largo.readthedocs.io setup instructions. [Pull request #1585](https://github.com/INN/largo/pull/1585).
 
 ## [Largo 0.6](https://github.com/INN/largo/compare/v0.5.5.4...v0.6)
