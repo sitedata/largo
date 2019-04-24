@@ -435,6 +435,10 @@ if ( ! function_exists( 'largo_setup' ) ) {
 		// Gutenberg alignment classes
 		add_theme_support( 'align-wide' );
 
+		// Gutenberg-derived responsive embedding
+		// https://github.com/INN/largo/issues/1688
+		add_theme_support( 'responsive-embeds' );
+
 		// Gutenberg support for editor styles; @link https://github.com/WordPress/gutenberg/pull/9008
 		add_theme_support( 'editor-styles' );
 		add_editor_style('/css/gutenberg' . $suffix . '.css');
