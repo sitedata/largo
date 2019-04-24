@@ -44,7 +44,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'Largo Project'
-copyright = u'2018, Institute for Nonprofit News'
+copyright = u'2019, Institute for Nonprofit News'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
