@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 though this project doesn't succeed in adhering to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Largo 0.6.3](https://github.com/INN/largo/compare/v0.6.2...v0.6.3)
+
+### Fixes and minor improvements
+
+- Fixes several issues with magnification behavior of images. [Pull request #1695](https://github.com/INN/largo/pull/1695) for [issue #1664](https://github.com/INN/largo/issues/1664)
+
 ## [Largo 0.6.2](https://github.com/INN/largo/compare/v0.6.1...v0.6.2)
 
 This release brings improved compatibility with the WordPress Block Editor. The CSS class names `type-pull-quote`, `type-aside`, `alignleft`, `alignright`, `aligncenter` and `half` provided by Largo's "Module Wrapper" function in the Classic Editor are now supported on blocks via the "Additional CSS Classes" control, enabling improved pull quote display.
