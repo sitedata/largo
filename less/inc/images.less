@@ -15,6 +15,19 @@
   background-size: 20%;
 }
 
-ul.wp-block-gallery {
-  list-style: none;
+.wp-block-gallery {
+  &ul {
+    list-style: none;
+    margin-left: 0;
+  }
+  &.is-cropped {
+    .blocks-gallery-imagea,
+    .blocks-gallery-item {
+      a, img {
+        height: auto;
+        -o-object-fit: scale-down;
+        object-fit: scale-down;
+      }
+    }
+  }
 }
