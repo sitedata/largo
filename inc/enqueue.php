@@ -84,17 +84,39 @@ if ( ! function_exists( 'largo_gallery_enqueue' ) ) {
 	 * @since 0.5.5.3
 	 */
 	function largo_gallery_enqueue() {
-		$slick_css = get_template_directory_uri() . '/lib/navis-slideshows/vendor/slick/slick.css';
-		wp_enqueue_style( 'navis-slick', $slick_css, array(), '1.0' );
+		$slick_css = '/lib/navis-slideshows/vendor/slick/slick.css';
+		wp_enqueue_style(
+			'navis-slick',
+			get_template_directory_uri() . $slick_css,
+			array(),
+			filemtime( get_template_directory() . $slick_css )
+		);
 
-		$slides_src = get_template_directory_uri() . '/lib/navis-slideshows/vendor/slick/slick.min.js';
-		wp_enqueue_script( 'jquery-slick', $slides_src, array( 'jquery' ), '3.0', true );
+		$slides_src = '/lib/navis-slideshows/vendor/slick/slick.min.js';
+		wp_enqueue_script(
+			'jquery-slick',
+			get_template_directory_uri() . $slides_src,
+			array( 'jquery' ),
+			filemtime( get_template_directory() . $slides_src ),
+			true
+		);
 
-		$slides_css = get_template_directory_uri() . '/lib/navis-slideshows/css/slides.css';
-		wp_enqueue_style( 'navis-slides', $slides_css, array(), '1.0' );
+		$slides_css = '/lib/navis-slideshows/css/slides.css';
+		wp_enqueue_style(
+			'navis-slides',
+			get_template_directory_uri() . $slides_css,
+			array(),
+			filemtime( get_template_directory() . $slides_css ),
+		);
 
-		$show_src = get_template_directory_uri() . '/lib/navis-slideshows/js/navis-slideshows.js';
-		wp_enqueue_script( 'navis-slideshows', $show_src, array( 'jquery-slick' ), '0.11', true );
+		$show_src = '/lib/navis-slideshows/js/navis-slideshows.js';
+		wp_enqueue_script(
+			'navis-slideshows',
+			get_template_directory_uri() . $show_src,
+			array( 'jquery-slick' ),
+			filemtime( get_template_directory() . $show_src ),
+			true
+		);
 	}
 	add_action( 'wp_enqueue_scripts', 'largo_gallery_enqueue' );
 }
@@ -289,7 +311,7 @@ function largo_gutenberg_frontend_css_js() {
 			'largo-stylesheet-gutenberg',
 			get_template_directory_uri() . '/css/gutenberg' . $suffix . '.css',
 			array(),
-			$version
+			filemtime( get_template_directory() . '/css/gutenberg' . $suffix . '.css' )
 		);
 	}
 }
