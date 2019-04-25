@@ -51,7 +51,7 @@ copyright = u'2019, Institute for Nonprofit News'
 # built documents.
 #
 # The short X.Y version.
-version = '0.6.2'
+version = '0.6.3-pre'
 # The full version, including alpha/beta/rc tags.
 release = version
 
