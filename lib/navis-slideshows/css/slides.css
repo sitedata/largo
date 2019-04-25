@@ -211,7 +211,19 @@ body.single-format-standard .navis-slideshow a.slick-next {
     overflow:visible;
     background-color: #000;
     display: block;
+    transform: none;
 }
+/* Gutenberg styles; https://github.com/INN/largo/issues/1664 */
+.navis-slideshow.navis-full.alignleft,
+.navis-slideshow.navis-full.aligncenter,
+.navis-slideshow.navis-full.alignright,
+.navis-slideshow.navis-full.alignwide,
+.navis-slideshow.navis-full.alignfull,
+.navis-slideshow.navis-full.alignnone {
+  display: block;
+}
+.wp-block-image.navis-slideshow.navis-full figcaption,
+.wp-block-image .navis-slideshow.navis-full figcaption, /* yes, with and without space */
 .navis-slideshow.navis-full .permalink {
     display: none;
 }
