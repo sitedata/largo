@@ -106,7 +106,7 @@ if ( ! function_exists( 'largo_gallery_enqueue' ) ) {
 			'navis-slides',
 			get_template_directory_uri() . $slides_css,
 			array(),
-			filemtime( get_template_directory() . $slides_css ),
+			filemtime( get_template_directory() . $slides_css )
 		);
 
 		$show_src = '/lib/navis-slideshows/js/navis-slideshows.js';
