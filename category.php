@@ -44,6 +44,7 @@ $queried_object = get_queried_object();
 				); ?>
 			</div>
 
+			<?php do_action( 'largo_category_after_primary_featured_post' ); ?>
 			<?php $secondary_featured = array_slice( $featured_posts, 1 );
 			if ( count( $secondary_featured ) > 0 ) { ?>
 				<div class="secondary-featured-post">
