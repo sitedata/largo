@@ -367,6 +367,10 @@ These actions are run on all homepage templates, including the Legacy Three Colu
  - **largo_loop_after_post_x** - runs after every post, with arguments ``$counter`` and ``context`` describing which post it's running after and what the context is. (In categories, the context is ``archive``.)
  - **largo_after_category_river** - immediately after the river of stories at the bottom of the category archive page, after the Load More Posts button (for adding a footer to this column, for example.)
 
+**series-landing.php**
+
+ - **largo_series_before_stories** - at the top of the column of ``div.stories``.
+
 **search.php**
 
 The Largo search page has two main modes: Google Custom Search Engine and the standard WordPress search emgine. Because the dispalyed layouts are so different, each has their own set of actions.
