@@ -371,6 +371,10 @@ These actions are run on all homepage templates, including the Legacy Three Colu
 
  - **largo_series_before_stories** - at the top of the column of ``div.stories``.
 
+**archive.php**
+
+ - **largo_archive_before_stories** - at the top of the column of ``div.stories``.
+
 **search.php**
 
 The Largo search page has two main modes: Google Custom Search Engine and the standard WordPress search emgine. Because the dispalyed layouts are so different, each has their own set of actions.
