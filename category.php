@@ -46,7 +46,7 @@ $queried_object = get_queried_object();
 
 			<?php 
       
-      do_action( 'largo_category_after_primary_featured_post' ); ?>
+      			do_action( 'largo_category_after_primary_featured_post' );
 
 			/*
 			 * NOTE: If you are trying to accomplish something other than displaying no featured posts 
