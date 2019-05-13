@@ -24,7 +24,7 @@ inc/post-metaboxes.php
 
    Add our prominence taxonomy meta box with custom behavior.
 
-   :param array $largoProminenceTerms: list of prominence terms
+   :param array $largoProminenceTerms: An array of arrays describing the taxonomy terms
 
    :see: largo_custom_taxonomies
 

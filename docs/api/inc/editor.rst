@@ -10,7 +10,10 @@ inc/editor.php
 .. php:function:: largo_module_shortcode()
 
    Add the module shortcode (used for pullquotes and asides within posts)
+
    This is no longer used but is included here for backwards compatibility
+
+   The module insertion is handled by largo/js/tinymce/plugins/largo/tinymce.js, which now inserts <aside> tags.
 
    :since: 0.3
 

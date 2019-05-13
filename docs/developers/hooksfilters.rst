@@ -39,21 +39,20 @@ Other filters and actions
 
 filter: **largo_additional_networks**
 
-    Called in `inc/widgets/largo-follow.php` and 'inc/header-footer.php' to allow child themes to add additional social networks for social buttons, etc.`_.
-post type.
+    Called in `inc/widgets/largo-follow.php` and `inc/header-footer.php` to allow child themes to add additional social networks for social buttons, etc.
 
     **Usage:** ::
 
     function gijn_additional_networks( $networks ) {
-		if ( of_get_option( 'listserv_link' ) ) {
-			$gijn_networks = array( 
-				'listserv' => 'Join The GIJN Listserv'
-			);
-			$networks = array_merge( $networks, $gijn_networks );
-		}
-		return $networks;
-	}
-	add_filter( 'largo_additional_networks', 'gijn_additional_networks' );
+        if ( of_get_option( 'listserv_link' ) ) {
+            $gijn_networks = array( 
+                'listserv' => 'Join The GIJN Listserv'
+            );
+            $networks = array_merge( $networks, $gijn_networks );
+        }
+        return $networks;
+    }
+    add_filter( 'largo_additional_networks', 'gijn_additional_networks' );
 
 filter: **largo_archive_{$post_type}_title**
 

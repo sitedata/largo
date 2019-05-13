@@ -109,7 +109,7 @@ if( of_get_option('disclaimer_enabled') ) {
 /**
  * Add our prominence taxonomy meta box with custom behavior.
  *
- * @param array $largoProminenceTerms list of prominence terms
+ * @param array $largoProminenceTerms An array of arrays describing the taxonomy terms
  * @see largo_custom_taxonomies
  */
 function largo_add_custom_prominence_meta_box($largoProminenceTerms) {
@@ -121,7 +121,9 @@ function largo_add_custom_prominence_meta_box($largoProminenceTerms) {
 			'post',
 			'side',
 			'default',
-			$largoProminenceTerms
+			array(
+				'__back_compat_meta_box' => true, // because this taxonomy metabox is covered by Gutenberg
+			)
 		);
 	}, 10);
 }

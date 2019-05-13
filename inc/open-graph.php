@@ -88,10 +88,6 @@ if ( ! function_exists( 'largo_opengraph' ) ) {
 			if ( $thumbnailURL )
 				echo '<meta property="og:image" content="' . esc_url( $thumbnailURL ) . '" />';
 
-			// google author/publisher markup
-			// see: https://support.google.com/webmasters/answer/1408986
-			if ( of_get_option( 'gplus_link' ) )
-				echo '<link href="' . esc_url( of_get_option( 'gplus_link' ) ) . '" rel="publisher" />';
 	}
 }
 // don't add this if Yoast is active

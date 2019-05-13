@@ -44,10 +44,10 @@ $queried_object = get_queried_object();
 				); ?>
 			</div>
 
-			<?php do_action( 'largo_category_after_primary_featured_post' ); ?>
+			<?php 
+      
+      do_action( 'largo_category_after_primary_featured_post' ); ?>
 
-			<?php
-			
 			/*
 			 * NOTE: If you are trying to accomplish something other than displaying no featured posts 
 			 * or displaying 5 featured posts, you will need to modify the `largo_category_archive_posts` function

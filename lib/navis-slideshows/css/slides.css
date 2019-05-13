@@ -210,7 +210,20 @@ body.single-format-standard .navis-slideshow a.slick-next {
     z-index: 999999;
     overflow:visible;
     background-color: #000;
+    display: block;
+    transform: none;
 }
+/* Gutenberg styles; https://github.com/INN/largo/issues/1664 */
+.navis-slideshow.navis-full.alignleft,
+.navis-slideshow.navis-full.aligncenter,
+.navis-slideshow.navis-full.alignright,
+.navis-slideshow.navis-full.alignwide,
+.navis-slideshow.navis-full.alignfull,
+.navis-slideshow.navis-full.alignnone {
+  display: block;
+}
+.wp-block-image.navis-slideshow.navis-full figcaption,
+.wp-block-image .navis-slideshow.navis-full figcaption, /* yes, with and without space */
 .navis-slideshow.navis-full .permalink {
     display: none;
 }
@@ -258,6 +271,13 @@ body.single-format-standard .navis-slideshow a.slick-next {
     right: 14px;
     z-index: 99999;
     color: white;
+    text-shadow:
+      -1px -1px 0 black,
+      -1px  1px 0 black,
+       1px -1px 0 black,
+       1px  1px 0 black,
+       0px  0px 1px black
+    ;
     font-family: sans-serif;
     font-size: 2.5em;
 }
@@ -311,6 +331,7 @@ body.normal.single-post .navis-slideshow.navis-full p.wp-media-credit {
 /**** SINGLE LIGHTBOX ***/
 .navis-single.navis-full img {
     max-height: 100vh;
+    width: auto;
     top: 50%;
     position: absolute;
     left: 50%;
