@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 though this project doesn't succeed in adhering to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Largo 0.6.4](https://github.com/INN/largo/compare/v0.6.3...v0.6.4)
+
+### Feature Updates
+- Added `largo_category_after_primary_featured_post` hook between primary and secondary featured posts on the `category.php` template, `largo_series_before_stories` hook before stories on the `series-landing.php` template, and the `largo_archive_before_stories` hook before stories on the `archive.php` template. These new hooks allow you to add content to these templates in specific spots if needed. [Pull request #1703](https://github.com/INN/largo/pull/1703).
+
 ## [Largo 0.6.3](https://github.com/INN/largo/compare/v0.6.2...v0.6.3)
 
 ### Fixes and minor improvements
