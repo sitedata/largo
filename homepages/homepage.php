@@ -94,8 +94,8 @@ function largo_home_single_top() {
 	$big_story = null;
 
 	// Cache the terms
-	$homepage_feature_term = get_term_by( 'slug', __('homepage-featured', 'largo'), 'prominence' );
-	$top_story_term = get_term_by( 'slug', __('top-story', 'largo'), 'prominence' );
+	$homepage_feature_term = get_term_by( 'slug', 'homepage-featured', 'prominence' );
+	$top_story_term = get_term_by( 'slug', 'top-story', 'prominence' );
 
 	// Get the posts that are both in 'Homepage Featured' and 'Homepage Top Story'
 	$top_story_posts = get_posts(array(
