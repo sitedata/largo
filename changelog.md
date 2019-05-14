@@ -10,7 +10,7 @@ though this project doesn't succeed in adhering to [Semantic Versioning](https:/
 ## Fixes and minor improvements
 
 - Updated `largo_home_single_top` function to get `homepage_feature_term` and `top_story_term` values from slug
-instead of by name. If these prominence names were updated to anything else, ``homepage_feature_term`` and `top_story_term` would be false and fallback to `__('Homepage Featured', 'largo')`. [Pull request #]() for [issue #1445](https://github.com/INN/largo/issues/1445).
+instead of by name. If these prominence names were updated to anything else, ``homepage_feature_term`` and `top_story_term` would be false and fallback to `__('Homepage Featured', 'largo')`. [Pull request #1709](https://github.com/INN/largo/pull/1709) for [issue #1445](https://github.com/INN/largo/issues/1445).
 
 ## [Largo 0.6.3](https://github.com/INN/largo/compare/v0.6.2...v0.6.3)
 
