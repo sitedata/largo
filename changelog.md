@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 though this project doesn't succeed in adhering to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Largo 0.6.4](https://github.com/INN/largo/compare/v0.6.3...v0.6.4)
+
+## Fixes and minor improvements
+
+- Updated `largo_home_single_top` function to get `homepage_feature_term` and `top_story_term` values from slug
+instead of by name. If these prominence names were updated to anything else, ``homepage_feature_term`` and `top_story_term` would be false and fallback to `__('Homepage Featured', 'largo')`. [Pull request #]() for [issue #1445](https://github.com/INN/largo/issues/1445).
+
 ## [Largo 0.6.3](https://github.com/INN/largo/compare/v0.6.2...v0.6.3)
 
 ### Fixes and minor improvements
