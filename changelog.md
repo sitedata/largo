@@ -7,8 +7,16 @@ though this project doesn't succeed in adhering to [Semantic Versioning](https:/
 
 ## [Largo 0.6.4](https://github.com/INN/largo/compare/v0.6.3...v0.6.4)
 
-### Feature Updates
-- Added `largo_category_after_primary_featured_post` hook between primary and secondary featured posts on the `category.php` template, `largo_series_before_stories` hook before stories on the `series-landing.php` template, and the `largo_archive_before_stories` hook before stories on the `archive.php` template. These new hooks allow you to add content to these templates in specific spots if needed. [Pull request #1703](https://github.com/INN/largo/pull/1703).
+### Developer-facing improvements
+
+- Adds `largo_category_after_primary_featured_post` hook between primary and secondary featured posts on the `category.php` template. [Pull request #1703](https://github.com/INN/largo/pull/1703) by [@megabulk](https://github.com/megabulk).
+- Adds `largo_series_before_stories` hook before stories on the `series-landing.php` template. [Pull request #1703](https://github.com/INN/largo/pull/1703) by [@megabulk](https://github.com/megabulk).
+- Adds `largo_archive_before_stories` hook before stories on the `archive.php` template. [Pull request #1703](https://github.com/INN/largo/pull/1703) by [@megabulk](https://github.com/megabulk).
+
+### Fixes and minor improvements
+
+- Updates `largo_home_single_top` function to get `homepage_feature_term` and `top_story_term` values from slug instead of by name. If these prominence names were updated to anything else, `homepage_feature_term` and `top_story_term` would be false and fallback to `__('Homepage Featured', 'largo')`. [Pull request #1709](https://github.com/INN/largo/pull/1709) for [issue #1445](https://github.com/INN/largo/issues/1445).
+- Removes separator `<span>` on search results page; puts the search result url on a new line instead of next to the date. Also adds a `overflow-wrap: breakword;` style to the search-result URL to make sure it doesn't overflow the result container. [Pull request #1710](https://github.com/INN/largo/pull/1710) for [issue #1509](https://github.com/INN/largo/issues/1509).
 
 ## [Largo 0.6.3](https://github.com/INN/largo/compare/v0.6.2...v0.6.3)
 
