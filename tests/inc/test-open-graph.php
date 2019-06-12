@@ -48,6 +48,6 @@ EOT;
 		$test = '-';
 		$expected = '|';
 		$result = apply_filters( 'document_title_separator', $test );
-		assertEquals( $expected, $result, "Largo's filter on document_title_separator appears to not be engaged.");
+		$this->assertEquals( $expected, $result, "Largo's filter on document_title_separator appears to not be engaged.");
 	}
 }
