@@ -24,7 +24,7 @@ EOT;
 	}
 	function test_largo_opengraph__twitter() {
 		$test = 'https://twitter.com/inn';
-		of_set_owption( 'twitter_link', $test );
+		of_set_option( 'twitter_link', $test );
 		ob_start();
 		largo_opengraph();
 		$capture = ob_get_clean();
