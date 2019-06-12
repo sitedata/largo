@@ -1,5 +1,11 @@
 <?php
 /**
+ * Functions related to social media knowledge tags
+ *
+ * @package Largo
+ */
+
+/**
  * Adds appropriate open graph, twittercards, and google publisher tags
  * to the header based on the page type displayed
  *
@@ -43,25 +49,27 @@ if ( ! function_exists( 'largo_opengraph' ) ) {
 					<meta property="og:url" content="<?php the_permalink(); ?>"/>
 					<meta property="og:description" content="<?php echo strip_tags( esc_html( get_the_excerpt() ) ); ?>" />
 					<meta name="description" content="<?php echo strip_tags( esc_html( get_the_excerpt() ) ); ?>" />
-			<?php
+					<?php
 				} // have_posts
 
 				rewind_posts();
 
-			} elseif ( is_front_page() ) { ?>
-
-				<meta property="og:title" content="<?php bloginfo( 'name' ); echo ' - '; bloginfo( 'description' ); ?>" />
-				<meta property="og:type" content="website" />
-				<meta property="og:url" content="<?php echo home_url(); ?>"/>
-				<meta property="og:description" content="<?php bloginfo( 'description' ); ?>" />
-				<meta name="description" content="<?php bloginfo( 'description' ); ?>" />
-		<?php
+			} elseif ( is_front_page() ) {
+				?>
+					<meta property="og:title" content="<?php bloginfo( 'name' ); echo ' - '; bloginfo( 'description' ); ?>" />
+					<meta property="og:type" content="website" />
+					<meta property="og:url" content="<?php echo home_url(); ?>"/>
+					<meta property="og:description" content="<?php bloginfo( 'description' ); ?>" />
+					<meta name="description" content="<?php bloginfo( 'description' ); ?>" />
+				<?php
 			} else {
-		?>
-				<meta property="og:title" content="<?php wp_title(); ?>" />
-				<meta property="og:type" content="article" />
-				<meta property="og:url" content="<?php echo esc_url( largo_get_current_url() ); ?>"/>
-			<?php
+				// not a single post, not the front page
+				?>
+					<meta property="og:title" content="<?php wp_title(); ?>" />
+					<meta property="og:type" content="article" />
+					<meta property="og:url" content="<?php echo esc_url( largo_get_current_url() ); ?>"/>
+				<?php
+
 				$description = '';
 				//let's try to get a better description when available
 				if ( is_category() && category_description() ) {
@@ -80,14 +88,15 @@ if ( ! function_exists( 'largo_opengraph' ) ) {
 					echo '<meta property="og:description" content="' . strip_tags( esc_html( $description ) ) . '" />';
 					echo '<meta name="description" content="' . strip_tags( esc_html( $description ) ) . '" />';
 				}
-			} // else
+			}
 
 			// a few more attributes that are common to all page types
 			echo '<meta property="og:site_name" content="'  . get_bloginfo() . '" />';
 
 			// thumbnail url
-			if ( $thumbnailURL )
+			if ( $thumbnailURL ) {
 				echo '<meta property="og:image" content="' . esc_url( $thumbnailURL ) . '" />';
+			}
 
 	}
 }
