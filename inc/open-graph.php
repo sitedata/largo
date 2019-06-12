@@ -62,6 +62,7 @@ if ( ! function_exists( 'largo_opengraph' ) ) {
 				<meta property="og:type" content="article" />
 				<meta property="og:url" content="<?php echo esc_url( largo_get_current_url() ); ?>"/>
 			<?php
+				$description = '';
 				//let's try to get a better description when available
 				if ( is_category() && category_description() ) {
 					$description = category_description();
@@ -75,7 +76,7 @@ if ( ! function_exists( 'largo_opengraph' ) ) {
 				} else {
 					$description = get_bloginfo( 'description' );
 				}
-				if ( $description ) {
+				if ( !empty( $description ) ) {
 					echo '<meta property="og:description" content="' . strip_tags( esc_html( $description ) ) . '" />';
 					echo '<meta name="description" content="' . strip_tags( esc_html( $description ) ) . '" />';
 				}
