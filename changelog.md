@@ -19,6 +19,7 @@ though this project doesn't succeed in adhering to [Semantic Versioning](https:/
 - Removes separator `<span>` on search results page; puts the search result url on a new line instead of next to the date. Also adds a `overflow-wrap: breakword;` style to the search-result URL to make sure it doesn't overflow the result container. [Pull request #1710](https://github.com/INN/largo/pull/1710) for [issue #1509](https://github.com/INN/largo/issues/1509).
 - Fixes a `ReferenceError` in navigation menu JavaScript. [Pull request #1715](https://github.com/INN/largo/pull/1715) for [issue #1714](https://github.com/INN/largo/issues/1714).
 - Fixes an undefined variable error in certain edge cases of the site `og:description` and `description` meta tags. [Pull request #1724](https://github.com/INN/largo/pull/1724) for [issue #1721](https://github.com/INN/largo/issues/1721).
+- Co-Authors Plus profile field descriptions no longer contain escaped HTML. [Pull request #]() for [issue #1720](https://github.com/INN/largo/issues/1720).
 
 ## [Largo 0.6.3](https://github.com/INN/largo/compare/v0.6.2...v0.6.3)
 
