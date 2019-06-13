@@ -37,8 +37,7 @@ Compiling translation files
 To rebuild the translation files, run the following commands: ::
 
 	grunt pot
-	msgmerge -o lang/es_ES.po.merged lang/es_ES.po lang/largo.pot
-	mv lang/es_ES.po.merged lang/es_ES.po
+	grunt msgmerge
 	grunt po2mo
 
 Images
