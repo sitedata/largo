@@ -102,6 +102,7 @@ $queried_object = get_queried_object();
 
 		<div class="row-fluid clearfix">
 			<div class="stories span8" role="main" id="content">
+			<?php do_action( 'largo_archive_before_stories' ); ?>
 			<?php
 				// and finally wind the posts back so we can go through the loop as usual
 				rewind_posts();

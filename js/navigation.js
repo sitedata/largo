@@ -75,7 +75,7 @@
     bool = Modernizr.hasEvent('pointerdown');
 
     while (i-- && !bool) {
-      if (hasEvent(domPrefixes[i] + 'pointerdown')) {
+      if (Modernizr.hasEvent(domPrefixes[i] + 'pointerdown')) {
         bool = true;
       }
     }
