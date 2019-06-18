@@ -29,7 +29,7 @@ $topstory_classes = (largo_get_active_homepage_layout() == 'LegacyThreeColumn') 
 				<a href="<?php the_permalink(); ?>"><?php the_post_thumbnail( 'large' ); ?></a>
 				<h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
 				<h5 class="byline"><?php largo_byline( true, false, get_the_ID() ); ?></h5>
-				<?php largo_excerpt( $post, 4 ); ?>
+				<?php largo_excerpt( get_post(), 4 ); ?>
 				<?php if ( largo_post_in_series() ):
 					$feature = largo_get_the_main_feature();
 					$feature_posts = largo_get_recent_posts_for_term( $feature, 1, 1 );
