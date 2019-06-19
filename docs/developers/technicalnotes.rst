@@ -31,21 +31,13 @@ The Largo parent theme uses `LESS CSS <http://lesscss.org/>`_ to generate the st
 
 You will notice that the theme's main style.css is empty except for the header block because we enqueue our styles from ``css/style.css`` (the output of /less/style.less when it's compiled), overriding the WordPress default behavior of including the ``style.css`` file in the root of the theme directory.
 
-TGM Plugin Activation
----------------------
-
-We use `TGM Plugin Activation <https://github.com/thomasgriffin/TGM-Plugin-Activation>`_ to package a couple of plugins with the Largo theme that are not currently available in the WordPress plugin directory and to recommend plugins for a number of tasks that are commonly requested for news websites.
-
-- The rest of the theme files and the folder structure should be familiar to most WordPress developers, but if you have any questions, feel free to send us an email at largo@inn.org
-
 Compiling translation files
 ---------------------------
 
 To rebuild the translation files, run the following commands: ::
 
 	grunt pot
-	msgmerge -o lang/es_ES.po.merged lang/es_ES.po lang/largo.pot
-	mv lang/es_ES.po.merged lang/es_ES.po
+	grunt msgmerge
 	grunt po2mo
 
 Images

@@ -68,6 +68,7 @@ A few brief technical notes that might be helpful as you get started:
     technicalnotes
     grunt-commands
     hooksfilters
+    plugin-compat
 
 Function Reference
 ------------------
