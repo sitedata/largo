@@ -503,7 +503,7 @@ function largo_extend_block_editor() {
         array( 'wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor', 'wp-api' ),
         '1.0.0',
         true
-	);
+    );
 	
 }
 add_action( 'enqueue_block_editor_assets', 'largo_extend_block_editor' );
@@ -535,10 +535,12 @@ function largo_display_custom_fields_in_rest_api( $object ) {
 	$meta_fields = ['_media_credit'];
 
     if ( isset( $meta['_media_credit' ] ) && isset( $meta['_media_credit' ][0] ) ) {
-        //return the post meta
-        return $meta['_media_credit' ][0];
-	}
+		
+		//return the post meta
+		return $meta['_media_credit' ][0];
+		
+    }
 	
-	return;
+    return;
 	
 }
