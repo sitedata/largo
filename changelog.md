@@ -20,7 +20,7 @@ though this project doesn't succeed in adhering to [Semantic Versioning](https:/
 - Fixes a `ReferenceError` in navigation menu JavaScript. [Pull request #1715](https://github.com/INN/largo/pull/1715) for [issue #1714](https://github.com/INN/largo/issues/1714).
 - Fixes an undefined variable error in certain edge cases of the site `og:description` and `description` meta tags. [Pull request #1724](https://github.com/INN/largo/pull/1724) for [issue #1721](https://github.com/INN/largo/issues/1721).
 - Co-Authors Plus profile field descriptions no longer contain escaped HTML. [Pull request #1726](https://github.com/INN/largo/pull/1726) for [issue #1720](https://github.com/INN/largo/issues/1720).
-- Added `box-sizing: border-box;` style attribute to `figcaption` and `.wp-caption-text` elements to prevent caption text from overflowing from the parent container. [Pull request #1711](https://github.com/INN/largo/pull/1711) for [issue #1702](https://github.com/INN/largo/issues/1702).
+- Added `box-sizing: border-box;` style attribute to `figcaption` and `.wp-caption-text` elements to prevent caption text from overflowing from the parent container. Also modified Gutenberg block image caption styling to be consistent with the classic image caption styling when the image is expanded into a lightbox. [Pull request #1711](https://github.com/INN/largo/pull/1711) for [issue #1702](https://github.com/INN/largo/issues/1702).
 - Fixes multiple `Undefined variable: post` errors in `homepage/templates/top-stories.php`. [Pull request #1728](https://github.com/INN/largo/pull/1728) for [issue #1723](https://github.com/INN/largo/issues/1723).
 
 ## [Largo 0.6.3](https://github.com/INN/largo/compare/v0.6.2...v0.6.3)
