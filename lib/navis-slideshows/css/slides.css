@@ -306,7 +306,7 @@ body.single-format-standard .navis-slideshow a.slick-next {
 
 .navis-slideshow.navis-full .wp-caption-text,
 body.normal.single-post .hero .navis-slideshow.navis-full p.wp-caption-text {
-    background-color: rgba(0,0,0,.7);
+    background-color: transparent;
     color: #ccc;
     padding: 1em 17.023%!important;
     padding-bottom: 32px!important;
