@@ -39,19 +39,23 @@ add_action( 'rest_api_init', 'largo_register_custom_rest_fields' );
  */
 function largo_display_custom_fields_in_rest_api( $object ) {
 
-    $post_id = $object['id'];
+    $post_id = $object[ 'id' ];
 
 	$meta = get_post_meta( $post_id );
 	
-	$meta_fields = ['_media_credit'];
+    $meta_fields = [ '_media_credit', '_media_credit_url' ];
+    
+    foreach( $meta_fields as $meta_field ){
 
-    if ( isset( $meta['_media_credit' ] ) && isset( $meta['_media_credit' ][0] ) ) {
-		
-		//return the post meta
-		return $meta['_media_credit' ][0];
-		
+        if ( isset( $meta[ $meta_field ] ) && isset( $meta[ $meta_field ][0] ) ) {
+
+            //return the post meta
+            $media_credit_meta[ $meta_field ] = $meta[ $meta_field ][0];
+            
+        }
+
     }
 	
-    return;
+    return $media_credit_meta;
 	
 }

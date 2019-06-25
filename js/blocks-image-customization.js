@@ -24,7 +24,15 @@ function largo_core_image_block_add_media_credit( element, blockType, attribute 
 
             } else {
 
-                var attachment_caption = attachment_caption + '<br/><span class="largo-attachment-media-credit">' + media.media_credit + '</span>';
+                var media_credit = media.media_credit;
+
+                if( media.media_credit._media_credit_url ){
+
+                    var media_credit = '<a href="'+media.media_credit._media_credit_url+'" target="_blank">'+media.media_credit._media_credit+'</a>';
+
+                }
+
+                var attachment_caption = attachment_caption + '<br/><span class="largo-attachment-media-credit">' + media_credit + '</span>';
 
                 return Object.assign( attribute, { caption: attachment_caption } );
 
