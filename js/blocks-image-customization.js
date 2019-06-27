@@ -19,7 +19,7 @@ function largo_core_image_block_add_media_credit( element, blockType, attribute 
             // the original instance of the media caption
             var attachment_caption = attribute.caption;
 
-            if( media.media_credit._media_credit ){
+            if( media.media_credit && media.media_credit._media_credit ){
 
                 // our default media credit, if it exists 
                 var media_credit = '<span class="largo-attachment-media-credit">' + media.media_credit._media_credit + '</span>';
@@ -48,7 +48,7 @@ function largo_core_image_block_add_media_credit( element, blockType, attribute 
                 }
 
             }
-            
+
         });
     }
 }
