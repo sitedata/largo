@@ -223,11 +223,6 @@ body.single-format-standard .navis-slideshow a.slick-next {
 .navis-slideshow.navis-full.alignnone {
   display: block;
 }
-.wp-block-image.navis-slideshow.navis-full figcaption,
-.wp-block-image .navis-slideshow.navis-full figcaption, /* yes, with and without space */
-.navis-slideshow.navis-full .permalink {
-    display: none;
-}
 .navis-slideshow.navis-full .slick-list {
     top:0;
 }
@@ -237,7 +232,7 @@ body.single-format-standard .navis-slideshow a.slick-next {
     top: 0;
 }
 .navis-slideshow.navis-full .slick-dots li button {
-    background-color: #000;   
+    background-color: #000;
 }
 .navis-slideshow.navis-full .slick-dots li.slick-active button {
     background-color: #666;
