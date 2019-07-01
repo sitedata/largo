@@ -313,6 +313,8 @@ body.normal.single-post .hero .navis-slideshow.navis-full p.wp-caption-text {
 }
 
 body.normal.single-post .navis-slideshow.navis-full p.wp-media-credit {
+    /** This uses positional hacks to overlay on the caption's background. */
+    background-color:transparent;
     position:absolute;
     display: block;
     bottom: 0;
@@ -321,7 +323,6 @@ body.normal.single-post .navis-slideshow.navis-full p.wp-media-credit {
     text-align: left;
     padding:.75em 0 .5em 0;
     z-index: 4;
-    background-color:transparent;
 }
 
 /**** SINGLE LIGHTBOX ***/
