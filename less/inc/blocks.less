@@ -41,6 +41,7 @@
   }
 }
 .wp-block-gallery {
+  // standard block display
   .blocks-gallery-image,
   .blocks-gallery-item {
     figcaption {
@@ -48,6 +49,40 @@
       text-align: left; // override Gutenberg's figcaption centering
       padding: 10px; // reduce blank space, because clicking on the figcaption doesn't trigger a click on the image to open the gallery.
       max-height: 50%; // to prevent very long captions from covering the image.
+    }
+  }
+
+  // block in Navis slideshow
+  .blocks-gallery-image,
+  .blocks-gallery-item {
+    .navis-single {
+      figcaption {
+        // these styles are to match styles in largo/lib/navis-slideshows/css/slides.css
+        background-color: rgba(0,0,0,.7);
+        color: #ccc;
+        padding: 1em 17.023%!important;
+        padding-bottom: 32px!important;
+        margin: 0!important;
+        bottom: 0;
+        position: absolute;
+        border: none;
+        font-size: 16px;
+      }
+    }
+  }
+
+  &ul {
+    list-style: none;
+    margin-left: 0;
+  }
+  &.is-cropped {
+    .blocks-gallery-image,
+    .blocks-gallery-item {
+      a, img {
+        height: auto;
+        -o-object-fit: scale-down;
+        object-fit: scale-down;
+      }
     }
   }
 }
