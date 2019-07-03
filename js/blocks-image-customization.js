@@ -1,11 +1,4 @@
 const {assign} = lodash;
-const { addFilter } = wp.hooks;
-const { __ } = wp.i18n;
-
-const { createHigherOrderComponent } = wp.compose;
-const { Fragment } = wp.element;
-const { InspectorControls } = wp.editor;
-const { PanelBody, SelectControl } = wp.components;
 
 function largo_core_image_block_add_media_credit( element, blockType, attribute ){
 
