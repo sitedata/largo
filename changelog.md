@@ -10,6 +10,7 @@ though this project doesn't succeed in adhering to [Semantic Versioning](https:/
 ## Fixes and minor improvements
 - Removed separator span on search results page to be able to put the search result url on a new line instead of next to the date. Also added `overflow-wrap: breakword;` to result url 
 to make sure it doesn't overflow from results container. [Pull request #1710](https://github.com/INN/largo/pull/1710) for [issue #1509](https://github.com/INN/largo/issues/1509).
+- Fixed an issue where the Largo specific media credit caption and url was not being output in Gutenberg image blocks. [Pull request #1733](https://github.com/INN/largo/pull/1733/) for [issue #1683](https://github.com/INN/largo/issues/1683).
 
 ## [Largo 0.6.3](https://github.com/INN/largo/compare/v0.6.2...v0.6.3)
 
