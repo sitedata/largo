@@ -81,7 +81,7 @@ class largo_image_widget extends WP_Widget {
 			//output the widget
 			echo $args['before_widget'];
 
-			if ( !empty( $title ) ) { echo $args['before_title'] . $instance['title'] . $args['after_title']; }
+			if ( !empty( $instance['title'] ) ) { echo $args['before_title'] . $instance['title'] . $args['after_title']; }
 
 			echo self::get_image_html( $instance, true );
 
