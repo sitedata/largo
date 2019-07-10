@@ -122,7 +122,7 @@ class largo_series_posts_widget extends WP_Widget {
 		</p>
 
 		<p><input id="<?php echo $this->get_field_id('show_byline'); ?>" name="<?php echo $this->get_field_name('show_byline'); ?>" type="checkbox" value="1" <?php checked( $instance['show_byline'], 1);?> />
-			<label for="<?php echo $this->get_field_id('show_byline'); ?>"><?php _e( 'Show date on first post', 'largo' ); ?></label>
+			<label for="<?php echo $this->get_field_id('show_byline'); ?>"><?php _e( 'Show byline on first post?', 'largo' ); ?></label>
 		</p>
 
 		<p>
