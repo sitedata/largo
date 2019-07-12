@@ -78,8 +78,7 @@
         self.stickyNavEl.addClass(idx);
     });
 
-    $(window).on('scroll', this.stickyNavScrollCallback.bind(this));
-    $(window).on('resize', this.stickyNavResizeCallback.bind(this));
+    $(window).on('scroll resize', this.stickyNavScrollCallback.bind(this));
 
     this.stickyNavResizeCallback();
   };
