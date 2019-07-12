@@ -91,15 +91,13 @@
         // the main nav exists and is visible,
         // so we should hide the sticky nav
         this.stickyNavEl.removeClass('show');
-        clearTimeout(this.scrollTimeout);
-        return;
       } else {
         // the main nav either doesn't exist or isn't visible,
         // so we shouldn't hide the sticky nav
         this.stickyNavEl.addClass('show');
-        clearTimeout(this.scrollTimeout);
-        return;
       }
+      clearTimeout(this.scrollTimeout);
+      return;
     }
   }
 
