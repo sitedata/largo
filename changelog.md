@@ -24,6 +24,7 @@ though this project doesn't succeed in adhering to [Semantic Versioning](https:/
 - Fixes an issue where the widget title wasn't displaying in the Largo Image Widget, due to trying to use the `$title` variable which was removed when we stopped using `extract` in [pull request #1565](https://github.com/INN/largo/pull/1565/). [Pull request #]() for [issue #1717](https://github.com/INN/largo/issues/1717).
 - Added support for `wp_body_open` hook below opening body tag. [Pull request #1735](https://github.com/INN/largo/pull/1735) for [issue #1698](https://github.com/INN/largo/issues/1698).
 - Added `font-display: block` to `fontello` font family. [Pull request #1742](https://github.com/INN/largo/pull/1742) for [issue #1686](https://github.com/INN/largo/issues/1686).
+- Replaced image settings in the Largo Series Posts widget to mirror the image settings in the Largo Recent Posts widget. [Pull request #1734](https://github.com/INN/largo/pull/1734) for [issue #1727](https://github.com/INN/largo/issues/1727).
 
 ## [Largo 0.6.3](https://github.com/INN/largo/compare/v0.6.2...v0.6.3)
 
