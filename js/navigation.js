@@ -103,11 +103,13 @@
 
 
   Navigation.prototype.stickyNavScrollCallback = function(event) {
-    // @todo what does this do?
     if (
+      // if we're scrolled past the top of the page
       $(window).scrollTop() < 0
+      // or if the window is taller than the document
       || ($(window).scrollTop() + $(window).outerHeight()) >= $(document).outerHeight()
     ) {
+      // then it doesn't make sense to do the logic here; the page won't scroll
       return;
     }
 
@@ -115,6 +117,7 @@
         direction = this.scrollDirection(),
         callback, wait;
 
+    // this.mainEl (#main) exists in all Largo templates.
     if ( $(window).scrollTop() <= this.mainEl.offset().top ) {
       // we're near the top of the page, so now let's consider whether to hide the sticky nav:
       // if main_nav_hide_article is true, mainNavEl won't exist.
@@ -122,21 +125,22 @@
         // the main nav exists and is visible,
         // so we should hide the sticky nav
         this.stickyNavEl.removeClass('show');
-
-        // @todo should there be a return here?
+        clearTimeout(this.scrollTimeout);
+        return; // don't need to do the other logic; it shouldn't show anyways
       }
-      // @todo should this timeout clearer be removed?
-      clearTimeout(this.scrollTimeout);
     }
 
-
-    // Abort if the scroll direction is the same as it was.
-    // Abort if the page has not been scrolled.
     if (
-      this.previousScroll == direction
-      || !this.previousScroll
+      !this.previousScroll
     ) {
-      console.log( this.previousScroll, direction );
+      // if the page has not been scrolled,
+      // Update the scroll direction,
+      // then continue to the logic that would control whether to show it or not.
+      this.previousScroll = direction;
+    } else if ( this.previousScroll == direction ) {
+      // if we're scrolling in the same direction,
+      // update the scroll direction,
+      // and end this function because the directional code has nothing to add.
       this.previousScroll = direction;
       return;
     }
