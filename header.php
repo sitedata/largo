@@ -42,6 +42,21 @@
 
 <body <?php body_class(); ?>>
 
+	<?php 
+
+		/**
+		 * Fires right after the opening body tag.
+		 * 
+		 * @since 0.6.4
+		 */
+		if ( function_exists( 'wp_body_open' ) ) {
+			wp_body_open();
+		} else {
+			do_action( 'wp_body_open' );
+		}
+
+	?>
+
 	<div id="top"></div>
 
 	<?php
