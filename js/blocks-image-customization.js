@@ -1,33 +1,4 @@
 const { createHigherOrderComponent } = wp.compose;
- 
-// we can't use es6 syntax, so here's the equivalent of
-// `<BlockListBlock { ...props } props={ args } />`
-function _extends() { 
-
-    _extends = Object.assign || function ( target ) { 
-
-        for ( var i = 1; i < arguments.length; i++ ) { 
-
-            var source = arguments[i]; 
-
-            for ( var key in source ) { 
-
-                if ( Object.prototype.hasOwnProperty.call( source, key ) ) { 
-
-                    target[key] = source[key]; 
-
-                } 
-
-            } 
-
-        } 
-
-        return target; 
-
-    }; 
-    
-    return _extends.apply( this, arguments ); 
-}
 
 var largo_core_image_block_add_media_credit = createHigherOrderComponent( function ( BlockListBlock ) {
 
@@ -71,7 +42,7 @@ var largo_core_image_block_add_media_credit = createHigherOrderComponent( functi
 
     }
 
-    return React.createElement( BlockListBlock, _extends( {}, props ) );
+    return React.createElement( BlockListBlock, props );
 
   };
 
