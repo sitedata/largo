@@ -1,16 +1,47 @@
-const {assign} = lodash;
+const { createHigherOrderComponent } = wp.compose;
+ 
+// we can't use es6 syntax, so here's the equivalent of
+// `<BlockListBlock { ...props } props={ args } />`
+function _extends() { 
 
-function largo_core_image_block_add_media_credit( element, blockType, attribute ){
+    _extends = Object.assign || function ( target ) { 
 
-    if( blockType.name === 'core/image' ){
+        for ( var i = 1; i < arguments.length; i++ ) { 
 
-        var attachment_id = attribute.id;
+            var source = arguments[i]; 
+
+            for ( var key in source ) { 
+
+                if ( Object.prototype.hasOwnProperty.call( source, key ) ) { 
+
+                    target[key] = source[key]; 
+
+                } 
+
+            } 
+
+        } 
+
+        return target; 
+
+    }; 
+    
+    return _extends.apply( this, arguments ); 
+}
+
+var largo_core_image_block_add_media_credit = createHigherOrderComponent( function ( BlockListBlock ) {
+
+  return function ( props ) {
+
+    if( props.name === 'core/image' ){
+
+        var attachment_id = props.attributes.id;
         var media = new wp.api.models.Media( { id: attachment_id } );
 
         var media_response = media.fetch().then( function( media ) {
 
             // the original instance of the media caption
-            var attachment_caption = attribute.caption;
+            var attachment_caption = props.attributes.caption;
 
             if( media.media_credit && media.media_credit._media_credit ){
 
@@ -26,28 +57,28 @@ function largo_core_image_block_add_media_credit( element, blockType, attribute 
 
                 // if our media attachment caption already includes `largo-attachment-media-credit`,
                 // which is the class of our span, don't do anything more
-                if( attachment_caption.includes( 'wp-media-credit' ) ){
-
-                    return;
-                
-                // else, our media credit probably doesn't exist. let's add it in
-                } else {
+                if( ! attachment_caption.includes( 'wp-media-credit' ) ){
 
                     var attachment_caption = media_credit + attachment_caption;
 
-                    // return our attribute with its new caption
-                    return Object.assign( attribute, { caption: attachment_caption } );
-
+                    props.attributes.caption = attachment_caption;
+                    
                 }
 
             }
 
         });
-    }
-}
 
-wp.hooks.addFilter(
-    'blocks.getSaveContent.extraProps',
-    'largo-core-block-customizations/get-save-content/extra-props',
-    largo_core_image_block_add_media_credit
+    }
+
+    return React.createElement( BlockListBlock, _extends( {}, props ) );
+
+  };
+
+}, 'largo_core_image_block_add_media_credit');
+ 
+wp.hooks.addFilter( 
+    'editor.BlockEdit', 
+    'largo-core-block-customizations/editor/block-edit', 
+    largo_core_image_block_add_media_credit 
 );
