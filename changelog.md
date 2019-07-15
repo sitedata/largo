@@ -23,6 +23,7 @@ though this project doesn't succeed in adhering to [Semantic Versioning](https:/
 - Fixes multiple `Undefined variable: post` errors in `homepage/templates/top-stories.php`. [Pull request #1728](https://github.com/INN/largo/pull/1728) for [issue #1723](https://github.com/INN/largo/issues/1723).
 - Fixes an issue where the widget title wasn't displaying in the Largo Image Widget, due to trying to use the `$title` variable which was removed when we stopped using `extract` in [pull request #1565](https://github.com/INN/largo/pull/1565/). [Pull request #]() for [issue #1717](https://github.com/INN/largo/issues/1717).
 - Added support for `wp_body_open` hook below opening body tag. [Pull request #1735](https://github.com/INN/largo/pull/1735) for [issue #1698](https://github.com/INN/largo/issues/1698).
+- Updated pull quote block styles so they can be easily differentiated from regular block quote blocks. [Pull request #1746](https://github.com/INN/largo/pull/1746) for [issue #1699](https://github.com/INN/largo/issues/1699).
 
 ## [Largo 0.6.3](https://github.com/INN/largo/compare/v0.6.2...v0.6.3)
 
