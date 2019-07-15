@@ -1,0 +1,22 @@
+/*
+* This is a shim to fix left/right aligned images being misaligned with paragraphs.
+* Largo issue: https://github.com/INN/largo/issues/1731
+* Gutenberg issue: https://github.com/WordPress/gutenberg/issues/16241
+*/
+
+.entry-content {
+    .wp-block-image {
+        .alignleft {
+            display: inline-table;
+        }
+        .alignright {
+            display: inline-table;
+        }
+    }
+}  
+figure.wp-block-image {
+    margin: auto;
+}
+div.wp-block-image {
+    margin: auto;
+}
