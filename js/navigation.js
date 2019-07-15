@@ -11,6 +11,9 @@
   /*
    * This is a shim to cover for the case where a browser may or may not have scrollbars
    * @link https://github.com/jquery/jquery/issues/1729
+   *
+   * In some browsers, having the Inspector Tools docked within the browser in a sidebar
+   * configuration may cause abnormal readings for this value.
    */
   Navigation.prototype.windowwidth = function() {
     return Math.max(window.outerWidth, $(window).width());
