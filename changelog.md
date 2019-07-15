@@ -5,25 +5,79 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 though this project doesn't succeed in adhering to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Largo 0.6.2](https://github.com/INN/largo/compare/v0.6.1...0.5-dev)
+## [Largo 0.6.4](https://github.com/INN/largo/compare/v0.6.3...v0.6.4)
 
-This release contains bug fixes for Largo 0.6.
+### Developer-facing improvements
+
+- Adds `largo_category_after_primary_featured_post` hook between primary and secondary featured posts on the `category.php` template. [Pull request #1703](https://github.com/INN/largo/pull/1703) by [@megabulk](https://github.com/megabulk).
+- Adds `largo_series_before_stories` hook before stories on the `series-landing.php` template. [Pull request #1703](https://github.com/INN/largo/pull/1703) by [@megabulk](https://github.com/megabulk).
+- Adds `largo_archive_before_stories` hook before stories on the `archive.php` template. [Pull request #1703](https://github.com/INN/largo/pull/1703) by [@megabulk](https://github.com/megabulk).
+
+### Fixes and minor improvements
+
+- Updates `largo_home_single_top` function to get `homepage_feature_term` and `top_story_term` values from slug instead of by name. If these prominence names were updated to anything else, `homepage_feature_term` and `top_story_term` would be false and fallback to `__('Homepage Featured', 'largo')`. [Pull request #1709](https://github.com/INN/largo/pull/1709) for [issue #1445](https://github.com/INN/largo/issues/1445).
+- Removes separator `<span>` on search results page; puts the search result url on a new line instead of next to the date. Also adds a `overflow-wrap: breakword;` style to the search-result URL to make sure it doesn't overflow the result container. [Pull request #1710](https://github.com/INN/largo/pull/1710) for [issue #1509](https://github.com/INN/largo/issues/1509).
+- Fixes a `ReferenceError` in navigation menu JavaScript. [Pull request #1715](https://github.com/INN/largo/pull/1715) for [issue #1714](https://github.com/INN/largo/issues/1714).
+- Fixes an undefined variable error in certain edge cases of the site `og:description` and `description` meta tags. [Pull request #1724](https://github.com/INN/largo/pull/1724) for [issue #1721](https://github.com/INN/largo/issues/1721).
+- Co-Authors Plus profile field descriptions no longer contain escaped HTML. [Pull request #1726](https://github.com/INN/largo/pull/1726) for [issue #1720](https://github.com/INN/largo/issues/1720).
+- Fixes multiple `Undefined variable: post` errors in `homepage/templates/top-stories.php`. [Pull request #1728](https://github.com/INN/largo/pull/1728) for [issue #1723](https://github.com/INN/largo/issues/1723).
+- Fixes an issue where the widget title wasn't displaying in the Largo Image Widget, due to trying to use the `$title` variable which was removed when we stopped using `extract` in [pull request #1565](https://github.com/INN/largo/pull/1565/). [Pull request #]() for [issue #1717](https://github.com/INN/largo/issues/1717).
+- Added support for `wp_body_open` hook below opening body tag. [Pull request #1735](https://github.com/INN/largo/pull/1735) for [issue #1698](https://github.com/INN/largo/issues/1698).
+- Added `font-display: block` to `fontello` font family. [Pull request #1742](https://github.com/INN/largo/pull/1742) for [issue #1686](https://github.com/INN/largo/issues/1686).
+- Replaced image settings in the Largo Series Posts widget to mirror the image settings in the Largo Recent Posts widget. [Pull request #1734](https://github.com/INN/largo/pull/1734) for [issue #1727](https://github.com/INN/largo/issues/1727).
+
+## [Largo 0.6.3](https://github.com/INN/largo/compare/v0.6.2...v0.6.3)
+
+### Fixes and minor improvements
+
+- Fixes several issues with magnification behavior of images. [Pull request #1695](https://github.com/INN/largo/pull/1695) for [issue #1664](https://github.com/INN/largo/issues/1664)
+
+## [Largo 0.6.2](https://github.com/INN/largo/compare/v0.6.1...v0.6.2)
+
+This release brings improved compatibility with the WordPress Block Editor. The CSS class names `type-pull-quote`, `type-aside`, `alignleft`, `alignright`, `aligncenter` and `half` provided by Largo's "Module Wrapper" function in the Classic Editor are now supported on blocks via the "Additional CSS Classes" control, enabling improved pull quote display.
+
+This release removes support for Google Plus, which shut down on April 2, 2019.
+
+This release also contains a number of bug fixes and minor updates.
+
+Particular thanks go to outside contributors [@seanchayes](https://github.com/seanchayes) and [@megabulk](https://github.com/megabulk).
 
 ### Feature updates
 
+- Adds support for responsive embedded content, which is most noticeable with video content set to full width. [Pull request #1689](https://github.com/INN/largo/pull/1689) for [issue #1688](https://github.com/INN/largo/issues/1688).
+- Image and embed blocks aligned left/right, on viewports that are too small to display them reasonably in the indicated position, become 100% width of the column and lose their alignment. [Pull request #1630](https://github.com/INN/largo/pull/1630) by [@seanchayes](https://github.com/seanchayes) for [issue #1611](https://github.com/INN/largo/issues/1611).
+- Matches the default styles for Gutenberg's Pull Quote block with Largo's styles for `<blockquote>`. Adds styles for `<cite>` elements. [Pull Request #1687](https://github.com/INN/largo/pull/1687) for [issue #1682](https://github.com/INN/largo/issues/1682).
+- Ensures that the CSS classes used by Largo's Classic Editor plugin "Module Wrapper" can be used on pull quotes. [Pull Request #1687](https://github.com/INN/largo/pull/1687) for [issue #1682](https://github.com/INN/largo/issues/1682). If you'd like to make use of these classes by adding them to a Pull Quote block in the "Additional CSS Class" control of the "Advanced" section of the pull quote's block settings, the list of classes is as follows:
+	- `type-pull-quote`: appears larger in the story, with a slightly fancier presentation
+	- `type-aside`: appears smaller, without decoration
+	- `alignleft`: block is aligned left. This class may make it impossible to select the block in the editor with your mouse, requiring use of the keyboard to move the cursor into the block.
+	- `alignright`: block is aligned right. This class may make it impossible to select the block in the editor with your mouse, requiring use of the keyboard to move the cursor into the block.
+	- `aligncenter`: block is aligned center.
+	- `half`: Block is half the width of the column at all but the smallest screen widths.
+- Removed all Google+ profile fields in the admin interface and buttons on the front-end due to [Google+ being shut down](https://support.google.com/plus/answer/9217723#whatshappening) on April 2, 2019. [Pull request #1667](https://github.com/INN/largo/pull/1667) for [issue #1546](https://github.com/INN/largo/issues/1546).
+- Prevents search engine indexing on 404 and search results pages. This change is to keep up with SEO best practices, to preserve your crawl budget with Google, and to prevent a SEO hijacking attack whereby spammers search for their URL on your site, then get the resulting search query result page listed in search engines using your site's reputation. [Pull request #1674](https://github.com/INN/largo/pull/1673) for [issue #1615](https://github.com/INN/largo/issues/1615).
 - Updates INN's logos in the `img/` folder. If your child theme redefines the function `inn_logo()`, please update that function to reference the new SVG image locations in `img/`. [Pull request #1633](https://github.com/INN/largo/pull/1633) for [issue #1621](https://github.com/INN/largo/issues/1631)
+
+### Function updates
+
 - Adds the term's taxonomy slug and term slug in the format `taxonomy-term` as a class on the term in the output of `largo_top_term()`, `largo_category_and_tags()`, and `largo_maybe_top_term()`. [Pull request](https://github.com/INN/largo/pull/1648) for [issue #1646](https://github.com/INN/largo/issues/1646).
 - The arguments set on `largo_byline()` are now passed to the `largo_byline` filter as an array of argument name => argument value. [Pull request #1657](https://github.com/INN/largo/pull/1657) for [issue #1646](https://github.com/INN/largo/issues/1656).
+- Makes the function `largo_get_term_meta_post()` pluggable. [Pull request #1666](https://github.com/INN/largo/pull/1666) by GitHub user [@megabulk](https://github.com/megabulk).
+- Widget area name is now output as an HTML comment on many sidebars, to ease debugging widget presentations. [Pull request #1632](https://github.com/INN/largo/pull/1632) by [@seanchayes](https://github.com/seanchayes) for [issue #1492](https://github.com/INN/largo/issues/1482).
+- Added note to `category.php` template explaining how to modify displaying the featured posts on category pages. [Pull request #1676](https://github.com/INN/largo/pull/1676) for [issue #1595](https://github.com/INN/largo/issues/1595).
+- Upgrades ReadTheDocs build process. [Pull request #1680](https://github.com/INN/largo/pull/1680) for issues [#1616](https://github.com/INN/largo/issues/1616) and [#1456](https://github.com/INN/largo/issues/1456).
+- If Co-Authors Plus is active, and if a post has an `author` term, but the term has no corresponding `guest-author` post, when running `largo_byline()`, the byline will now contain an HTML comment informing why the byline is empty. If the `WP_DEBUG` or `LARGO_DEBUG` constants are true, Largo will add a message to the server's error log of the form "post 123 should have at least one co-author, but has none!" [Pull request #1607](https://github.com/INN/largo/pull/1607) for [Automattic/Co-Authors-Plus#637](https://github.com/Automattic/Co-Authors-Plus/issues/637) and as part of the general cleanup ticket [#1492](https://github.com/INN/largo/issues/1492).
 
-### Fixes
+### Fixes and minor improvements
 
+- Defines a new image size `96x96` for use on avatars and small square listing images. This is a bug fix; Largo has referred to such an image size for a long time but never made sure that such images existed. Sites worried about this issue may want to regenerate thumbnail images. [Pull request #1672](https://github.com/INN/largo/pull/1672) for [issue #1619](https://github.com/INN/largo/issues/1619).
 - Increases contrast of the floating social button icons against the background, to improve accessibility. [Pull request #1635](https://github.com/INN/largo/pull/1635/).
 - Fixes issue where floating social buttons were not clickable, because of z-index ordering. [Pull request #1635](https://github.com/INN/largo/pull/1635/) for [issue #1576](https://github.com/INN/largo/issues/1576).
 - Fixes links in social media buttons not respecting the blog's character set. [Pull request #1635](https://github.com/INN/largo/pull/1635/) for [issue #1283](https://github.com/INN/largo/issues/1283).
 - Fixes issue where `[module]content[/module]` was not rendering `content` in the output of the `largo_module_shortcode()` function. [Pull request #1645](https://github.com/INN/largo/pull/1645) for [issue #1639](https://github.com/INN/largo/issues/1639).
 - Function `largo_post_social_links` now respects the blog character set option. [Pull request #1635](https://github.com/INN/largo/pull/1635/) for [issue #1283](https://github.com/INN/largo/issues/1283).
 - Fixes PHP notices in class `Bootstrap_Walker_Nav_Menu`. [Pull request #1624](https://github.com/INN/largo/pull/1624) and [#1625](https://github.com/INN/largo/pull/1625) for [issue #1623](https://github.com/INN/largo/issues/1623) as part of [issue #1492](https://github.com/INN/largo/issues/1492).
-- Fixes a regression in the behavior of the Largo Follow widget. [Pull request #1600](https://github.com/INN/largo/pull/1600) for [issue #1599](https://github.com/INN/largo/issues/1599).
+- Fixes a regression in the behavior of the Largo Follow widget in Largo 0.6. [Pull request #1600](https://github.com/INN/largo/pull/1600) for [issue #1599](https://github.com/INN/largo/issues/1599).
 - Fixes issue where post excerpt and featured media were not being used for open graph tags on post types that are `is_singular()` but not `is_single()`. [Pull request #1604](https://github.com/INN/largo/pull/1604) for [issue #1602](https://github.com/INN/largo/issues/1602).
 - Prevents `largo_top_term()` from calling `largo_category_and_tags()` when the post ID argument passed to `largo_top_term()` does not match `get_the_ID`'s post ID, because there is presently no way to pass that ID to `largo_category_and_tags()`. [Pull request #1648](https://github.com/INN/largo/pull/1648) for [issue #1647](https://github.com/INN/largo/issues/1647).
 - Fixes improper post ID argument passed to `largo_top_term()` in the homepage featured stories zone. [Pull request #1648](https://github.com/INN/largo/pull/1648).
@@ -31,13 +85,23 @@ This release contains bug fixes for Largo 0.6.
 - Removes search form from global nav bar when on the search page, so that there's only one search form. [Pull request #1604](https://github.com/INN/largo/pull/1604).
 - Cleans up the search page when no query has been entered. [Pull request #1604](https://github.com/INN/largo/pull/1604) for [issue #1603](https://github.com/INN/largo/issues/1603).
 - Defines the index 'class' in `partials/widget-content.php` when using a large image. [Pull request #1606](https://github.com/INN/largo/pull/1606) for issues [#1605](https://github.com/INN/largo/issues/1605) and [#1492](https://github.com/INN/largo/issues/1492).
-- If Co-Authors Plus is active, and if a post has an `author` term, but the term has no corresponding `guest-author` post, when running `largo_byline()`, the byline will now contain an HTML comment informing why the byline is empty. If the `WP_DEBUG` or `LARGO_DEBUG` constants are true, Largo will add a message to the server's error log of the form "post 123 should have at least one co-author, but has none!" [Pull request #1607](https://github.com/INN/largo/pull/1607) for [Automattic/Co-Authors-Plus#637](https://github.com/Automattic/Co-Authors-Plus/issues/637) and as part of the general cleanup ticket [#1492](https://github.com/INN/largo/issues/1492).
+- Fix for posts with "Featured in category" selected not displaying on category RSS feeds. [Pull request #1668](https://github.com/INN/largo/pull/1668) for [issue #1598](https://github.com/INN/largo/issues/1598).
+- Fixes issue where prominence terms were not saving with the Block Editor, because the "Post Prominence" metabox was output twice. [Pull request #1655](https://github.com/INN/largo/pull/1655) for [issue #1654](https://github.com/INN/largo/issues/1654).
+- Fixes issue where the header ad widget area and before-footer widget area could extend beyond the viewport, causing horizontal scrolling on narrower screens. [Pull request #1673](https://github.com/INN/largo/pull/1673) for [issue #1670](https://github.com/INN/largo/issues/1670).
+- Uses `validate_file()` when using `require_once`. [Pull request #1589](https://github.com/INN/largo/pull/1589) for [issue #1494](https://github.com/INN/largo/issues/1494).
+- Added `display: block;` style attribute to `.navis-slideshow.navis-full` to prevent full size images from not displaying properly due to the `display: table;` attribute on all `.wp-block-image` alignment classes. [Pull request #1675](https://github.com/INN/largo/pull/1675) for [issue #1664](https://github.com/INN/largo/issues/1664).
+- Fixed issue with display of slideshows within column blocks. [Pull request #1658](https://github.com/INN/largo/pull/1685) for [issue #1681](https://github.com/INN/largo/issues/1681).
+- Overrides some default Gutenberg block styles to fit Largo styling better since they were not breaking properly between 781px and 600px. [Pull request #1679](https://github.com/INN/largo/pull/1679) for [issue #1658](https://github.com/INN/largo/issues/1658).
+- Removes a doubled `</a>` tag from menu dropdown parents. [Pull request 1684](https://github.com/INN/largo/pull/1684) by [@megabulk](https://github.com/megabulk).
+- Adds an `empty()` check to `largo_maybe_top_term()` to better check for the lack of a top term on a post when deciding whether to output top term markup. [Pull request #1613](https://github.com/INN/largo/pull/1613)
 - Further cleans up undefined variables.
 
 ### Upgrade notices
 
-- If you have a custom `partials/nav-global.php` you may want to copy the `if ( ! is_search() ) { ... }` logic from [pull request #1604](https://github.com/INN/largo/pull/1604/) to reduce user confusion about which search form to use.
 - If your child theme redefines the function `inn_logo()`, please update that function to reference the new INN logo SVG image locations in `img/`.
+- If you have a custom `partials/nav-global.php` you may want to copy the `if ( ! is_search() ) { ... }` logic from [pull request #1604](https://github.com/INN/largo/pull/1604/) to reduce user confusion about which search form to use.
+- If your site has replaced or modified Largo's navigation.js, you may want to reassess that in light of the changes made in [#1544](https://github.com/INN/largo/pull/1544).
+
 
 ## [Largo 0.6.1](https://github.com/INN/largo/compare/v0.6...v0.6.1)
 
@@ -47,7 +111,8 @@ This release contains bug fixes for Largo 0.6.
 
 - Uses [`filemtime()`](https://secure.php.net/manual/en/function.filemtime.php) as the version number for more enqueued assets, meaning that cachebusting will be handled by file modification time and not by Largo version. [Pull Request #1575](https://github.com/INN/largo/pull/1575) for [issue #1550](https://github.com/INN/largo/issues/1550).
 - For many assets where no version number was provided for enqueued assets, `largo_version()` is now used. [Pull Request #1575](https://github.com/INN/largo/pull/1575) for [issue #1550](https://github.com/INN/largo/issues/1550).
-- Removes the list of recommended plugins displayed on new installations of Largo. [Pull Request #1580](https://github.com/INN/largo/pull/1580) for [issue #1570](https://github.com/INN/largo/issues/1570). We'll be bringing this list back in an updated form on an INN website; stay tuned.
+- Removes the list of recommended plugins displayed on new installations of Largo. [Pull Request #1580](https://github.com/INN/largo/pull/1580) for [issue #1570](https://github.com/INN/largo/issues/1570).
+- Adds a `rect_thumb_half` image size of 400x300, cropped, for use in areas where the fixed aspect ratio of `rect_thumb` is desired, but `rect_thumb` is too big. [PR #1584](https://github.com/INN/largo/pull/1584).
 
 ### Fixes
 
@@ -61,7 +126,7 @@ This release contains bug fixes for Largo 0.6.
 
 - Lays groundwork for testing Largo under PHP 7.3. [Pull request #1587](https://github.com/INN/largo/pull/1587) for [issue #1579](https://github.com/INN/largo/issues/1579).
 - Adds a pip `requirements.txt` for Sphinx dependencies required by Grunt tasks used during the development process. [Pull request #1585](https://github.com/INN/largo/pull/1585) for [issue #1359](https://github.com/INN/largo/issues/1359).
-- Removes several unneccessary Grunt tasks from the Gruntfile, and their dependencies. [Pull request #1585](https://github.com/INN/largo/pull/1585) for [issue #1540](https://github.com/INN/largo/issues/1540).
+- Removes several unnecessary Grunt tasks from the Gruntfile, and their dependencies. [Pull request #1585](https://github.com/INN/largo/pull/1585) for [issue #1540](https://github.com/INN/largo/issues/1540).
 - Removes some old developer setup instructions from the largo.readthedocs.io setup instructions. [Pull request #1585](https://github.com/INN/largo/pull/1585).
 
 ## [Largo 0.6](https://github.com/INN/largo/compare/v0.5.5.4...v0.6)
@@ -70,8 +135,8 @@ Special thanks to our community contributors:
 - Mike Schinkel for his work on [pull request #1469](https://github.com/INN/largo/pull/1469) at WordCamp for Publishers 2017's Contributor Day
 - GitHub user [fenriz07](https://github.com/fenriz07) for their work in [PR #1541](https://github.com/INN/largo/pull/1541) on updating links in our documentation
 
-
 ### New Features
+
 - Adds Gutenberg support, with
 	- editor styles
 	- support for the `.alignwide` and `.alignfull` CSS classes and their use in blocks

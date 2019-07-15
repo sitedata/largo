@@ -19,7 +19,6 @@ $entry_classes = 'entry-content';
 
 		<small class="date-link">
 			<span class="date"><?php largo_time(); ?></span>
-			<span class="sep">|</span>
 			<a href="<?php the_permalink(); ?>" title="<?php the_permalink(); ?>" rel=""><?php the_permalink(); ?></a>
 		</small>
 

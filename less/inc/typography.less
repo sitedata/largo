@@ -203,6 +203,7 @@ del {
 // Fancy Post Formatting
 // --------------------------------------------
 
+.blockquote,
 blockquote {
   box-sizing: border-box;
   clear: both;
@@ -211,21 +212,35 @@ blockquote {
   margin: @baseline;
   border-left: 5px solid @grayLighter;
 
+  &.alignleft,
   .alignleft & {
     border-right: 5px solid @grayLighter;
     border-left: none;
     margin-left: 0;
+
+    cite {
+      text-align: right;
+    }
   }
+  &.alignright,
   .alignright & {
     margin-right: 0;
+    border-right: none; // override Gutenberg's editor styles
+
+    cite {
+      text-align: left;
+    }
   }
+  &.aligncenter,
   .aligncenter & {
     border: none;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   p {
     font-size: @baseFontSize;
-    margin: @baseline/2 0;
+    margin: 0.75em 0;
     line-height: 1.5;
   }
   small {

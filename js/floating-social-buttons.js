@@ -7,6 +7,15 @@
   };
 
   var maybeShowSocialPalette = function() {
+
+    // If any figure in the post has `navis-full` class,
+    // go ahead and stop this function. we don't want to show the buttons
+    if( $('figure').hasClass('navis-full') ){
+
+      return false;
+      
+    }
+
     var stickyNavHeight = (!!$('.sticky-nav-holder').length)? $('.sticky-nav-holder').outerHeight() : 0,
         adminBar = (!!$('#wpadminbar').length)? $('#wpadminbar').outerHeight(): 0;
 

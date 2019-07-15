@@ -11,17 +11,22 @@
   /*
    * This is a shim to cover for the case where a browser may or may not have scrollbars
    * @link https://github.com/jquery/jquery/issues/1729
+   * @link https://github.com/INN/largo/pull/1369
    *
    * In some browsers, having the Inspector Tools docked within the browser in a sidebar
    * configuration may cause abnormal readings for this value.
    */
   Navigation.prototype.windowwidth = function() {
-    return Math.max(window.outerWidth, $(window).width());
+    return Math.max(window.innerWidth, $(window).width());
   }
 
+  /**
+   * Set up the Navigation object
+   */
   Navigation.prototype.init = function() {
     // Dropdowns on touch screens
     this.enableMobileDropdowns();
+    this.toggleTouchClass();
 
     // Stick navigation
     this.stickyNavEl = $('.sticky-nav-holder');
@@ -29,7 +34,10 @@
     this.mainEl = $('#main');
     this.mainNavEl = $('#main-nav');
 
-    if ( this.windowwidth() > 768) {
+    // the currently-open menu Element (not a jQuery object);
+    this.openMenu = false;
+
+    if (this.windowwidth() > 768) {
       this.stickyNavTransition();
     }
 
@@ -39,38 +47,102 @@
     // Deal with long/wrapping navs
     setTimeout(this.navOverflow.bind(this), 0);
 
-    // Sticky nav on small viewports
+    // Nav on small viewports
     this.responsiveNavigation();
+
+    // Nav on touch devices on large viewports
+    this.touchDropdowns();
 
     return this;
   };
 
-  Navigation.prototype.enableMobileDropdowns = function () {
-    // Touch enable the drop-down menus
-    if (Modernizr.touch) {
-      // iOS Safari works with touchstart, the rest work with click
-      var mobileEvent = /Mobile\/.+Safari/.test(navigator.userAgent) ? 'touchstart' : 'click',
-      // Open the drop down
-      openMenu = false;
+  /**
+   * Run the Modernizr.touch and Modernizr.pointerevents tests at will
+   *
+   * because Modernizr doesn't allow rerunning the tests, so the availablilty of an input device changes while the page is loaded, the Modernizr.touch property will be inaccurate
+   *
+   * @link https://github.com/Modernizr/Modernizr/blob/e2c27dcd32d6185846ce3c6c83d7634cfa402d19/feature-detects/touchevents.js
+   * @link https://github.com/Modernizr/Modernizr/blob/e2c27dcd32d6185846ce3c6c83d7634cfa402d19/feature-detects/pointerevents.js
+   * @return bool whether or not this is (probably) a touch device at this time
+   */
+  Navigation.prototype.touch = function () {
+    if (('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch) {
+      return true;
+    }
 
-      // Call this to close the open menu
-      var closeOpenMenu = function() {
-        if (openMenu) {
-          openMenu.removeClass('open');
-          openMenu = false;
-        }
+    domPrefixes = Modernizr._domPrefixes;
+    var bool = false,
+           i = domPrefixes.length;
+
+    // Don't forget un-prefixed...
+    bool = Modernizr.hasEvent('pointerdown');
+
+    while (i-- && !bool) {
+      if (Modernizr.hasEvent(domPrefixes[i] + 'pointerdown')) {
+        bool = true;
+      }
+    }
+    return bool;
+  }
+
+  /**
+   * If a nav dropdown element is open, and something outside is clicked, close the menu
+   */
+  Navigation.prototype.enableMobileDropdowns = function () {
+    var self = this;
+
+    // Call this to close the open menu
+    var closeOpenMenu = function(event) {
+      // If it is a touch event, get rid of the click events.
+      if (event.type == 'touchstart') {
+        $(this).off('click.touchDropdown');
       }
 
-      // Close the open menu when the user taps elsewhere
-      $('body').on(mobileEvent, closeOpenMenu);
+      if (self.openMenu) {
+        if (self.openMenu.parentElement.contains( event.target ) ) {
+          // gotta navigate.
+          window.location = event.target.href;
+          // for top-level items, the link is handled natively.
+          // items in the dropdown, it isn't.
+        }
+
+        self.openMenu.parentNode.classList.remove('open');
+        self.openMenu = false;
+        // we can't event.preventDefault here because of Chrome/Opera:
+        // https://www.chromestatus.com/feature/5093566007214080
+      }
     }
+
+    // Close the open menu when the user taps elsewhere
+    // Should this be scoped to not be on document/html/body?
+    // No; because div.global-nav-bg #page and div.footer-bg are separate things,
+    // and together they do not cover all of body.
+    $('body').on('touchstart.touchDropdown click.touchDropdown' , closeOpenMenu);
   };
+
+  /**
+   * Toggle the Modernizr-added .touch and .no-touch classes
+   */
+  Navigation.prototype.toggleTouchClass = function () {
+    $html = $('html');
+    if (this.touch()) {
+      $html.addClass('touch').removeClass('no-touch');
+    } else {
+      $html.addClass('no-touch').removeClass('touch');
+    }
+  }
 
   Navigation.prototype.bindEvents = function() {
     $(window).resize(this.navOverflow.bind(this));
+    $(window).resize(this.enableMobileDropdowns.bind(this));
+    $(window).resize(this.toggleTouchClass.bind(this));
+    $(window).resize(this.touchDropdowns.bind(this));
     this.bindStickyNavEvents();
   };
 
+  /**
+   * Attach sticky nav resize event handlers to their events
+   */
   Navigation.prototype.bindStickyNavEvents = function() {
     var self = this;
 
@@ -192,15 +264,85 @@
     return direction;
   };
 
+  /**
+   * Touch/click event handler for sticky nav and main nav items
+   *
+   * Goals:
+   * - open when tapped, event.preventDefault
+   * - when open, click on link follows that link
+   *
+   * Largo does not support a three-level menu, so no need to worry about dropdowns off the dropdown.
+   *
+   * @todo: prevent this from triggering on the mobile nav
+   */
+  Navigation.prototype.touchDropdowns = function() {
+
+    /*
+     * Define some event handlers
+     */
+
+    // Open the drawer when touched or clicked
+    function touchstart(event) {
+      // prevents this from running when the sandwich menu button is visible:
+      // prevents this from running when we're doing the "phone" menu
+      if ($('.navbar .toggle-nav-bar').css('display') !== 'none') {
+        return false;
+      }
+
+      if ($(this).closest('.dropdown').hasClass('open')) {
+      } else {
+        // If it is a touch event, get rid of the click events.
+        if (event.type == 'touchstart') {
+          $(this).off('click.toggleNav');
+        }
+        $(this).parent('.dropdown').addClass('open');
+        $(this).parent('.dropdown').addClass('open');
+        self.openMenu = this;
+        event.preventDefault();
+        event.stopPropagation();
+      }
+    }
+
+    // if the touch is canceled, close the nav
+    function touchcancel(event) {
+      $(this).parent('.dropdown').removeClass('open');
+    }
+
+    /*
+     * Attach or detach them as appropriate
+     */
+
+    var self = this;
+
+    // a selector that applies to both main-nav and sticky nav elements
+    $('.nav li > .dropdown-toggle').each(function() {
+      var $button = $(this);
+
+      if(self.windowwidth() > 768 ){
+        $button.on('touchstart.toggleNav click.toggleNav', touchstart);
+        $button.on('touchcancel.toggleNav', touchcancel);
+        $button.off('touchstart.toggleNav click.toggleNav');
+        $button.off('touchcancel.toggleNav');
+      }
+    });
+
+  }
+
+  /**
+   * Touch menu interactions and menu appearance on "phone" screen sizes.
+   */
   Navigation.prototype.responsiveNavigation = function() {
     var self = this;
 
-    // Responsive navigation
+    // Tap/click this button to open/close the phone navigation, which shows on narrower viewports
     $('.navbar .toggle-nav-bar').each(function() {
+      // the hamburger
       var toggleButton = $(this),
-          navbar = toggleButton.closest('.navbar');
+        // the parent nav of the hamburger
+        navbar = toggleButton.closest('.navbar');
 
       // Support both touch and click events
+      // The .toggleNav here is namespacing the click event: https://api.jquery.com/on/#event-names
       toggleButton.on('touchstart.toggleNav click.toggleNav', function(event) {
         // If it is a touch event, get rid of the click events.
         if (event.type == 'touchstart') {
@@ -221,16 +363,19 @@
         return false;
       });
 
-      // Secondary nav
+      // Secondary nav items in the drop-down
       navbar.on('touchstart.toggleNav click.toggleNav', '.nav-shelf .caret', function(event) {
-        if (toggleButton.css('display') == 'none')
+        // prevents this from running when the sandwich menu button is not visible:
+        // prevents this from running when we're not doing the "phone" menu
+        if (toggleButton.css('display') == 'none') {
           return false;
+        }
 
         if (event.type == 'touchstart') {
           navbar.off('click.toggleNav', '.nav-shelf .dropdown-toggle');
         }
 
-        var li = $( event.target ).closest('li');
+        var li = $(event.target).closest('li');
 
         if (!li.hasClass('open')) {
           navbar.find('.nav-shelf li.open').removeClass('open');
@@ -269,7 +414,6 @@
         shelfWidth = shelf.outerWidth(),
         rightWidth = right.outerWidth(),
         caretWidth = nav.find('.caret').first().outerWidth(),
-        windowWidth = this.windowwidth(),
         isMobile = button.is(':visible');
 
     if (!isMobile) {
@@ -281,7 +425,7 @@
        * Calculate the width of the nav
        */
       var navWidth = 0;
-      shelf.find('ul.nav > li').each( function() {
+      shelf.find('ul.nav > li').each(function() {
         if ($(this).is(':visible'))
           navWidth += $(this).outerWidth();
       });
@@ -332,7 +476,7 @@
        * If the nav is still wrapping, call navOverflow again.
        */
       var navWidth = 0;
-      shelf.find('ul.nav > li').each( function() {
+      shelf.find('ul.nav > li').each(function() {
         if ($(this).is(':visible'))
           navWidth += $(this).outerWidth();
       });
@@ -377,7 +521,7 @@
       shelf.find('ul.nav > li.menu-item').last().after(li);
     });
 
-    if (overflow.find('ul li').length == 0 ) {
+    if (overflow.find('ul li').length == 0) {
       overflow.remove();
     }
   };
@@ -385,8 +529,11 @@
   if (typeof window.Navigation == 'undefined')
     window.Navigation = Navigation;
 
+  /**
+   * Initialize the Navigation
+   */
   $(document).ready(function() {
-    new Navigation();
+    // make this Navigation available to inspectors.
+    window.Largo.navigation = new Navigation();
   });
-
 })();

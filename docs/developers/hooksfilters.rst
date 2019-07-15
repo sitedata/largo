@@ -39,21 +39,20 @@ Other filters and actions
 
 filter: **largo_additional_networks**
 
-    Called in `inc/widgets/largo-follow.php` and 'inc/header-footer.php' to allow child themes to add additional social networks for social buttons, etc.`_.
-post type.
+    Called in `inc/widgets/largo-follow.php` and `inc/header-footer.php` to allow child themes to add additional social networks for social buttons, etc.
 
     **Usage:** ::
 
     function gijn_additional_networks( $networks ) {
-		if ( of_get_option( 'listserv_link' ) ) {
-			$gijn_networks = array( 
-				'listserv' => 'Join The GIJN Listserv'
-			);
-			$networks = array_merge( $networks, $gijn_networks );
-		}
-		return $networks;
-	}
-	add_filter( 'largo_additional_networks', 'gijn_additional_networks' );
+        if ( of_get_option( 'listserv_link' ) ) {
+            $gijn_networks = array( 
+                'listserv' => 'Join The GIJN Listserv'
+            );
+            $networks = array_merge( $networks, $gijn_networks );
+        }
+        return $networks;
+    }
+    add_filter( 'largo_additional_networks', 'gijn_additional_networks' );
 
 filter: **largo_archive_{$post_type}_title**
 
@@ -362,9 +361,18 @@ These actions are run on all homepage templates, including the Legacy Three Colu
 **category.php**
 
  - **largo_category_after_description_in_header** - between the ``div.archive-description`` and before ``get_template_part('partials/archive', 'category-related');``.
+ - **largo_category_after_primary_featured_post** - between the ``div.primary-featured-post`` and before the ``div.secondary-featured-post``.
  - **largo_before_category_river** - just before the river of stories at the bottom of the category archive page (for adding a header to this column, for example)
  - **largo_loop_after_post_x** - runs after every post, with arguments ``$counter`` and ``context`` describing which post it's running after and what the context is. (In categories, the context is ``archive``.)
  - **largo_after_category_river** - immediately after the river of stories at the bottom of the category archive page, after the Load More Posts button (for adding a footer to this column, for example.)
+
+**series-landing.php**
+
+ - **largo_series_before_stories** - at the top of the column of ``div.stories``.
+
+**archive.php**
+
+ - **largo_archive_before_stories** - at the top of the column of ``div.stories``.
 
 **search.php**
 

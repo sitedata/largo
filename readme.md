@@ -10,7 +10,8 @@ A responsive WordPress framework designed for news publishers and developed by t
 
 The project extends work done by [NPR's Project Argo](http://argoproject.org/).
 
-**Current version:** v0.6.1
+**Current version:** [v0.6.3](https://github.com/INN/largo/releases)
+**Working version:** 0.6.4-prerelease
 
 **Changelog** is available in this repository: [changelog.md](./changelog.md)
 
@@ -52,37 +53,41 @@ Feedback, comments and questions to: [largo@inn.org](mailto:largo@inn.org)
 
 Built and maintained by the [Institute for Nonprofit News](http://inn.org) product and technology team ([@INNNerds](http://twitter.com/INNNerds)):
 
-- **[Kay Lima](https://github.com/kaylima)**, Acting Director
+- **[Kay Lima](https://github.com/kaylima)**, Director
 - **[Ben Keith](https://github.com/benlk)** ([@benlkeith](http://twitter.com/benlkeith)), Lead Developer
-- **[Tyler Machado](https://github.com/tylermachado)** ([@tylermachado](https://twitter.com/tylermachado)), Front-End Developer
 - **Paola Baradello**, Account Director
+- **[Miranda Krapf](https://github.com/MirandaEcho)**, Project Manager
+- **[Josh Darby](https://github.com/joshdarby)**, Senior Developer
 
 Special thanks to everyone who has contributed to the project, including the following alphabetical list of people:
-- [@aschweigert](https://github.com/aschweigert)
-- [@gabehong](https://github.com/gabehong)
-- [@julia67](https://github.com/julia67)
-- [@rclations](https://github.com/rclations)
-- [DrewAPicture](http://github.com/drewapicture)
-- [GaryJones](http://github.com/garyjones)
-- [MsPseudolus](https://github.com/MsPseudolus)
+- [aschweigert](https://github.com/aschweigert)
 - [danielbachhuber](http://github.com/danielbachhuber)
+- [DrewAPicture](http://github.com/drewapicture)
 - [drywall](http://github.com/drywall)
 - [fenriz07](http://github.com/fenriz07)
+- [gabehong](https://github.com/gabehong)
+- [GaryJones](http://github.com/garyjones)
 - [jackbrighton](http://github.com/jackbrighton)
 - [jmusal](https://github.com/jmusal)
 - [joshuarrrr](http://github.com/joshuarrrr)
+- [julia67](https://github.com/julia67)
 - [kaeti](https://github.com/kaeti)
 - [lindamood](http://github.com/lindamood)
+- [megabulk](https://github.com/megabulk)
 - [meredithinn](http://github.com/meredithinn)
 - [mikeschinkel](https://github.com/mikeschinkel)
 - [mospaw](http://github.com/mospaw)
+- [MsPseudolus](https://github.com/MsPseudolus)
 - [nacin](http://github.com/nacin)
 - [nipoez](http://github.com/nipoez)
 - [ntwb](https://github.com/ntwb)
 - [palewire](http://github.com/palewire)
+- [rclations](https://github.com/rclations)
 - [rnagle](https://github.com/rnagle)
 - [seamusleahy](http://github.com/seamusleahy)
+- [seanchayes](https://github.com/seanchayes)
 - [tothebeat](http://github.com/tothebeat)
+- [tylermachado](https://github.com/tylermachado)
 - [willhaynes](http://github.com/willhaynes)
 - [yayannabelle](https://github.com/yayannabelle)
 - and the whole news nerd and WordPress communities.

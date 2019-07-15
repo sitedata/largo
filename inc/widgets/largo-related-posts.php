@@ -49,7 +49,7 @@ class largo_related_posts_widget extends WP_Widget {
 				$rel_posts->the_post();
 				echo '<li>';
 
-				echo '<a href="' . get_permalink() . '"/>' . get_the_post_thumbnail( get_the_ID(), 'thumbnail', array( 'class' => '' ) ) . '</a>';
+				echo '<a href="' . get_permalink() . '">' . get_the_post_thumbnail( get_the_ID(), 'thumbnail', array( 'class' => '' ) ) . '</a>';
 				?>
 
 				<h4><a href="<?php the_permalink(); ?>" title="Read: <?php esc_attr( the_title( '','', FALSE ) ); ?>"><?php the_title(); ?></a></h4>

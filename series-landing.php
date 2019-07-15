@@ -84,6 +84,7 @@ endif;
 ?>
 
 <div id="content" class="span<?php echo $content_span[ $opt['cftl_layout'] ]; ?> stories" role="main">
+<?php do_action( 'largo_series_before_stories' ); ?>
 <?php
 
 global $wp_query, $post;
