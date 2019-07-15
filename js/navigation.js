@@ -83,24 +83,6 @@
     this.stickyNavResizeCallback();
   };
 
-  // Hide the sticky nav if we're too close to the top of the page
-  Navigation.prototype.stickyNavScrollTopHide = function() {
-    if ( $(window).scrollTop() <= this.mainEl.offset().top ) {
-      // we're near the top of the page, so now let's consider whether to hide the sticky nav
-      if ( this.mainNavEl.is(':visible') ) {
-        // the main nav exists and is visible,
-        // so we should hide the sticky nav
-        this.stickyNavEl.removeClass('show');
-      } else {
-        // the main nav either doesn't exist or isn't visible,
-        // so we shouldn't hide the sticky nav
-        this.stickyNavEl.addClass('show');
-      }
-      clearTimeout(this.scrollTimeout);
-      return;
-    }
-  }
-
   Navigation.prototype.stickyNavResizeCallback = function() {
     if (
       this.windowwidth() <= 768 ||
@@ -119,8 +101,13 @@
     this.stickyNavTransitionDone();
   };
 
+
   Navigation.prototype.stickyNavScrollCallback = function(event) {
-    if ($(window).scrollTop() < 0 || ($(window).scrollTop() + $(window).outerHeight()) >= $(document).outerHeight()) {
+    // @todo what does this do?
+    if (
+      $(window).scrollTop() < 0
+      || ($(window).scrollTop() + $(window).outerHeight()) >= $(document).outerHeight()
+    ) {
       return;
     }
 
@@ -128,11 +115,28 @@
         direction = this.scrollDirection(),
         callback, wait;
 
-    this.stickyNavScrollTopHide();
+    if ( $(window).scrollTop() <= this.mainEl.offset().top ) {
+      // we're near the top of the page, so now let's consider whether to hide the sticky nav:
+      // if main_nav_hide_article is true, mainNavEl won't exist.
+      if ( this.mainNavEl.length && this.mainNavEl.is(':visible') ) {
+        // the main nav exists and is visible,
+        // so we should hide the sticky nav
+        this.stickyNavEl.removeClass('show');
+
+        // @todo should there be a return here?
+      }
+      // @todo should this timeout clearer be removed?
+      clearTimeout(this.scrollTimeout);
+    }
 
 
-    // Abort if the scroll direction is the same as it was, or if the page has not been scrolled.
-    if (this.previousScroll == direction || !this.previousScroll ) {
+    // Abort if the scroll direction is the same as it was.
+    // Abort if the page has not been scrolled.
+    if (
+      this.previousScroll == direction
+      || !this.previousScroll
+    ) {
+      console.log( this.previousScroll, direction );
       this.previousScroll = direction;
       return;
     }
