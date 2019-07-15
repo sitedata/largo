@@ -85,15 +85,20 @@
 
   Navigation.prototype.stickyNavResizeCallback = function() {
     if (
-      this.windowwidth() <= 768 ||
-      ( Largo.sticky_nav_options.main_nav_hide_article && ($('body').hasClass('single') || $('body').hasClass('page')) )
+      this.windowwidth() <= 768
+      || (
+        Largo.sticky_nav_options.main_nav_hide_article
+        && (
+          $('body').hasClass('single')
+          || $('body').hasClass('page')
+        )
+      )
     ) {
       this.stickyNavEl.addClass('show');
       this.stickyNavEl.parent().css('height', this.stickyNavEl.outerHeight());
     } else if (
       Largo.sticky_nav_options.sticky_nav_display
     ) {
-      this.stickyNavScrollTopHide();
       this.stickyNavEl.parent().css('height', '');
     } else {
       this.stickyNavEl.parent().css('height', '');
@@ -102,14 +107,26 @@
   };
 
 
+  /**
+   * Determine whether or not to show or hide the sticky nav in response to scrolling
+   */
   Navigation.prototype.stickyNavScrollCallback = function(event) {
     if (
-      // if we're scrolled past the top of the page
       $(window).scrollTop() < 0
-      // or if the window is taller than the document
-      || ($(window).scrollTop() + $(window).outerHeight()) >= $(document).outerHeight()
+      || ( $(window).scrollTop() + $(window).outerHeight() ) >= $(document).outerHeight()
     ) {
-      // then it doesn't make sense to do the logic here; the page won't scroll
+      // if we're scrolled past the top of the page
+      // or if the window is taller than the document
+      // then it doesn't make sense to do the logic in this function.
+      return;
+    }
+
+    if (
+      this.windowwidth() > 768
+      && !Largo.sticky_nav_options.sticky_nav_display
+    ) {
+      // if we're in a non-mobile case and the sticky nav is set to not display
+      // then we should not be changing the status of the sticky nav based on height.
       return;
     }
 
