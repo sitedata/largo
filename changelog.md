@@ -25,6 +25,7 @@ though this project doesn't succeed in adhering to [Semantic Versioning](https:/
 - Added support for `wp_body_open` hook below opening body tag. [Pull request #1735](https://github.com/INN/largo/pull/1735) for [issue #1698](https://github.com/INN/largo/issues/1698).
 - Added `font-display: block` to `fontello` font family. [Pull request #1742](https://github.com/INN/largo/pull/1742) for [issue #1686](https://github.com/INN/largo/issues/1686).
 - Replaced image settings in the Largo Series Posts widget to mirror the image settings in the Largo Recent Posts widget. [Pull request #1734](https://github.com/INN/largo/pull/1734) for [issue #1727](https://github.com/INN/largo/issues/1727).
+- Adds a temporary shim to fix left/right aligned images not being correctly aligned with paragraphs. [Pull request #1747](https://github.com/INN/largo/pull/1747) for [issue #1731](https://github.com/INN/largo/issues/1731).
 - Updated pull quote block styles so they can be easily differentiated from regular block quote blocks. [Pull request #1746](https://github.com/INN/largo/pull/1746) for [issue #1699](https://github.com/INN/largo/issues/1699).
 
 ## [Largo 0.6.3](https://github.com/INN/largo/compare/v0.6.2...v0.6.3)
