@@ -276,6 +276,39 @@ blockquote {
   }
 }
 
+.wp-block-pullquote blockquote,
+.pull-quote,
+blockquote.pull-quote,
+.type-pull-quote,
+blockquote.type-pull-quote {
+  font: @serifFontFamily;
+  font-style: italic;
+  font-size: @baseFontSize * 1.5;
+  line-height: 1.3;
+  border: none;
+  padding: 0;
+
+  cite {
+    font-style: normal;
+  }
+
+  &::before,
+  &::after {
+    content: "";
+    display: block;
+    height: 1px;
+    width: 100%;
+    margin: 20px auto;
+    background: @grayLighter;
+  }
+
+  h6 {
+    font-size: @baseFontSize;
+    margin: 0;
+    text-transform: none;
+  }
+}
+
 code,
 pre {
   padding: 0 3px 2px;
