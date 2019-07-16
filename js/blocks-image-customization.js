@@ -16,15 +16,24 @@ var largo_core_image_block_add_media_credit = createHigherOrderComponent( functi
 
             if( media.media_credit && media.media_credit._media_credit ){
 
-                // our default media credit, if it exists 
-                var media_credit = '<p class="wp-media-credit">' + media.media_credit._media_credit + '</p>';
+                var media_credit = media.media_credit._media_credit;
 
-                // if our media credit has a url, include that also
+                // if the media credit organization exists, add it
                 if( media.media_credit._navis_media_credit_org ){
 
-                    var media_credit = '<p class="wp-media-credit">'+media.media_credit._media_credit+' / '+media.media_credit._navis_media_credit_org+'</p>';
+                    var media_credit = media.media_credit._media_credit+' / '+media.media_credit._navis_media_credit_org;
+                
+                }
+
+                // if the media credit url exists, wrap the media credit with it
+                if( media.media_credit._media_credit_url ){
+
+                    var media_credit = '<a href="'+media.media_credit._media_credit_url+'">'+media_credit+'</a>';
 
                 }
+
+                // our full media credit
+                var media_credit = '<p class="wp-media-credit">'+media_credit+'</p>';
 
                 // if our media attachment caption already includes `largo-attachment-media-credit`,
                 // which is the class of our span, don't do anything more
