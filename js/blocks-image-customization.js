@@ -14,15 +14,23 @@ var largo_core_image_block_add_media_credit = createHigherOrderComponent( functi
             // the original instance of the media caption
             var attachment_caption = props.attributes.caption;
 
-            if( media.media_credit && media.media_credit._media_credit ){
+            if( media.media_credit && ( media.media_credit._media_credit || media.media_credit._navis_media_credit_org ) ){
 
-                var media_credit = media.media_credit._media_credit;
-
-                // if the media credit organization exists, add it
-                if( media.media_credit._navis_media_credit_org ){
+                // if both the credit and organization are present
+                if( media.media_credit._media_credit && media.media_credit._navis_media_credit_org ){
 
                     var media_credit = media.media_credit._media_credit+' / '+media.media_credit._navis_media_credit_org;
                 
+                // if only the credit is present
+                } else if( media.media_credit._media_credit ){
+
+                    var media_credit = media.media_credit._media_credit;
+
+                // if only the org is present
+                } else if( media.media_credit._navis_media_credit_org ){
+
+                    var media_credit = media.media_credit._navis_media_credit_org;
+
                 }
 
                 // if the media credit url exists, wrap the media credit with it
