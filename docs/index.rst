@@ -21,14 +21,10 @@ Twitter: https://twitter.com/largoproject
 
 Mailing List: http://eepurl.com/yu0bT
 
-.. _dev-docs:
-
-For Developers
---------------
-
 .. toctree::
     :maxdepth: 3
 
     developers/index
-    api/index
     feedback
+    SUPPORT
+    api/index
