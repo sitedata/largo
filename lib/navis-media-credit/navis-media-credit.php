@@ -271,3 +271,47 @@ class Media_Credit {
         return update_post_meta( $this->post_id, '_' . $field, $value );
     }
 }
+
+/**
+ * Register custom fields for the REST api
+ */
+function navis_register_custom_rest_fields() {
+
+	register_rest_field( 'attachment', 'media_credit', 
+		array(
+			'get_callback' => 'navis_display_media_credit_in_rest_api',
+			'schema' => null,
+		)
+	);
+
+}
+add_action( 'rest_api_init', 'navis_register_custom_rest_fields' );
+
+/**
+ * Configure data for custom fields to display in REST api
+ * 
+ * @param Array $object The post object
+ * @return Array $media_credit_meta the new object meta data
+ */
+function navis_display_media_credit_in_rest_api( $object ) {
+
+    $post_id = $object[ 'id' ];
+
+	$meta = get_post_meta( $post_id );
+	
+    $meta_fields = [ '_media_credit', '_media_credit_url', '_navis_media_credit_org', '_navis_media_can_distribute' ];
+    
+    foreach( $meta_fields as $meta_field ){
+
+        if ( isset( $meta[ $meta_field ] ) && isset( $meta[ $meta_field ][0] ) ) {
+
+            //return the post meta
+            $media_credit_meta[ $meta_field ] = $meta[ $meta_field ][0];
+            
+        }
+
+    }
+	
+    return $media_credit_meta;
+	
+}

@@ -7,3 +7,9 @@
     .type-pull-quote;
   }
 }
+// Our editor styles provide border elements that duplicate Gutenberg's, so remove Gutenberg's.
+// @see https://github.com/INN/largo/pull/1746#issuecomment-511966639
+.wp-block-pullquote {
+  border-top: none;
+  border-bottom: none;
+}

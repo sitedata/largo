@@ -181,7 +181,8 @@ class Largo {
 			'/inc/featured-media.php',
 			'/inc/deprecated.php',
 			'/inc/pagination.php',
-			'/inc/conditionals.php'
+			'/inc/conditionals.php',
+			'/inc/gutenberg-block-edits.php',
 		);
 
 		if ( $this->is_less_enabled() ) {
