@@ -92,6 +92,7 @@ A few brief technical notes that might be helpful as you get started:
     :maxdepth: 2
 
     technicalnotes
+    release-checklist
     grunt-commands
     hooksfilters
     plugin-compat
