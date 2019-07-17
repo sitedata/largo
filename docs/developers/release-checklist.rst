@@ -65,6 +65,7 @@ Here's the reference list, in Markdown so that it can be copied into a new GitHu
         - [ ] GitHub release drafted
             - can be copied from `changelog.md`
             - [ ] includes encouragement to say hi if you're using the theme. (This fulfills the "who's using our stuff?" goal in https://github.com/INN/largo/issues/1495)
+            - [ ] includes link to "how to update Largo" docs added for https://github.com/INN/largo/issues/1713
         - [ ] labs.inn.org blog post written and saved as draft, based on changelog
     - [ ] update all version numbers. `0.6.4-prerelease.x` all become `0.6.4`.
     - [ ] merge 0.5-dev into 0.5
