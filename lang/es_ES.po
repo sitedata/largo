@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Project Largo - Base Theme v0.5.4\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/theme/largo\n"
-"POT-Creation-Date: 2019-04-25T22:31:53+00:00\n"
+"POT-Creation-Date: 2019-07-17T22:33:47+00:00\n"
 "PO-Revision-Date: 2016-02-29 20:44:14+0000\n"
 "Last-Translator: Eric Flores <eric@dashway.com>\n"
 "Language-Team: Institute for Nonprofit News <largo@inn.org>\n"
@@ -47,28 +47,28 @@ msgid "https://labs.inn.org/"
 msgstr ""
 
 # @ largo
-#: functions.php:218
+#: functions.php:219
 msgid "Global Navigation"
 msgstr "Navegación Global"
 
 # @ largo
-#: functions.php:219
+#: functions.php:220
 #, fuzzy
 msgid "Main Navigation"
 msgstr "Navegación Global"
 
 # @ largo
-#: functions.php:220 options.php:506
+#: functions.php:221 options.php:506
 msgid "Don't Miss"
 msgstr "No se pierda"
 
 # @ largo
-#: functions.php:221
+#: functions.php:222
 msgid "Footer Navigation"
 msgstr "Navegación al pie de página"
 
 # @ largo
-#: functions.php:222
+#: functions.php:223
 msgid "Footer Bottom"
 msgstr "Pie de página abajo"
 
@@ -274,7 +274,7 @@ msgstr ""
 
 # @ largo
 #: inc/update.php:348 inc/taxonomies.php:76 homepages/layouts/TopStories.php:24
-#: homepages/homepage.php:97 homepages/homepage.php:154
+#: homepages/homepage.php:154
 msgid "Homepage Featured"
 msgstr "Destacado de página de inicio"
 
@@ -298,7 +298,6 @@ msgstr ""
 #: homepages/layouts/LegacyThreeColumn.php:19
 #: homepages/layouts/TopStories.php:19
 #: homepages/layouts/HomepageSingleWithFeatured.php:17
-#: homepages/homepage.php:98
 #, fuzzy
 msgid "Homepage Top Story"
 msgstr "Historia principal de portada"
@@ -448,7 +447,7 @@ msgid "INN Network News"
 msgstr "Red de noticias INN"
 
 #. translators: %1$s is the page number.
-#: inc/open-graph.php:122
+#: inc/open-graph.php:141
 msgid "Page %1$s"
 msgstr ""
 
@@ -685,6 +684,7 @@ msgstr "Widgets"
 # @ largo
 #: inc/customizer/customizer.php:181 inc/widgets/largo-recent-posts.php:203
 #: inc/widgets/largo-recent-posts.php:221
+#: inc/widgets/largo-series-posts.php:134
 msgid "None"
 msgstr "Ninguno"
 
@@ -1481,7 +1481,7 @@ msgstr "Entradas recientes de Largo"
 
 # @ largo
 #: inc/widgets/largo-related-posts.php:94
-#: inc/widgets/largo-series-posts.php:112
+#: inc/widgets/largo-series-posts.php:115
 #, fuzzy
 msgid "Number of Posts to Display"
 msgstr "Numero de entradas a mostrar"
@@ -1714,37 +1714,44 @@ msgstr "Evitar entradas duplicadas?"
 
 # @ largo
 #: inc/widgets/largo-recent-posts.php:198
+#: inc/widgets/largo-series-posts.php:129
 msgid "Thumbnail Image"
 msgstr "Imagen de muestra"
 
 # @ largo
 #: inc/widgets/largo-recent-posts.php:200
+#: inc/widgets/largo-series-posts.php:131
 msgid "Small (60x60)"
 msgstr "Pequeño (60x60)"
 
 # @ largo
 #: inc/widgets/largo-recent-posts.php:201
+#: inc/widgets/largo-series-posts.php:132
 #, fuzzy
 msgid "Medium (140x140)"
 msgstr "Mediano (150x150)"
 
 # @ largo
 #: inc/widgets/largo-recent-posts.php:202
+#: inc/widgets/largo-series-posts.php:133
 msgid "Large (Full width of the widget)"
 msgstr "Grande (Full width of the widget)"
 
 # @ largo
 #: inc/widgets/largo-recent-posts.php:209
+#: inc/widgets/largo-series-posts.php:140
 msgid "Image Alignment"
 msgstr ""
 
 # @ largo
 #: inc/widgets/largo-recent-posts.php:211
+#: inc/widgets/largo-series-posts.php:142
 msgid "Left align"
 msgstr ""
 
 # @ largo
 #: inc/widgets/largo-recent-posts.php:212
+#: inc/widgets/largo-series-posts.php:143
 msgid "Right align"
 msgstr ""
 
@@ -1883,40 +1890,22 @@ msgid "Largo Series Posts"
 msgstr "Entradas recientes de Largo"
 
 # @ largo
-#: inc/widgets/largo-series-posts.php:64 homepages/zones/zones.php:106
+#: inc/widgets/largo-series-posts.php:65 homepages/zones/zones.php:106
 msgid "Complete Coverage"
 msgstr "Cobertura completa"
 
 # @ default
 # @ largo
-#: inc/widgets/largo-series-posts.php:101
+#: inc/widgets/largo-series-posts.php:104
 msgid "Series"
 msgstr "Series"
 
-# @ largo
-#: inc/widgets/largo-series-posts.php:122
-msgid "Show date on first post"
+#: inc/widgets/largo-series-posts.php:125
+msgid "Show byline on first post?"
 msgstr ""
 
 # @ largo
-#: inc/widgets/largo-series-posts.php:126
-msgid "Thumbnail position on first post"
-msgstr ""
-
-# @ largo
-#: inc/widgets/largo-series-posts.php:129
-#, fuzzy
-msgid "Before Headline"
-msgstr "Más Titulares"
-
-# @ largo
-#: inc/widgets/largo-series-posts.php:129
-#, fuzzy
-msgid "After Headline"
-msgstr "Más Titulares"
-
-# @ largo
-#: inc/widgets/largo-series-posts.php:136
+#: inc/widgets/largo-series-posts.php:147
 msgid "Divider heading"
 msgstr ""
 
@@ -3336,6 +3325,16 @@ msgstr "Sobre este sitio"
 #: partials/sidebar-fallback.php:13
 msgid "Follow Us"
 msgstr "Síganos"
+
+# @ largo
+#, fuzzy
+#~ msgid "Before Headline"
+#~ msgstr "Más Titulares"
+
+# @ largo
+#, fuzzy
+#~ msgid "After Headline"
+#~ msgstr "Más Titulares"
 
 # @ largo
 #~ msgid "Link to Google Plus Page"

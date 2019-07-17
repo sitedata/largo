@@ -60,7 +60,6 @@ Here's the reference list, in Markdown so that it can be copied into a new GitHu
         - [ ] New features list
         - [ ] bugfixes
         - [ ] potentially breaking changes and upgrade notices
-    - [ ] run `grunt build`
     - [ ] write release announcement
         - [ ] GitHub release drafted
             - can be copied from `changelog.md`
@@ -68,6 +67,7 @@ Here's the reference list, in Markdown so that it can be copied into a new GitHu
             - [ ] includes link to "how to update Largo" docs added for https://github.com/INN/largo/issues/1713
         - [ ] labs.inn.org blog post written and saved as draft, based on changelog
     - [ ] update all version numbers. `0.6.4-prerelease.x` all become `0.6.4`.
+    - [ ] run `grunt build`
     - [ ] merge 0.5-dev into 0.5
 
     Releasing:
