@@ -10,6 +10,32 @@ If you use Largo for a project we'd love to hear from you so can we add you to o
 
 The preferred way of building a site with Largo is by creating a WordPress child theme. We have created a `sample, heavily documented, child theme <childthemes.html#advanced-theme-development-and-modification>`_ to help you understand the way we structure our child themes in the hopes that it will give you a solid framework to get started. There is more information on setting up Largo and `using child themes <../users/download.html#creating-child-themes>`_ in the download and installation section of our documentation.
 
+Bug Reports and Feature Requests
+--------------------------------
+
+Our preferred way for you to submit bug reports, requests for new features or even questions about how things work in Largo is by `opening a new issue on the Largo github repository <https://github.com/INN/Largo/issues>`_.
+
+Contributing to Largo
+---------------------
+
+We welcome (and encourage) anyone who wants to contribute back to the project.
+
+To begin, `please review our contribution guidelines <https://github.com/INN/docs/blob/master/how-to-work-with-us/contributing.md>`_.
+
+We have many ways you can contribute and not all are technical. Wherever possible we will flag issues that we believe are `good for beginners <https://github.com/INN/Largo/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+for+beginners%22>`_ or for less/non-technical contributors (`writing/improving documentation <https://github.com/INN/Largo/issues?q=is%3Aopen+is%3Aissue+label%3A%22status%3A+needs+docs%22>`_, etc.).
+
+Our roadmap, open issues, suggested features and discussion can always be found in the issues section of the `Largo github repository <https://github.com/INN/Largo/issues>`_.
+
+We also have documentation on the `Anatomy of a Pull Request and Submission Protocol <https://github.com/INN/docs/blob/master/how-to-work-with-us/pull-requests.md>`_ and `Contributing to the INN Nerds docs repo using Github.com <https://github.com/INN/docs/blob/master/how-to-work-with-us/via-github.md>`_ which explain, at a high level, the process of contributing to Github projects, generally.
+
+If you would like to help with the documentation, here are some resources:
+
+- `Sphinx' PHP domain-specific markup <http://mark-story.com/posts/view/sphinx-phpdomain-released>`_
+- `Sphinx reStructuredText primer and quickstart guide <http://sphinx-doc.org/rest.html>`_
+
+
+If you have feedback on this collection of documentation, please `get in touch <../feedback.html>`_.
+
 Setting up a development environment
 ------------------------------------
 
@@ -80,32 +106,6 @@ It may be helpful to  `read Largo's source on Github <https://github.com/INN/Lar
 .. toctree::
     :maxdepth: 2
 
-    /api/index
     constants
     hooksfilters
-
-Bug Reports and Feature Requests
---------------------------------
-
-Our preferred way for you to submit bug reports, requests for new features or even questions about how things work in Largo is by `opening a new issue on the Largo github repository <https://github.com/INN/Largo/issues>`_.
-
-Contributing to Largo
----------------------
-
-We welcome (and encourage) anyone who wants to contribute back to the project.
-
-To begin, `please review our contribution guidelines <https://github.com/INN/docs/blob/master/how-to-work-with-us/contributing.md>`_.
-
-We have many ways you can contribute and not all are technical. Wherever possible we will flag issues that we believe are `good for beginners <https://github.com/INN/Largo/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+for+beginners%22>`_ or for less/non-technical contributors (`writing/improving documentation <https://github.com/INN/Largo/issues?q=is%3Aopen+is%3Aissue+label%3A%22status%3A+needs+docs%22>`_, etc.).
-
-Our roadmap, open issues, suggested features and discussion can always be found in the issues section of the `Largo github repository <https://github.com/INN/Largo/issues>`_.
-
-We also have documentation on the `Anatomy of a Pull Request and Submission Protocol <https://github.com/INN/docs/blob/master/how-to-work-with-us/pull-requests.md>`_ and `Contributing to the INN Nerds docs repo using Github.com <https://github.com/INN/docs/blob/master/how-to-work-with-us/via-github.md>`_ which explain, at a high level, the process of contributing to Github projects, generally.
-
-If you would like to help with the documentation, here are some resources:
-
-- `Sphinx' PHP domain-specific markup <http://mark-story.com/posts/view/sphinx-phpdomain-released>`_
-- `Sphinx reStructuredText primer and quickstart guide <http://sphinx-doc.org/rest.html>`_
-
-
-If you have feedback on this collection of documentation, please `get in touch <../feedback.html>`_.
+    /api/index
