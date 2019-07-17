@@ -455,7 +455,7 @@ function optionsframework_options() {
 
 	$options[] = array(
 		'name' => __( 'Sticky navigation', 'largo' ),
-		'desc' => __( 'By default, a floating/sticky navigation bar is visible on all pages for mobile screen sizes. The sticky navigation bar will disappear when a user scrolls down and reappear when a user begins to scroll up. When the main navigation is visible, the sticky navigation will disappear. This feature can be deactivated but we typically recommend sticking with the default behavior.'),
+		'desc' => __( 'By default, a floating/sticky navigation bar is visible on all pages for mobile screen sizes. The sticky navigation bar will disappear when a user scrolls down and reappear when a user begins to scroll up. When the main navigation is visible, the sticky navigation will disappear. This feature can be deactivated for larger screens, but we typically recommend sticking with the default behavior.'),
 		'type' => 'info'
 	);
 

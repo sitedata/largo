@@ -12,6 +12,9 @@
    * This is a shim to cover for the case where a browser may or may not have scrollbars
    * @link https://github.com/jquery/jquery/issues/1729
    * @link https://github.com/INN/largo/pull/1369
+   *
+   * In some browsers, having the Inspector Tools docked within the browser in a sidebar
+   * configuration may cause abnormal readings for this value.
    */
   Navigation.prototype.windowwidth = function() {
     return Math.max(window.innerWidth, $(window).width());
@@ -150,45 +153,55 @@
         self.stickyNavEl.addClass(idx);
     });
 
-    $(window).on('scroll', this.stickyNavScrollCallback.bind(this));
-    $(window).on('resize', this.stickyNavResizeCallback.bind(this));
+    $(window).on('scroll resize', this.stickyNavScrollCallback.bind(this));
 
     this.stickyNavResizeCallback();
-    this.stickyNavSetOffset();
   };
-
-  /**
-   * Hide the sticky nav if we're too close to the top of the page
-   */
-  Navigation.prototype.stickyNavScrollTopHide = function() {
-    if ($(window).scrollTop() <= this.mainEl.offset().top && this.mainNavEl.is(':visible')) {
-      this.stickyNavEl.removeClass('show');
-      clearTimeout(this.scrollTimeout);
-      return;
-    }
-  }
 
   Navigation.prototype.stickyNavResizeCallback = function() {
     if (
-      this.windowwidth() <= 768 ||
-      (Largo.sticky_nav_options.main_nav_hide_article && ($('body').hasClass('single') || $('body').hasClass('page')))
-   ) {
+      this.windowwidth() <= 768
+      || (
+        Largo.sticky_nav_options.main_nav_hide_article
+        && (
+          $('body').hasClass('single')
+          || $('body').hasClass('page')
+        )
+      )
+    ) {
       this.stickyNavEl.addClass('show');
       this.stickyNavEl.parent().css('height', this.stickyNavEl.outerHeight());
     } else if (
       Largo.sticky_nav_options.sticky_nav_display
-   ) {
-      this.stickyNavScrollTopHide();
+    ) {
       this.stickyNavEl.parent().css('height', '');
     } else {
       this.stickyNavEl.parent().css('height', '');
     }
-    this.stickyNavSetOffset();
     this.stickyNavTransitionDone();
   };
 
+
+  /**
+   * Determine whether or not to show or hide the sticky nav in response to scrolling
+   */
   Navigation.prototype.stickyNavScrollCallback = function(event) {
-    if ($(window).scrollTop() < 0 || ($(window).scrollTop() + $(window).outerHeight()) >= $(document).outerHeight()) {
+    if (
+      $(window).scrollTop() < 0
+      || ( $(window).scrollTop() + $(window).outerHeight() ) >= $(document).outerHeight()
+    ) {
+      // if we're scrolled past the top of the page
+      // or if the window is taller than the document
+      // then it doesn't make sense to do the logic in this function.
+      return;
+    }
+
+    if (
+      this.windowwidth() > 768
+      && !Largo.sticky_nav_options.sticky_nav_display
+    ) {
+      // if we're in a non-mobile case and the sticky nav is set to not display
+      // then we should not be changing the status of the sticky nav based on height.
       return;
     }
 
@@ -196,12 +209,30 @@
         direction = this.scrollDirection(),
         callback, wait;
 
-    this.stickyNavScrollTopHide();
+    // this.mainEl (#main) exists in all Largo templates.
+    if ( $(window).scrollTop() <= this.mainEl.offset().top ) {
+      // we're near the top of the page, so now let's consider whether to hide the sticky nav:
+      // if main_nav_hide_article is true, mainNavEl won't exist.
+      if ( this.mainNavEl.length && this.mainNavEl.is(':visible') ) {
+        // the main nav exists and is visible,
+        // so we should hide the sticky nav
+        this.stickyNavEl.removeClass('show');
+        clearTimeout(this.scrollTimeout);
+        return; // don't need to do the other logic; it shouldn't show anyways
+      }
+    }
 
-    this.stickyNavSetOffset();
-
-    // Abort if the scroll direction is the same as it was, or if the page has not been scrolled.
-    if (this.previousScroll == direction || !this.previousScroll) {
+    if (
+      !this.previousScroll
+    ) {
+      // if the page has not been scrolled,
+      // Update the scroll direction,
+      // then continue to the logic that would control whether to show it or not.
+      this.previousScroll = direction;
+    } else if ( this.previousScroll == direction ) {
+      // if we're scrolling in the same direction,
+      // update the scroll direction,
+      // and end this function because the directional code has nothing to add.
       this.previousScroll = direction;
       return;
     }
@@ -231,16 +262,6 @@
 
     this.scrollTop = scrollTop;
     return direction;
-  };
-
-  Navigation.prototype.stickyNavSetOffset = function() {
-    if ($('body').hasClass('admin-bar')) {
-      if ($(window).scrollTop() <= $('#wpadminbar').outerHeight()) {
-        this.stickyNavEl.css('top', $('#wpadminbar').outerHeight());
-      } else {
-        this.stickyNavEl.css('top', '');
-      }
-    }
   };
 
   /**
@@ -330,7 +351,6 @@
 
         navbar.toggleClass('open');
         $('html').addClass('nav-open');
-        self.stickyNavSetOffset();
         navbar.find('.nav-shelf').css({
           top: self.stickyNavEl.position().top + self.stickyNavEl.outerHeight()
         });
@@ -384,7 +404,7 @@
       return;
     }
 
-    if (! this.windowwidth() <= 768) {
+    if ( ! this.windowwidth() <= 768 ) {
       $('html').removeClass('nav-open');
     }
 
