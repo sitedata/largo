@@ -55,23 +55,19 @@ We encourage all INN member organizations looking to add features to or otherwis
 Child Themes
 ------------
 
-What *is* a child theme?
-````````````````````````
+A child theme is a theme that inherits the functionality and styling of another theme, called the parent theme. Child themes are the recommended way of modifying an existing theme. Child themes are `a feature of WordPress <https://developer.wordpress.org/themes/advanced-topics/child-themes/>`_ that allow you to extend and override the parent theme that the child theme is based upon. We encourage you to create a child theme for your website.
 
-From the `WordPress Codex <https://codex.wordpress.org/Child_Themes>`_:
+You should use a child theme in order to make it easier to upgrade to future versions of the Largo parent theme. Child themes allow you to put your modifications to Largo in a place that won't be wiped out when you update Largo. WordPress has a `tutorial you can follow <https://developer.wordpress.org/themes/advanced-topics/child-themes/>`_ that explains how to create and configure a child theme.
 
-  A child theme is a theme that inherits the functionality and styling of another theme, called the parent theme. Child themes are the recommended way of modifying an existing theme.
-
-Why should you use a child theme?
-`````````````````````````````````
-In order to make it easier to upgrade to future versions of the Largo parent theme, you will want to add any customizations that are unique to your site by creating a child theme. WordPress has a `tutorial you can follow <http://codex.wordpress.org/Child_Themes>`_ that explains how to create and configure a child theme.
-
-**More:** `Using Child Themes <../developers/childthemes.html>`_.
 
 .. toctree::
-    :maxdepth: 2
+   :glob:
 
-    childthemes
+   child-themes/creating
+   child-themes/basic-style-changes
+   child-themes/advanced-development
+   upgrade-largo
+   child-themes/*
 
 Custom Post Templates
 ---------------------

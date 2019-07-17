@@ -17,8 +17,8 @@ Here's the reference list, in Markdown so that it can be copied into a new GitHu
     The owner of the release needs to complete the following steps **BEFORE** merging to master and tagging the release:
 
     - [ ] run the [theme check plugin](https://wordpress.org/plugins/theme-check/) and address any outstanding issues. 
-    - [ ] using [WP sample data](https://wpcom-themes.svn.automattic.com/demo/theme-unit-test-data.xml), go through the entire [theme unit tests checklist]
-    - [ ] Update the INN Sandbox repo submodule https://github.com/INN/umbrella-innsandbox and take a look around http://demo.innsandbox.wpengine.com, making sure to test all testable items.
+    - [ ] using [WP sample data](https://wpcom-themes.svn.automattic.com/demo/theme-unit-test-data.xml), go through the entire [theme unit tests checklist](https://codex.wordpress.org/Theme_Unit_Test)
+    - [ ] Update the INN Sandbox repo submodules https://github.com/INN/umbrella-innsandbox/tree/master/wp-content/themes and take a look around the sandbox sites, making sure to test all testable items.
     - [ ] design checklist tktk (add to the list of theme unit tests, including style guidance, patterns that need to be followed, etc., eventually this will be codified in the INN/Largo style guide)
         - [ ] click around: don't just visually check the homepage, but also internal pages: https://github.com/INN/docs/blob/master/checklists/child-themes.md
         - [ ] Homepage `/`
