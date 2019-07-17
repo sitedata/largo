@@ -47,14 +47,14 @@ if ( ! function_exists( 'largo_opengraph' ) ) {
 		} elseif ( is_front_page() ) {
 			printf(
 				'<meta property="og:title" content="%1$s - %2$s" />',
-				esc_attr( bloginfo( 'name' ) ),
-				esc_attr( bloginfo( 'description' ) )
+				esc_attr( get_bloginfo( 'name' ) ),
+				esc_attr( get_bloginfo( 'description' ) )
 			);
 			?>
 				<meta property="og:type" content="website" />
 				<meta property="og:url" content="<?php echo esc_attr( home_url() ); ?>"/>
-				<meta property="og:description" content="<?php esc_attr( bloginfo( 'description' ) ); ?>" />
-				<meta name="description" content="<?php bloginfo( 'description' ); ?>" />
+				<meta property="og:description" content="<?php echo esc_attr( get_bloginfo( 'description' ) ); ?>" />
+				<meta name="description" content="<?php echo esc_attr( get_bloginfo( 'description' ) ); ?>" />
 			<?php
 		} else {
 			// not a single post, not the front page.
