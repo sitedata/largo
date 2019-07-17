@@ -22,13 +22,16 @@ though this project doesn't succeed in adhering to [Semantic Versioning](https:/
 - Co-Authors Plus profile field descriptions no longer contain escaped HTML. [Pull request #1726](https://github.com/INN/largo/pull/1726) for [issue #1720](https://github.com/INN/largo/issues/1720).
 - Added `box-sizing: border-box;` style attribute to `figcaption` and `.wp-caption-text` elements to prevent caption text from overflowing from the parent container. Also modified Gutenberg block image caption styling to be consistent with the classic image caption styling when the image is expanded into a lightbox. [Pull request #1711](https://github.com/INN/largo/pull/1711) for [issue #1702](https://github.com/INN/largo/issues/1702).
 - Fixes multiple `Undefined variable: post` errors in `homepage/templates/top-stories.php`. [Pull request #1728](https://github.com/INN/largo/pull/1728) for [issue #1723](https://github.com/INN/largo/issues/1723).
-- Fixes an issue where the widget title wasn't displaying in the Largo Image Widget, due to trying to use the `$title` variable which was removed when we stopped using `extract` in [pull request #1565](https://github.com/INN/largo/pull/1565/). [Pull request #]() for [issue #1717](https://github.com/INN/largo/issues/1717).
+- Fixes an issue where the widget title wasn't displaying in the Largo Image Widget, due to trying to use the `$title` variable which was removed when we stopped using `extract` in [pull request #1565](https://github.com/INN/largo/pull/1565/). [Pull request #1736](https://github.com/INN/largo/pull/1736) for [issue #1717](https://github.com/INN/largo/issues/1717).
 - Added support for `wp_body_open` hook below opening body tag. [Pull request #1735](https://github.com/INN/largo/pull/1735) for [issue #1698](https://github.com/INN/largo/issues/1698).
 - Added `font-display: block` to `fontello` font family. [Pull request #1742](https://github.com/INN/largo/pull/1742) for [issue #1686](https://github.com/INN/largo/issues/1686).
 - Replaced image settings in the Largo Series Posts widget to mirror the image settings in the Largo Recent Posts widget. [Pull request #1734](https://github.com/INN/largo/pull/1734) for [issue #1727](https://github.com/INN/largo/issues/1727).
 - Adds a temporary shim to fix left/right aligned images not being correctly aligned with paragraphs. [Pull request #1747](https://github.com/INN/largo/pull/1747) for [issue #1731](https://github.com/INN/largo/issues/1731).
 - Fixed an issue where the Largo specific media credit caption and url was not being output in Gutenberg image blocks. [Pull request #1733](https://github.com/INN/largo/pull/1733/) for [issue #1683](https://github.com/INN/largo/issues/1683).
 - Updated pull quote block styles so they can be easily differentiated from regular block quote blocks. [Pull request #1746](https://github.com/INN/largo/pull/1746) for [issue #1699](https://github.com/INN/largo/issues/1699).
+- Fixed an issue where clicking on an image in an open slideshow modal resulted in the image having a different width once the modal was closed. [Pull request #1743](https://github.com/INN/largo/pull/1743) for [issue #1700](https://github.com/INN/largo/issues/1700).
+- Fixed an issue where setting the sticky navigation to show at the top of the page didn't output the expected result. [Pull reques #1662](https://github.com/INN/largo/pull/1662) for [issue #1660](https://github.com/INN/largo/issues/1660).
+
 
 ## [Largo 0.6.3](https://github.com/INN/largo/compare/v0.6.2...v0.6.3)
 
