@@ -10,80 +10,6 @@ If you use Largo for a project we'd love to hear from you so can we add you to o
 
 The preferred way of building a site with Largo is by creating a WordPress child theme. We have created a `sample, heavily documented, child theme <childthemes.html#advanced-theme-development-and-modification>`_ to help you understand the way we structure our child themes in the hopes that it will give you a solid framework to get started. There is more information on setting up Largo and `using child themes <../users/download.html#creating-child-themes>`_ in the download and installation section of our documentation.
 
-Setting up a development environment
-------------------------------------
-
-We use a set of tools to make setting up a Largo development environment as easy and consistent as possible.
-
-We encourage all INN member organizations looking to add features to or otherwise modify their theme to use this same setup, since doing so will make support and collaboration between members and INN easier.
-
-**Read**:
-
-.. toctree::
-    :maxdepth: 2
-
-    setup
-    setup-documentation
-    intro-command-line
-
-Child Themes
-------------
-
-What *is* a child theme?
-````````````````````````
-
-From the `WordPress Codex <https://codex.wordpress.org/Child_Themes>`_:
-
-  A child theme is a theme that inherits the functionality and styling of another theme, called the parent theme. Child themes are the recommended way of modifying an existing theme.
-
-Why should you use a child theme?
-`````````````````````````````````
-In order to make it easier to upgrade to future versions of the Largo parent theme, you will want to add any customizations that are unique to your site by creating a child theme. WordPress has a `tutorial you can follow <http://codex.wordpress.org/Child_Themes>`_ that explains how to create and configure a child theme.
-
-**More:** `Using Child Themes <../developers/childthemes.html>`_.
-
-.. toctree::
-    :maxdepth: 2
-
-    childthemes
-
-Custom Post Templates
----------------------
-
-Largo allows you to select between three default templates to use for posts and pages on your site. This default is set from the **Appearance > Theme Options > Layout** tab under the “Single Article Template” heading.
-
-- One Column (Standard Layout) is a new default article template in Largo version 0.4 that focuses on readability, reduces distractions and allows for beautiful presentation of visual elements within a story with a large “hero” section at the top of the article for featured media (photo, video, slideshow or embedded media).
-- Two Columns (Classic Layout) is the previous article template from Largo version 0.3 and before which features a content area on the left and a sidebar on the right.
-- Full-width (no sidebar) is an option when posts need a wider content area for things like maps and interactive data applications. The full-width template is not ideal for text, as the line length is non-optimal for a good reading experience.
-
-
-Technical Notes
----------------
-
-A few brief technical notes that might be helpful as you get started:
-
-.. toctree::
-    :maxdepth: 2
-
-    technicalnotes
-    grunt-commands
-    hooksfilters
-    plugin-compat
-
-Function Reference
-------------------
-
-NOTE: the function reference is a work-in-progress and may not be very useful at the moment.
-
-It may be helpful to  `read Largo's source on Github <https://github.com/INN/Largo>`_. If you discover insight there that is not included in these docs, please `let us know <#contributing-to-largo>`_.
-
-.. toctree::
-    :maxdepth: 2
-
-    /api/index
-    constants
-    hooksfilters
-
 Bug Reports and Feature Requests
 --------------------------------
 
@@ -109,3 +35,74 @@ If you would like to help with the documentation, here are some resources:
 
 
 If you have feedback on this collection of documentation, please `get in touch <../feedback.html>`_.
+
+Setting up a development environment
+------------------------------------
+
+We use a set of tools to make setting up a Largo development environment as easy and consistent as possible.
+
+We encourage all INN member organizations looking to add features to or otherwise modify their theme to use this same setup, since doing so will make support and collaboration between members and INN easier.
+
+**Read**:
+
+.. toctree::
+    :maxdepth: 2
+
+    setup
+    setup-documentation
+    intro-command-line
+
+Child Themes
+------------
+
+A child theme is a theme that inherits the functionality and styling of another theme, called the parent theme. Child themes are the recommended way of modifying an existing theme. Child themes are `a feature of WordPress <https://developer.wordpress.org/themes/advanced-topics/child-themes/>`_ that allow you to extend and override the parent theme that the child theme is based upon. We encourage you to create a child theme for your website.
+
+You should use a child theme in order to make it easier to upgrade to future versions of the Largo parent theme. Child themes allow you to put your modifications to Largo in a place that won't be wiped out when you update Largo. WordPress has a `tutorial you can follow <https://developer.wordpress.org/themes/advanced-topics/child-themes/>`_ that explains how to create and configure a child theme.
+
+
+.. toctree::
+   :glob:
+
+   child-themes/creating
+   child-themes/basic-style-changes
+   child-themes/advanced-development
+   upgrade-largo
+   child-themes/*
+
+Custom Post Templates
+---------------------
+
+Largo allows you to select between three default templates to use for posts and pages on your site. This default is set from the **Appearance > Theme Options > Layout** tab under the “Single Article Template” heading.
+
+- One Column (Standard Layout) is a new default article template in Largo version 0.4 that focuses on readability, reduces distractions and allows for beautiful presentation of visual elements within a story with a large “hero” section at the top of the article for featured media (photo, video, slideshow or embedded media).
+- Two Columns (Classic Layout) is the previous article template from Largo version 0.3 and before which features a content area on the left and a sidebar on the right.
+- Full-width (no sidebar) is an option when posts need a wider content area for things like maps and interactive data applications. The full-width template is not ideal for text, as the line length is non-optimal for a good reading experience.
+
+
+Technical Notes
+---------------
+
+A few brief technical notes that might be helpful as you get started:
+
+.. toctree::
+    :maxdepth: 2
+
+    technicalnotes
+    release-checklist
+    grunt-commands
+    hooksfilters
+    plugin-compat
+
+Function Reference
+------------------
+
+NOTE: the function reference is a work-in-progress and may not be very useful at the moment.
+
+It may be helpful to  `read Largo's source on Github <https://github.com/INN/Largo>`_. If you discover insight there that is not included in these docs, please `let us know <#contributing-to-largo>`_.
+
+.. toctree::
+    :maxdepth: 2
+
+    constants
+    hooksfilters
+    /api/index
