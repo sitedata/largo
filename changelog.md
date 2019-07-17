@@ -27,6 +27,8 @@ though this project doesn't succeed in adhering to [Semantic Versioning](https:/
 - Added `font-display: block` to `fontello` font family. [Pull request #1742](https://github.com/INN/largo/pull/1742) for [issue #1686](https://github.com/INN/largo/issues/1686).
 - Replaced image settings in the Largo Series Posts widget to mirror the image settings in the Largo Recent Posts widget. [Pull request #1734](https://github.com/INN/largo/pull/1734) for [issue #1727](https://github.com/INN/largo/issues/1727).
 - Adds a temporary shim to fix left/right aligned images not being correctly aligned with paragraphs. [Pull request #1747](https://github.com/INN/largo/pull/1747) for [issue #1731](https://github.com/INN/largo/issues/1731).
+- Fixed an issue where the Largo specific media credit caption and url was not being output in Gutenberg image blocks. [Pull request #1733](https://github.com/INN/largo/pull/1733/) for [issue #1683](https://github.com/INN/largo/issues/1683).
+- Updated pull quote block styles so they can be easily differentiated from regular block quote blocks. [Pull request #1746](https://github.com/INN/largo/pull/1746) for [issue #1699](https://github.com/INN/largo/issues/1699).
 
 ## [Largo 0.6.3](https://github.com/INN/largo/compare/v0.6.2...v0.6.3)
 

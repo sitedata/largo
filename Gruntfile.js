@@ -137,8 +137,18 @@ module.exports = function(grunt) {
           'cssmin'
         ]
       },
+      uglify: {
+        files: [
+          'js/*.js',
+          '!js/*.min.js'
+        ],
+        tasks: ['uglify']
+      },
       sphinx: {
-        files: ['docs/*.rst', 'docs/*/*.rst'],
+        files: [
+          'docs/*.rst',
+          'docs/*/*.rst'
+        ],
         tasks: ['docs']
       }
     },
