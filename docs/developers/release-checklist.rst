@@ -95,8 +95,12 @@ Here's the reference list, in Markdown so that it can be copied into a new GitHu
     - [ ] publish launch announcement blog post
     - [ ] tweet announcement and schedule 2-5 for the next 7 days (TweetDeck, HootSuite) with simple download prompt or tweets detailing new features, like "Newsroom Staff Pages should be clean and useful. We think so too. See Largo 0.X's new...." Make sure these tweets get cross-tweeted between INN accounts.
     - [ ] notify non-INN sites
-    - [ ] discuss what the version number for the next Largo update will be.
-    - [ ] bump version number in active-development branch to the version number for the next anticipated milestone, as described in https://github.com/INN/largo/pull/1705
+    - [ ] bump version number for next version's dev cycle
+        - [ ] merge `trunk` into `develop`
+        - [ ] discuss what the version number for the next Largo update will be.
+        - [ ] bump version number in active-development branch to the version number for the next anticipated milestone, as described in https://github.com/INN/largo/pull/1705
+        - [ ] run `grunt build`
+        - [ ] file PR merging all that to the `trunk` branch
     - [ ] compare this ticket to the template used to create this ticket, and update the template at `docs/developers/release-checklist.rst` (https://largo.readthedocs.io/developers/release-checklist.html)
     - [ ] create the release ticket for the next milestone from the template used to create this issue
     - [ ] prune stale and merged branches: https://github.com/INN/largo/branches/stale?page=1
