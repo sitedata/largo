@@ -6,12 +6,12 @@ A responsive WordPress framework designed for news publishers and developed by t
 
 <img align="right" src="/img/largo-login-logo.png" />
 
-**Largo** is a responsive WordPress starter/parent theme designed with the needs of news publisers in mind.
+**Largo** is a responsive WordPress starter/parent theme designed with the needs of news publishers in mind.
 
 The project extends work done by [NPR's Project Argo](http://argoproject.org/).
 
-**Current version:** [v0.6.3](https://github.com/INN/largo/releases)
-**Working version:** 0.6.4-prerelease
+**Current version:** [v0.6.4](https://github.com/INN/largo/releases)
+**Working version:** 0.7.0-prerelease
 
 **Changelog** is available in this repository: [changelog.md](./changelog.md)
 
@@ -27,7 +27,7 @@ If you're using Largo on your site, say hi! Send us an email at [labs@inn.org](m
 
 ## Setup
 
-Follow the [setup instructions in the documentation](http://largo.readthedocs.io/users/download.html).
+Follow the [setup instructions in the documentation](https://largo.inn.org/guides/administrators/installing-largo/).
 
 ## Contributing
 
