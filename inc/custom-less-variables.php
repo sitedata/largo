@@ -128,7 +128,7 @@ class Largo_Custom_Less_Variables {
 	* @param string $file - path of file to write
 	* @param string $contents - the content to be written to the file
 	*/
-	protected function put_contents($file, $contents) {
+	static function put_contents($file, $contents) {
 		global $wp_filesystem;
 
 		if (empty($wp_filesystem)) {
@@ -144,7 +144,7 @@ class Largo_Custom_Less_Variables {
 	*
 	* @param string $file - path of file to read
 	*/
-	protected function get_contents($file) {
+	static function get_contents($file) {
 		global $wp_filesystem;
 
 		if (empty($wp_filesystem)) {
