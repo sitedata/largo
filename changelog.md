@@ -7,6 +7,10 @@ though this project doesn't succeed in adhering to [Semantic Versioning](https:/
 
 ## [Largo 0.7.0](https://github.com/INN/largo/compare/v0.6.4...v0.7.0)
 
+### Fixes and minor improvements
+
+- Fixed an issue where the CSS Variables theme option was not working due to improperly escaped regex's in `inc/custom-less-variables.php`. We fixed those expressions and also changed the `put_contents` and `get_contents` functions in the class to be static functions rather than protected. [Pull request #1772](https://github.com/INN/largo/pull/1772) for [issue #1771](https://github.com/INN/largo/issues/1771).
+
 ## [Largo 0.6.4](https://github.com/INN/largo/compare/v0.6.3...v0.6.4)
 
 ### Developer-facing improvements
