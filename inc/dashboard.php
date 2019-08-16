@@ -66,19 +66,31 @@ function largo_dashboard_network_news() {
  * Largo dashboard quick links
  */
 function largo_dashboard_quick_links() {
-	echo '
-		<div class="list-widget">
-			<p>If you\'re having trouble with your site, want to request a new feature or are just interested in learning more about Project Largo, here are a few helpful links:</p>
-			<ul>
-				<li><a href="https://largo.inn.org/">Largo Project Website</a></li>
-				<li><a href="https://largo.readthedocs.io/">Largo Documentation</a></li>
-				<li><a href="mailto:support@inn.org">Contact Us</a></li>
-				<li><a href="https://support.inn.org/">Help Desk</a></li>
-				<li><a href="https://support.inn.org/">Knowledge Base</a></li>
-			</ul>
-			<p>Developers can also log issues on <a href="https://github.com/INN/Largo">our public github repository</a> and if you would like to be included in our Largo users\' group, <a href="http://eepurl.com/guL4DT">sign up here</a>.</p>
-		</div>
-	';
+	echo '<div class="list-widget">';
+		printf(
+			'<p>%1$s</p>',
+			__( 'If you\'re having trouble with your site, want to request a new feature or are just interested in learning more about Project Largo, here are a few helpful links:', 'largo' )
+		);
+		echo '<ul>';
+			$links = array(
+				// these are translated with their HTML in case we have different-language versions of these
+				__( '<a href="https://largo.inn.org/">Largo Project Website</a>', 'largo' ),
+				__( '<a href="https://largo.readthedocs.io/">Largo Documentation</a>', 'largo' ),
+				__( '<a href="https://support.inn.org/">Help Desk and Knowledge Base</a>', 'largo' ),
+				__( '<a href="mailto:support@inn.org">Contact Us</a>', 'largo' ),
+			);
+			foreach ( $links as $link ) {
+				printf(
+					'<li>%1$s</li>',
+					$link
+				);
+			}
+		echo '</ul>';
+		printf(
+			'<p>%1$s</p>',
+			__( 'Developers can also log issues on <a href="https://github.com/INN/Largo">our public github repository</a> and if you would like to be included in our Largo users\' group, <a href="http://eepurl.com/guL4DT">sign up here</a>.', 'largo' ), // link is translatable in case we ever have a signup link in another language.
+		);
+	echo '</div>';
 }
 
 // add the largo logo to the login page
