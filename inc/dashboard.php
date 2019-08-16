@@ -20,7 +20,7 @@ function largo_dashboard_widgets_member() {
 		$wp_meta_boxes['dashboard']['side']['core']['dashboard_quick_press']
 	);
 
-	wp_add_dashboard_widget( 'dashboard_quick_links', __( 'Project Largo Help', 'largo' ), 'largo_dashboard_quick_links' );
+	wp_add_dashboard_widget( 'dashboard_quick_links', __( 'Largo Theme Help', 'largo' ), 'largo_dashboard_quick_links' );
 
 	wp_add_dashboard_widget( 'dashboard_network_news', __( 'INN Network News', 'largo' ), 'largo_dashboard_network_news' );
 	$my_widget = $wp_meta_boxes['dashboard']['normal']['core']['dashboard_network_news'];
