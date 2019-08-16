@@ -88,7 +88,7 @@ function largo_dashboard_quick_links() {
 		echo '</ul>';
 		printf(
 			'<p>%1$s</p>',
-			__( 'Developers can also log issues on <a href="https://github.com/INN/Largo">our public github repository</a>.', 'largo' ),
+			__( 'Developers can also log issues on <a href="https://github.com/INN/Largo">the theme\'s GitHub repository</a>. We welcome contributions.', 'largo' ), // translate the HTML in case the link needs localization.
 		);
 		printf(
 			'<p>%1$s</p>',
