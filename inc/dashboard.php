@@ -88,7 +88,17 @@ function largo_dashboard_quick_links() {
 		echo '</ul>';
 		printf(
 			'<p>%1$s</p>',
-			__( 'Developers can also log issues on <a href="https://github.com/INN/Largo">our public github repository</a> and if you would like to be included in our Largo users\' group, <a href="http://eepurl.com/guL4DT">sign up here</a>.', 'largo' ), // link is translatable in case we ever have a signup link in another language.
+			__( 'Developers can also log issues on <a href="https://github.com/INN/Largo">our public github repository</a>.', 'largo' ),
+		);
+		printf(
+			'<p>%1$s</p>',
+			__( 'INN maintains a newsletter used to periodically notify Largo users of updates.', 'largo' ), 
+		);
+		printf(
+			'<p><a class="button button-primary" href="%1$s">%2$s</a></p>',
+			// translators: this URL is for the Largo Users Mailchimp signup, and should be localized if necessary.
+			__( 'http://eepurl.com/guL4DT', 'largo' ),
+			__( 'Sign up for emails', 'largo' ), 
 		);
 	echo '</div>';
 }
