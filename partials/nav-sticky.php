@@ -75,6 +75,7 @@ $site_name = ( of_get_option( 'nav_alt_site_name', false ) ) ? of_get_option( 'n
 									<div class="input-append">
 										<span class="text-input-wrapper">
 											<input type="text" placeholder="<?php esc_attr_e('Search', 'largo'); ?>"
+												aria-label="<?php esc_attr_e('Search', 'largo'); ?>"
 												class="input-medium appendedInputButton search-query" value="" name="s" />
 										</span>
 										<button type="submit" class="search-submit btn"><?php _e('Go', 'largo'); ?></button>
