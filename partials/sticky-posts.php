@@ -57,7 +57,7 @@ if ( $query->have_posts() ) {
 							largo_excerpt( $post, 2 );
 							$shown_ids[] = get_the_ID();
 
-						if ( $feature_posts ) { //if the sticky post is in a series, show up to 3 other posts in that series ?>
+						if ( !empty($feature_posts) ) { //if the sticky post is in a series, show up to 3 other posts in that series ?>
 							<div class="sticky-features-list">
 								<h4><?php _e('More from', 'largo'); ?> <span class="series-name"><?php echo esc_html( $feature->name ); ?></span></h4>
 								<ul>
