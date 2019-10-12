@@ -58,10 +58,16 @@ add_action('show_user_profile',  'largo_add_avatar_field');
 
 function largo_save_avatar_field($user_id) {
 	if (has_files_to_upload(LARGO_AVATAR_INPUT_NAME)) {
-		if (isset( $_FILES[LARGO_AVATAR_INPUT_NAME])) {
+
+		// initialize WP_Filesystem
+		global $wp_filesystem;
+		require_once ( ABSPATH . '/wp-admin/includes/file.php' );
+		WP_Filesystem();
+
+		if ( isset( $_FILES[LARGO_AVATAR_INPUT_NAME] ) && $wp_filesystem->exists( $_FILES[LARGO_AVATAR_INPUT_NAME]['tmp_name'] ) ) {
 			$file = wp_upload_bits(
 				$_FILES[LARGO_AVATAR_INPUT_NAME]['name'], null,
-				@file_get_contents($_FILES[LARGO_AVATAR_INPUT_NAME]['tmp_name'])
+				$wp_filesystem->get_contents( $_FILES[LARGO_AVATAR_INPUT_NAME]['tmp_name'] )
 			);
 
 			if (FALSE === $file['error']) {
