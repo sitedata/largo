@@ -210,7 +210,7 @@ add_filter( 'widget_update_callback', 'largo_widget_update_extend', 10, 2 );
  */
 function largo_add_link_to_widget_title( $title, $instance = null ) {
   if (!empty($title) && !empty($instance['title_link'])) {
-    $title = '<a href="' . esc_url( $instance['title_link'] ) . '">' . $title . '</a>';
+    $title = '<a href="' . esc_url( $instance['title_link'] ) . '">' . esc_attr( $title ) . '</a>';
   }
   return $title;
 }
