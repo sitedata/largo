@@ -21,7 +21,7 @@ class largo_facebook_widget extends WP_Widget {
 
 	function widget( $args, $instance ) {
 
-		$instance['title'] = apply_filters( 'widget_title', empty( $instance['title'] ) ? '' : $instance['title'] );
+		$instance['title'] = apply_filters( 'widget_title', ( empty( $instance['title'] ) ? '' : $instance['title'] ), $instance ) ;
 		echo $args['before_widget'];
 
 		if ( !empty( $instance['title'] ) ) { echo $args['before_title'] . $instance['title'] . $args['after_title']; }
