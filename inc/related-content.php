@@ -321,12 +321,11 @@ if ( ! function_exists( 'largo_categories_and_tags' ) ) {
 
 /**
  * Returns (and optionally echoes) the 'top term' for a post, falling back to a category if one wasn't specified
+ * @param array $options Settings for post id, echo, link, use icon, wrapper and exclude
  *
- * @param array|string $options Settings for post id, echo, link, use icon, wrapper and exclude
+ * @return string
  */
 function largo_top_term( $options = array() ) {
-
-	global $wpdb;
 
 	$defaults = array(
 		'post' => get_the_ID(),
@@ -338,60 +337,31 @@ function largo_top_term( $options = array() ) {
 	);
 
 	$args = wp_parse_args( $options, $defaults );
+	$output = '';
+
+	$term_object = largo_get_top_term( $args );
+
+	if ( is_wp_error( $term_object ) || 'none' === $term_object ) return $output;
 
 	/*
-	 * Try to get a term ID
-	 * Or continue using 'none' if that is the case
+	 * Using the term object generate some text
 	 */
-	$term_id = get_post_meta( $args['post'], 'top_term', TRUE );
-
-	// Try to get the taxonomy for the term ID, but if it's 'none' for the "None" option, don't bother doing this.
-	if ( !empty( $term_id ) && $term_id !== 'none' ) {
-		//get the taxonomy slug
-		$taxonomy = $wpdb->get_var( $wpdb->prepare( "SELECT taxonomy FROM $wpdb->term_taxonomy WHERE term_id = %d LIMIT 1", $term_id) );
-	}
-
-	// if no top_term specified, or if the top term is not in a taxonomy and the top term is not 'none',
-	if ( empty( $term_id ) || ( empty( $taxonomy ) && $term_id !== 'none' ) ) {
-		// Get the categories the post is in and try to use the first one as a term id
-		$term_id = get_the_category( $args['post'] );
-		if ( is_array( $term_id ) &&  count( $term_id ) ) {
-			$term_id = $term_id[0]->term_id;
-		}
-
-		// The post isn't in a category? Try post-types if that's enabled.
-		if ( empty( $term_id ) && taxonomy_exists( 'post-type' ) ) {
-			$term_id = get_the_terms( $args['post'], 'post-type' );
-			if ( is_array( $term_id ) &&  count( $term_id ) ) {
-				$term_id = $term_id[0]->term_id;
-			}
-		}
-	}
-
-	/*
-	 * Using the term ID, get the term and then generate some text
-	 */
-	if ( $term_id && $term_id !== 'none' && !empty( $taxonomy ) ) {
+	if ( is_object( $term_object ) ) {
 		$icon = ( $args['use_icon'] ) ?  '<i class="icon-white icon-tag"></i>' : '' ;	//this will probably change to a callback largo_term_icon() someday
 
 		$link = ( $args['link'] ) ? array( '<a href="%2$s" title="Read %3$s in the %4$s category">','</a>' ) : array( '', '' ) ;
 
-		// get the term object
-		$term = get_term( $term_id, $taxonomy );
-
-		if ( is_wp_error( $term ) ) return;
-
 		$output = sprintf(
 			'<%1$s class="post-category-link _top_term_output %6$s">'.$link[0].'%5$s%4$s'.$link[1].'</%1$s>',
 			$args['wrapper'],
-			get_term_link( $term ),
+			get_term_link( $term_object ),
 			of_get_option( 'posts_term_plural' ),
-			$term->name,
+			$term_object->name,
 			$icon,
 			sprintf(
 				'%1$s-%2$s',
-				$term->taxonomy,
-				$term->slug
+				$term_object->taxonomy,
+				$term_object->slug
 			)
 		);
 	}
@@ -402,7 +372,6 @@ function largo_top_term( $options = array() ) {
 	 */
 	if (
 		empty( $output )
-		&& 'none' !== $term_id
 		&& (int) $args['post'] === get_the_ID()
 	) {
 
@@ -434,12 +403,60 @@ function largo_top_term( $options = array() ) {
 	 * for https://github.com/INN/Largo/issues/1082, support not outputting anything
 	 * @since 0.5.5
 	 */
-	if ( $term_id == 'none' ) {
+	if ( 'none' === $term_object ) {
 		$output = '';
 	}
 
 	if ( $args['echo'] ) echo $output;
 	return $output;
+}
+/**
+ * Get the top_term term_id, if set, from the post
+ * Return 'none' if 'none' is found
+ * Get the taxonomy associated with that term_id
+ * Return a term object if a term_id integer is found
+ * If no taxonomy object is found return the term_id of a category or other registered post_type
+ *
+ * @param array $args
+ *
+ * @return false|int|mixed|\WP_Error|\WP_Term[]
+ */
+function largo_get_top_term( $args ) {
+	global $wpdb;
+	$term_object = false;
+	/*
+	 * Try to get a term ID
+	 * Or continue using 'none' if that is the case
+	 */
+	$term_id = get_post_meta( $args['post'], 'top_term', TRUE );
+
+	// Try to get the taxonomy for the term ID, but if it's 'none' for the "None" option, don't bother doing this.
+	if ( 'none' === $term_id ) return $term_id;
+
+	if ( !empty( $term_id ) ) {
+		//get the taxonomy slug
+		$taxonomy = $wpdb->get_var( $wpdb->prepare( "SELECT taxonomy FROM $wpdb->term_taxonomy WHERE term_id = %d LIMIT 1", $term_id) );
+		$term_object = get_term( $term_id, $taxonomy );
+	}
+
+	// if no top_term specified, or if the top term is not in a taxonomy get a fallback term from either categories or other registered post_types
+	if ( empty( $term_id ) || ( empty( $term_object ) ) ) {
+		// Get the categories the post is in and try to use the first one as a term id
+		$term_id = get_the_category( $args['post'] );
+		if ( is_array( $term_id ) &&  count( $term_id ) ) {
+			$term_id = $term_id[0];
+		}
+
+		// The post isn't in a category? Try post-types if that's enabled.
+		if ( empty( $term_id ) && taxonomy_exists( 'post-type' ) ) {
+			$term_id = get_the_terms( $args['post'], 'post-type' );
+			if ( is_array( $term_id ) &&  count( $term_id ) ) {
+				$term_id = $term_id[0];
+			}
+		}
+	}
+
+	return $term_id;
 }
 
 /**
@@ -671,7 +688,7 @@ class Largo_Related {
 	 */
 	protected function get_term_posts() {
 
-		//we've gone back and forth through all the post's series, now let's try traditional taxonomies	
+		//we've gone back and forth through all the post's series, now let's try traditional taxonomies
 		$taxonomies = array();
 		foreach ( array( 'category', 'post_tag' ) as $_taxonomy ) {
 			$_terms = get_object_term_cache( $this->post_id, $_taxonomy );
@@ -680,7 +697,7 @@ class Largo_Related {
 				$_terms = wp_get_object_terms( $this->post_id, $_taxonomy );
 				wp_cache_add( $this->post_id, $taxonomies, $_taxonomy . '_relationships' );
 			}
-			
+
 			if ( is_array( $_terms ) ) {
 				$taxonomies = array_merge( $taxonomies, $_terms );
 			}
