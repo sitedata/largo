@@ -344,9 +344,9 @@ function largo_top_term( $options = array() ) {
 	if ( is_wp_error( $term_object ) || 'none' === $term_object ) return $output;
 
 	/*
-	 * Using the term object generate some text
+	 * Checking first, use the term object to generate some text
 	 */
-	if ( is_object( $term_object ) ) {
+	if ( is_a( $term_object, 'WP_Term' ) ) {
 		$icon = ( $args['use_icon'] ) ?  '<i class="icon-white icon-tag"></i>' : '' ;	//this will probably change to a callback largo_term_icon() someday
 
 		$link = ( $args['link'] ) ? array( '<a href="%2$s" title="Read %3$s in the %4$s category">','</a>' ) : array( '', '' ) ;
