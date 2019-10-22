@@ -341,10 +341,8 @@ function largo_top_term( $options = array() ) {
 
 	$term_object = largo_get_top_term( $args );
 
-	if ( is_wp_error( $term_object ) || 'none' === $term_object ) return $output;
-
 	/*
-	 * Checking first, use the term object to generate some text
+	 * If we get a term object use it to generate some text
 	 */
 	if ( is_a( $term_object, 'WP_Term' ) ) {
 		$icon = ( $args['use_icon'] ) ?  '<i class="icon-white icon-tag"></i>' : '' ;	//this will probably change to a callback largo_term_icon() someday
@@ -440,23 +438,23 @@ function largo_get_top_term( $args ) {
 	}
 
 	// if no top_term specified, or if the top term is not in a taxonomy get a fallback term from either categories or other registered post_types
-	if ( empty( $term_id ) || ( empty( $term_object ) ) ) {
+	if ( empty( $term_id ) || ( empty( $term_object ) || is_wp_error( $term_object ) ) ) {
 		// Get the categories the post is in and try to use the first one as a term id
 		$term_id = get_the_category( $args['post'] );
 		if ( is_array( $term_id ) &&  count( $term_id ) ) {
-			$term_id = $term_id[0];
+			$term_object = $term_id[0];
 		}
 
 		// The post isn't in a category? Try post-types if that's enabled.
 		if ( empty( $term_id ) && taxonomy_exists( 'post-type' ) ) {
 			$term_id = get_the_terms( $args['post'], 'post-type' );
 			if ( is_array( $term_id ) &&  count( $term_id ) ) {
-				$term_id = $term_id[0];
+				$term_object = $term_id[0];
 			}
 		}
 	}
 
-	return $term_id;
+	return $term_object;
 }
 
 /**
