@@ -7,9 +7,16 @@ though this project doesn't succeed in adhering to [Semantic Versioning](https:/
 
 ## [Largo 0.7.0](https://github.com/INN/largo/compare/v0.6.4...v0.7.0)
 
+Particular thanks go to outside contributor [@seanchayes](https://github.com/seanchayes).
+
 ### Fixes and minor improvements
 
 - Fixed an issue where the CSS Variables theme option was not working due to improperly escaped regex's in `inc/custom-less-variables.php`. We fixed those expressions and also changed the `put_contents` and `get_contents` functions in the class to be static functions rather than protected. [Pull request #1772](https://github.com/INN/largo/pull/1772) for [issue #1771](https://github.com/INN/largo/issues/1771).
+- Removed conflicting duplicate HTML IDs by changing the element ID `header-social` to the class `header-social`, and updating CSS styles to reflect the new selector. [Pull request #1826](https://github.com/INN/largo/pull/1826) for [issue #1781](https://github.com/INN/largo/issues/1781), by [@seanchayes](https://github.com/seanchayes).
+
+### Potentially-breaking changes
+
+- Replace `#header-social` in CSS files with `.header-social` to mach updated markup. [Pull request #1826](https://github.com/INN/largo/pull/1826) for [issue #1781](https://github.com/INN/largo/issues/1781).
 
 ## [Largo 0.6.4](https://github.com/INN/largo/compare/v0.6.3...v0.6.4)
 
