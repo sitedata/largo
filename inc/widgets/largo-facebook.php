@@ -25,8 +25,10 @@ class largo_facebook_widget extends WP_Widget {
 			$intance['title'] = '';
 		}
 
-		$instance['title'] = apply_filters( 'widget_title', $instance['title'] );
+		$instance['title'] = apply_filters( 'widget_title', $instance['title'], $instance );
+
 		$page_url = esc_url( $instance['fb_page_url'] );
+
 		$height = isset( $instance['widget_height'] ) ? $instance['widget_height'] : 350;
 
 		echo $args['before_widget'];
