@@ -13,6 +13,7 @@ Particular thanks go to outside contributor [@seanchayes](https://github.com/sea
 
 - Fixed an issue where the CSS Variables theme option was not working due to improperly escaped regex's in `inc/custom-less-variables.php`. We fixed those expressions and also changed the `put_contents` and `get_contents` functions in the class to be static functions rather than protected. [Pull request #1772](https://github.com/INN/largo/pull/1772) for [issue #1771](https://github.com/INN/largo/issues/1771).
 - Removed conflicting duplicate HTML IDs by changing the element ID `header-social` to the class `header-social`, and updating CSS styles to reflect the new selector. [Pull request #1826](https://github.com/INN/largo/pull/1826) for [issue #1781](https://github.com/INN/largo/issues/1781), by [@seanchayes](https://github.com/seanchayes).
+- Widget titles may now be set on the Largo Twitter and Largo Facebook widgets. Pull requests [#1822](https://github.com/INN/largo/pull/1822) by [@seanchayes](https://github.com/seanchayes) and [#1840](https://github.com/INN/largo/pull/1840) for issues [#1739](https://github.com/INN/largo/issues/1739) and [#1740](https://github.com/INN/largo/issues/1740).
 
 ### Potentially-breaking changes
 
