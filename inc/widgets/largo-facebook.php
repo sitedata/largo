@@ -20,18 +20,21 @@ class largo_facebook_widget extends WP_Widget {
 	}
 
 	function widget( $args, $instance ) {
+
 		echo $args['before_widget'];
 
-			$page_url = esc_url( $instance['fb_page_url'] );
-			$height = isset( $instance['widget_height'] ) ? $instance['widget_height'] : 350;
-			
-			$output = '<div class="fb-page" data-adapt-container-width="true" data-href="' . $page_url . '"';
-			$output .= ' data-height="' . (int) $height . '"';
-			$output .= ! empty( $instance['show_faces'] ) ? ' data-show-facepile="true"' : ' data-show-facepile="false"';
-			if ( !empty( $instance['show_stream'] ) ) {
-				$output .= ' data-tabs="timeline"';
-			}
-			$output .= '><div class="fb-xfbml-parse-ignore"><blockquote cite="' . $page_url . '"><a href="' . $page_url . '">' . get_bloginfo( 'name' ) .'</a></blockquote></div></div>';
+		$instance['title'] = apply_filters( 'widget_title', ( empty( $instance['title'] ) ? '' : $instance['title'] ), $instance ) ;
+		if ( !empty( $instance['title'] ) ) { echo $args['before_title'] . $instance['title'] . $args['after_title']; }
+		$page_url = esc_url( $instance['fb_page_url'] );
+		$height = isset( $instance['widget_height'] ) ? $instance['widget_height'] : 350;
+
+		$output = '<div class="fb-page" data-adapt-container-width="true" data-href="' . $page_url . '"';
+		$output .= ' data-height="' . (int) $height . '"';
+		$output .= ! empty( $instance['show_faces'] ) ? ' data-show-facepile="true"' : ' data-show-facepile="false"';
+		if ( !empty( $instance['show_stream'] ) ) {
+			$output .= ' data-tabs="timeline"';
+		}
+		$output .= '><div class="fb-xfbml-parse-ignore"><blockquote cite="' . $page_url . '"><a href="' . $page_url . '">' . get_bloginfo( 'name' ) .'</a></blockquote></div></div>';
 
 		echo $output;
 
@@ -42,6 +45,7 @@ class largo_facebook_widget extends WP_Widget {
 
 	function update( $new_instance, $old_instance ) {
 		$instance = $old_instance;
+		$instance['title'] = sanitize_text_field( $new_instance['title'] );
 		$instance['fb_page_url'] = esc_url_raw( $new_instance['fb_page_url'] );
 		$instance['widget_height'] = (int) $new_instance['widget_height'];
 		$instance['show_faces'] = ! empty( $new_instance['show_faces'] ) ? 1 : 0;
@@ -60,6 +64,10 @@ class largo_facebook_widget extends WP_Widget {
 		$show_faces = ! empty( $instance['show_faces'] ) ? 'checked="checked"' : '';
 		$show_stream = ! empty( $instance['show_stream'] ) ? 'checked="checked"' : '';
 		?>
+		<p>
+			<label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title', 'largo'); ?>:</label>
+			<input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo esc_attr(strip_tags($instance['title'])); ?>" />
+		</p>
 
 		<p>
 			<label for="<?php echo $this->get_field_id( 'fb_page_url' ); ?>"><?php _e( 'Facebook Page URL:', 'largo' ); ?></label>

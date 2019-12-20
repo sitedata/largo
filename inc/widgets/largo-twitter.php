@@ -22,7 +22,9 @@ class largo_twitter_widget extends WP_Widget {
 	function widget( $args, $instance ) {
 
 		echo $args['before_widget'];
-		
+		$instance['title'] = apply_filters( 'widget_title', ( empty( $instance['title'] ) ? '' : $instance['title'] ), $instance ) ;
+		if ( !empty( $instance['title'] ) ) { echo $args['before_title'] . $instance['title'] . $args['after_title']; }
+
 		// Build the placeholder URLs used by various widget types
 		// Note that these are not strictly necessary (widget will render as long as the data-widget-id attribute is correct
 		// The URL and text are just used as a fallback if the JS doesn't load
@@ -49,7 +51,7 @@ class largo_twitter_widget extends WP_Widget {
 				/* translators: Tweets by @username */
 				$widget_text = __( 'Tweets by @' . $instance['twitter_username'], 'largo' );
 		}
-			
+
 		$widget_embed = sprintf( '<a class="twitter-timeline" href="%1$s">%2$s</a>',
 			esc_url( $widget_href ),
 			esc_attr( $widget_text )
@@ -74,6 +76,7 @@ class largo_twitter_widget extends WP_Widget {
 
 	function update( $new_instance, $old_instance ) {
 		$instance = $old_instance;
+		$instance['title'] = sanitize_text_field( $new_instance['title'] );
 		$instance['twitter_username'] = sanitize_text_field( $new_instance['twitter_username'] );
 		$instance['twitter_list_slug'] = sanitize_text_field( $new_instance['twitter_list_slug'] );
 		$instance['widget_ID'] = sanitize_text_field( $new_instance['widget_ID'] );
@@ -93,6 +96,10 @@ class largo_twitter_widget extends WP_Widget {
 		$instance = wp_parse_args( (array) $instance, $defaults );
 
 		?>
+		<p>
+			<label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title', 'largo'); ?>:</label>
+			<input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo esc_attr(strip_tags($instance['title'])); ?>" />
+		</p>
 
 		<p>
 			<label for="<?php echo $this->get_field_id( 'widget_type' ); ?>"><?php _e('Widget Type', 'largo'); ?></label>
@@ -128,13 +135,12 @@ class largo_twitter_widget extends WP_Widget {
 			<label for="<?php echo $this->get_field_id( 'twitter_collection_title' ); ?>"><?php _e( 'Collection Title (for collection widget):', 'largo' ); ?></label>
 			<input id="<?php echo $this->get_field_id( 'twitter_collection_title' ); ?>" name="<?php echo $this->get_field_name( 'twitter_collection_title' ); ?>" value="<?php echo esc_attr( $instance['twitter_collection_title'] ); ?>" style="width:90%;" />
 		</p>
-
 	<?php
 	}
 
 	/**
 	 * Returns true if this widget has been rendered one or more times.
-	 * 
+	 *
 	 * @since 0.5
 	 */
 	static function is_rendered() {
