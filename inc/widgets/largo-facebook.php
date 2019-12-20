@@ -86,7 +86,7 @@ class largo_facebook_widget extends WP_Widget {
 		</p>
 
 		<p>
-			<label for="<?php echo $this->get_field_id( 'widget_height' ); ?>"><?php _e( 'Widget Height:', 'largo' ); ?></label>
+			<label for="<?php echo $this->get_field_id( 'widget_height' ); ?>"><?php _e( 'Widget Height in pixels:', 'largo' ); ?></label>
 			<input id="<?php echo $this->get_field_id( 'widget_height' ); ?>" name="<?php echo $this->get_field_name( 'widget_height' ); ?>" value="<?php echo (int) $instance['widget_height']; ?>" class="widefat" type="number"/>
 		</p>
 
