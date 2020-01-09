@@ -37,11 +37,12 @@
   &.alignwide {
     figcaption {
       .normal & {
-        padding-left: calc( 2.5vw * 0.5);
-        padding-right: calc( 2.5vw * 0.5);
+        // calc(-0.5 * (95vw * 0.17021276594) )
+        padding-left: ~"calc( (2.5vw + 17.021276594%) * 0.5 )";
+        padding-right: ~"calc( (2.5vw + 17.021276594%) * 0.5 )";
         @media @tabletDown {
-          padding-left: calc( (2.5vw + 6.38297872%) * 0.5 );
-          padding-right: calc( (2.5vw + 6.38297872%) * 0.5 );
+          padding-left: ~"calc( (2.5vw + 6.38297872%) * 0.5 )";
+          padding-right: ~"calc( (2.5vw + 6.38297872%) * 0.5 )";
         }
         @media @mobile {
           padding-left: 2.5vw;
@@ -57,11 +58,11 @@
       .classic & {
       }
       .normal & {
-        padding-left: calc( 2.5vw + 17.021276594%);
-        padding-right: calc( 2.5vw + 17.021276594%);
+        padding-left: ~"calc( 2.5vw + 17.021276594%)";
+        padding-right: ~"calc( 2.5vw + 17.021276594%)";
         @media @tabletDown {
-          padding-left: calc( 2.5vw + 6.38297872% );
-          padding-right: calc( 2.5vw + 6.38297872% );
+          padding-left: ~"calc( 2.5vw + 6.38297872% )";
+          padding-right: ~"calc( 2.5vw + 6.38297872% )";
         }
         @media @mobile {
           padding-left: 2.5vw;
