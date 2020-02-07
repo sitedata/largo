@@ -35,19 +35,30 @@
     }
   }
   &.alignwide {
-    figcaption {
-      .normal & {
-        // calc(-0.5 * (95vw * 0.17021276594) )
-        padding-left: ~"calc( (2.5vw + 17.021276594%) * 0.5 )";
-        padding-right: ~"calc( (2.5vw + 17.021276594%) * 0.5 )";
-        @media @tabletDown {
-          padding-left: ~"calc( (2.5vw + 6.38297872%) * 0.5 )";
-          padding-right: ~"calc( (2.5vw + 6.38297872%) * 0.5 )";
+    &:not(.navis-slideshow) {
+      .classic & {
+        figcaption {
+          @media ( min-width: 1229px ) {
+            margin-left: ~"calc( 0.5 * ( 100vw - 1170px ) )"; // the left margin on #page, as a negative.
+            transform: none;
+          }
+          @media ( max-width: 1228px ) {
+            margin-left: 2.5vw; // the left margin on #page, as a negative.
+            transform: none;
+          }
+          @media ( max-width: 768px ) {
+            margin-left: 2.5vw;
+            margin-right: 2.5vw;
+          }
         }
-        @media @mobile {
-          padding-left: 2.5vw;
-          padding-right: 2.5vw;
-        }
+      }
+      figcaption {
+        margin-right: calc(0.5 * (95vw * 0.17021276594) );
+        margin-left: calc(0.5 * (95vw * 0.17021276594) );
+        @media (max-width: 979px) {
+          margin-left: calc(0.5 * (2.5vw + 6.38297872%) );
+          margin-right: calc(0.5 * (2.5vw + 6.38297872%) );
+        } 
       }
     }
   }
@@ -89,6 +100,14 @@
         margin-left: 50%;
         transform: translateX(-50%);
         max-width: none;
+      }
+    }
+  }
+  &.alignwide,
+  &.alignfull {
+    &.navis-slideshow {
+      figcaption {
+        width: 100%;
       }
     }
   }
