@@ -104,7 +104,7 @@ if ( ! isset( $largo ) )
  */
 if ( ! function_exists( 'optionsframework_init' ) ) {
 	define( 'OPTIONS_FRAMEWORK_DIRECTORY', get_template_directory_uri() . '/lib/options-framework/' );
-	if ( 0 == validate_file( get_template_directory() . '/lib/options-framework/options-framework.php' ) ) {
+	if ( 0 == validate_file( '/lib/options-framework/options-framework.php' ) ) {
 		require_once get_template_directory() . '/lib/options-framework/options-framework.php';
 	}
 }
@@ -203,7 +203,7 @@ class Largo {
 		}
 
 		foreach ( $includes as $include ) {
-			if ( 0 === validate_file( get_template_directory() . $include ) ) {
+			if ( 0 === validate_file( $include ) ) {
 				require_once( get_template_directory() . $include );
 			}
 		}
@@ -402,7 +402,7 @@ if ( of_get_option( 'custom_landing_enabled' ) && of_get_option( 'series_enabled
  * Perform load
  */
 foreach ( $includes as $include ) {
-	if ( 0 === validate_file( get_template_directory() . $include ) ) {
+	if ( 0 === validate_file( $include ) ) {
 		require_once( get_template_directory() . $include );
 	}
 }
