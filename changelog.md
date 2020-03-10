@@ -13,6 +13,7 @@ Particular thanks go to outside contributor [@seanchayes](https://github.com/sea
 
 - Fixed an issue where the CSS Variables theme option was not working due to improperly escaped regex's in `inc/custom-less-variables.php`. We fixed those expressions and also changed the `put_contents` and `get_contents` functions in the class to be static functions rather than protected. [Pull request #1772](https://github.com/INN/largo/pull/1772) for [issue #1771](https://github.com/INN/largo/issues/1771).
 - Removed conflicting duplicate HTML IDs by changing the element ID `header-social` to the class `header-social`, and updating CSS styles to reflect the new selector. [Pull request #1826](https://github.com/INN/largo/pull/1826) for [issue #1781](https://github.com/INN/largo/issues/1781), by [@seanchayes](https://github.com/seanchayes).
+- Correct the use of [`validate_file()`](https://developer.wordpress.org/reference/functions/validate_file/), to allow Largo to be used on Windows servers. [Pull request #1850](https://github.com/INN/largo/pull/1850) for [issue #1849](https://github.com/INN/largo/issues/1849).
 
 ### Potentially-breaking changes
 

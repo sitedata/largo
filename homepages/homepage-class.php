@@ -1,7 +1,7 @@
 <?php
 
 if ( empty( $wp_filesystem ) ) {
-	if ( 0 === validate_file( ABSPATH . 'wp-admin/includes/file.php' ) ) {
+	if ( 0 === validate_file( 'wp-admin/includes/file.php' ) ) {
 		require_once( ABSPATH . 'wp-admin/includes/file.php' );
 		WP_Filesystem();
 	} else {
