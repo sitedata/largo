@@ -10,7 +10,11 @@
  * @link http://largo.readthedocs.io/users/menus.html#available-menu-areas
  */
 
-if ( ! is_single() && ! is_singular() || ! of_get_option( 'main_nav_hide_article', false ) ) {
+if (
+	! is_single() && ! is_singular()
+	|| ! of_get_option( 'main_nav_hide_article', false )
+	|| is_front_page()
+) {
 ?>
 	<div class="global-nav-bg">
 		<div class="global-nav">
@@ -31,22 +35,27 @@ if ( ! is_single() && ! is_singular() || ! of_get_option( 'main_nav_hide_article
 					<?php
 					/* Check to display Social Media Icons */
 					if ( of_get_option( 'show_header_social') ) { ?>
-						<ul id="header-social" class="social-icons visible-desktop">
+						<ul class="header-social social-icons visible-desktop">
 							<?php largo_social_links(); ?>
 						</ul>
 					<?php }
 					/* Check to display Donate Button */
-					if ( of_get_option( 'show_donate_button') )
+					if ( of_get_option( 'show_donate_button') ) {
 						largo_donate_button();
-					?>
-					<!-- BEGIN Header Search -->
-					<div id="header-search">
-						<form class="form-search" role="search" method="get" action="<?php echo esc_url( home_url( '/' ) ); ?>">
-							<div class="input-append">
-								<input type="text" placeholder="<?php _e('Search', 'largo'); ?>" class="input-medium appendedInputButton search-query" value="" name="s" /><button type="submit" class="search-submit btn"><?php _e('GO', 'largo'); ?></button>
+					}
+
+					if ( ! is_search() ) {
+						?>
+							<div id="header-search">
+								<form class="form-search" role="search" method="get" action="<?php echo esc_url( home_url( '/' ) ); ?>">
+									<div class="input-append">
+										<input type="text" placeholder="<?php _e('Search', 'largo'); ?>" class="input-medium appendedInputButton search-query" value="" name="s" /><button type="submit" class="search-submit btn"><?php _e('GO', 'largo'); ?></button>
+									</div>
+								</form>
 							</div>
-						</form>
-					</div>
+						<?php
+					}
+					?>
 				<!-- END Header Search -->
 				</div>
 			</nav>

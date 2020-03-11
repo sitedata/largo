@@ -68,7 +68,7 @@ function largo_add_meta_content( $callback, $box_id ) {
 }
 
 /**
- * Call this function from within a largo_add_meta_field callback to register an input as a post meta field
+ * Call this function from within a largo_add_meta_box callback to register an input as a post meta field
  *
  * @since 0.2
  *

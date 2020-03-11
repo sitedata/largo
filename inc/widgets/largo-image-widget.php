@@ -13,6 +13,7 @@ if ( !defined('ABSPATH') )
  **/
 class largo_image_widget extends WP_Widget {
 
+	// not really sure what this means?
 	const VERSION = '4.0.7';
 
 	const CUSTOM_IMAGE_SIZE_SLUG = 'largo_image_widget_custom';
@@ -37,7 +38,12 @@ class largo_image_widget extends WP_Widget {
 	 */
 	function admin_setup() {
 		wp_enqueue_media();
-		wp_enqueue_script( 'largo-image-widget', get_template_directory_uri() . '/js/image-widget.js', array( 'jquery', 'media-upload', 'media-views' ), self::VERSION );
+		wp_enqueue_script(
+			'largo-image-widget',
+			get_template_directory_uri() . '/js/image-widget.js',
+			array( 'jquery', 'media-upload', 'media-views' ),
+			self::VERSION
+		);
 		wp_localize_script( 'largo-image-widget', 'LargoImageWidget', array(
 			'frame_title' => __( 'Select an Image', 'largo' ),
 			'button_title' => __( 'Insert Into Widget', 'largo' ),
@@ -52,7 +58,6 @@ class largo_image_widget extends WP_Widget {
 	 * @author Modern Tribe, Inc.
 	 */
 	function widget( $args, $instance ) {
-		extract( $args );
 		$instance = wp_parse_args( (array) $instance, self::get_defaults() );
 		if ( !empty( $instance['imageurl'] ) || !empty( $instance['attachment_id'] ) ) {
 
@@ -73,22 +78,19 @@ class largo_image_widget extends WP_Widget {
 			}
 			$instance['imageurl'] = apply_filters( 'image_widget_image_url', esc_url( $instance['imageurl'] ), $args, $instance );
 
-			// Using extracted vars now
-			extract( $instance );
-
 			//output the widget
-			echo $before_widget;
+			echo $args['before_widget'];
 
-			if ( !empty( $title ) ) { echo $before_title . $title . $after_title; }
+			if ( !empty( $instance['title'] ) ) { echo $args['before_title'] . $instance['title'] . $args['after_title']; }
 
 			echo self::get_image_html( $instance, true );
 
-			if ( !empty( $description ) ) {
+			if ( !empty( $instance['description'] ) ) {
 				echo '<div class="' . $this->widget_options['classname'] . '-description" >';
-				echo wpautop( $description );
+				echo wpautop( $instance['description'] );
 				echo "</div>";
 			}
-			echo $after_widget;
+			echo $args['after_widget'];
 		}
 	}
 

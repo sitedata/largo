@@ -94,10 +94,10 @@ function largo_home_single_top() {
 	$big_story = null;
 
 	// Cache the terms
-	$homepage_feature_term = get_term_by( 'name', __('Homepage Featured', 'largo'), 'prominence' );
-	$top_story_term = get_term_by( 'name', __('Top Story', 'largo'), 'prominence' );
+	$homepage_feature_term = get_term_by( 'slug', 'homepage-featured', 'prominence' );
+	$top_story_term = get_term_by( 'slug', 'top-story', 'prominence' );
 
-	// Get the posts that are both in 'Homepage Featured' and 'Top Story'
+	// Get the posts that are both in 'Homepage Featured' and 'Homepage Top Story'
 	$top_story_posts = get_posts(array(
 		'tax_query' => array(
 			'relation' => 'AND',
@@ -114,7 +114,7 @@ function largo_home_single_top() {
 		return $top_story_posts[0];
 	}
 
-	// Fallback: get the posts that are in "Homepage Featured" but not "Top Story"
+	// Fallback: get the posts that are in "Homepage Featured" but not "Homepage Top Story"
 	$homepage_featured_posts = get_posts(array(
 		'tax_query' => array(
 			array(

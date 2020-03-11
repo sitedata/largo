@@ -20,9 +20,8 @@ class largo_twitter_widget extends WP_Widget {
 	}
 
 	function widget( $args, $instance ) {
-		extract( $args );
 
-		echo $before_widget;
+		echo $args['before_widget'];
 		
 		// Build the placeholder URLs used by various widget types
 		// Note that these are not strictly necessary (widget will render as long as the data-widget-id attribute is correct
@@ -35,8 +34,11 @@ class largo_twitter_widget extends WP_Widget {
 				break;
 			case 'list':
 				$widget_href = 'https://twitter.com/' . $instance['twitter_username'] . '/lists/' . $instance['twitter_list_slug'];
-				/* translators: Tweets from [list URL] */
-				$widget_text = __( 'A Twitter List by ' . $instance['twitter_username'], 'largo' );
+				$widget_text = sprintf(
+					/* translators: A Twitter List by [twitter user name] */
+					__( 'A Twitter List by %1$s', 'largo' ),
+					$instance['twitter_username']
+				);
 				break;
 			case 'collection':
 				$widget_href = 'https://twitter.com/' . $instance['twitter_username'] . '/timelines/' . $instance['twitter_collection_id'];
@@ -53,11 +55,19 @@ class largo_twitter_widget extends WP_Widget {
 			esc_attr( $widget_text )
 		);
 		// N.B. - the JS is enqueued in largo_footer_js (inc/enqueue.php)
-	
+
 		echo $widget_embed;
 
-		echo $after_widget;
-		
+		echo $args['after_widget'];
+
+		wp_enqueue_script(
+			'largo_twitter_widget',
+			'//platform.twitter.com/widgets.js',
+			array(),
+			largo_version(),
+			true
+		);
+
 		self::$rendered = true;
 
 	}
@@ -76,17 +86,21 @@ class largo_twitter_widget extends WP_Widget {
 			'widget_ID' 		=> '',
 			'twitter_username' 	=> largo_twitter_url_to_username( of_get_option( 'twitter_link' ) ),
 			'widget_type' 		=> 'timeline',
+			'twitter_list_slug' => '',
+			'twitter_collection_id' => '',
+			'twitter_collection_title' => '',
 		);
 		$instance = wp_parse_args( (array) $instance, $defaults );
+
 		?>
 
 		<p>
 			<label for="<?php echo $this->get_field_id( 'widget_type' ); ?>"><?php _e('Widget Type', 'largo'); ?></label>
 			<select id="<?php echo $this->get_field_id( 'widget_type' ); ?>" name="<?php echo $this->get_field_name( 'widget_type' ); ?>" class="widefat" style="width:90%;">
-			    <option <?php selected( $instance['widget_type'], 'timeline'); ?> value="timeline"><?php _e( 'Timeline', 'largo' ); ?></option>
-			    <option <?php selected( $instance['widget_type'], 'likes'); ?> value="likes"><?php _e( 'Likes', 'largo' ); ?></option>
-			    <option <?php selected( $instance['widget_type'], 'list'); ?> value="list"><?php _e( 'List', 'largo' ); ?></option>
-			    <option <?php selected( $instance['widget_type'], 'collection'); ?> value="collection"><?php _e( 'Collection', 'largo' ); ?></option>
+				<option <?php selected( $instance['widget_type'], 'timeline'); ?> value="timeline"><?php _e( 'Timeline', 'largo' ); ?></option>
+				<option <?php selected( $instance['widget_type'], 'likes'); ?> value="likes"><?php _e( 'Likes', 'largo' ); ?></option>
+				<option <?php selected( $instance['widget_type'], 'list'); ?> value="list"><?php _e( 'List', 'largo' ); ?></option>
+				<option <?php selected( $instance['widget_type'], 'collection'); ?> value="collection"><?php _e( 'Collection', 'largo' ); ?></option>
 			</select>
 		</p>
 
@@ -104,12 +118,12 @@ class largo_twitter_widget extends WP_Widget {
 			<label for="<?php echo $this->get_field_id( 'twitter_list_slug' ); ?>"><?php _e( 'Twitter List Slug (for list widget):', 'largo' ); ?></label>
 			<input id="<?php echo $this->get_field_id( 'twitter_list_slug' ); ?>" name="<?php echo $this->get_field_name( 'twitter_list_slug' ); ?>" value="<?php echo esc_attr( $instance['twitter_list_slug'] ); ?>" style="width:90%;" />
 		</p>
-		
+
 		<p>
 			<label for="<?php echo $this->get_field_id( 'twitter_collection_id' ); ?>"><?php _e( 'Collection ID (for collection widget):', 'largo' ); ?></label>
 			<input id="<?php echo $this->get_field_id( 'twitter_collection_id' ); ?>" name="<?php echo $this->get_field_name( 'twitter_collection_id' ); ?>" value="<?php echo esc_attr( $instance['twitter_collection_id'] ); ?>" style="width:90%;" />
 		</p>
-		
+
 		<p>
 			<label for="<?php echo $this->get_field_id( 'twitter_collection_title' ); ?>"><?php _e( 'Collection Title (for collection widget):', 'largo' ); ?></label>
 			<input id="<?php echo $this->get_field_id( 'twitter_collection_title' ); ?>" name="<?php echo $this->get_field_name( 'twitter_collection_title' ); ?>" value="<?php echo esc_attr( $instance['twitter_collection_title'] ); ?>" style="width:90%;" />

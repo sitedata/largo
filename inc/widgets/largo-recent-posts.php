@@ -40,33 +40,37 @@ class largo_recent_posts_widget extends WP_Widget {
 		// Preserve global $post
 		$preserve = $post;
 
-		extract( $args );
-
 		$posts_term = of_get_option( 'posts_term_plural', 'Posts' );
 
 		// Add the link to the title.
-		$title = apply_filters( 'widget_title', empty( $instance['title'] ) ? __( 'Recent ' . $posts_term, 'largo' ) : $instance['title'], $instance, $this->id_base );
+		$title = apply_filters( 'widget_title', empty( $instance['title'] ) ? '' : $instance['title'], $instance, $this->id_base );
 
-		echo $before_widget;
+		echo $args['before_widget'];
 
-		if ( $title ) echo $before_title . $title . $after_title;
+		if ( $title ) echo $args['before_title'] . $title . $args['after_title'];
 
 		$thumb = isset( $instance['thumbnail_display'] ) ? $instance['thumbnail_display'] : 'small';
 		$excerpt = isset( $instance['excerpt_display'] ) ? $instance['excerpt_display'] : 'num_sentences';
 
 		$query_args = array (
 			'post__not_in' 	 => get_option( 'sticky_posts' ),
-			'posts_per_page' => $instance['num_posts'],
+			'posts_per_page' => isset( $instance['num_posts'] ) ? $instance['num_posts'] : 3,
 			'post_status'	=> 'publish'
 		);
 
 		if ( isset( $instance['avoid_duplicates'] ) && $instance['avoid_duplicates'] === 1 ) {
 			$query_args['post__not_in'] = $shown_ids;
 		}
-		if ( $instance['cat'] != '' ) $query_args['cat'] = $instance['cat'];
-		if ( $instance['tag'] != '') $query_args['tag'] = $instance['tag'];
-		if ( $instance['author'] != '') $query_args['author'] = $instance['author'];
-		if ( $instance['taxonomy'] != '') {
+		if ( ! empty( $instance['cat'] ) ) {
+			$query_args['cat'] = $instance['cat'];
+		}
+		if ( ! empty( $instance['tag'] ) ) {
+			$query_args['tag'] = $instance['tag'];
+		}
+		if ( ! empty( $instance['author'] ) ) {
+			$query_args['author'] = $instance['author'];
+		}
+		if ( ! empty( $instance['taxonomy'] ) && ! empty( $instance['term'] ) ) {
 			$query_args['tax_query'] = array(
 				array(
 					'taxonomy'	=> $instance['taxonomy'],
@@ -114,10 +118,10 @@ class largo_recent_posts_widget extends WP_Widget {
 		// close the ul
 		echo '</ul>';
 
-		if( $instance['linkurl'] !='' ) {
+		if( ! empty( $instance['linkurl'] ) ) {
 			echo '<p class="morelink"><a href="' . esc_url( $instance['linkurl'] ) . '">' . esc_html( $instance['linktext'] ) . '</a></p>';
 		}
-		echo $after_widget;
+		echo $args['after_widget'];
 
 		// Restore global $post
 		wp_reset_postdata();

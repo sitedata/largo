@@ -44,14 +44,14 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'Largo Project'
-copyright = u'2014, Institute for Nonprofit News'
+copyright = u'2019, Institute for Nonprofit News'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
 # built documents.
 #
 # The short X.Y version.
-version = '0.5.5'
+version = '0.7.0-prerelease'
 # The full version, including alpha/beta/rc tags.
 release = version
 
@@ -102,7 +102,7 @@ html_theme = 'default'
 
 
 # -- START Change the local theme
-# @see http://docs.readthedocs.io/en/latest/theme.html
+# @see https://docs.readthedocs.io/en/latest/theme.html
 
 # on_rtd is whether we are on readthedocs.io
 import os

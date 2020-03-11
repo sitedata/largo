@@ -4,14 +4,20 @@
 // Base styles
 // --------------------------------------------------
 
+
 // Core
-.btn {
+// used by .ep-block-button
+.btn-core-properties {
   display: inline-block;
   padding: 4px 10px;
-  margin-bottom: 0; // For input.btn
   font-size: @baseFontSize;
   line-height: @baseLineHeight;
   *line-height: 20px;
+  border-radius: 3px;
+}
+.btn {
+  .btn-core-properties;
+  margin-bottom: 0; // For input.btn
   color: @grayDark;
   text-align: center;
   vertical-align: middle;

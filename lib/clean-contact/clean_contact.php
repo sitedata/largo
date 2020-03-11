@@ -5,7 +5,7 @@ Plugin URI: http://www.checkfront.com/extras/wp-clean-contact
 Description:  No hassle contact form plugin with advanced Spam protection that doesn't require Captcha.
 Version: 1.6
 Author: Jason Morehouse
-Author URI: http://www.checkfront.com/
+Author URI: https://www.checkfront.com/
 */
 
 /* Copyright 2010 Jason Morehouse (email: jm@checkfront.com)

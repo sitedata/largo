@@ -1,8 +1,18 @@
 <?php
 
-if (empty($wp_filesystem)) {
-	require_once(ABSPATH . 'wp-admin/includes/file.php');
-	WP_Filesystem();
+if ( empty( $wp_filesystem ) ) {
+	if ( 0 === validate_file( ABSPATH . 'wp-admin/includes/file.php' ) ) {
+		require_once( ABSPATH . 'wp-admin/includes/file.php' );
+		WP_Filesystem();
+	} else {
+		wp_die(
+			sprintf(
+				esc_html__( 'The WP_Filesystem class could not be found by %1$s', 'largo' ),
+				__FILE__
+			),
+			'WP_Filesystem'
+		);
+	}
 }
 
 class Homepage {
@@ -72,6 +82,9 @@ class Homepage {
 					$vars[$zone] = call_user_func(array($this, $zone));
 			}
 		}
+
+		// this turns the list of zones into actual variables in the current scope.
+		// the $vars array here is not affected by user input.
 		extract($vars);
 		include_once $this->template;
 	}

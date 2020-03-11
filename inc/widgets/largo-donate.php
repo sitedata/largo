@@ -11,20 +11,22 @@ class largo_donate_widget extends WP_Widget {
 		);
 		parent::__construct( 'largo-donate-widget', __('Largo Donate Widget', 'largo'),$widget_opts);
 	}
+
 	function widget( $args, $instance ) {
-		extract( $args );
 
 		$title = apply_filters('widget_title', empty( $instance['title'] ) ? __('Support ' . get_bloginfo('name'), 'largo') : $instance['title'], $instance, $this->id_base);
 
-		echo $before_widget;
-		if ( $title )
-			echo $before_title . $title . $after_title; ?>
+		echo $args['before_widget'];
+		if ( $title ) {
+			echo $args['before_title'] . $title . $args['after_title'];
+		}
 
-            <p><?php echo esc_html( $instance['cta_text'] ); ?></p>
-            <a class="btn btn-primary" href="<?php echo esc_url( $instance['button_url'] ); ?>"><?php echo esc_html( $instance['button_text'] ); ?></a>
-
+		?>
+			<p><?php echo esc_html( $instance['cta_text'] ); ?></p>
+			<a class="btn btn-primary" href="<?php echo esc_url( $instance['button_url'] ); ?>"><?php echo esc_html( $instance['button_text'] ); ?></a>
 		<?php
-		echo $after_widget;
+
+		echo $args['after_widget'];
 	}
 
 	function update( $new_instance, $old_instance ) {

@@ -39,7 +39,7 @@ html.nav-open body {
   }
 
   // Social icons appearing in main or sticky nav
-  #header-social li > a {
+  .header-social li > a {
     padding-left: 4px;
     padding-right: 4px;
   }
@@ -293,7 +293,7 @@ html.nav-open body {
   }
 }
 
-// Gradient is applied to it's own element because overflow
+// Gradient is applied to its own element because overflow
 // visible is not honored by IE when filter is present
 .navbar-inner {
   float: left;
@@ -450,8 +450,8 @@ html.nav-open body {
 }
 
 @media (min-width: 769px) {
-  html.no-touch ul.nav li.dropdown:hover ul.dropdown-menu,
-  html.touch ul.nav li.dropdown.open ul.dropdown-menu {
+  .nav li.dropdown:hover ul.dropdown-menu,
+  .nav li.dropdown.open ul.dropdown-menu {
       display: block;
   }
 }
@@ -459,8 +459,9 @@ html.nav-open body {
 // Open state for the dropdown
 // ---------------------------
 .open {
-  // IE7's z-index only goes to the nearest positioned ancestor, which would
+  // IE7 only lets z-index go to the nearest positioned ancestor, which would
   // make the menu appear below buttons that appeared later on the page
+  // thus, a fix
   *z-index: @zindexDropdown;
 
   & > .dropdown-menu {
@@ -469,23 +470,6 @@ html.nav-open body {
     @media (min-width: 769px) {
       display: none;
     }
-  }
-}
-
-// Allow for dropdowns to go bottom up (aka, dropup-menu)
-.dropup,
-.navbar-fixed-bottom .dropdown {
-  // Reverse the caret
-  .caret {
-    border-top: 0;
-    border-bottom: 4px solid @black;
-    content: "\2191";
-  }
-  // Different positioning for bottom up menu
-  .dropdown-menu {
-    top: auto;
-    bottom: 100%;
-    margin-bottom: 1px;
   }
 }
 

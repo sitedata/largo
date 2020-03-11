@@ -16,25 +16,28 @@ class largo_related_posts_widget extends WP_Widget {
 		global $post;
 		// Preserve global $post
 		$preserve = $post;
-		extract( $args );
 
 		// only useful on post pages
 		if ( !is_single() ) return;
 
 		$title = apply_filters('widget_title', empty( $instance['title'] ) ? __( 'Read Next', 'largo' ) : $instance['title'], $instance, $this->id_base);
 
-		echo $before_widget;
+		echo $args['before_widget'];
 
-		if ( $title ) echo $before_title . $title . $after_title;
+		if ( ! empty( $title ) ) echo $args['before_title'] . $title . $args['after_title'];
 
-		$related = new Largo_Related( $instance['qty'] );
+		if ( isset( $instance['qty'] ) ) {
+			$related = new Largo_Related( $instance['qty'] );
+		} else {
+			$related = new Largo_Related( 1 );
+		}
 
 		//get the related posts
 		$rel_posts = new WP_Query( array(
 			'post__in' => $related->ids(),
 			'nopaging' => 1,
 			'post__not_in' => array( $post->ID ),
-			'posts_per_page' => $instance['qty'],
+			'posts_per_page' => ( isset( $instance['qty'] ) ) ? $instance['qty'] : 1,
 			'ignore_sticky_posts' => 1
 		) );
 
@@ -46,14 +49,14 @@ class largo_related_posts_widget extends WP_Widget {
 				$rel_posts->the_post();
 				echo '<li>';
 
-				echo '<a href="' . get_permalink() . '"/>' . get_the_post_thumbnail( get_the_ID(), 'thumbnail', array( 'class' => '' ) ) . '</a>';
+				echo '<a href="' . get_permalink() . '">' . get_the_post_thumbnail( get_the_ID(), 'thumbnail', array( 'class' => '' ) ) . '</a>';
 				?>
 
 				<h4><a href="<?php the_permalink(); ?>" title="Read: <?php esc_attr( the_title( '','', FALSE ) ); ?>"><?php the_title(); ?></a></h4>
 
-				<?php if ( $instance['show_byline'] ) { ?>
+				<?php if ( isset( $instance['show_byline'] ) && $instance['show_byline'] ) { ?>
 					<h5 class="byline">
-						<span class="by-author"><?php largo_byline( true, false ); ?></span>
+						<span class="by-author"><?php largo_byline( true, false, get_the_ID() ); ?></span>
 					</h5>
 				<?php } ?>
 
@@ -64,7 +67,7 @@ class largo_related_posts_widget extends WP_Widget {
 
 			echo "</ul>";
 		}
-		echo $after_widget;
+		echo $args['after_widget'];
 		// Restore global $post
 		wp_reset_postdata();
 		$post = $preserve;
@@ -74,7 +77,7 @@ class largo_related_posts_widget extends WP_Widget {
 		$instance = $old_instance;
 		$instance['title'] = sanitize_text_field($new_instance['title']);
 		$instance['qty'] = (int) $new_instance['qty'];
-		$instance['show_byline'] = (int) $new_instance['show_byline'];
+		$instance['show_byline'] = isset( $new_instance['show_byline'] ) ? (int) $new_instance['show_byline'] : 0 ;
 		return $instance;
 	}
 

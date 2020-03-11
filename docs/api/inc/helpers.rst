@@ -11,20 +11,6 @@ inc/helpers.php
 
    :since: 0.4
 
-.. php:function:: largo_fb_user_is_followable()
-
-   Checks to see if a given Facebook username or ID has following enabled by
-   checking the iframe of that user's "Follow" button for <table>.
-   Usernames that can be followed have <tables>.
-   Users that can't be followed don't.
-   Users that don't exist don't.
-
-   :param string $username: a valid Facebook username or page name. They're generally indistinguishable, except pages get to use '-'
-
-   :uses: wp_remote_get
-
-   :returns: bool $he user specified by the username or ID can be followed
-
 .. php:function:: clean_user_fb_username()
 
    Cleans a Facebook url to the bare username or id when the user is edited
@@ -41,22 +27,20 @@ inc/helpers.php
 
    :uses: largo_fb_url_to_username
 
-   :link: http://codex.wordpress.org/Plugin_API/Action_Reference/edit_user_profile_update
+   :link: https://codex.wordpress.org/Plugin_API/Action_Reference/edit_user_profile_update
 
-   :link: http://codex.wordpress.org/Plugin_API/Action_Reference/personal_options_update
+   :link: https://codex.wordpress.org/Plugin_API/Action_Reference/personal_options_update
 
 .. php:function:: validate_fb_username()
 
    Checks that the Facebook URL submitted is valid and the user is followable and causes an error if not
 
    :uses: largo_fb_url_to_username
-
-   :uses: largo_fb_user_is_followable
    :param $errors $he: error object
    :param bool $update: whether this is a user update
    :param object $user: a WP_User object
 
-   :link: http://codex.wordpress.org/Plugin_API/Action_Reference/user_profile_update_errors
+   :link: https://codex.wordpress.org/Plugin_API/Action_Reference/user_profile_update_errors
 
    :since: 0.4
 
@@ -86,9 +70,9 @@ inc/helpers.php
 
    :uses: largo_twitter_url_to_username
 
-   :link: http://codex.wordpress.org/Plugin_API/Action_Reference/edit_user_profile_update
+   :link: https://codex.wordpress.org/Plugin_API/Action_Reference/edit_user_profile_update
 
-   :link: http://codex.wordpress.org/Plugin_API/Action_Reference/personal_options_update
+   :link: https://codex.wordpress.org/Plugin_API/Action_Reference/personal_options_update
 
 .. php:function:: validate_twitter_username()
 
@@ -101,7 +85,7 @@ inc/helpers.php
 
    :uses: largo_twitter_url_to_username
 
-   :link: http://codex.wordpress.org/Plugin_API/Action_Reference/user_profile_update_errors
+   :link: https://codex.wordpress.org/Plugin_API/Action_Reference/user_profile_update_errors
 
    :since: 0.4
 

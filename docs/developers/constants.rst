@@ -33,7 +33,7 @@ The other constants
 
 .. php:const:: INN_MEMBER
 
-	``INN_MEMBER`` indicates whether or not a WordPress site belongs to `a member of the Institute for Nonprofit News <http://inn.org/members/>`_. 
+	``INN_MEMBER`` indicates whether or not a WordPress site belongs to `a member of the Institute for Nonprofit News <https://inn.org/members/>`_. 
 
 	``INN_MEMBER`` is defined as true in ``functions.php`` if it is not otherwise defined and if ``INN_HOSTED`` is true. If ``INN_HOSTED`` is false, then ``INN_MEMBER`` will also be false unless ``INN_MEMBER`` is explicitly defined in ``wp_config.php`` or in the ``functions.php`` of a child theme.
 
@@ -79,7 +79,7 @@ The other constants
 
 .. php:const:: SHOW_MAIN_NAV
 
-	The main navigation appears on the homepage and all internal pages, but not on mobile devices, governed by ``SHOW_MAIN_NAV``. ``SHOW_MAIN_NAV`` defaults to true, but child themes can set it to false with ``define( 'SHOW_GLOBAL_NAV', FALSE );`` in their theme ``functions.
+	The main navigation appears on the homepage and all internal pages, but not on mobile devices, governed by ``SHOW_MAIN_NAV``. ``SHOW_MAIN_NAV`` defaults to true, but child themes can set it to false with ``define( 'SHOW_GLOBAL_NAV', FALSE );`` in their theme ``functions.php``
 
 .. php:const:: SHOW_SECONDARY_NAV
 
@@ -94,12 +94,6 @@ The other constants
 .. php:const:: JCLV_UNCOMPRESSED
 
 .. php:const:: DOING_AUTOSAVE
-
-.. php:const:: PICTUREFILL_WP_PATH
-
-.. php:const:: PICTUREFILL_WP_URL
-
-.. php:const:: PICTUREFILL_WP_VERSION
 
 .. php:const:: CFTL_SELF_DIR
 

@@ -68,7 +68,12 @@ if ( ! function_exists( 'optionsframework_mlu_js' ) ) :
 
 function optionsframework_mlu_js () {
 	// Registers custom scripts for the Media Library AJAX uploader.
-	wp_register_script( 'of-medialibrary-uploader', OPTIONS_FRAMEWORK_DIRECTORY .'js/of-medialibrary-uploader.js', array( 'jquery', 'thickbox' ) );
+	wp_register_script(
+		'of-medialibrary-uploader',
+		OPTIONS_FRAMEWORK_DIRECTORY .'js/of-medialibrary-uploader.js',
+		array( 'jquery', 'thickbox' ),
+		largo_version()
+	);
 	wp_enqueue_script( 'of-medialibrary-uploader' );
 	wp_enqueue_script( 'media-upload' );
 }
@@ -194,15 +199,14 @@ function optionsframework_mlu_get_silentpost ( $_token ) {
 		foreach ( $_args as $k => $v ) {
 			$query .= ' AND ' . $k . ' = "' . $v . '"';
 		} // End FOREACH Loop
-		
+
 		$query .= ' LIMIT 1';
 		$_posts = $wpdb->get_row( $query );
-		
+
 		// If we've got a post, loop through and get it's ID.
-		if ( count( $_posts ) ) {
+		if ( is_object( $_posts ) ) {
 			$_id = $_posts->ID;
 		} else {
-		
 			// If no post is present, insert one.
 			// Prepare some additional data to go with the post insertion.
 			$_words = explode( '_', $_token );
@@ -211,7 +215,7 @@ function optionsframework_mlu_get_silentpost ( $_token ) {
 			$_post_data = array( 'post_title' => $_title );
 			$_post_data = array_merge( $_post_data, $_args );
 			$_id = wp_insert_post( $_post_data );
-		}	
+		}
 	}
 	return $_id;
 }

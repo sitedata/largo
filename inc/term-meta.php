@@ -25,28 +25,30 @@ add_action( 'init', 'largo_register_term_meta_post_type' );
  * @param int $term_id The ID of the term
  * @return int $post_id The ID of the term meta post
  */
-function largo_get_term_meta_post( $taxonomy, $term_id ) {
-	$query = new WP_Query( array(
-		'post_type'      => '_term_meta',
-		'posts_per_page' => 1,
-		'post_status' => 'any',
-		'tax_query'      => array(
-			array(
-				'taxonomy'         => $taxonomy,
-				'field'            => 'id',
-				'terms'            => $term_id,
-				'include_children' => false
+if ( ! function_exists ( 'largo_get_term_meta_post' ) ) {
+	function largo_get_term_meta_post( $taxonomy, $term_id ) {
+		$query = new WP_Query( array(
+			'post_type'      => '_term_meta',
+			'posts_per_page' => 1,
+			'post_status' => 'any',
+			'tax_query'      => array(
+				array(
+					'taxonomy'         => $taxonomy,
+					'field'            => 'id',
+					'terms'            => $term_id,
+					'include_children' => false
+				)
 			)
-		)
-	));
+		));
 
-	if ( $query->found_posts ) {
-		return $query->posts[0]->ID;
-	} else {
-		$tax_input = array();
-		$post_id = wp_insert_post( array( 'post_type' => '_term_meta', 'post_title' => "{$taxonomy}:${term_id}" ) );
-		wp_set_post_terms( $post_id, array( (int) $term_id ), $taxonomy );
-		return $post_id;
+		if ( $query->found_posts ) {
+			return $query->posts[0]->ID;
+		} else {
+			$tax_input = array();
+			$post_id = wp_insert_post( array( 'post_type' => '_term_meta', 'post_title' => "{$taxonomy}:${term_id}" ) );
+			wp_set_post_terms( $post_id, array( (int) $term_id ), $taxonomy );
+			return $post_id;
+		}
 	}
 }
 
@@ -71,7 +73,7 @@ function largo_add_term_featured_media_button( $context = '' ) {
 			<p><a href="#" id="set-featured-media-button" class="button set-featured-media add_media" data-editor="content" title="<?php echo $language; ?> Featured Media"><span class="dashicons dashicons-admin-generic"></span> <?php echo $language; ?> Featured Media</a> <span class="spinner" style="display: none;"></span></p>
 			<p class="description">This image will be displayed on the top of the term's archive page.</p>
 			<input type="hidden" id="post_ID" value="<?php echo $post_id ?>" />
-			<input type="hidden" id="featured_image_id" value="<?php echo $featured['attachment'] ;?>" />
+			<input type="hidden" id="featured_image_id" value="<?php echo ( ! empty( $featured['attachment'] ) ) ? esc_attr( $featured['attachment'] ) : '' ; ;?>" />
 
 			<?php # echo get_the_post_thumbnail($post_id); ?>
 		</td>

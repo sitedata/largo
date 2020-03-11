@@ -11,7 +11,7 @@ if ( ! function_exists( 'largo_enqueue_js' ) ) {
 		/*
 		 * Use minified assets if LARGO_DEBUG is false.
 		 */
-		$suffix = (LARGO_DEBUG)? '' : '.min';
+		$suffix = ( LARGO_DEBUG ) ? '' : '.min';
 		$version = largo_version();
 
 		// Our primary stylesheet. Often overridden by custom-less-variables version.
@@ -37,14 +37,14 @@ if ( ! function_exists( 'largo_enqueue_js' ) ) {
 			'largo-navigation',
 			get_template_directory_uri() . '/js/navigation' . $suffix . '.js',
 			array( 'largoCore' ),
-			$version,
+			filemtime( get_template_directory() . '/js/navigation' . $suffix . '.js' ),
 			true
 		);
 
 		// Largo configuration object for use in frontend JS
 		wp_localize_script(
 			'largoCore', 'Largo', array(
-			'is_home' => is_home(),
+			'is_home' => is_front_page(),
 			'is_single' => is_single() || is_singular(),
 			'sticky_nav_options' => array(
 				'sticky_nav_display' => (bool) of_get_option( 'sticky_nav_display', 0 ),
@@ -58,7 +58,6 @@ if ( ! function_exists( 'largo_enqueue_js' ) ) {
 		 *
 		 * - modernizr.custom.js
 		 * - largoPlugins.js
-		 * - jquery.idTabs.js
 		 */
 		wp_enqueue_script(
 			'largo-modernizr',
@@ -85,17 +84,39 @@ if ( ! function_exists( 'largo_gallery_enqueue' ) ) {
 	 * @since 0.5.5.3
 	 */
 	function largo_gallery_enqueue() {
-		$slick_css = get_template_directory_uri() . '/lib/navis-slideshows/vendor/slick/slick.css';
-		wp_enqueue_style( 'navis-slick', $slick_css, array(), '1.0' );
+		$slick_css = '/lib/navis-slideshows/vendor/slick/slick.css';
+		wp_enqueue_style(
+			'navis-slick',
+			get_template_directory_uri() . $slick_css,
+			array(),
+			filemtime( get_template_directory() . $slick_css )
+		);
 
-		$slides_src = get_template_directory_uri() . '/lib/navis-slideshows/vendor/slick/slick.min.js';
-		wp_enqueue_script( 'jquery-slick', $slides_src, array( 'jquery' ), '3.0', true );
+		$slides_src = '/lib/navis-slideshows/vendor/slick/slick.min.js';
+		wp_enqueue_script(
+			'jquery-slick',
+			get_template_directory_uri() . $slides_src,
+			array( 'jquery' ),
+			filemtime( get_template_directory() . $slides_src ),
+			true
+		);
 
-		$slides_css = get_template_directory_uri() . '/lib/navis-slideshows/css/slides.css';
-		wp_enqueue_style( 'navis-slides', $slides_css, array(), '1.0' );
+		$slides_css = '/lib/navis-slideshows/css/slides.css';
+		wp_enqueue_style(
+			'navis-slides',
+			get_template_directory_uri() . $slides_css,
+			array(),
+			filemtime( get_template_directory() . $slides_css )
+		);
 
-		$show_src = get_template_directory_uri() . '/lib/navis-slideshows/js/navis-slideshows.js';
-		wp_enqueue_script( 'navis-slideshows', $show_src, array( 'jquery-slick' ), '0.11', true );
+		$show_src = '/lib/navis-slideshows/js/navis-slideshows.js';
+		wp_enqueue_script(
+			'navis-slideshows',
+			get_template_directory_uri() . $show_src,
+			array( 'jquery-slick' ),
+			filemtime( get_template_directory() . $show_src ),
+			true
+		);
 	}
 	add_action( 'wp_enqueue_scripts', 'largo_gallery_enqueue' );
 }
@@ -111,7 +132,12 @@ if ( ! function_exists( 'largo_enqueue_child_theme_css' ) ) {
 		$theme = wp_get_theme();
 
 		if (is_object($theme->parent())) {
-			wp_enqueue_style( 'largo-child-styles', get_stylesheet_directory_uri() . '/style.css', array('largo-stylesheet'));
+			wp_enqueue_style(
+				'largo-child-styles',
+				get_stylesheet_directory_uri() . '/style.css',
+				array(),
+				filemtime( get_stylesheet_directory() . '/style.css' )
+			);
 		}
 	}
 	add_action( 'wp_enqueue_scripts', 'largo_enqueue_child_theme_css' );
@@ -126,16 +152,25 @@ function largo_enqueue_admin_scripts() {
 
 	// Use minified assets if LARGO_DEBUG isn't true.
 	$suffix = (LARGO_DEBUG)? '' : '.min';
-	wp_enqueue_style( 'largo-admin-widgets', get_template_directory_uri().'/css/widgets-php' . $suffix . '.css' );
-	wp_enqueue_script( 'largo-admin-widgets', get_template_directory_uri() . '/js/widgets-php' . $suffix . '.js', array( 'jquery' ), '1.0', true );
+	wp_enqueue_style(
+		'largo-admin-widgets',
+		get_template_directory_uri() . '/css/widgets-php' . $suffix . '.css',
+		array(),
+		largo_version()
+	);
+	wp_enqueue_script(
+		'largo-admin-widgets',
+		get_template_directory_uri() . '/js/widgets-php' . $suffix . '.js',
+		array( 'jquery' ),
+		largo_version(),
+		true
+	);
 }
 add_action( 'admin_enqueue_scripts', 'largo_enqueue_admin_scripts' );
 
 if ( ! function_exists( 'largo_header_js' ) ) {
 	/**
 	 * Determine which size of the banner image to load based on the window width
-	 *
-	 * TODO: this should probably use picturefill for this instead
 	 *
 	 * @since 1.0
 	 */
@@ -180,11 +215,6 @@ if ( ! function_exists( 'largo_footer_js' ) ) {
 			}(document, 'script', 'facebook-jssdk'));</script>
 		<?php }
 
-		if ( largo_twitter_widget::is_rendered() ) { ?>
-			<!--Twitter-->
-			<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
-		<?php }
-
 		/*
 		 * Load Facebook Tracking Pixel if defined in Theme Options
 		 *
@@ -223,40 +253,92 @@ add_action( 'wp_footer', 'largo_footer_js' );
 
 if ( ! function_exists( 'largo_google_analytics' ) ) {
 	/**
-	 * Add Google Analytics code to the footer, you need to add your GA ID to the theme settings for this to work
+	 * Add Google Analytics code to the footer
 	 *
-	 * @since 1.0
+	 * You need to add your GA ID to the theme settings for this to work.
+	 *
+	 * Through version 0.5.5.4, this function output a Google Analytics
+	 * tag even if the site didn't have GA configured in the theme. This
+	 * tag was used to send GA tracking events to properties for INN and
+	 * for the Largo Project.
+	 *
+	 * In this current version of the plugin, it only outputs a GA tag
+	 * if you've added a GA ID to the theme settings. If you're using a different
+	 * GA script, leave that setting blank.
+	 *
+	 * If you're using Largo, please send us an email to say hi!
+	 * https://labs.inn.org/contact/
+	 *
+	 * @since 0.3
 	 */
 	function largo_google_analytics() {
-		if ( !current_user_can('edit_posts') ) : // don't track editors ?>
-			<script>
-			    var _gaq = _gaq || [];
-			<?php if ( of_get_option( 'ga_id', true ) ) : // make sure the ga_id setting is defined ?>
-				_gaq.push(['_setAccount', '<?php echo of_get_option( "ga_id" ) ?>']);
-				_gaq.push(['_trackPageview']);
-			<?php endif; ?>
-				<?php if (defined('INN_MEMBER') && INN_MEMBER) { ?>
-				_gaq.push(
-					["inn._setAccount", "UA-17578670-2"],
-					["inn._setCustomVar", 1, "MemberName", "<?php bloginfo('name') ?>"],
-					["inn._trackPageview"]
-				);
-				<?php } ?>
-			    _gaq.push(
-					["largo._setAccount", "UA-17578670-4"],
-					["largo._setCustomVar", 1, "SiteName", "<?php bloginfo('name') ?>"],
-					["largo._setDomainName", "<?php echo parse_url( home_url(), PHP_URL_HOST ); ?>"],
-					["largo._setAllowLinker", true],
-					["largo._trackPageview"]
-				);
-
-			    (function() {
-				    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-				    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-				    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-				})();
-			</script>
-	<?php endif;
+		if ( ! current_user_can( 'edit_posts' ) ) { // don't track editors or authors or admins.
+			if ( of_get_option( 'ga_id', true ) ) { // make sure the ga_id setting is defined.
+				?>
+				<script>
+					var _gaq = _gaq || [];
+					_gaq.push(['_setAccount', '<?php echo of_get_option( 'ga_id' ); ?>']);
+					_gaq.push(['_trackPageview']);
+					(function() {
+						var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+						ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+						var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+					})();
+				</script>
+				<?php
+			}
+		}
 	}
 }
 add_action( 'wp_head', 'largo_google_analytics' );
+
+
+/**
+ * Enqueue Largo's Gutenberg-supporting stylesheets and scripts, for the frontend
+ *
+ * @since 0.6
+ */
+function largo_gutenberg_frontend_css_js() {
+	$suffix = ( LARGO_DEBUG ) ? '' : '.min';
+	$version = largo_version();
+
+	if (
+		function_exists( 'register_block_type' )
+		// @todo add a conditional that checks that we're on a Gutenberg post
+	) {
+		// Gutenberg support stylesheet
+		wp_enqueue_style(
+			'largo-stylesheet-gutenberg',
+			get_template_directory_uri() . '/css/gutenberg' . $suffix . '.css',
+			array(),
+			filemtime( get_template_directory() . '/css/gutenberg' . $suffix . '.css' )
+		);
+	}
+}
+add_action( 'wp_enqueue_scripts', 'largo_gutenberg_frontend_css_js' );
+
+/**
+ * Enqueue Largo's Gutenberg-supporting stylesheets and scripts, for the admin editor
+ *
+ * @since 0.6
+ * @see https://wordpress.org/gutenberg/handbook/blocks/writing-your-first-block-type/#enqueuing-block-scripts
+ */
+function largo_gutenberg_editor_css_js() {
+	$suffix = ( LARGO_DEBUG ) ? '' : '.min';
+	$version = largo_version();
+	if (
+		function_exists( 'register_block_type' )
+		// @todo add a conditional that checks that we're on a Gutenberg post
+	) {
+		// Gutenberg support stylesheet
+		wp_enqueue_style(
+			'largo-stylesheet-gutenberg',
+			get_template_directory_uri() . '/css/gutenberg' . $suffix . '.css',
+			array(),
+			$version
+		);
+	}
+	// wp_register_script()
+	// see what we do in pym shortcode
+}
+add_action( 'enqueue_block_editor_assets', 'largo_gutenberg_editor_css_js' );

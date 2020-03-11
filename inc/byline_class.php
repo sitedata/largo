@@ -5,9 +5,12 @@
 
 /**
  * Generates a byline for a normal WordPress user
+ *
  * @param Array $args an array with the following keys:
- *     - int post_id the ID of the post that we are creating a byline for
- *     - bool exclude_date Whether or not to display the date
+ *     $args = [
+ *         'post_id' => (int) the ID of the post that we are creating a byline for
+ *         'exclude_date ' => (bool) Whether or not to display the date
+ *     ]
  */
 class Largo_Byline {
 
@@ -96,13 +99,13 @@ class Largo_Byline {
 	 * This supports both Largo_Byline and Largo_CoAuthors_Byline
 	 */
 	function avatar() {
-		
 		// only do avatars if it's a single post
 		if ( ! is_single() ) {
-			$output = '';
+			$output = ' ';
 		} else {
+			$output = '';
 			$author_email = get_the_author_meta( 'email', $this->author_id );
-			if ( $this->author->type == 'guest-author' && get_the_post_thumbnail( $this->author->ID ) ) {
+			if ( isset( $this->author ) && $this->author->type == 'guest-author' && get_the_post_thumbnail( $this->author->ID ) ) {
 				$output = get_the_post_thumbnail( $this->author->ID, array( 60,60 ) );
 				$output = str_replace( 'attachment-32x32', 'avatar avatar-32 photo', $output );
 				$output = str_replace( 'wp-post-image', '', $output );
@@ -181,7 +184,7 @@ class Largo_Byline {
 	 */
 	function edit_link() {
 		// Add the edit link if the current user can edit the post
-		if ( current_user_can( 'edit_published_posts' ) ) {
+		if ( current_user_can( 'edit_post', $this->post_id ) ) {
 			echo ' <span class="edit-link"><a href="' . get_edit_post_link( $this->post_id ) . '">' . __( 'Edit This Post', 'largo' ) . '</a></span>';
 		}
 	}
@@ -262,9 +265,22 @@ class Largo_CoAuthors_Byline extends Largo_Byline {
 			$authors = implode( ', ', array_slice( $out, 0, -1 ) );
 			$authors .= ' <span class="and">' . __( 'and', 'largo' ) . '</span> ' . $out[$key];
 		} else {
-			$authors = $out[0];
+			if ( isset( $out[0] ) ) {
+				$authors = $out[0];
+			} else {
+				$cap_error_message = sprintf(
+					esc_html__( 'post %1$s should have at least one co-author, but has none!', 'largo' ),
+					$this->post_id
+				);
+				if ( WP_DEBUG || LARGO_DEBUG ) {
+					error_log(var_export( $cap_error_message, true));
+				}
+				$authors = sprintf(
+					'<!-- %1$s -->',
+					$cap_error_message
+				);
+			}
 		}
-
 
 		// Now assemble the One True Byline
 		ob_start();

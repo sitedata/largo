@@ -155,7 +155,7 @@ function cftl_tax_landing_messages($messages) {
 		7 => __('Landing Page saved.', 'cf-tax-landing'),
 		8 => sprintf(__('Landing Page submitted.  %s', 'cf-tax-landing'), $taxonomy_links),
 		9 => sprintf(__('Landing Page scheduled for: <strong>%1$s</strong>.', 'cf-tax-landing'),
-			// translators: Publish box date format, see http://php.net/date
+			// translators: Publish box date format, see https://secure.php.net/manual/en/function.date.php
 			date_i18n(__('M j, Y @ G:i'), strtotime($post->post_date))),
 		10 => sprintf(__('Landing Page updated.', 'cf-tax-landing')),
 	);
@@ -364,10 +364,12 @@ function cftl_tax_landing_header($post) {
 <?php
 }
 
+// The mother of all forms
 function cftl_tax_landing_main($post) {
 	wp_nonce_field(plugin_basename(__FILE__), 'cftl_tax_landing_main');
-	$fields = ($post->post_title) ? get_post_custom( $post->ID ) : cftl_field_defaults();
-	$fields['show'] = maybe_unserialize($fields['show'][0]);
+	$custom = get_post_custom( $post->ID );
+	$fields = ( ! empty( $custom ) ) ? $custom : cftl_field_defaults();
+	$fields['show'] = maybe_unserialize( $fields['show'] );
 	foreach( array('image','excerpt','byline','tags') as $key ) {
 		if ( !array_key_exists($key, $fields['show'])) $fields['show'][$key] = 0;
 	}
@@ -486,21 +488,25 @@ function cftl_tax_landing_main($post) {
 function cftl_tax_landing_footer ( $post ) {
 	wp_nonce_field( plugin_basename(__FILE__), 'cftl_tax_landing_footer' );
 	$fields = ($post->post_title) ? get_post_custom( $post->ID ) : cftl_field_defaults();
+
+	$footer_style_none = checked( $fields['footer_style'][0], 'none', false );
+	$footer_style_widget = checked( $fields['footer_style'][0], 'widget', false );
+	$footer_style_custom = checked( $fields['footer_style'][0], 'custom', false );
 	?>
 <div class="form-field-radios-stacked">
 	<h4>Layout Style</h4>
 	<div>
-		<input type="radio" name="footer_style" id="footer_style_none" value="none" <?php checked( $fields['footer_style'][0], 'none') ?> />
-	    <label for="footer_style_none">None</label>
-	    <div class="description">Do not display a footer</div>
+		<input type="radio" name="footer_style" id="footer_style_none" value="none" <?php echo $footer_style_none; ?> />
+		<label for="footer_style_none">None</label>
+		<div class="description">Do not display a footer</div>
 
-	    <input type="radio" name="footer_style" id="footer_style_widget" value="widget" <?php checked( $fields['footer_style'][0], 'widget') ?> />
-	    <label for="footer_style_widget">Use Widget</label>
-	    <div class="description">Implements a "Series <?php echo cftl_title($post); ?>: Bottom" widget</div>
+		<input type="radio" name="footer_style" id="footer_style_widget" value="widget" <?php echo $footer_style_widget; ?> />
+		<label for="footer_style_widget">Use Widget</label>
+		<div class="description">Implements a "Series <?php echo cftl_title($post); ?>: Bottom" widget</div>
 
-	    <input type="radio" name="footer_style" id="footer_style_custom" value="custom" <?php checked( $fields['footer_style'][0], 'custom') ?> />
-	    <label for="footer_style_custom">Custom HTML</label>
-	    <div class="description">Implements custom HTML entered below</div>
+		<input type="radio" name="footer_style" id="footer_style_custom" value="custom" <?php echo $footer_style_custom; ?> />
+		<label for="footer_style_custom">Custom HTML</label>
+		<div class="description">Implements custom HTML entered below</div>
 	</div>
 </div>
 <div class="form-field-wysiwyg" id="footer-html" <?php if ($fields['footer_style'][0] != 'custom') echo 'style="display:none;"'; ?>>
@@ -517,10 +523,15 @@ function cftl_tax_landing_footer ( $post ) {
 <?php
 }
 
+/**
+ * The default values for the footer landing page
+ * @since 0.3
+ */
 function cftl_field_defaults( ) {
 	return array(
 		'header_enabled' => array(1),
 		'show_series_byline' => array(1),
+		'show' => array(1),
 		'show_sharebar' => array(1),
 		'header_style' => array('standard'),
 		'cftl_layout' => array('two-column'),
@@ -532,6 +543,7 @@ function cftl_field_defaults( ) {
 		'footer_enabled' => array(1),
 		'left_region' => of_get_option('landing_left_region_default', 'sidebar-single'),
 		'right_region' => of_get_option('landing_right_region_default', 'sidebar-main'),
+		'footer_style' => array( 0 ),
 	);
 }
 
@@ -664,8 +676,19 @@ function cftl_admin_scripts() {
 
 	if( $screen->base == 'post' && $screen->post_type == 'cftl-tax-landing') {
 		$url = get_template_directory_uri();
-		wp_enqueue_script( 'series', $url.'/inc/wp-taxonomy-landing/series.js', array('jquery', 'jquery-ui-sortable'), '0.0.1', true );
-		wp_enqueue_style( 'series', $url.'/inc/wp-taxonomy-landing/series.css' );
+		wp_enqueue_script(
+			'series',
+			$url . '/inc/wp-taxonomy-landing/series.js',
+			array('jquery', 'jquery-ui-sortable'),
+			largo_version(),
+			true
+		);
+		wp_enqueue_style(
+			'series',
+			$url . '/inc/wp-taxonomy-landing/series.css',
+			array(),
+			largo_version()
+		);
 	}
 }
 add_action( 'admin_enqueue_scripts', 'cftl_admin_scripts');

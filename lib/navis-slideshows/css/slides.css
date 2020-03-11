@@ -37,6 +37,7 @@
     margin:0;
     position: relative;
     font-style:italic;
+    box-sizing: border-box;
 }
 
 body.normal.single-post .hero .navis-slideshow .wp-caption-text {
@@ -210,9 +211,17 @@ body.single-format-standard .navis-slideshow a.slick-next {
     z-index: 999999;
     overflow:visible;
     background-color: #000;
+    display: block;
+    transform: none;
 }
-.navis-slideshow.navis-full .permalink {
-    display: none;
+/* Gutenberg styles; https://github.com/INN/largo/issues/1664 */
+.navis-slideshow.navis-full.alignleft,
+.navis-slideshow.navis-full.aligncenter,
+.navis-slideshow.navis-full.alignright,
+.navis-slideshow.navis-full.alignwide,
+.navis-slideshow.navis-full.alignfull,
+.navis-slideshow.navis-full.alignnone {
+  display: block;
 }
 .navis-slideshow.navis-full .slick-list {
     top:0;
@@ -223,7 +232,7 @@ body.single-format-standard .navis-slideshow a.slick-next {
     top: 0;
 }
 .navis-slideshow.navis-full .slick-dots li button {
-    background-color: #000;   
+    background-color: #000;
 }
 .navis-slideshow.navis-full .slick-dots li.slick-active button {
     background-color: #666;
@@ -258,6 +267,13 @@ body.single-format-standard .navis-slideshow a.slick-next {
     right: 14px;
     z-index: 99999;
     color: white;
+    text-shadow:
+      -1px -1px 0 black,
+      -1px  1px 0 black,
+       1px -1px 0 black,
+       1px  1px 0 black,
+       0px  0px 1px black
+    ;
     font-family: sans-serif;
     font-size: 2.5em;
 }
@@ -275,7 +291,7 @@ body.single-format-standard .navis-slideshow a.slick-next {
     max-height: 100vh;
     top: 45%;
     position: absolute;
-    left: 50%;    
+    left: 50%;
     -webkit-transform: translate(-50%, -50%);
        -moz-transform: translate(-50%, -50%);
         -ms-transform: translate(-50%, -50%);
@@ -284,6 +300,8 @@ body.single-format-standard .navis-slideshow a.slick-next {
 }
 
 .navis-slideshow.navis-full .wp-caption-text,
+.wp-block-image.navis-slideshow.navis-full figcaption,
+.wp-block-image .navis-slideshow.navis-full figcaption, /** yes, with and without space, for align* images */
 body.normal.single-post .hero .navis-slideshow.navis-full p.wp-caption-text {
     background-color: rgba(0,0,0,.7);
     color: #ccc;
@@ -294,9 +312,15 @@ body.normal.single-post .hero .navis-slideshow.navis-full p.wp-caption-text {
     position: absolute;
     border: none;
     text-align: left;
+    display: block;
+    caption-side: unset;
+    box-sizing: border-box;
 }
 
 body.normal.single-post .navis-slideshow.navis-full p.wp-media-credit {
+    color: #ccc;
+    /** This uses positional hacks to overlay on the caption's background. */
+    background-color:transparent;
     position:absolute;
     display: block;
     bottom: 0;
@@ -305,12 +329,12 @@ body.normal.single-post .navis-slideshow.navis-full p.wp-media-credit {
     text-align: left;
     padding:.75em 0 .5em 0;
     z-index: 4;
-    background-color:transparent;
 }
 
 /**** SINGLE LIGHTBOX ***/
 .navis-single.navis-full img {
     max-height: 100vh;
+    width: auto;
     top: 50%;
     position: absolute;
     left: 50%;

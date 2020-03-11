@@ -166,7 +166,7 @@ function largo_get_featured_posts_in_category( $category_name, $number = 5 ) {
  */
 function largo_category_archive_posts( $query ) {
 	// don't muck with admin, non-categories, etc
-	if ( ! $query->is_category() || ! $query->is_main_query() || is_admin() ) return;
+	if ( ! $query->is_category() || ! $query->is_main_query() || is_admin() || is_feed() && is_category() ) return;
 
 	// If this has been disabled by an option, do nothing
 	if ( of_get_option( 'hide_category_featured' ) == true ) return;

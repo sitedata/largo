@@ -109,7 +109,7 @@ if( of_get_option('disclaimer_enabled') ) {
 /**
  * Add our prominence taxonomy meta box with custom behavior.
  *
- * @param array $largoProminenceTerms list of prominence terms
+ * @param array $largoProminenceTerms An array of arrays describing the taxonomy terms
  * @see largo_custom_taxonomies
  */
 function largo_add_custom_prominence_meta_box($largoProminenceTerms) {
@@ -121,7 +121,9 @@ function largo_add_custom_prominence_meta_box($largoProminenceTerms) {
 			'post',
 			'side',
 			'default',
-			$largoProminenceTerms
+			array(
+				'__back_compat_meta_box' => true, // because this taxonomy metabox is covered by Gutenberg
+			)
 		);
 	}, 10);
 }
@@ -208,7 +210,11 @@ function largo_custom_sidebar_js() {
 	if ($typenow == 'post') {
 		$suffix = (LARGO_DEBUG)? '' : '.min';
 		wp_enqueue_script(
-			'custom-sidebar', get_template_directory_uri() . '/js/custom-sidebar' . $suffix . '.js', array('jquery'));
+			'custom-sidebar',
+			get_template_directory_uri() . '/js/custom-sidebar' . $suffix . '.js',
+			array('jquery'),
+			largo_version()
+		);
 
 		$post_templates = get_post_templates();
 		$default_sidebar_labels = array();
@@ -320,7 +326,12 @@ function largo_top_terms_js() {
 	global $typenow;
 	if( $typenow == 'post' ) {
 		$suffix = (LARGO_DEBUG)? '' : '.min';
-		wp_enqueue_script( 'top-terms', get_template_directory_uri() . '/js/top-terms' . $suffix . '.js', array( 'jquery' ) );
+		wp_enqueue_script(
+			'top-terms',
+			get_template_directory_uri() . '/js/top-terms' . $suffix . '.js',
+			array( 'jquery' ),
+			largo_version()
+		);
 	}
 }
 add_action( 'admin_enqueue_scripts', 'largo_top_terms_js' );

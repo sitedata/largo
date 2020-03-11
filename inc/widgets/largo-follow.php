@@ -18,24 +18,22 @@ class largo_follow_widget extends WP_Widget {
 	}
 
 	function widget( $args, $instance ) {
-		extract( $args );
 
 		$title = apply_filters('widget_title',  $instance['title'], $instance, $this->id_base);
 
-		echo $before_widget;
+		echo $args['before_widget'];
 
-		if ( is_single() && isset($id) && $id == 'article-bottom' ) {
+		if ( is_single() && isset($args['id']) && $args['id'] == 'article-bottom' ) {
 			// display the post social bar
 			largo_post_social_links();
 		} else {
 			// Display the widget title if one was input
-			if ( $title ) echo $before_title . $title . $after_title;
+			if ( $title ) echo $args['before_title'] . $title . $args['after_title'];
 			
 			// Display the usual buttons and whatnot
 			$networks = array(
 				'facebook' => 'Like Us on Facebook',
 				'twitter' => 'Follow Us on Twitter',
-				'gplus' => 'Follow Us on Google+',
 				'youtube' => 'Follow Us on YouTube',
 				'instagram' => 'Follow Us on Instagram',
 				'linkedin' => 'Find Us on LinkedIn',
@@ -64,7 +62,7 @@ class largo_follow_widget extends WP_Widget {
 			}
 		}
 
-		echo $after_widget;
+		echo $args['after_widget'];
 	}
 
 	function update( $new_instance, $old_instance ) {

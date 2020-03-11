@@ -24,7 +24,7 @@ inc/metabox-api.php
 
 .. php:function:: largo_register_meta_input()
 
-   Call this function from within a largo_add_meta_field callback to register an input as a post meta field
+   Call this function from within a largo_add_meta_box callback to register an input as a post meta field
 
    TODO: Include a validation parameter so meta fields can be validated easily.
 

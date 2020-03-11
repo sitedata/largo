@@ -21,12 +21,13 @@ if ( !function_exists( 'largo_load_more_posts_enqueue_script' ) ) {
 	 */
 	function largo_load_more_posts_enqueue_script() {
 		$suffix = (LARGO_DEBUG)? '' : '.min';
-		$version = largo_version();
 
 		wp_enqueue_script(
 			'load-more-posts',
 			get_template_directory_uri() . '/js/load-more-posts'. $suffix . '.js',
-			array('jquery'), $version, false
+			array('jquery'),
+			filemtime( get_template_directory() . '/js/load-more-posts' . $suffix . '.js' ),
+			false
 		);
 	}
 	add_action( 'wp_enqueue_scripts', 'largo_load_more_posts_enqueue_script' );
@@ -56,7 +57,7 @@ if ( !function_exists( 'largo_load_more_posts_data' ) ) {
 			'ajax_url' => admin_url( 'admin-ajax.php' ),
 			'paged' => ( !empty( $the_query->query_vars['paged'] ) )? $the_query->query_vars['paged'] : 1,
 			'query' => $query,
-			'is_home' => $the_query->is_home(),
+			'is_home' => $the_query->is_front_page(),
 			'is_series_landing' => $post->post_type == 'cftl-tax-landing' ? true : false,
 			'no_more_posts' => apply_filters( 'largo_no_more_posts_text', "You've reached the end!", $nav_id, $the_query )
 		);
@@ -118,15 +119,19 @@ if ( !function_exists( 'largo_load_more_posts' ) ) {
 
 		if ( $query->have_posts() ) {
 			// Choose the correct partial to load here
-			$partial = largo_load_more_posts_choose_partial($query);
+			$partial = largo_load_more_posts_choose_partial( $query );
+
+			do_action( 'largo_lmp_before_posts' );
 
 			// Render all the posts
 			while ( $query->have_posts() ) : $query->the_post();
 				// Use largo_get_partial_by_post_type here as well as in the search archive,
 				// to ensure that LMP posts will be using the partial set by the child theme for that post type.
-				$post_type_partial = largo_get_partial_by_post_type($partial, get_post_type(), $partial);
+				$post_type_partial = largo_get_partial_by_post_type( $partial, get_post_type(), $partial );
 				get_template_part( 'partials/content', $post_type_partial );
 			endwhile;
+
+			do_action( 'largo_lmp_after_posts' );
 		}
 		wp_die();
 	}

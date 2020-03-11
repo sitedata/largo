@@ -5,8 +5,10 @@
 ## OS X
 .DS_Store
 
-## Sublime Text
+## Editors
 *.sublime-*
+*.swp
+*.swo
 
 ## Translation files
 lang/*.merged

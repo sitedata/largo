@@ -18,7 +18,7 @@ We've built wrappers around the sphinx compilation process to make it easy to us
 
 ###### 1. Use our development tools:
 
-If you're already using our development tools, running:
+If you're already using our development tools ([INN/deploy-tools](https://github.com/INN/deploy-tools/)), running:
 
 	$ fab dev assets.watch
 

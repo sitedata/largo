@@ -37,10 +37,10 @@ if ( ! function_exists( 'largo_entry_content' ) ) {
 
 /**
  * Adds pagination to single posts
- * Based on: http://bavotasan.com/2012/a-better-wp_link_pages-for-wordpress/
+ * Based on: https://bavotasan.com/2012/a-better-wp_link_pages-for-wordpress/
  *
  * @params $args same array of arguments as accepted by wp_link_pages
- * See: http://codex.wordpress.org/Function_Reference/wp_link_pages
+ * See: https://codex.wordpress.org/Function_Reference/wp_link_pages
  * @return formatted output in html (or echo)
  * @since 0.3
  */
@@ -59,32 +59,31 @@ if ( ! function_exists( 'largo_custom_wp_link_pages' ) ) {
 
 		$r = wp_parse_args( $args, $defaults );
 		$r = apply_filters( 'wp_link_pages_args', $r );
-		extract( $r, EXTR_SKIP );
 
 		global $page, $numpages, $multipage, $more, $pagenow;
 
 		$output = '';
 		if ( $multipage ) {
 			//if ( 'number' == $next_or_number ) {
-				$output .= $before;
+				$output .= $r['before'];
 
 				//previous page
 				$i = $page - 1;
 				if ( $i && $more ) {
 					$output .= _wp_link_page( $i );
-					$output .= $text_before . $previouspagelink . $text_after . '</a>|';
+					$output .= $r['text_before'] . $r['previouspagelink'] . $r['text_after'] . '</a>|';
 				}
 
 				//list of page #s
 				for ( $i = 1; $i < ( $numpages + 1 ); $i = $i + 1 ) {
-					$j = str_replace( '%', $i, $pagelink );
+					$j = str_replace( '%', $i, $r['pagelink'] );
 					$output .= ' ';
 					if ( $i != $page || ( ( ! $more ) && ( $page == 1 ) ) )
 						$output .= _wp_link_page( $i );
 					else
 						$output .= '<span class="current-post-page">';
 
-					$output .= $text_before . $j . $text_after;
+					$output .= $r['text_before'] . $j . $r['text_after'];
 					if ( $i != $page || ( ( ! $more ) && ( $page == 1 ) ) )
 						$output .= '</a>';
 					else
@@ -95,15 +94,15 @@ if ( ! function_exists( 'largo_custom_wp_link_pages' ) ) {
 				$i = $page + 1;
 				if ( $i <= $numpages && $more ) {
 					$output .= '|' . _wp_link_page( $i );
-					$output .= $text_before . $nextpagelink . $text_after . '</a>';
+					$output .= $r['text_before'] . $r['nextpagelink'] . $r['text_after'] . '</a>';
 				}
 
 				$output .= '|<a href="' . add_query_arg( array( 'all' => '1'), get_permalink() ) . '" title="View all pages">View As Single Page</a>';
 
-				$output .= $after;
+				$output .= $r['after'];
 		}
 
-		if ( $echo )
+		if ( $r['echo'] )
 			echo $output;
 
 		return $output;
@@ -163,7 +162,7 @@ if ( ! function_exists( 'largo_content_nav' ) ) {
 		<?php } elseif ( $wp_query->max_num_pages > 1 ) {
 			$posts_term = of_get_option('posts_term_plural');
 
-			largo_render_template('partials/load-more-posts', array(
+			largo_render_template('partials/load-more-posts', null, array(
 				'nav_id' => $nav_id,
 				'the_query' => $wp_query,
 				'posts_term' => ($posts_term)? $posts_term : 'Posts'

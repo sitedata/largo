@@ -128,7 +128,7 @@ class Largo_Custom_Less_Variables {
 	* @param string $file - path of file to write
 	* @param string $contents - the content to be written to the file
 	*/
-	protected function put_contents($file, $contents) {
+	static function put_contents($file, $contents) {
 		global $wp_filesystem;
 
 		if (empty($wp_filesystem)) {
@@ -144,7 +144,7 @@ class Largo_Custom_Less_Variables {
 	*
 	* @param string $file - path of file to read
 	*/
-	protected function get_contents($file) {
+	static function get_contents($file) {
 		global $wp_filesystem;
 
 		if (empty($wp_filesystem)) {
@@ -289,7 +289,7 @@ class Largo_Custom_Less_Variables {
 		$variables_less = self::get_contents( self::variable_file_path() );
 
 		// Parse out the variables. Each is defined per line in format: @<varName>: <varValue>;
-		preg_match_all( '#^\s*@(?P<name>[\w-_]+):\s*(?P<value>[^;]*);#m', $variables_less, $matches );
+		preg_match_all( '#^\s*@(?P<name>[\w\-_]+):\s*(?P<value>[^;]*);#m', $variables_less, $matches );
 
 		foreach ( $matches[0] as $index => $rule ) {
 			$name = $matches['name'][$index];
@@ -770,7 +770,7 @@ class Largo_Custom_Less_Variables {
 		$less = self::get_contents( self::variable_file_path() );
 
 		// Parse
-		$pattern = '#/\*\*\s+(?<comment>.*)\s+\*/\s*@(?P<name>[\w-_]+):\s*(?P<value>[^;]*);#Us';
+		$pattern = '#/\*\*\s+(?<comment>.*)\s+\*/\s*@(?P<name>[\w\-_]+):\s*(?P<value>[^;]*);#Us';
 		$comment_pattern = '#^\s*\*\s*@(?P<prop>\w+)\s+(?P<value>.*)$#mU';
 
 		preg_match_all( $pattern, $less, $matches );

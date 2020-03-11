@@ -1,7 +1,12 @@
 <?php
 
 function largo_load_avatar_js() {
-	wp_enqueue_script('largo_avatar_js', get_template_directory_uri() . '/inc/avatars/js/avatars.js', array('jquery'));
+	wp_enqueue_script(
+		'largo_avatar_js',
+		get_template_directory_uri() . '/inc/avatars/js/avatars.js',
+		array('jquery'),
+		largo_version()
+	);
 	wp_localize_script('largo_avatar_js', 'largo_avatar_js_L10n', array(
 		'update_text' => __('Click "Update Profile" to save your avatar.', 'largo')
 	));
@@ -35,7 +40,7 @@ function largo_add_avatar_field($user) {
 						if (empty($image_src) && largo_has_gravatar($user->user_email)) {
 								echo get_avatar($user->ID);
 								echo '<br />';
-								_e('Currently using Gravatar. Change at <a href="http://gravatar.com/">gravatar.com</a> or choose a different image below.', 'largo');
+								_e('Currently using Gravatar. Change at <a href="https://gravatar.com/">gravatar.com</a> or choose a different image below.', 'largo');
 						} ?>
 					</p>
 
@@ -70,8 +75,17 @@ function largo_save_avatar_field($user_id) {
 				);
 				$id = wp_insert_attachment($args, $file['file']);
 
-				if (!is_wp_error($id)) {
-					require_once(ABSPATH . 'wp-admin/includes/image.php');
+				if ( ! is_wp_error( $id ) ) {
+					if ( 0 === validate_file( ABSPATH . 'wp-admin/includes/image.php' ) ) {
+						require_once( ABSPATH . 'wp-admin/includes/image.php' );
+					} else {
+						wp_die(
+							sprintf(
+								esc_html__( 'wp-admin/includes/image.php could not be loaded by %1$s', 'largo' ),
+								__FILE__
+							)
+						);
+					}
 					// Generate the metadata for the attachment, and update the database record.
 					$metadata = wp_generate_attachment_metadata($id, $file['file']);
 					$update = wp_update_attachment_metadata($id, $metadata);

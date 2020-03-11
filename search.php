@@ -9,11 +9,19 @@ get_header();
 	<?php if (of_get_option('use_gcs') && of_get_option('gcs_id')) { ?>
 		<h1>
 			<?php
-				printf( __('Search results for <span class="search-term">%s</span>', 'largo'), get_search_query() );
+				$search_query = esc_html( get_search_query() );
+				if ( empty( $search_query ) ) {
+					echo wp_kses_post( __('Search', 'largo') );
+				} else {
+					echo wp_kses_post( sprintf(
+						__('Search results for <span class="search-term">%s</span>', 'largo'),
+						$search_query
+					) );
+				}
 			?>
 		</h1>
 
-		<?
+		<?php
 			/**
 			 * Fires before the Google Custom Search container
 			 *
@@ -67,7 +75,7 @@ get_header();
 			<?php } ?>
 		</div>
 
-		<?
+		<?php
 			/**
 			 * Fires after the Google Custom Search container
 			 *

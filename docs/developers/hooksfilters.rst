@@ -39,21 +39,20 @@ Other filters and actions
 
 filter: **largo_additional_networks**
 
-    Called in `inc/widgets/largo-follow.php` and 'inc/header-footer.php' to allow child themes to add additional social networks for social buttons, etc.`_.
-post type.
+    Called in `inc/widgets/largo-follow.php` and `inc/header-footer.php` to allow child themes to add additional social networks for social buttons, etc.
 
     **Usage:** ::
 
     function gijn_additional_networks( $networks ) {
-		if ( of_get_option( 'listserv_link' ) ) {
-			$gijn_networks = array( 
-				'listserv' => 'Join The GIJN Listserv'
-			);
-			$networks = array_merge( $networks, $gijn_networks );
-		}
-		return $networks;
-	}
-	add_filter( 'largo_additional_networks', 'gijn_additional_networks' );
+        if ( of_get_option( 'listserv_link' ) ) {
+            $gijn_networks = array( 
+                'listserv' => 'Join The GIJN Listserv'
+            );
+            $networks = array_merge( $networks, $gijn_networks );
+        }
+        return $networks;
+    }
+    add_filter( 'largo_additional_networks', 'gijn_additional_networks' );
 
 filter: **largo_archive_{$post_type}_title**
 
@@ -112,7 +111,7 @@ filter: **largo_lmp_args**
 
     *args: $args*
 
-    Passed in this are the arguments for the Load More Posts WP_Query. An example usage would be to check if ``is_home()`` and then restrict the posts returned by the query to those in the homepage featured prominence term.
+    Passed in this are the arguments for the Load More Posts WP_Query. An example usage would be to check if ``is_front_page()`` and then restrict the posts returned by the query to those in the homepage featured prominence term.
 
 filter: **largo_lmp_template_partial**
 
@@ -258,11 +257,11 @@ Template Hooks
 
 Sometimes you may want to fire certain functions or include additional blocks of markup on a page without having to modify or override an entire template file.
 
-WordPress allows you to define custom action hooks using the `do_action() <http://codex.wordpress.org/Function_Reference/do_action>`_ function like so: ::
+WordPress allows you to define custom action hooks using the `do_action() <https://codex.wordpress.org/Function_Reference/do_action>`_ function like so: ::
 
     do_action( 'largo_top' );
 
-and then from functions.php in a child theme you can use the `add_action() <http://codex.wordpress.org/Function_Reference/add_action>`_ function to fire another function you define to insert markup or perform some other action when the do_action() function is executed, for example: ::
+and then from functions.php in a child theme you can use the `add_action() <https://codex.wordpress.org/Function_Reference/add_action>`_ function to fire another function you define to insert markup or perform some other action when the do_action() function is executed, for example: ::
 
     add_action( 'largo_top', 'largo_render_network_header' );
 
@@ -362,9 +361,18 @@ These actions are run on all homepage templates, including the Legacy Three Colu
 **category.php**
 
  - **largo_category_after_description_in_header** - between the ``div.archive-description`` and before ``get_template_part('partials/archive', 'category-related');``.
+ - **largo_category_after_primary_featured_post** - between the ``div.primary-featured-post`` and before the ``div.secondary-featured-post``.
  - **largo_before_category_river** - just before the river of stories at the bottom of the category archive page (for adding a header to this column, for example)
  - **largo_loop_after_post_x** - runs after every post, with arguments ``$counter`` and ``context`` describing which post it's running after and what the context is. (In categories, the context is ``archive``.)
  - **largo_after_category_river** - immediately after the river of stories at the bottom of the category archive page, after the Load More Posts button (for adding a footer to this column, for example.)
+
+**series-landing.php**
+
+ - **largo_series_before_stories** - at the top of the column of ``div.stories``.
+
+**archive.php**
+
+ - **largo_archive_before_stories** - at the top of the column of ``div.stories``.
 
 **search.php**
 

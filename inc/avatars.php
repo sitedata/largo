@@ -5,7 +5,7 @@ include_once dirname(__FILE__) . '/avatars/functions.php';
 
 /**
  * Determine whether or not an author has a valid gravatar image
- * see: http://codex.wordpress.org/Using_Gravatars
+ * see: https://codex.wordpress.org/Using_Gravatars
  *
  * @param $email string an author's email address
  * @return bool true if a gravatar is available for this user
@@ -20,7 +20,7 @@ function largo_has_gravatar( $email ) {
 		return (bool) $cache_value;
 	}
 
-	$uri = 'http://www.gravatar.com/avatar/' . $hash . '?d=404';
+	$uri = 'https://www.gravatar.com/avatar/' . $hash . '?d=404';
 	$response = wp_remote_head( $uri );
 	if ( 200 == wp_remote_retrieve_response_code( $response ) ) {
 		$cache_value = '1';
@@ -40,13 +40,15 @@ function largo_has_gravatar( $email ) {
  */
 function largo_has_avatar( $email ) {
 	$user = get_user_by( 'email', $email );
-	$result = largo_get_user_avatar_id( $user->ID );
-	if ( ! empty ( $result ) ) {
-		return true;
-	} else {
-		if ( largo_has_gravatar( $email ) ) {
+	if ( ! empty( $user ) ) {
+		$result = largo_get_user_avatar_id( $user->ID );
+		if ( ! empty ( $result ) ) {
 			return true;
-		}	
+		} else {
+			if ( largo_has_gravatar( $email ) ) {
+				return true;
+			}
+		}
 	}
 	return false;
 }

@@ -45,7 +45,7 @@ $content_span = array( 'one-column' => 12, 'two-column' => 8, 'three-column' => 
 		<h1 class="entry-title"><?php the_title(); ?></h1>
 		<?php
 		if ( $opt['show_series_byline'] )
-			echo '<h5 class="byline">' . largo_byline( false ) . '</h5>';
+			echo '<h5 class="byline">' . largo_byline( false, false, get_the_ID() ) . '</h5>';
 		if ( $opt['show_sharebar'] )
 			largo_post_social_links();
 		?>
@@ -84,6 +84,7 @@ endif;
 ?>
 
 <div id="content" class="span<?php echo $content_span[ $opt['cftl_layout'] ]; ?> stories" role="main">
+<?php do_action( 'largo_series_before_stories' ); ?>
 <?php
 
 global $wp_query, $post;

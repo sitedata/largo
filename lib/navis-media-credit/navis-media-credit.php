@@ -180,26 +180,33 @@ class Navis_Media_Credit {
             'caption' => '',
         ), $atts );
         $atts = apply_filters( 'navis_image_layout_defaults', $atts );
-        extract( $atts );
 
-        if ( $id && ! $credit ) {
-            $post_id = str_replace( 'attachment_', '', $id );
+        if ( $atts['id'] && empty( $atts['credit'] ) ) {
+            $post_id = str_replace( 'attachment_', '', $atts['id'] );
             $creditor = navis_get_media_credit( $post_id );
             $credit = ! empty( $creditor ) ? $creditor->to_string() : '';
         }
 
-        if ( $id ) {
-            $id = 'id="' . esc_attr($id) . '" ';
+        // XXX: maybe remove module and image classes at some point
+		$out = sprintf(
+			'<div id="%s" class="wp-caption module image %s" style="max-width: %spx;">%s',
+			esc_attr( $atts['id'] ),
+			esc_attr( $atts['align'] ),
+			esc_attr( $atts['width'] ),
+			do_shortcode( $content )
+		);
+
+		if ( isset( $credit ) ) {
+			$out .= sprintf(
+				'<p class="wp-media-credit">%s</p>',
+				wp_kses_post( $credit )
+			);
+		}
+
+        if ( !empty( $atts['caption'] ) ) {
+            $out .= sprintf( '<p class="wp-caption-text">%s</p>', wp_kses_post( $atts['caption'] ) );
         }
 
-        // XXX: maybe remove module and image classes at some point
-        $out = sprintf( '<div %s class="wp-caption module image %s" style="max-width: %spx;">%s', $id, $align, $width, do_shortcode( $content ) );
-        if ( $credit ) {
-            $out .= sprintf( '<p class="wp-media-credit">%s</p>', $credit );
-        }
-        if ( $caption ) {
-            $out .= sprintf( '<p class="wp-caption-text">%s</p>', $caption );
-        }
         $out .= "</div>";
 
         return $out;
@@ -263,4 +270,48 @@ class Media_Credit {
     function update( $field, $value ) {
         return update_post_meta( $this->post_id, '_' . $field, $value );
     }
+}
+
+/**
+ * Register custom fields for the REST api
+ */
+function navis_register_custom_rest_fields() {
+
+	register_rest_field( 'attachment', 'media_credit', 
+		array(
+			'get_callback' => 'navis_display_media_credit_in_rest_api',
+			'schema' => null,
+		)
+	);
+
+}
+add_action( 'rest_api_init', 'navis_register_custom_rest_fields' );
+
+/**
+ * Configure data for custom fields to display in REST api
+ * 
+ * @param Array $object The post object
+ * @return Array $media_credit_meta the new object meta data
+ */
+function navis_display_media_credit_in_rest_api( $object ) {
+
+    $post_id = $object[ 'id' ];
+
+	$meta = get_post_meta( $post_id );
+	
+    $meta_fields = [ '_media_credit', '_media_credit_url', '_navis_media_credit_org', '_navis_media_can_distribute' ];
+    
+    foreach( $meta_fields as $meta_field ){
+
+        if ( isset( $meta[ $meta_field ] ) && isset( $meta[ $meta_field ][0] ) ) {
+
+            //return the post meta
+            $media_credit_meta[ $meta_field ] = $meta[ $meta_field ][0];
+            
+        }
+
+    }
+	
+    return $media_credit_meta;
+	
 }

@@ -18,28 +18,28 @@ class largo_series_posts_widget extends WP_Widget {
 		$preserve = $post;
 
 		// instance: num, series (id), title, heading
-		extract( $args );
 
 		//get the posts
- 		$series_posts = largo_get_series_posts( $instance['series'], $instance['num'] );
+		$series_posts = largo_get_series_posts( $instance['series'], $instance['num'] );
 
- 		if ( ! $series_posts ) return; //output nothing if no posts found
+		if ( empty( $series_posts ) ) return; //output nothing if no posts found
 
 
 		$instance['title_link'] = get_term_link( (int) $instance['series'], 'series' );
 		$term = get_term( $instance['series'], 'series' );
 		$title = apply_filters( 'widget_title', $term->name, $instance, $this->id_base );
+		$thumb = isset( $instance['thumbnail_display'] ) ? $instance['thumbnail_display'] : 'small';
 
-		echo $before_widget;
+		echo $args['before_widget'];
 
-		if ( $title ) echo $before_title . $title . $after_title;
+		if ( ! empty( $title ) ) echo $args['before_title'] . $title . $args['after_title'];
 
-	 	//first post
-	 	$series_posts->the_post();
+		//first post
+		$series_posts->the_post();
 
 		$context = array(
 			'instance' => $instance,
-			'thumb' => 'medium',
+			'thumb' => $thumb,
 			'excerpt' => 'custom_excerpt'
 		);
 		largo_render_template('partials/widget', 'content', $context);
@@ -62,9 +62,9 @@ class largo_series_posts_widget extends WP_Widget {
 			echo '</ul>';
 		}
 
- 		echo '<a class="more" href="' . get_term_link( (int) $instance['series'], 'series' ) . '">' . __('Complete Coverage', 'largo') . "</a>";
+		echo '<a class="more" href="' . get_term_link( (int) $instance['series'], 'series' ) . '">' . __('Complete Coverage', 'largo') . "</a>";
 
-		echo $after_widget;
+		echo $args['after_widget'];
 
 		// Restore global $post
 		wp_reset_postdata();
@@ -78,7 +78,8 @@ class largo_series_posts_widget extends WP_Widget {
 		$instance['num'] = (int)$new_instance['num'];
 		$instance['series'] = sanitize_key( $new_instance['series'] );
 		$instance['show_byline'] = (int) $new_instance['show_byline'];
-		$instance['thumbnail_location'] = sanitize_key( $new_instance['thumbnail_location'] );
+		$instance['thumbnail_display'] = sanitize_key( $new_instance['thumbnail_display'] );
+		$instance['image_align'] = sanitize_key( $new_instance['image_align'] );
 		return $instance;
 	}
 
@@ -89,7 +90,8 @@ class largo_series_posts_widget extends WP_Widget {
 		$instance = wp_parse_args( (array) $instance, array(
 			'num' => 4,
 			'heading' => 'Explore:',
-			'thumbnail_location' => 'before',
+			'thumbnail_display' => 'small',
+			'image_align' => 'left',
 			'show_byline' => 0,
 			'series' => 'null')
 		);
@@ -120,17 +122,25 @@ class largo_series_posts_widget extends WP_Widget {
 		</p>
 
 		<p><input id="<?php echo $this->get_field_id('show_byline'); ?>" name="<?php echo $this->get_field_name('show_byline'); ?>" type="checkbox" value="1" <?php checked( $instance['show_byline'], 1);?> />
-			<label for="<?php echo $this->get_field_id('show_byline'); ?>"><?php _e( 'Show date on first post', 'largo' ); ?></label>
+			<label for="<?php echo $this->get_field_id('show_byline'); ?>"><?php _e( 'Show byline on first post?', 'largo' ); ?></label>
 		</p>
 
 		<p>
-			<label for="<?php echo $this->get_field_id('thumbnail_location'); ?>"><?php _e('Thumbnail position on first post', 'largo'); ?>:</label>
-			<select name="<?php echo $this->get_field_name('thumbnail_location'); ?>" id="<?php echo $this->get_field_id('thumbnail_location'); ?>">
-			<?php
-			$choices = array( 'before' => __( 'Before Headline', 'largo' ), 'after' => __( 'After Headline', 'largo' ) );
-			foreach( $choices as $i => $display ) {
-				echo '<option value="', $i, '"', selected($instance['thumbnail_location'], $i, false), '>', $display, '</option>';
-			} ?>
+			<label for="<?php echo $this->get_field_id( 'thumbnail_display' ); ?>"><?php _e( 'Thumbnail Image', 'largo' ); ?></label>
+			<select id="<?php echo $this->get_field_id( 'thumbnail_display' ); ?>" name="<?php echo $this->get_field_name( 'thumbnail_display' ); ?>" class="widefat" style="width:90%;">
+				<option <?php selected( $instance['thumbnail_display'], 'small'); ?> value="small"><?php _e( 'Small (60x60)', 'largo' ); ?></option>
+				<option <?php selected( $instance['thumbnail_display'], 'medium'); ?> value="medium"><?php _e( 'Medium (140x140)', 'largo' ); ?></option>
+				<option <?php selected( $instance['thumbnail_display'], 'large'); ?> value="large"><?php _e( 'Large (Full width of the widget)', 'largo' ); ?></option>
+				<option <?php selected( $instance['thumbnail_display'], 'none'); ?> value="none"><?php _e( 'None', 'largo' ); ?></option>
+			</select>
+		</p>
+
+		<!-- Image alignment -->
+		<p>
+			<label for="<?php echo $this->get_field_id( 'image_align' ); ?>"><?php _e( 'Image Alignment', 'largo' ); ?></label>
+			<select id="<?php echo $this->get_field_id( 'image_align' ); ?>" name="<?php echo $this->get_field_name( 'image_align' ); ?>" class="widefat" style="width:90%;">
+				<option <?php selected( $instance['image_align'], 'left'); ?> value="left"><?php _e( 'Left align', 'largo' ); ?></option>
+				<option <?php selected( $instance['image_align'], 'right'); ?> value="right"><?php _e( 'Right align', 'largo' ); ?></option>
 			</select>
 		</p>
 
