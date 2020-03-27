@@ -10,6 +10,9 @@ The following image sizes are registered in Largo, using the constants defined b
 
   - ``60x60``
       - 60x60px image crop.
+  - ``96x96``
+      - 96x96px image crop
+      - Used for avatars and small square listing images.
   - ``rect_thumb``
       - 800x600px image crop
       - Used for cat/tax archive pages.
