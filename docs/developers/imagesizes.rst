@@ -35,6 +35,8 @@ The following image sizes are registered in Largo, using the constants defined b
       - Image size defined by: ``(FULL_WIDTH*2/3)xFULL_HEIGHT``
       - Default is 780px wide by a flexible height.
 
+Largo also sets the `post-thumbnail` and `thumbnail` image sizes to be 140x140, instead of the WordPress default.
+
 Constants
 ---------
 
