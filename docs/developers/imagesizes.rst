@@ -13,6 +13,9 @@ The following image sizes are registered in Largo, using the constants defined b
   - ``rect_thumb``
       - 800x600px image crop
       - Used for cat/tax archive pages.
+  - ``rect_thumb_half``
+      - 400x300px image crop
+      - Used for areas where fixed aspect ratio of `rect_thumb` is desired but too big.
   - ``medium``
       - Image size defined by constants: ``MEDIUM_WIDTHxMEDIUM_HEIGHT``
       - Default is 336px wide by a flexible height.
