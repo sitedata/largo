@@ -178,10 +178,12 @@ function largo_layout_meta_box_display () {
 		echo '<p>' . __('Select the post template you wish this post to use.', 'largo') . '</p>';
 		echo '<label class="hidden" for="post_template">' . __("Post Template", 'largo' ) . '</label>';
 		echo '<select name="_wp_post_template" id="post_template" class="dropdown">';
+		// translators: %s is the name of the current page template
 		echo '<option value="">' . sprintf(__( 'Default: %s', 'largo' ), $current_template) . '</option>';
 		post_templates_dropdown(); //get the options
 		echo '</select>';
 		echo '<p>' . sprintf(
+			// translators: %s is a URL.
 			__('<a href="%s">Click here</a> to change the default post template.', 'largo' ),
 			admin_url('themes.php?page=options-framework#of-option-layoutoptions41'));
 		echo '</p>';
@@ -220,11 +222,17 @@ function largo_custom_sidebar_js() {
 		$default_sidebar_labels = array();
 
 		foreach ($post_templates as $template) {
-			if (in_array($template, array('full-page.php', 'single-one-column.php')))
+			if (in_array($template, array('full-page.php', 'single-one-column.php'))) {
 				$default_sidebar_labels[$template] = 'Default (no sidebar)';
+			}
 
-			if ($template == 'single-two-column.php')
-				$default_sidebar_labels[$template] = sprintf(__('Default (%s)', 'largo'), $wp_registered_sidebars['sidebar-single']['name']);
+			if ($template == 'single-two-column.php') {
+				$default_sidebar_labels[$template] = sprintf(
+					// translators: %s is the name of the single sidebar.
+					__( 'Default (%s)', 'largo' ),
+					$wp_registered_sidebars['sidebar-single']['name']
+				);
+			}
 		}
 
 		wp_localize_script('custom-sidebar', 'default_sidebar_labels', $default_sidebar_labels);
