@@ -52,7 +52,9 @@ function largo_time_diff( $time ) {
 	$time_difference = current_time( 'timestamp' ) - $time;
 
 	if ( $time_difference < 86400 ) {
-		$output = sprintf( __( '<span class="time-ago">%s ago</span>', 'largo' ),
+		$output = sprintf(
+			// translators: %s is the output of human_time_diff().
+			__( '<span class="time-ago">%s ago</span>', 'largo' ),
 			human_time_diff( $time, current_time( 'timestamp' ) )
 		);
 	} else {
@@ -101,12 +103,14 @@ if ( ! function_exists( 'largo_author_link' ) ) {
 			$output = esc_html( $byline_text );
 		} else {
 			$byline_link = isset( $values['largo_byline_link'] ) ? $values['largo_byline_link'][0] : get_author_posts_url( get_the_author_meta( 'ID', $author_id ) );
+			// translators: %s is the byline text.
 			$byline_title_attr = sprintf( __( 'More from %s','largo' ), $byline_text );
 			$output = '<a class="url fn n" href="' . esc_url( $byline_link ) . '" title="' . esc_attr( $byline_title_attr ) . '" rel="author">' . esc_html( $byline_text ) . '</a>';
 		}
 
-		if ( $echo )
+		if ( $echo ) {
 			echo $output;
+		}
 		return $output;
 	}
 }
