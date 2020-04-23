@@ -7,6 +7,7 @@ if ( empty( $wp_filesystem ) ) {
 	} else {
 		wp_die(
 			sprintf(
+				// translators: %1$s is the local filename and its path.
 				esc_html__( 'The WP_Filesystem class could not be found by %1$s', 'largo' ),
 				__FILE__
 			),
