@@ -1,7 +1,6 @@
 <?php
-
 /**
- * Largo Recent Posts
+ * Largo Recent Posts Widget
  */
 class largo_recent_posts_widget extends WP_Widget {
 
@@ -112,7 +111,11 @@ class largo_recent_posts_widget extends WP_Widget {
 			echo $output;
 
 		} else {
-			printf( __( '<p class="error"><strong>You don\'t have any recent %s.</strong></p>', 'largo' ), strtolower( $posts_term ) );
+			printf(
+				// translators: %s is the theme option value for the name of "posts".
+				__( '<p class="error"><strong>You don\'t have any recent %s.</strong></p>', 'largo' ),
+				strtolower( $posts_term )
+			);
 		} // end more featured posts
 
 		// close the ul
