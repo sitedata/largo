@@ -870,6 +870,7 @@ function largo_update_admin_notice() {
 ?>
 	<div class="update-nag" style="display: block;"><p>
 	<?php printf(
+		// translators: %s is a URL.
 		__( 'Largo has been updated! Please <a href="%s">visit the update page</a> to apply a required database update.', 'largo' ),
 		admin_url( 'index.php?page=update-largo' )
 	);
@@ -1163,6 +1164,7 @@ add_action( 'admin_menu', 'largo_block_theme_options_for_update', 10 );
 function largo_block_theme_options() { ?>
 	<h3>
 	<?php printf(
+		// translators: %s is a URL.
 		__( 'Please <a href="%s">visit the update page</a> to apply required Largo updates before editing Theme Options.', 'largo' ),
 		admin_url( 'index.php?page=update-largo' )
 	); ?>
