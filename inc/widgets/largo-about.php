@@ -53,9 +53,12 @@ class largo_about_widget extends WP_Widget {
 			$link_title = __( 'The Largo Theme Options page', 'largo' );
 			$options_url = site_url( '/wp-admin/themes.php?page=options-framework' );
 			$message = sprintf(
-				__( '%sYou have not set a description for your site.%s Add a site description by visiting %sthe Largo Theme Options page%s.', 'largo' ),
-				'<strong>','</strong>',
-				"<a href=\"{$options_url}\" title=\"{$link_title}\">", '</a>'
+				// translators: %1$s is '<strong>'. %2$s is '</strong>'. %3$s is an opening anchor tag, and %4$s is its closing tag.
+				__( '%1$sYou have not set a description for your site.%2$s Add a site description by visiting %3$sthe Largo Theme Options page%4$s.', 'largo' ),
+				'<strong>',
+				'</strong>',
+				"<a href=\"{$options_url}\" title=\"{$link_title}\">",
+				'</a>'
 			);
 			echo "<p class=\"error\">{$message}</p>";
 		}
@@ -100,6 +103,7 @@ class largo_about_widget extends WP_Widget {
 	 */
 	private function _instance_defaults( $instance = array() ) {
 		return wp_parse_args( $instance, array(
+			// translators: %s is the name of this blog.
 			'title' => sprintf( __( 'About %s', 'largo' ), get_bloginfo( 'name' ) ),
 		));
 	}
