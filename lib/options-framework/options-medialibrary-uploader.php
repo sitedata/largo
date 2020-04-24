@@ -147,11 +147,11 @@ function optionsframework_medialibrary_uploader( $_id, $_value, $_mode = 'full',
 				$title = $parts[$i];
 			}
 
-			// No output preview if it's not an image.			
+			// No output preview if it's not an image.
 			$output .= '';
-		
-			// Standard generic output if it's not an image.	
-			$title = __( 'View File', 'options_framework_theme' );
+
+			// Standard generic output if it's not an image.
+			$title = __( 'View File', 'largo' );
 			$output .= '<div class="no_image"><span class="file_link"><a href="' . $value . '" target="_blank" rel="external">'.$title.'</a></span>' . $remove . '</div>';
 		}	
 	}
@@ -283,7 +283,7 @@ endif;
 if ( ! function_exists( 'optionsframework_mlu_modify_tabs' ) ) :
 
 function optionsframework_mlu_modify_tabs ( $tabs ) {
-	$tabs['gallery'] = str_replace( __( 'Gallery', 'optionsframework' ), __( 'Previously Uploaded', 'options_framework_theme' ), $tabs['gallery'] );
+	$tabs['gallery'] = str_replace( __( 'Gallery', 'largo' ), __( 'Previously Uploaded', 'largo' ), $tabs['gallery'] );
 	return $tabs;
 }
 
