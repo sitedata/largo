@@ -29,8 +29,11 @@ class largo_twitter_widget extends WP_Widget {
 		switch($instance['widget_type']) {
 			case 'likes':
 				$widget_href = 'https://twitter.com/' . $instance['twitter_username'] . '/likes';
-				/* translators: @username's Likes on Twitter */
-				$widget_text = __( $instance['twitter_username'] . '\'s Likes on Twitter', 'largo' );
+				$widget_text = sprintf(
+					// translators: @username's Likes on Twitter.
+					__( "@%1$s's Likes on Twitter", 'largo' ),
+					esc_html( $instance['twitter_username'] )
+				);
 				break;
 			case 'list':
 				$widget_href = 'https://twitter.com/' . $instance['twitter_username'] . '/lists/' . $instance['twitter_list_slug'];
@@ -47,7 +50,11 @@ class largo_twitter_widget extends WP_Widget {
 			default: //timeline, probably
 				$widget_href = 'https://twitter.com/' . $instance['twitter_username'];
 				/* translators: Tweets by @username */
-				$widget_text = __( 'Tweets by @' . $instance['twitter_username'], 'largo' );
+				$widget_text = sprintf(
+					// translators: %1$s is the twitter username
+					__( 'Tweets by @%1$s', 'largo' ),
+					esc_html( $instance['twitter_username'] )
+				);
 		}
 			
 		$widget_embed = sprintf( '<a class="twitter-timeline" href="%1$s">%2$s</a>',
