@@ -18,19 +18,19 @@ define('CFTL_SELF_DIR', get_template_directory_uri() . '/inc/wp-taxonomy-landing
 function cftl_register_taxonomy_landing() {
 	register_post_type('cftl-tax-landing', array(
 		'labels' => array(
-			'name' => __('Landing Pages', 'cf-tax-landing'),
-			'singular_name' => __('Landing Page', 'cf-tax-landing'),
-			'add_new' => _x('Add New', 'cftl-tax-landing', 'cf-tax-landing'),
-			'add_new_item' => __('Add New Landing Page', 'cf-tax-landing'),
-			'edit_item' => __('Edit Landing Page', 'cf-tax-landing'),
-			'new_item' => __('New Landing Page', 'cf-tax-landing'),
-			'all_items' => __('All Landing Pages', 'cf-tax-landing'),
-			'view_item' => __('View Landing Page', 'cf-tax-landing'),
-			'search_items' => __('Search Landing Pages', 'cf-tax-landing'),
-			'not_found' =>  __('No Landing Pages found', 'cf-tax-landing'),
-			'not_found_in_trash' => __('No Landing Pages found in Trash', 'cf-tax-landing'),
+			'name' => __('Landing Pages', 'largo'),
+			'singular_name' => __('Landing Page', 'largo'),
+			'add_new' => _x('Add New', 'cftl-tax-landing', 'largo'),
+			'add_new_item' => __('Add New Landing Page', 'largo'),
+			'edit_item' => __('Edit Landing Page', 'largo'),
+			'new_item' => __('New Landing Page', 'largo'),
+			'all_items' => __('All Landing Pages', 'largo'),
+			'view_item' => __('View Landing Page', 'largo'),
+			'search_items' => __('Search Landing Pages', 'largo'),
+			'not_found' =>  __('No Landing Pages found', 'largo'),
+			'not_found_in_trash' => __('No Landing Pages found in Trash', 'largo'),
 			'parent_item_colon' => '',
-			'menu_name' => __('Landing Pages', 'cf-tax-landing')
+			'menu_name' => __('Landing Pages', 'largo')
 		),
 		'supports' => array(
 			'title',
@@ -103,7 +103,11 @@ function cftl_set_tax_landing_title_admin($title) {
 		$title_array[] = strip_tags($tax_list);
 	}
 	if (empty($title_array)) {
-		return sprintf(__('%s - No specified taxonomies.', 'cf-tax-landing'), $title);
+		return sprintf(
+			// translators: %s is the title of the present post.
+			__('%s - No specified taxonomies.', 'largo'), 
+			$title
+		);
 	}
 	return $title . ' - ' . implode(' ', $title_array);
 }
@@ -118,7 +122,7 @@ function cftl_set_tax_landing_title($title) {
 	}
 
 	$substitutions = array(
-		'[archives]' => __('Archives', 'cf-tax-landing'),
+		'[archives]' => __('Archives', 'largo'),
 		'[tax-title]' => $cftl_tax_landing['original_title'],
 		);
 	$title = str_replace(array_keys($substitutions), array_values($substitutions), $title);
@@ -140,24 +144,36 @@ function cftl_tax_landing_messages($messages) {
 		$taxonomy_links = implode(' ', $taxonomy_array);
 	}
 	else {
-		$taxonomy_links = __("No taxonomies specified.", 'cf-tax-landing');
+		$taxonomy_links = esc_html__("No taxonomies specified.", 'largo');
 	}
 
 	$messages['cftl-tax-landing'] = array(
 		0 => '', // Unused. Messages start at index 1.
-		1 => sprintf(__('Landing Page updated.  %s', 'cf-tax-landing'), $taxonomy_links),
+		1 => sprintf(
+			// translators: %s a blob of HTML.
+			__('Landing Page updated.  %s', 'largo'),
+			$taxonomy_links
+		),
 		2 => __('Custom field updated.'),
 		3 => __('Custom field deleted.'),
-		4 => __('Landing Page updated.', 'cf-tax-landing'),
+		4 => __('Landing Page updated.', 'largo'),
 		/* translators: %s: date and time of the revision */
-		5 => isset($_GET['revision']) ? sprintf(__('Landing Page restored to revision from %s', 'cf-tax-landing'), wp_post_revision_title((int) $_GET['revision'], false)) : false,
-		6 => sprintf(__('Landing Page published.  %s', 'cf-tax-landing'), $taxonomy_links),
-		7 => __('Landing Page saved.', 'cf-tax-landing'),
-		8 => sprintf(__('Landing Page submitted.  %s', 'cf-tax-landing'), $taxonomy_links),
-		9 => sprintf(__('Landing Page scheduled for: <strong>%1$s</strong>.', 'cf-tax-landing'),
-			// translators: Publish box date format, see https://secure.php.net/manual/en/function.date.php
-			date_i18n(__('M j, Y @ G:i'), strtotime($post->post_date))),
-		10 => sprintf(__('Landing Page updated.', 'cf-tax-landing')),
+		5 => isset($_GET['revision']) ? sprintf(__('Landing Page restored to revision from %s', 'largo'), wp_post_revision_title((int) $_GET['revision'], false)) : false,
+		// translators: %s a blob of HTML.
+		6 => sprintf(__('Landing Page published.  %s', 'largo'), $taxonomy_links),
+		7 => __('Landing Page saved.', 'largo'),
+		// translators: %s a blob of HTML.
+		8 => sprintf(__('Landing Page submitted.  %s', 'largo'), $taxonomy_links),
+		9 => sprintf(
+			// translators: %1$s is the output of date_i18n()
+			__('Landing Page scheduled for: <strong>%1$s</strong>.', 'largo'),
+			date_i18n(
+				// translators: Publish box date format, see https://secure.php.net/manual/en/function.date.php
+				__('M j, Y @ G:i'),
+				strtotime($post->post_date)
+			)
+		),
+		10 => sprintf(__('Landing Page updated.', 'largo')),
 	);
 
 	return $messages;
@@ -170,14 +186,14 @@ function cftl_tax_landing_help($contextual_help, $screen_id, $screen) {
 	// $contextual_help .= var_dump($screen); // use this to help determine $screen->id
 	if ('cftl-tax-landing' == $screen->id) {
 	$contextual_help =
-		'<p>' . __('When adding or editing a Landing Page:', 'cf-tax-landing') . '</p>' .
+		'<p>' . __('When adding or editing a Landing Page:', 'largo') . '</p>' .
 		'<ul>' .
 		'<li>' . __('Specify at least one category, tag, or custom taxonomy.') . '</li>' .
 		'<li>' . __('When a taxonomy archive is requested, such as a category page, the first Landing Page with that taxonomy (if any) is used.') . '</li>' .
 		'</ul>';
 	}
 	elseif ('edit-cftl-tax-landing' == $screen->id) {
-		$contextual_help = '<p>' . __('Landing Pages are used to override the default category, tag, and custom Landing Pages with a Build-layout page.', 'cf-tax-landing') . '</p>';
+		$contextual_help = '<p>' . __('Landing Pages are used to override the default category, tag, and custom Landing Pages with a Build-layout page.', 'largo') . '</p>';
 	}
 	return $contextual_help;
 }
@@ -244,21 +260,21 @@ function cftl_tax_landing_extras_box($post) {
 		$taxonomy_links = implode('<br/>', $taxonomy_array);
 	}
 	else {
-		$taxonomy_links = __("No taxonomies specified.", 'cf-tax-landing');
+		$taxonomy_links = __("No taxonomies specified.", 'largo');
 	}
 
 	$page_template = get_post_meta($post->ID, '_wp_page_template', true);
 	?>
 <div class="form-field">
-	<label for="cftl_page_template"><?php _e('Page Template', 'cf-tax-landing') ?></label>
+	<label for="cftl_page_template"><?php _e('Page Template', 'largo') ?></label>
 	<select name="cftl_page_template" id="cftl_page_template">
-		<option value=""<?php echo empty($page_template) ? ' selected="selected"' : '' ?>><?php _e('No Template (Use Post Templates)', 'cf-tax-landing'); ?></option>
-		<option value="default"<?php echo ("default" == $page_template) ? ' selected="selected"' : ''?>><?php _e('Default (Page) Template', 'cf-tax-landing'); ?></option>
+		<option value=""<?php echo empty($page_template) ? ' selected="selected"' : '' ?>><?php _e('No Template (Use Post Templates)', 'largo'); ?></option>
+		<option value="default"<?php echo ("default" == $page_template) ? ' selected="selected"' : ''?>><?php _e('Default (Page) Template', 'largo'); ?></option>
 		<?php page_template_dropdown($page_template); ?>
 	</select>
 </div>
 <div class="form-field">
-	<label><?php _e('Current taxonomy links:', 'cf-tax-landing') ?></label><br/>
+	<label><?php _e('Current taxonomy links:', 'largo') ?></label><br/>
 	<?php echo $taxonomy_links; ?>
 </div>
 <?php
