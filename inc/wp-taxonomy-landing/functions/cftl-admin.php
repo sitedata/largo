@@ -641,7 +641,11 @@ function cftl_custom_sidebars() {
 		$sidebar_slug = largo_make_slug( $widget->post_title  );
 		if ( $sidebar_slug ) {
 			register_sidebar( array(
-				'name'       	=> __( 'Series ' . $widget->post_title  . ": Footer", 'largo' ),
+				'name'       	=> sprintf( 
+					// translators: %1$s is a variable for the name of a term in the "series" taxonomy.
+					__( 'Series %1$s: Footer', 'largo' ),
+					$widget->post_title
+				),
 				'id' 			=> $sidebar_slug . "_footer",
 				'before_widget' => '<aside id="%1$s" class="%2$s clearfix">',
 				'after_widget' 	=> '</aside>',
