@@ -111,8 +111,8 @@ function optionsframework_options() {
 		'type' 	=> 'textarea');
 
 	$options[] = array(
-		'name' 	=> __('Feed URL', 'largo'),
-		'desc' 	=> __('Enter the <strong>URL for your primary RSS feed.</strong> You can override the default if you use Feedburner or some other service to generate or track your RSS feed', 'largo'),
+		'name' 	=> __( 'Feed URL', 'largo' ),
+		'desc' 	=> __( 'Enter the <strong>URL for your primary RSS feed.</strong> You can override the default if you use Feedburner or some other service to generate or track your RSS feed', 'largo' ),
 		'id' 	=> 'rss_link',
 		'std' 	=> get_feed_link(),
 		'type' 	=> 'text');
@@ -433,7 +433,7 @@ function optionsframework_options() {
 	);
 
 	$options[] = array(
-		'desc' => __('Hide the featured posts area on category pages?'),
+		'desc' => __( 'Hide the featured posts area on category pages?', 'largo' ),
 		'id' => 'hide_category_featured',
 		'std' => '0',
 		'type' => 'checkbox',
@@ -492,7 +492,7 @@ function optionsframework_options() {
 
 	$options[] = array(
 		'name' => __( 'Sticky navigation', 'largo' ),
-		'desc' => __( 'By default, a floating/sticky navigation bar is visible on all pages for mobile screen sizes. The sticky navigation bar will disappear when a user scrolls down and reappear when a user begins to scroll up. When the main navigation is visible, the sticky navigation will disappear. This feature can be deactivated for larger screens, but we typically recommend sticking with the default behavior.'),
+		'desc' => __( 'By default, a floating/sticky navigation bar is visible on all pages for mobile screen sizes. The sticky navigation bar will disappear when a user scrolls down and reappear when a user begins to scroll up. When the main navigation is visible, the sticky navigation will disappear. This feature can be deactivated for larger screens, but we typically recommend sticking with the default behavior.', 'largo' ),
 		'type' => 'info'
 	);
 
@@ -516,7 +516,7 @@ function optionsframework_options() {
 	);
 
 	$options[] = array(
-		'name' => __( 'Sticky navigation overflow' ),
+		'name' => __( 'Sticky navigation overflow', 'largo' ),
 		'desc' => __( 'Enter the label used for the navigation menu that houses any navigation links that would otherwise cause the navigation to wrap onto multiple lines.', 'largo' ),
 		'id' => 'nav_overflow_label',
 		'std' => __( 'More', 'largo' ),
@@ -524,7 +524,7 @@ function optionsframework_options() {
 	);
 
 	$options[] = array(
-		'name' => __( 'Alternate site name for sticky navigation' ),
+		'name' => __( 'Alternate site name for sticky navigation', 'largo' ),
 		'desc' => __( 'If your site name is especially long, use this field to set an abbreviation or shorter version for use in the sticky nav on small screens.', 'largo' ),
 		'id' => 'nav_alt_site_name',
 		'std' => '',

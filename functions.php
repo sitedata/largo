@@ -376,13 +376,16 @@ function largo_php_warning() {
 	$minver = "5.3.0";
 	$curver = phpversion();
 
-	if( current_user_can('update_themes') && version_compare( $curver, $minver, "<" ) ) :
-		$warning = "Largo requires <b>PHP $minver</b>. You're running <b>$curver</b>. Please upgrade your version of php.";
- 		echo "<div class='update-nag'>";
-    	_e( $warning, 'largo' );
- 		echo "</div>";
- 	endif;
-
+	if ( current_user_can('update_themes') && version_compare( $curver, $minver, "<" ) ) {
+		echo "<div class='update-nag'>";
+		printf(
+			// translators: %1$s and %2$s are PHP version numbers.
+			esc_html__( 'Largo requires <b>PHP %1$s</b>. Your server runs <b>$curver</b>. Please upgrade your version of php.', 'largo'),
+			$minver,
+			$curver
+		);
+		echo "</div>";
+	}
 }
 add_action( 'admin_notices', 'largo_php_warning' );
 

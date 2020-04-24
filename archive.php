@@ -42,12 +42,12 @@ $queried_object = get_queried_object();
 				$description = __( 'Select a different month:', 'largo' );
 				if ( is_month() ) {
 					// translators: this is the PHP date format string for the month and year. Passed to get_the_date(). https://www.php.net/manual/en/datetime.formats.date.php .
-					$date_format = _x( 'F Y', 'largo' );
+					$date_format = __( 'F Y', 'largo' );
 					// translators: %s is the month and year.
 					$title = sprintf( __( 'Monthly Archives: <span>%s</span>', 'largo' ), get_the_date( $date_format ) );
 				} elseif ( is_year() ) {
 					// translators: this is the PHP date format string for the year. Passed to get_the_date(). https://www.php.net/manual/en/datetime.formats.date.php .
-					$date_format = _x( 'Y', 'largo' );
+					$date_format = __( 'Y', 'largo' );
 					// translators: %s is the year.
 					$title = sprintf( __( 'Yearly Archives: <span>%s</span>', 'largo' ), get_the_date( $date_format ) );
 				} else {

@@ -946,14 +946,14 @@ function largo_update_page_view() { ?>
 		<div id="icon-tools" class="icon32"></div>
 		<h2>Largo Database Update</h2>
 		<div class="largo-update-message">
-			<p><?php _e('This version of Largo includes a variety of updates, enhancements and changes.'); ?></p>
+			<p><?php esc_html_e('This version of Largo includes a variety of updates, enhancements and changes.', 'largo'); ?></p>
 			<?php if (version_compare(of_get_option('largo_version'), '0.4') < 0) { ?>
-				<p><?php _e('These changes affect'); ?>:
+				<p><?php esc_html_e('These changes affect:', 'largo'); ?>
 					<ul>
-						<li><?php _e('Theme options'); ?></li>
-						<li><?php _e('Configured menus'); ?></li>
-						<li><?php _e('Site navigation'); ?></li>
-						<li><?php _e('Sidebars and widgets'); ?></li>
+						<li><?php esc_html_e( 'Theme options', 'largo' ); ?></li>
+						<li><?php esc_html_e( 'Configured menus', 'largo' ); ?></li>
+						<li><?php esc_html_e( 'Site navigation', 'largo' ); ?></li>
+						<li><?php esc_html_e( 'Sidebars and widgets', 'largo' ); ?></li>
 					</ul>
 				<p><?php _e( 'The database update you are about to apply will take steps to migrate existing site settings.', 'largo' ); ?></p>
 				<p><?php _e( 'In the event that a site setting can not be migrated, the update will do its best to preserve it instead.', 'largo' ); ?></p>
@@ -1022,7 +1022,7 @@ function largo_ajax_update_database() {
 	$ret = largo_perform_update();
 	if ( ! empty( $ret ) ) {
 		if ( version_compare( of_get_option( 'largo_version' ), '0.4' ) < 0 ) {
-			$message = __( "Thank you -- the update is complete. Don\'t forget to check your site settings!", "largo" );
+			$message = __( 'Thank you -- the update is complete. Don\'t forget to check your site settings!', 'largo' );
 		} else {
 			$message = __( 'Thank you -- the update is complete.', 'largo' );
 		}

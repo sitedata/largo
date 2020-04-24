@@ -144,7 +144,7 @@ function cftl_tax_landing_messages($messages) {
 		$taxonomy_links = implode(' ', $taxonomy_array);
 	}
 	else {
-		$taxonomy_links = esc_html__("No taxonomies specified.", 'largo');
+		$taxonomy_links = esc_html__( 'No taxonomies specified.', 'largo' );
 	}
 
 	$messages['cftl-tax-landing'] = array(
@@ -154,8 +154,8 @@ function cftl_tax_landing_messages($messages) {
 			__('Landing Page updated.  %s', 'largo'),
 			$taxonomy_links
 		),
-		2 => __('Custom field updated.'),
-		3 => __('Custom field deleted.'),
+		2 => __('Custom field updated.', 'largo' ),
+		3 => __('Custom field deleted.', 'largo' ),
 		4 => __('Landing Page updated.', 'largo'),
 		/* translators: %s: date and time of the revision */
 		5 => isset($_GET['revision']) ? sprintf(__('Landing Page restored to revision from %s', 'largo'), wp_post_revision_title((int) $_GET['revision'], false)) : false,
@@ -169,7 +169,7 @@ function cftl_tax_landing_messages($messages) {
 			__('Landing Page scheduled for: <strong>%1$s</strong>.', 'largo'),
 			date_i18n(
 				// translators: Publish box date format, see https://secure.php.net/manual/en/function.date.php
-				__('M j, Y @ G:i'),
+				__('M j, Y @ G:i', 'largo' ),
 				strtotime($post->post_date)
 			)
 		),
@@ -188,12 +188,12 @@ function cftl_tax_landing_help($contextual_help, $screen_id, $screen) {
 	$contextual_help =
 		'<p>' . __('When adding or editing a Landing Page:', 'largo') . '</p>' .
 		'<ul>' .
-		'<li>' . __('Specify at least one category, tag, or custom taxonomy.') . '</li>' .
-		'<li>' . __('When a taxonomy archive is requested, such as a category page, the first Landing Page with that taxonomy (if any) is used.') . '</li>' .
+		'<li>' . __('Specify at least one category, tag, or custom taxonomy.', 'largo') . '</li>' .
+		'<li>' . __('When a taxonomy archive is requested, such as a category page, the first Landing Page with that taxonomy (if any) is used.', 'largo') . '</li>' .
 		'</ul>';
 	}
 	elseif ('edit-cftl-tax-landing' == $screen->id) {
-		$contextual_help = '<p>' . __('Landing Pages are used to override the default category, tag, and custom Landing Pages with a Build-layout page.', 'largo') . '</p>';
+		$contextual_help = '<p>' . __( 'Landing Pages are used to override the default category, tag, and custom Landing Pages with a Build-layout page.', 'largo' ) . '</p>';
 	}
 	return $contextual_help;
 }
@@ -260,7 +260,7 @@ function cftl_tax_landing_extras_box($post) {
 		$taxonomy_links = implode('<br/>', $taxonomy_array);
 	}
 	else {
-		$taxonomy_links = __("No taxonomies specified.", 'largo');
+		$taxonomy_links = __( 'No taxonomies specified.', 'largo' );
 	}
 
 	$page_template = get_post_meta($post->ID, '_wp_page_template', true);

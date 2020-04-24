@@ -176,7 +176,7 @@ function largo_layout_meta_box_display () {
 	if ( $post->post_type != 'page' ) {
 		echo '<p><strong>' . __('Template', 'largo' ) . '</strong></p>';
 		echo '<p>' . __('Select the post template you wish this post to use.', 'largo') . '</p>';
-		echo '<label class="hidden" for="post_template">' . __("Post Template", 'largo' ) . '</label>';
+		echo '<label class="hidden" for="post_template">' . __('Post Template', 'largo' ) . '</label>';
 		echo '<select name="_wp_post_template" id="post_template" class="dropdown">';
 		// translators: %s is the name of the current page template
 		echo '<option value="">' . sprintf(__( 'Default: %s', 'largo' ), $current_template) . '</option>';
@@ -191,7 +191,7 @@ function largo_layout_meta_box_display () {
 
 	echo '<p><strong>' . __('Custom Sidebar', 'largo' ) . '</strong><br />';
 	echo __('Select a custom sidebar to display.', 'largo' ) . '</p>';
-	echo '<label class="hidden" for="custom_sidebar">' . __("Custom Sidebar", 'largo' ) . '</label>';
+	echo '<label class="hidden" for="custom_sidebar">' . __('Custom Sidebar', 'largo' ) . '</label>';
 	echo '<select name="custom_sidebar" id="custom_sidebar" class="dropdown">';
 	largo_custom_sidebars_dropdown(); //get the options
 	echo '</select>';
@@ -253,7 +253,7 @@ function largo_custom_related_meta_box_display() {
 	$value = get_post_meta( $post->ID, 'largo_custom_related_posts', true );
 
 	echo '<p><strong>' . __('Related Posts', 'largo') . '</strong><br />';
-	echo __('To override the default related posts functionality enter specific related post IDs separated by commas.') . '</p>';
+	echo __( 'To override the default related posts functionality enter specific related post IDs separated by commas.', 'largo' ) . '</p>';
 	echo '<input type="text" name="largo_custom_related_posts" value="' . esc_attr( $value ) . '" />';
 }
 largo_register_meta_input( 'largo_custom_related_posts', 'sanitize_text_field' );
