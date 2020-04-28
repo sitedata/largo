@@ -23,10 +23,13 @@
 			<?php if (INN_MEMBER) { ?>
 				<?php inn_logo(); ?>
 			<?php } ?>
-			<p class="footer-credit <?php echo ( !INN_MEMBER ? 'footer-credit-padding-inn-logo-missing' : ''); ?>"><?php printf( __('Built with the <a href="%s">Largo WordPress Theme</a> from the <a href="%s">Institute for Nonprofit News</a>.', 'largo'),
+			<p class="footer-credit <?php echo ( !INN_MEMBER ? 'footer-credit-padding-inn-logo-missing' : ''); ?>"><?php
+				printf(
+					// translators: %1$s and %2$s are URLs for largo.inn.org and inn.org respectively
+					__('Built with the <a href="%1$s">Largo WordPress Theme</a> from the <a href="%2$s">Institute for Nonprofit News</a>.', 'largo'),
 					'https://largo.inn.org/',
 					'https://inn.org'
-				 );
+				);
 			?></p>
 		</div>
 	</div>

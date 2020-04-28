@@ -81,6 +81,7 @@ function largo_save_avatar_field($user_id) {
 					} else {
 						wp_die(
 							sprintf(
+								// translators: %1$s is the current file's filename and path.
 								esc_html__( 'wp-admin/includes/image.php could not be loaded by %1$s', 'largo' ),
 								__FILE__
 							)
