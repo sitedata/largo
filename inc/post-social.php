@@ -33,11 +33,28 @@ if ( ! function_exists( 'largo_post_social_links' ) ) {
 		$values = get_post_custom( $post->ID );
 
 		if ( isset( $utilities['facebook'] ) && '1' === $utilities['facebook'] ) {
+			// possible values for this are defined in options.php
+			$fb_verb = ucfirst( of_get_option( 'fb_verb' ) );
+			switch ( $fb_verb ) {
+				case 'Like':
+					$fb_verb_localized = _x( 'Like', 'facebook verb', 'largo' );
+					break;
+				case 'Recommend':
+					$fb_verb_localized = _x( 'Recommend', 'facebook verb', 'largo' );
+					break;
+				case 'Share':
+					$fb_verb_localized = _x( 'Share', 'facebook verb', 'largo' );
+					break;
+				default:
+					$fb_verb_localized = wp_strip_all_tags( $fb_verb );
+			}
+
 			$fb_share = '<span class="facebook"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=%1$s"><i class="icon-facebook"></i><span class="hidden-phone">%2$s</span></a></span>';
+
 			$output .= sprintf(
 				$fb_share,
 				rawurlencode( get_permalink() ),
-				__( ucfirst( of_get_option( 'fb_verb' ) ), 'largo' )
+				esc_html( $fb_verb )
 			);
 		}
 
