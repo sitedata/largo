@@ -185,7 +185,10 @@ class Largo_Byline {
 	function edit_link() {
 		// Add the edit link if the current user can edit the post
 		if ( current_user_can( 'edit_post', $this->post_id ) ) {
-			echo ' <span class="edit-link"><a href="' . get_edit_post_link( $this->post_id ) . '">' . __( 'Edit This Post', 'largo' ) . '</a></span>';
+			$edit_post_link = get_edit_post_link( $this->post_id );
+			if (!empty($edit_post_link)){			
+				echo ' <span class="edit-link"><a href="' . $edit_post_link . '">' . __( 'Edit This Post', 'largo' ) . '</a></span>';
+			}
 		}
 	}
 }
