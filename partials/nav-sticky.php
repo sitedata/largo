@@ -35,7 +35,7 @@ $site_name = ( of_get_option( 'nav_alt_site_name', false ) ) ? of_get_option( 'n
 					 * @link https://largo.readthedocs.io/users/themeoptions.html
 					 */
 					if ( of_get_option( 'show_header_social') ) { ?>
-						<ul id="header-social" class="social-icons visible-desktop">
+						<ul class="header-social social-icons visible-desktop">
 							<?php largo_social_links(); ?>
 						</ul>
 					<?php } ?>

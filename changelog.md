@@ -7,10 +7,19 @@ though this project doesn't succeed in adhering to [Semantic Versioning](https:/
 
 ## [Largo 0.7.0](https://github.com/INN/largo/compare/v0.6.4...v0.7.0)
 
+Particular thanks go to outside contributor [@seanchayes](https://github.com/seanchayes).
+
 ### Fixes and minor improvements
 
+- Improved translatability by consolidating Largo to a single text domain, `largo`, and by removing variables from translation functions where possible. [Pull request #1858](https://github.com/INN/largo/pull/1858) for [issue #1592](https://github.com/INN/largo/issues/1592).
 - Fixed an issue where the CSS Variables theme option was not working due to improperly escaped regex's in `inc/custom-less-variables.php`. We fixed those expressions and also changed the `put_contents` and `get_contents` functions in the class to be static functions rather than protected. [Pull request #1772](https://github.com/INN/largo/pull/1772) for [issue #1771](https://github.com/INN/largo/issues/1771).
+- Removed conflicting duplicate HTML IDs by changing the element ID `header-social` to the class `header-social`, and updating CSS styles to reflect the new selector. [Pull request #1826](https://github.com/INN/largo/pull/1826) for [issue #1781](https://github.com/INN/largo/issues/1781), by [@seanchayes](https://github.com/seanchayes).
+- Correct the use of [`validate_file()`](https://developer.wordpress.org/reference/functions/validate_file/), to allow Largo to be used on Windows servers. [Pull request #1850](https://github.com/INN/largo/pull/1850) for [issue #1849](https://github.com/INN/largo/issues/1849).
 - Revised the Largo help widget in the admin dashboard to remove duplicate and dead links and also swap INN references to WP Buddy. [Pull request #1778](https://github.com/INN/largo/pull/1778) for issues [#1777](https://github.com/INN/largo/issues/1777), [#1644](https://github.com/INN/largo/issues/1644), and [#1495](https://github.com/INN/largo/issues/1495).
+
+### Potentially-breaking changes
+
+- Replace `#header-social` in CSS files with `.header-social` to mach updated markup. [Pull request #1826](https://github.com/INN/largo/pull/1826) for [issue #1781](https://github.com/INN/largo/issues/1781).
 
 ## [Largo 0.6.4](https://github.com/INN/largo/compare/v0.6.3...v0.6.4)
 

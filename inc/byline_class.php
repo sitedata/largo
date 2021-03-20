@@ -269,6 +269,7 @@ class Largo_CoAuthors_Byline extends Largo_Byline {
 				$authors = $out[0];
 			} else {
 				$cap_error_message = sprintf(
+					// translators: %1$s is a post ID.
 					esc_html__( 'post %1$s should have at least one co-author, but has none!', 'largo' ),
 					$this->post_id
 				);
@@ -297,7 +298,14 @@ class Largo_CoAuthors_Byline extends Largo_Byline {
 	function author_link() {
 		$author_name = ( ! empty($this->author->display_name) ) ? $this->author->display_name : $this->author->user_nicename ;
 
-		$output = '<a class="url fn n" href="' . get_author_posts_url( $this->author->ID, $this->author->user_nicename ) . '" title="' . esc_attr( sprintf( __( 'Read All Posts By %s', 'largo' ), $author_name ) ) . '" rel="author">' . esc_html( $author_name ) . '</a>';
+		$output = sprintf(
+			'<a class="url fn n" href="%1$s" title="%2$s" rel="author">%3$s</a>',
+			get_author_posts_url( $this->author->ID, $this->author->user_nicename ),
+			// translators: %s is the author name, which is often but not always a human person.
+			esc_attr( sprintf( __( 'Read All Posts By %s', 'largo' ), $author_name ) ),
+			esc_html( $author_name )
+		);
+
 		echo $output;
 	}
 
