@@ -6,30 +6,8 @@
  * @since 0.1
  */
 
-// cleanup the wordpress dashboard and add a few of our own widgets
-function largo_dashboard_widgets_member() {
-	global $wp_meta_boxes;
-
-	unset(
-		$wp_meta_boxes['dashboard']['normal']['core']['dashboard_plugins'],
-		$wp_meta_boxes['dashboard']['side']['core']['dashboard_secondary'],
-		$wp_meta_boxes['dashboard']['side']['core']['dashboard_primary'],
-		$wp_meta_boxes['dashboard']['normal']['core']['dashboard_incoming_links'],
-		$wp_meta_boxes['dashboard']['normal']['core']['dashboard_recent_comments'],
-		$wp_meta_boxes['dashboard']['side']['core']['dashboard_recent_drafts'],
-		$wp_meta_boxes['dashboard']['side']['core']['dashboard_quick_press']
-	);
-
-	wp_add_dashboard_widget( 'dashboard_quick_links', __( 'Largo Theme Help', 'largo' ), 'largo_dashboard_quick_links' );
-
-	wp_add_dashboard_widget( 'dashboard_network_news', __( 'INN Network News', 'largo' ), 'largo_dashboard_network_news' );
-	$my_widget = $wp_meta_boxes['dashboard']['normal']['core']['dashboard_network_news'];
-	unset($wp_meta_boxes['dashboard']['normal']['core']['dashboard_network_news']);
-	$wp_meta_boxes['dashboard']['side']['core']['dashboard_network_news'] = $my_widget;
-}
-
-// we'll still clean things up a bit for non INN members
-function largo_dashboard_widgets_nonmember() {
+// dashboad widgets for everyone!
+function largo_dashboard_widgets() {
 	global $wp_meta_boxes;
 
 	unset(
@@ -42,24 +20,6 @@ function largo_dashboard_widgets_nonmember() {
 
 	wp_add_dashboard_widget( 'dashboard_quick_links', __( 'Project Largo Help', 'largo' ), 'largo_dashboard_quick_links' );
 
-	wp_add_dashboard_widget( 'dashboard_network_news', __( 'INN Network News', 'largo' ), 'largo_dashboard_network_news' );
-	$my_widget = $wp_meta_boxes['dashboard']['normal']['core']['dashboard_network_news'];
-	unset($wp_meta_boxes['dashboard']['normal']['core']['dashboard_network_news']);
-	$wp_meta_boxes['dashboard']['side']['core']['dashboard_network_news'] = $my_widget;
-}
-
-// custom dashboard widgets for INN members
-function largo_dashboard_network_news() {
-	echo '<div class="rss-widget">';
-	wp_widget_rss_output( array(
-		'url' => 'https://feeds.feedburner.com/INNArticles',
-		'title' => __( 'INN Network News', 'largo' ),
-		'items' => 1,
-		'show_summary' => 1,
-		'show_author' => 0,
-		'show_date' => 1
-	));
-	echo '</div>';
 }
 
 /**
@@ -74,10 +34,10 @@ function largo_dashboard_quick_links() {
 		echo '<ul>';
 			$links = array(
 				// these are translated with their HTML in case we have different-language versions of these
-				__( '<a href="https://largo.inn.org/">Largo Project Website</a>', 'largo' ),
+				__( '<a href="https://largo.wpbuddy.co/">Largo Project Website</a>', 'largo' ),
 				__( '<a href="https://largo.readthedocs.io/">Largo Documentation</a>', 'largo' ),
-				__( '<a href="https://support.inn.org/">Help Desk and Knowledge Base</a>', 'largo' ),
-				__( '<a href="mailto:support@inn.org">Contact Us</a>', 'largo' ),
+				__( '<a href="https://largo.wpbuddy.co/support">Help Desk and Knowledge Base</a>', 'largo' ),
+				__( '<a href="mailto:support@wpbuddy.co">Contact Us</a>', 'largo' ),
 			);
 			foreach ( $links as $link ) {
 				printf(
@@ -88,17 +48,7 @@ function largo_dashboard_quick_links() {
 		echo '</ul>';
 		printf(
 			'<p>%1$s</p>',
-			__( 'Developers can also log issues on <a href="https://github.com/INN/Largo">the theme\'s GitHub repository</a>. We welcome contributions.', 'largo' ), // translate the HTML in case the link needs localization.
-		);
-		printf(
-			'<p>%1$s</p>',
-			__( 'INN maintains a newsletter used to periodically notify Largo users of updates.', 'largo' ), 
-		);
-		printf(
-			'<p><a class="button button-primary" href="%1$s">%2$s</a></p>',
-			// translators: this URL is for the Largo Users Mailchimp signup, and should be localized if necessary.
-			__( 'http://eepurl.com/guL4DT', 'largo' ),
-			__( 'Sign up for emails', 'largo' ), 
+			__( 'Developers can also log issues on <a href="https://github.com/WPBuddy/Largo">the theme\'s GitHub repository</a>. We welcome contributions.', 'largo' ), // translate the HTML in case the link needs localization.
 		);
 	echo '</div>';
 }
@@ -117,13 +67,9 @@ function largo_custom_login_logo() {
 	';
 }
 
-// only load the dashboard customizations if this is an INN member site
-if ( INN_MEMBER === TRUE ) {
-	add_action('login_head', 'largo_custom_login_logo');
-	add_action('wp_dashboard_setup', 'largo_dashboard_widgets_member');
-} else {
-	add_action('wp_dashboard_setup', 'largo_dashboard_widgets_nonmember');
-}
+// load the dashboard customizations
+add_action('login_head', 'largo_custom_login_logo');
+add_action('wp_dashboard_setup', 'largo_dashboard_widgets');
 
 /**
  * Largo Dashboard / Admin Bar Menu

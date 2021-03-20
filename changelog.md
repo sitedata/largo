@@ -10,7 +10,7 @@ though this project doesn't succeed in adhering to [Semantic Versioning](https:/
 ### Fixes and minor improvements
 
 - Fixed an issue where the CSS Variables theme option was not working due to improperly escaped regex's in `inc/custom-less-variables.php`. We fixed those expressions and also changed the `put_contents` and `get_contents` functions in the class to be static functions rather than protected. [Pull request #1772](https://github.com/INN/largo/pull/1772) for [issue #1771](https://github.com/INN/largo/issues/1771).
-- Revised the Largo help widget in the admin dashboard to remove duplicate and dead links. [Pull request #1778](https://github.com/INN/largo/pull/1778) for issues [#1777](https://github.com/INN/largo/issues/1777), [#1644](https://github.com/INN/largo/issues/1644), and [#1495](https://github.com/INN/largo/issues/1495).
+- Revised the Largo help widget in the admin dashboard to remove duplicate and dead links and also swap INN references to WP Buddy. [Pull request #1778](https://github.com/INN/largo/pull/1778) for issues [#1777](https://github.com/INN/largo/issues/1777), [#1644](https://github.com/INN/largo/issues/1644), and [#1495](https://github.com/INN/largo/issues/1495).
 
 ## [Largo 0.6.4](https://github.com/INN/largo/compare/v0.6.3...v0.6.4)
 
