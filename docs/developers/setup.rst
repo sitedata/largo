@@ -1,101 +1,60 @@
 Setting up a complete Largo dev environment
 ===========================================
 
-**This recipe is really old. It may not suit your needs.**
+**This recipe has been updated, please see an older version of the docs for the previous setup methods.**
 
-This recipe will walk you through setting up a fresh WordPress install on a Vagrant Virtualbox machine with INN's deploy tools and Largo installed.
+This recipe will walk you through setting up a fresh WordPress install using `Laravel's Valet CLI <https://laravel.com/docs/8.x/valet>`_.
 
 We'll walk you through the overall setup of the WordPress directory, and then we'll walk you through setting up Largo and its development requirements.
 
 Software to install first
 -------------------------
+Make sure you have these items installed locally on your machine before proceeding:
 
-From `INN's computer setup guide <https://github.com/INN/docs/blob/master/staffing/onboarding/os-x-setup.md#command-line-utilities>`_, install the following software:
+- Home Brew
+- Composer
+- php
+- MySQL
 
-- git
-- homebrew
-- wp-cli
-- virtualenv and virtualenvwrapper
-- Vagrant
-- npm and grunt-cli
-- xgettext and msgmerge (only needed for rebuilding translation files and releasing)
+Let's walk through these steps first, starting with Home Brew.
 
-If you're on OSX, you will also want to install Homebrew, to assist in the installation of the above.
+1. Install `Home Brew <https://www.digitalocean.com/community/tutorials/how-to-install-and-use-homebrew-on-macos>`_, open terminal of your choice and type or paste in
+    curl -fsSL -o install.sh https://raw.githubusercontent.com/Homebrew/install/master/install.sh
+2. Once that is finished you can install Composer
+    brew install composer
+3. Now we can add php in
+    brew install php
+3a. Once Composer is installed an update to your PATH may need to happen once php is installed you can try
+    export PATH=$PATH:~/.composer/vendor/bin
+4. Now you can install Laravel/Valet the program that will do all the heavy lifting to setup Largo project locally.
+    composer global require laravel/valet
+5. Now we can install valet
+    valet install
 
-Once you have all that set up, you're ready to install Largo and WordPress inside a virtual machine!
+Now if your not using `MAMP <https://www.mamp.info/en/mac/>`_ or some other database GUI you will need some way to manage mySQL for Wordpress. We recommend using what you feel at home with.
+Here we can run through using Home Brew to install Mysql
+    brew install mysql
 
-Setting up Largo and WordPress
-------------------------------
+Once that is complete you can create a Wordpress Database to use locally while you develop, Brew will print instructions for accessing Mysql server.
 
-1. Follow the instructions in `INN/docs for creating an umbrella repository at <https://github.com/INN/docs/blob/master/projects/largo/umbrella-setup.md>`_. This provides a few options, which are updated separately from Largo.
+Now that everything is installed we can move on to getting a local dev environment setup and running Largo Theme.
+Valet has a great set of cli tools to help speed up provisioning a working Wordpress installation.
+From getting a working URL to securing that URL with an SSL cert, valet will handle this all in a couple of commands.
+With the same terminal open change directory to where you want Wordpress to be installed. From there run these commands
 
-2. Now, to setting up Largo. ::
-
-	cd wp-content/themes/largo
-
-3. You're going to have to install some things first.
-
-4. First, install the Python dependencies.
-
-	We use a few Python libraries for this project, including `Fabric <https://www.fabfile.org>`_ which powers the INN deploy-tools to elegantly run `many common but complex tasks <https://github.com/INN/deploy-tools/blob/master/COMMANDS.md>`_. In the `OS X setup guide <https://github.com/INN/docs/blob/master/staffing/onboarding/os-x-setup.md>`_, you should have installed Python virtualenv and virtualenvwrapper.
-
-	Make sure you tell virtualenvwrapper where the umbrella is. ::
-
-		export WORKON_HOME=~/largo-umbrella
-		mkdir -p $WORKON_HOME
-		source /usr/local/bin/virtualenvwrapper.sh
+6. Lets clone the current version of WordPress into a new directory
+    git clone https://github.com/WordPress/WordPress.git largo
+7. Change to that directory and create the valet site link using this command (note: this will create a URL with the name of the directory you created, in this case it will be largo.test)
+    valet link
+8. Lets secure this new URL using (note: we specify the site here using just the first part of the URL)
+    vale secure largo
+9. From here you will want to the visit the link created, ours was largo.test, to finish installing Wordpress normally, we will pick up after you have completed this and can login to your local site.
 
 
-	You should add that last line to your .bashrc or your .bash_profile.
+Setting up Largo
+----------------
 
-	Now we can create a virtual environment and install the required Python libraries: ::
+1. Download the current release from Github, `Largo Theme <https://github.com/WPBuddy/largo/releases>`_
+2. Login to your local Wordpress site and click Appearance in the left side menu, then click Add New in the top of screen (blue outlined button) or the very large plus sign.
+3. Upload the zipped file you downloaded from Github once that is done you will now have a fresh Wordpress installation along with our most current version of Largo theme
 
-		mkvirtualenv largo-umbrella --no-site-packages
-		workon largo-umbrella
-		pip install -r requirements.txt
-
-5. Now, the NodeJS dependencies.
-
-	If this command fails, make sure you're in the ``largo`` directory. ::
-
-		npm install
-
-6. Our API docs/function reference uses doxphp to generate documentation based on the comments embedded in Largo's source code. You'll need to install doxphp to generate API docs.
-
-	- Installation process with git: ::
-        1. ``git clone https://github.com/avalanche123/doxphp.git`` to someplace in your filesystem
-        2. add ``doxphp/bin/`` to your ``$PATH`` by adding ``export PATH=$PATH:/path/to/doxphp/bin`` to your ``.bashrc`` or similar file
-
-	The last step may require you to use sudo.
-
-All done? Log into WordPress and start poking around. Remember to take Vagrant snapshots when you get things working how you like the. You'll probably want to take one after you add some posts and configure your menus for testing purposes. If you want to log into the vagrant box, it's as easy as ``vagrant ssh``.
-
-You have installed:
-
-	- INN's deploy tools
-	- the Largo theme
-	- Grunt and the nodejs packages we use to handle a bunch of things
-	- pip, virtualenv, a largo-umbrella virtualenv, sphinx, and everything needed to rebuild the documentation
-	- doxphp and dpxphp2sphinx
-	- WordPress on a dev environment of your choice.
-
-Some notes about deploy-tools and Fabric
-----------------------------------------
-
-The full list of supported commands can be found in `the deploy-tools documentation <https://github.com/INN/deploy-tools/blob/master/COMMANDS.md>`_.
-
-Most fabric commands take the form of ::
-
-	fab <environment> <branch> <action>
-	fab <action that defines its own environment>:arguments
-
-Every command in `the list of commands <https://github.com/INN/deploy-tools/blob/master/COMMANDS.md>`_ is prefixed with ``fab``.
-
-If you recieve an error when running your command, make sure that you have run ``workon largo-umbrella``, or the name of the Python virtualenv you are using. When run, ``workon`` will prefix your prompt: ::
-
-	you@computer:~$ workon largo
-	(largo-umbrella)you@computer:~$
-
-To exit the virtualenv, you can use the command ``deactivate``.
-
-Many commands in the deploy tools can now be done with `wp-cli <https://wp-cli.org/>`_.
