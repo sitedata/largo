@@ -1,21 +1,21 @@
 Welcome to the Largo Project
 ============================
 
-`Largo <https://largo.inn.org/>`_ is a responsive WordPress starter/parent theme built specifically with the needs of news publishers in mind and is built and maintained by the news apps and technology team at the `Institute for Nonprofit News (INN) <http://nerds.inn.org>`_.
+`Largo <https://largo.wpbuddy.co/>`_ is a responsive WordPress starter/parent theme built specifically with the needs of news publishers in mind and is maintained by the buddies @ `Wpbuddy.co <https://wpbuddy.co/>`_
+Formerly built and maintained by the news apps and technology team at the `Institute for Nonprofit News (INN) <http://nerds.inn.org>`_.
+Questions? Comments? Send us an email at largo@wpbuddy.co
 
-Questions? Comments? Send us an email at largo@inn.org
+Project Repository: https://github.com/WPBuddy/largo
 
-Project Repository: https://github.com/INN/Largo/
+Technical Issues (Bugs, Feature Requests, etc.): https://github.com/WPBuddy/largo/issues
 
-Technical Issues (Bugs, Feature Requests, etc.): https://github.com/INN/Largo/issues
+Largo User Guides for Administrators, Authors, and Editors: https://largo.wpbuddy.co/guides/
 
-Largo User Guides for Administrators, Authors, and Editors: https://largo.inn.org/guides/
+Help Desk (Support Requests): https://largo.wpbuddy.co/support/
 
-Help Desk (Support Requests): https://support.inn.org/
+Knowledge Base: https://largo.wpbuddy.co/support/
 
-Knowledge Base: https://support.inn.org/
-
-User Forum: https://support.inn.org/
+User Forum: https://largo.wpbuddy.co/support/
 
 Twitter: https://twitter.com/largoproject
 
