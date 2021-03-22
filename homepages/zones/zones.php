@@ -94,17 +94,34 @@ function homepage_series_stories_list() {
 
 	ob_start();
 	if ( !empty( $feature ) ) {
-?>
-	<h5 class="top-tag"><a class="post-category-link" href="<?php echo get_term_link( $feature ); ?>">
-		<?php echo __( "More in", "largo" ) . " " . esc_html( $feature->name ) ?></a></h5>
-			<?php foreach ( $series_posts as $series_post ) {
-				$shown_ids[] = $series_post->ID; ?>
-				<h4 class="related-story"><a href="<?php echo esc_url( get_permalink( $series_post->ID ) ); ?>">
-					<?php echo get_the_title( $series_post->ID ); ?></a></h4>
-			<?php } ?>
-			<p class="more"><a href="<?php echo get_term_link( $feature ); ?>">
-				<?php _e( 'Complete Coverage', 'largo' ); ?></a></p>
-<?php
+		?>
+			<h5 class="top-tag"><a class="post-category-link" href="<?php echo get_term_link( $feature ); ?>">
+				<?php
+					printf(
+						// translators: %1$s is the name of a term.
+						__( 'More in %1$s', 'largo' ),
+						esc_html( $feature->name ) 
+					);
+				?>
+			</a></h5>
+			<?php
+				foreach ( $series_posts as $series_post ) {
+					$shown_ids[] = $series_post->ID;
+					?>
+						<h4 class="related-story"><a href="<?php echo esc_url( get_permalink( $series_post->ID ) ); ?>">
+							<?php
+								echo get_the_title( $series_post->ID );
+							?>
+						</a></h4>
+					<?php
+				}
+			?>
+			<p class="more">
+				<a href="<?php echo get_term_link( $feature ); ?>">
+					<?php esc_html_e( 'Complete Coverage', 'largo' ); ?>
+				</a>
+			</p>
+		<?php
 	}
 	wp_reset_postdata();
 	$ret = ob_get_contents();

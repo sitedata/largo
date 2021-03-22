@@ -33,16 +33,33 @@ if ( ! function_exists( 'largo_post_social_links' ) ) {
 		$values = get_post_custom( $post->ID );
 
 		if ( isset( $utilities['facebook'] ) && '1' === $utilities['facebook'] ) {
-			$fb_share = '<span class="facebook"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=%1$s"><i class="icon-facebook"></i><span class="hidden-phone">%2$s</span></a></span>';
+			// possible values for this are defined in options.php
+			$fb_verb = ucfirst( of_get_option( 'fb_verb' ) );
+			switch ( $fb_verb ) {
+				case 'Like':
+					$fb_verb_localized = _x( 'Like', 'facebook verb', 'largo' );
+					break;
+				case 'Recommend':
+					$fb_verb_localized = _x( 'Recommend', 'facebook verb', 'largo' );
+					break;
+				case 'Share':
+					$fb_verb_localized = _x( 'Share', 'facebook verb', 'largo' );
+					break;
+				default:
+					$fb_verb_localized = wp_strip_all_tags( $fb_verb );
+			}
+
+			$fb_share = '<span class="facebook"><a target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/sharer/sharer.php?u=%1$s"><i class="icon-facebook"></i><span class="hidden-phone">%2$s</span></a></span>';
+
 			$output .= sprintf(
 				$fb_share,
 				rawurlencode( get_permalink() ),
-				__( ucfirst( of_get_option( 'fb_verb' ) ), 'largo' )
+				esc_html( $fb_verb )
 			);
 		}
 
 		if ( isset( $utilities['twitter'] ) && '1' === $utilities['twitter'] ) {
-			$twitter_share = '<span class="twitter"><a target="_blank" href="https://twitter.com/intent/tweet?text=%1$s&url=%2$s%3$s"><i class="icon-twitter"></i><span class="hidden-phone">%4$s</span></a></span>';
+			$twitter_share = '<span class="twitter"><a target="_blank" rel="noopener noreferrer" href="https://twitter.com/intent/tweet?text=%1$s&url=%2$s%3$s"><i class="icon-twitter"></i><span class="hidden-phone">%4$s</span></a></span>';
 
 			// By default, don't set a via.
 			$via = '';
@@ -89,7 +106,7 @@ if ( ! function_exists( 'largo_post_social_links' ) ) {
 
 		if ( isset( $utilities['email'] ) && '1' === $utilities['email'] ) {
 			$output .= sprintf(
-				'<span data-service="email" class="email share-button"><a href="mailto:?subject=%2$s&body=%3$s%0D%0A%4$s" target="_blank"><i class="icon-mail"></i> <span class="hidden-phone">%1$s</span></a></span>',
+				'<span data-service="email" class="email share-button"><a href="mailto:?subject=%2$s&body=%3$s%0D%0A%4$s" rel="noopener noreferrer" target="_blank"><i class="icon-mail"></i> <span class="hidden-phone">%1$s</span></a></span>',
 				esc_attr( __( 'Email', 'largo' ) ),
 				rawurlencode( html_entity_decode( get_the_title(), ENT_QUOTES, get_option( 'blog_charset' ) ) ), // subject
 				rawurlencode( html_entity_decode( strip_tags( get_the_excerpt() ), ENT_QUOTES, get_option( 'blog_charset' ) ) ), // description
@@ -101,7 +118,7 @@ if ( ! function_exists( 'largo_post_social_links' ) ) {
 			$output .= '<span class="print"><a href="#" onclick="window.print()" title="' . esc_attr( __( 'Print this article', 'largo' ) ) . '" rel="nofollow"><i class="icon-print"></i><span class="hidden-phone">' . esc_attr( __( 'Print', 'largo' ) ) . '</span></a></span>';
 		}
 
-		
+
 		// More social links
 		$more_social_links = array();
 
@@ -156,7 +173,7 @@ if ( ! function_exists( 'largo_post_social_links' ) ) {
 		if ( count( $more_social_links ) ) {
 			$more_social_links_str = implode( $more_social_links, "\n" );
 			$more = __( 'More', 'largo' );
-			
+
 			$output .= <<<EOD
 <span class="more-social-links">
 	<a class="popover-toggle" href="#"><i class="icon-plus"></i><span class="hidden-phone">${more}</span></a>

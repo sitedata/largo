@@ -268,17 +268,18 @@ if ( ! function_exists( 'largo_categories_and_tags' ) ) {
 
 				if ( $link ) {
 					$output[] = sprintf(
+						// translators: %1$s is an HTML tag. %2$S is a URL. %3$s is the plural name for posts. %4$s is a post category. %5$s is HTML for an icon. %6$s is a CSS class.
 						__( '<%1$s class="post-category-link %6$s"><a href="%2$s" title="Read %3$s in the %4$s category">%5$s%4$s</a></%1$s>', 'largo' ),
-						$item_wrapper,
-						( $rss ? get_category_feed_link( $cat->term_id ) : get_category_link( $cat->term_id ) ),
-						of_get_option( 'posts_term_plural' ),
-						$cat->name,
+						esc_attr( $item_wrapper ),
+						esc_attr( $rss ? get_category_feed_link( $cat->term_id ) : get_category_link( $cat->term_id ) ),
+						esc_html( of_get_option( 'posts_term_plural' ) ),
+						esc_html( $cat->name ),
 						$icon,
-						sprintf(
+						esc_attr( sprintf(
 							'%1$s-%2$s',
 							$cat->taxonomy,
 							$cat->slug
-						)
+						) )
 					);
 				} else {
 					$output[] = $cat->name;
@@ -294,17 +295,18 @@ if ( ! function_exists( 'largo_categories_and_tags' ) ) {
 
 				if ( $link ) {
 					$output[] = sprintf(
+						// translators: %1$s is an HTML tag. %2$S is a URL. %3$s is the plural name for posts. %4$s is a post tag. %5$s is HTML for an icon. %6$s is a CSS class.
 						__( '<%1$s class="post-tag-link %6$s"><a href="%2$s" title="Read %3$s tagged with: %4$s">%5$s%4$s</a></%1$s>', 'largo' ),
-						$item_wrapper,
-						( $rss ?  get_tag_feed_link( $tag->term_id ) : get_tag_link( $tag->term_id ) ),
-						of_get_option( 'posts_term_plural' ),
-						$tag->name,
+						esc_attr( $item_wrapper ),
+						esc_attr( $rss ?  get_tag_feed_link( $tag->term_id ) : get_tag_link( $tag->term_id ) ),
+						esc_html( of_get_option( 'posts_term_plural' ) ),
+						esc_html( $tag->name ),
 						$icon,
-						sprintf(
+						esc_attr( sprintf(
 							'%1$s-%2$s',
 							$tag->taxonomy,
 							$tag->slug
-						)
+						) )
 					);
 				} else {
 					$output[] = $tag->name;
