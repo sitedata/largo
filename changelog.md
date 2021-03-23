@@ -11,15 +11,19 @@ Particular thanks go to outside contributor [@seanchayes](https://github.com/sea
 
 ### Fixes and minor improvements
 
-- Improved translatability by consolidating Largo to a single text domain, `largo`, and by removing variables from translation functions where possible. [Pull request #1858](https://github.com/INN/largo/pull/1858) for [issue #1592](https://github.com/INN/largo/issues/1592).
-- Fixed an issue where the CSS Variables theme option was not working due to improperly escaped regex's in `inc/custom-less-variables.php`. We fixed those expressions and also changed the `put_contents` and `get_contents` functions in the class to be static functions rather than protected. [Pull request #1772](https://github.com/INN/largo/pull/1772) for [issue #1771](https://github.com/INN/largo/issues/1771).
-- Removed conflicting duplicate HTML IDs by changing the element ID `header-social` to the class `header-social`, and updating CSS styles to reflect the new selector. [Pull request #1826](https://github.com/INN/largo/pull/1826) for [issue #1781](https://github.com/INN/largo/issues/1781), by [@seanchayes](https://github.com/seanchayes).
-- Correct the use of [`validate_file()`](https://developer.wordpress.org/reference/functions/validate_file/), to allow Largo to be used on Windows servers. [Pull request #1850](https://github.com/INN/largo/pull/1850) for [issue #1849](https://github.com/INN/largo/issues/1849).
+- Improved translatability by consolidating Largo to a single text domain, `largo`, and by removing variables from translation functions where possible. [Pull request #1858](https://github.com/WPBuddy/largo/pull/1858) for [issue #1592](https://github.com/WPBuddy/largo/issues/1592).
+- Fixed an issue where the CSS Variables theme option was not working due to improperly escaped regex's in `inc/custom-less-variables.php`. We fixed those expressions and also changed the `put_contents` and `get_contents` functions in the class to be static functions rather than protected. [Pull request #1772](https://github.com/WPBuddy/largo/pull/1772) for [issue #1771](https://github.com/WPBuddy/largo/issues/1771).
+- Removed conflicting duplicate HTML IDs by changing the element ID `header-social` to the class `header-social`, and updating CSS styles to reflect the new selector. [Pull request #1826](https://github.com/WPBuddy/largo/pull/1826) for [issue #1781](https://github.com/WPBuddy/largo/issues/1781), by [@seanchayes](https://github.com/seanchayes).
+- Correct the use of [`validate_file()`](https://developer.wordpress.org/reference/functions/validate_file/), to allow Largo to be used on Windows servers. [Pull request #1850](https://github.com/WPBuddy/largo/pull/1850) for [issue #1849](https://github.com/WPBuddy/largo/issues/1849).
+- Adds `rel="noopener"` and/or `rel="noreferrer"` to links targeting `_blank`. [Pull request #1878](https://github.com/WPBuddy/largo/pull/1878) for [issue #1871](https://github.com/WPBuddy/largo/issues/1871) by [@omnisite](https://github.com/omnisite).
+- Updates the `edit_link()` function to only display the "Edit Post" link if it's not returned empty. [Pull request #1879](https://github.com/WPBuddy/largo/pull/1879) by [@michaels23](https://github.com/michaels23).
+- Adds `Mx.` to list of known honorifics for the `largo_trim_sentences` function. [Pull request #1876](https://github.com/WPBuddy/largo/pull/1876) for [issue #1869](https://github.com/WPBuddy/largo/issues/1869) by [@pedroxido](https://github.com/pedroxido). 
+- Adds relevant labels to all taxonomies created by Largo when they are initially registered. [Pull request #1821](https://github.com/WPBuddy/largo/pull/1821) for [issue #1346](https://github.com/WPBuddy/largo/issues/1346) by [@charmoney](https://github.com/charmoney).
 - Revised the Largo help widget in the admin dashboard to remove duplicate and dead links and also swap INN references to WP Buddy. [Pull request #1778](https://github.com/INN/largo/pull/1778) for issues [#1777](https://github.com/INN/largo/issues/1777), [#1644](https://github.com/INN/largo/issues/1644), and [#1495](https://github.com/INN/largo/issues/1495).
 
 ### Potentially-breaking changes
 
-- Replace `#header-social` in CSS files with `.header-social` to mach updated markup. [Pull request #1826](https://github.com/INN/largo/pull/1826) for [issue #1781](https://github.com/INN/largo/issues/1781).
+- Replace `#header-social` in CSS files with `.header-social` to mach updated markup. [Pull request #1826](https://github.com/WPBuddy/largo/pull/1826) for [issue #1781](https://github.com/WPBuddy/largo/issues/1781).
 
 ## [Largo 0.6.4](https://github.com/INN/largo/compare/v0.6.3...v0.6.4)
 

@@ -259,6 +259,7 @@ function largo_trim_sentences( $input, $sentences, $echo = false ) {
 			Mr\.            	# Skip either "Mr."
 		    | Mrs\.             # or "Mrs.",
 		    | Ms\.              # or "Ms.",
+		    | Mx\.              # or "Mx.",
 		    | Jr\.              # or "Jr.",
 		    | Dr\.              # or "Dr.",
 		    | Prof\.            # or "Prof.",
