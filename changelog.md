@@ -24,6 +24,7 @@ Particular thanks go to outside contributor [@seanchayes](https://github.com/sea
 - Social Links widget for single posts was using PHP escape sequences that were causing errors in PHP 8.0.3. Updated widget to be backwards compatible with PHP 7.3 and 8.0.3. [Pull request #1886](https://github.com/WPBuddy/largo/pull/1886) for [issue #1884](https://github.com/WPBuddy/largo/issues/1884).
 - Theme Options > Theme Images tab was using deprecated javascript/jQuery function `.live()`. Updated file `lib/options-framework/js/of-medialibrary-uploader.js` to use `.on()` instead. [Pull request #1888](https://github.com/WPBuddy/largo/pull/1888) for [issue #1874](https://github.com/WPBuddy/largo/issues/1874).
 - Updated mispelling of 'occured' and placed a period after the word in `featured-media.php`. [Pull request #1890](https://github.com/WPBuddy/largo/pull/1890) for [issue #1861](https://github.com/WPBuddy/largo/issues/1861) by [@billmca20](https://github.com/billmca20).
+- Updated invalid `font` css property to valid `font-family` property in `less/inc/typography.less`. [Pull request #1892](https://github.com/WPBuddy/largo/pull/1892) for [issue #1768](https://github.com/WPBuddy/largo/issues/1768) by [@billmca20](https://github.com/billmca20).
 
 ### Potentially-breaking changes
 
