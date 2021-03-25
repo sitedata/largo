@@ -20,6 +20,7 @@ Particular thanks go to outside contributor [@seanchayes](https://github.com/sea
 - Adds `Mx.` to list of known honorifics for the `largo_trim_sentences` function. [Pull request #1876](https://github.com/WPBuddy/largo/pull/1876) for [issue #1869](https://github.com/WPBuddy/largo/issues/1869) by [@pedroxido](https://github.com/pedroxido). 
 - Adds relevant labels to all taxonomies created by Largo when they are initially registered. [Pull request #1821](https://github.com/WPBuddy/largo/pull/1821) for [issue #1346](https://github.com/WPBuddy/largo/issues/1346) by [@charmoney](https://github.com/charmoney).
 - Revised the Largo help widget in the admin dashboard to remove duplicate and dead links and also swap INN references to WP Buddy. [Pull request #1778](https://github.com/INN/largo/pull/1778) for issues [#1777](https://github.com/INN/largo/issues/1777), [#1644](https://github.com/INN/largo/issues/1644), and [#1495](https://github.com/INN/largo/issues/1495).
+- `Implode()` function arguments were out of order on line 174 of `inc/post-social.php` causing fatal error on all single post pages. [Pull request #1887](https://github.com/WPBuddy/largo/pull/1887) for [issue #1885](https://github.com/WPBuddy/largo/issues/1885).
 
 ### Potentially-breaking changes
 

@@ -171,7 +171,7 @@ if ( ! function_exists( 'largo_post_social_links' ) ) {
 		$more_social_links = apply_filters( 'largo_post_social_more_social_links', $more_social_links );
 
 		if ( count( $more_social_links ) ) {
-			$more_social_links_str = implode( $more_social_links, "\n" );
+			$more_social_links_str = implode( "\n", $more_social_links );
 			$more = __( 'More', 'largo' );
 
 			$output .= <<<EOD
