@@ -23,6 +23,7 @@ Particular thanks go to outside contributor [@seanchayes](https://github.com/sea
 - `Implode()` function arguments were out of order on line 174 of `inc/post-social.php` causing fatal error on all single post pages. [Pull request #1887](https://github.com/WPBuddy/largo/pull/1887) for [issue #1885](https://github.com/WPBuddy/largo/issues/1885).
 - Social Links widget for single posts was using PHP escape sequences that were causing errors in PHP 8.0.3. Updated widget to be backwards compatible with PHP 7.3 and 8.0.3. [Pull request #1886](https://github.com/WPBuddy/largo/pull/1886) for [issue #1884](https://github.com/WPBuddy/largo/issues/1884).
 - Theme Options > Theme Images tab was using deprecated javascript/jQuery function `.live()`. Updated file `lib/options-framework/js/of-medialibrary-uploader.js` to use `.on()` instead. [Pull request #1888](https://github.com/WPBuddy/largo/pull/1888) for [issue #1874](https://github.com/WPBuddy/largo/issues/1874).
+- Updated mispelling of 'occured' and placed a period after the word in `featured-media.php`. [Pull request #1890](https://github.com/WPBuddy/largo/pull/1890) for [issue #1861](https://github.com/WPBuddy/largo/issues/1861) by [@billmca20](https://github.com/billmca20).
 
 ### Potentially-breaking changes
 
