@@ -26,6 +26,7 @@ Particular thanks go to outside contributor [@seanchayes](https://github.com/sea
 - Updated mispelling of 'occured' and placed a period after the word in `featured-media.php`. [Pull request #1890](https://github.com/WPBuddy/largo/pull/1890) for [issue #1861](https://github.com/WPBuddy/largo/issues/1861) by [@billmca20](https://github.com/billmca20).
 - Updated invalid `font` css property to valid `font-family` property in `less/inc/typography.less`. [Pull request #1892](https://github.com/WPBuddy/largo/pull/1892) for [issue #1768](https://github.com/WPBuddy/largo/issues/1768) by [@billmca20](https://github.com/billmca20).
 - Replaces `current_time('timestamp')` function with `time()` in the `largo_time_diff` function because WordPress is phasing out WordPress timestamps. [Pull request #1896](https://github.com/WPBuddy/largo/pull/1896) for [issue #1804](https://github.com/WPBuddy/largo/issues/1804) by [@omnisite](https://github.com/omnisite).
+- Updates `widget-content.php` partial to only display thubmnail if `$thumb` is not empty. [Pull request #1897](https://github.com/WPBuddy/largo/pull/1897) for [issue #1784](https://github.com/WPBuddy/largo/issues/1784) by [@omnisite](https://github.com/omnisite).
 
 ### Potentially-breaking changes
 
