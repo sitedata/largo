@@ -49,13 +49,12 @@ if ( ! function_exists( 'largo_modified_time' ) ) {
  * @see https://github.com/INN/Largo/pull/1265
  */
 function largo_time_diff( $time ) {
-	$time_difference = current_time( 'timestamp' ) - $time;
+	$time_difference = time() - $time;
 
 	if ( $time_difference < 86400 ) {
-		$output = sprintf(
-			// translators: %s is the output of human_time_diff().
-			__( '<span class="time-ago">%s ago</span>', 'largo' ),
-			human_time_diff( $time, current_time( 'timestamp' ) )
+		// translators: %s is the output of human_time_diff().
+		$output = sprintf( __( '<span class="time-ago">%s ago</span>', 'largo' ),
+			human_time_diff( $time, time() )
 		);
 	} else {
 		$output = date( 'F j, Y', $time );

@@ -25,6 +25,7 @@ Particular thanks go to outside contributor [@seanchayes](https://github.com/sea
 - Theme Options > Theme Images tab was using deprecated javascript/jQuery function `.live()`. Updated file `lib/options-framework/js/of-medialibrary-uploader.js` to use `.on()` instead. [Pull request #1888](https://github.com/WPBuddy/largo/pull/1888) for [issue #1874](https://github.com/WPBuddy/largo/issues/1874).
 - Updated mispelling of 'occured' and placed a period after the word in `featured-media.php`. [Pull request #1890](https://github.com/WPBuddy/largo/pull/1890) for [issue #1861](https://github.com/WPBuddy/largo/issues/1861) by [@billmca20](https://github.com/billmca20).
 - Updated invalid `font` css property to valid `font-family` property in `less/inc/typography.less`. [Pull request #1892](https://github.com/WPBuddy/largo/pull/1892) for [issue #1768](https://github.com/WPBuddy/largo/issues/1768) by [@billmca20](https://github.com/billmca20).
+- Replaces `current_time('timestamp')` function with `time()` in the `largo_time_diff` function because WordPress is phasing out WordPress timestamps. [Pull request #1896](https://github.com/WPBuddy/largo/pull/1896) for [issue #1804](https://github.com/WPBuddy/largo/issues/1804) by [@omnisite](https://github.com/omnisite).
 
 ### Potentially-breaking changes
 
