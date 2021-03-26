@@ -19,6 +19,7 @@ Particular thanks go to outside contributor [@seanchayes](https://github.com/sea
 - Updates the `edit_link()` function to only display the "Edit Post" link if it's not returned empty. [Pull request #1879](https://github.com/WPBuddy/largo/pull/1879) by [@michaels23](https://github.com/michaels23).
 - Adds `Mx.` to list of known honorifics for the `largo_trim_sentences` function. [Pull request #1876](https://github.com/WPBuddy/largo/pull/1876) for [issue #1869](https://github.com/WPBuddy/largo/issues/1869) by [@pedroxido](https://github.com/pedroxido). 
 - Adds relevant labels to all taxonomies created by Largo when they are initially registered. [Pull request #1821](https://github.com/WPBuddy/largo/pull/1821) for [issue #1346](https://github.com/WPBuddy/largo/issues/1346) by [@charmoney](https://github.com/charmoney).
+- Replaces `current_time('timestamp')` function with `time()` in the `largo_time_diff` function because WordPress is phasing out WordPress timestamps. [Pull request #1896](https://github.com/WPBuddy/largo/pull/1896) for [issue #1804](https://github.com/WPBuddy/largo/issues/1804) by [@omnisite](https://github.com/omnisite).
 
 ### Potentially-breaking changes
 
