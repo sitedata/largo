@@ -5,28 +5,30 @@ if ( isset( $instance['show_top_term'] ) && $instance['show_top_term'] == 1 && l
 	largo_maybe_top_term();
 }
 
+if ( ! empty( $thumb ) ) {
+	// default img size
+	$img_size = '60x60';
+	// the thumbnail image (if we're using one)
+	if ( $thumb == 'small' ) {
+		$img_location = ! empty( $instance['image_align'] ) ? $instance['image_align'] : 'left';
+		$img_attr = array( 'class' => $img_location . '-align' );
+		$img_attr['class'] .= " attachment-small";
+	} elseif ( $thumb == 'medium' ) {
+		$img_location = ! empty( $instance['image_align'] ) ? $instance['image_align'] : 'left';
+		$img_attr = array('class' => $img_location . '-align');
+		$img_attr['class'] .= " attachment-thumbnail";
+		$img_size = 'post-thumbnail';
+	} elseif ( $thumb == 'large' ) {
+		$img_attr = array();
+		$img_attr['class'] = " attachment-large";
+		$img_size = 'large';
+	}
 
-// the thumbnail image (if we're using one)
-if ($thumb == 'small') {
-	$img_location = ! empty( $instance['image_align'] ) ? $instance['image_align'] : 'left';
-	$img_attr = array( 'class' => $img_location . '-align' );
-	$img_attr['class'] .= " attachment-small";
-	?>
-		<a href="<?php echo get_permalink(); ?>"><?php echo get_the_post_thumbnail( get_the_ID(), '60x60', $img_attr); ?></a>
-	<?php
-} elseif ($thumb == 'medium') {
-	$img_location = ! empty( $instance['image_align'] ) ? $instance['image_align'] : 'left';
-	$img_attr = array('class' => $img_location . '-align');
-	$img_attr['class'] .= " attachment-thumbnail";
-	?>
-		<a href="<?php echo get_permalink(); ?>"><?php echo get_the_post_thumbnail( get_the_ID(), 'post-thumbnail', $img_attr); ?></a>
-	<?php
-} elseif ($thumb == 'large') {
-	$img_attr = array();
-	$img_attr['class'] = " attachment-large";
-	?>
-		<a href="<?php echo get_permalink(); ?>"><?php echo get_the_post_thumbnail( get_the_ID(), 'large', $img_attr); ?></a>
-	<?php
+	if ( get_the_post_thumbnail( get_the_ID(), $img_size ) ) {
+		?>
+		<a href="<?php echo get_permalink(); ?>"><?php echo get_the_post_thumbnail( get_the_ID(), $img_size, $img_attr ); ?></a>
+		<?php
+	}
 }
 
 // the headline and optionally the post-type icon

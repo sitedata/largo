@@ -305,7 +305,7 @@ function largo_enqueue_featured_media_js( $hook ) {
 			'image_title' => __( 'Featured image', 'largo' ),
 			'gallery_title' => __( 'Featured gallery', 'largo' ),
 			'error_invalid_url' => __( 'Error: please enter a valid URL.', 'largo' ),
-			'error_occurred' => __( 'An error ocurred', 'largo' ),
+			'error_occurred' => __( 'An error occurred.', 'largo' ),
 			'set_featured' => __( 'Set as featured', 'largo' ),
 			'confirm_remove_featured' => __( 'Yes, remove featured media', 'largo' ),
 			'remove_featured_title' => __( 'Remove featured', 'largo' )
@@ -462,13 +462,17 @@ function largo_featured_image_metabox_callback( $post, $metabox ) {
 	global $post;
 
 	$has_featured_media = largo_has_featured_media( $post->ID );
-	$language = ( ! empty( $has_featured_media ) ) ? 'Edit' : 'Set';
 
 	$checked = 'false' == get_post_meta( $post->ID, 'featured-image-display', true ) ? 'checked="checked"' : "";
 	echo wp_nonce_field( basename( __FILE__ ), 'featured_image_display_nonce' );
 
 	echo '<a href="#" class="set-featured-media">' . get_the_post_thumbnail() . '</a>';
-	echo '<a href="#" id="set-featured-media-button" class="button set-featured-media add_media" data-editor="content" title="' . __( $language . ' Featured Media', 'largo' ) . '"></span> ' . __( $language . ' Featured Media', 'largo' ) . '</a> <span class="spinner" style="display: none;"></span>';
+
+	if ( empty( $has_featured_media ) ) {
+		echo '<a href="#" id="set-featured-media-button" class="button set-featured-media add_media" data-editor="content" title="' . __( 'Set Featured Media', 'largo' ) . '"></span> ' . __( 'Set Featured Media', 'largo' ) . '</a> <span class="spinner" style="display: none;"></span>';
+	} else {
+		echo '<a href="#" id="set-featured-media-button" class="button set-featured-media add_media" data-editor="content" title="' . __( 'Edit Featured Media', 'largo' ) . '"></span> ' . __( 'Edit Featured Media', 'largo' ) . '</a> <span class="spinner" style="display: none;"></span>';
+	}
 
 	echo '<p><label class="selectit"><input type="checkbox" value="true" name="featured-image-display"' . $checked .'> ' . __( 'Hide on Single Post display', 'largo' ) . '</label></p>';
 }

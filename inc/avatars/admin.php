@@ -82,11 +82,12 @@ function largo_save_avatar_field($user_id) {
 				$id = wp_insert_attachment($args, $file['file']);
 
 				if ( ! is_wp_error( $id ) ) {
-					if ( 0 === validate_file( ABSPATH . 'wp-admin/includes/image.php' ) ) {
+					if ( 0 === validate_file( 'wp-admin/includes/image.php' ) ) {
 						require_once( ABSPATH . 'wp-admin/includes/image.php' );
 					} else {
 						wp_die(
 							sprintf(
+								// translators: %1$s is the current file's filename and path.
 								esc_html__( 'wp-admin/includes/image.php could not be loaded by %1$s', 'largo' ),
 								__FILE__
 							)
