@@ -29,7 +29,7 @@ Particular thanks go to outside contributor [@seanchayes](https://github.com/sea
 - Updates `widget-content.php` partial to only display thubmnail if `$thumb` is not empty. [Pull request #1897](https://github.com/WPBuddy/largo/pull/1897) for [issue #1784](https://github.com/WPBuddy/largo/issues/1784) by [@omnisite](https://github.com/omnisite).
 - Updates the `largo_save_avatar_field` function to use `WP_Filesystem` instead of `@file_get_contents`. [Pull request #1898](https://github.com/WPBuddy/largo/pull/1898) for [issue #1526](https://github.com/WPBuddy/largo/issues/1526) by [@omnisite](https://github.com/omnisite).
 - Refactors `largo_top_term` function to break out the getting / fetching of the term from the actual output for easier customization. [Pull request #1824](https://github.com/WPBuddy/largo/pull/1824) for [issue #1775](https://github.com/WPBuddy/largo/issues/1775), by [@seanchayes](https://github.com/seanchayes).
-- Update all npm packages to latest version; updated package.json command scripts to allow developers to quickly run grunt tasks
+- Update all npm packages to latest version; updated package.json command scripts to allow developers to quickly run grunt tasks [Pull request](https://github.com/WPBuddy/largo/pull/1899) fixes issue [#1540](https://github.com/WPBuddy/largo/issues/1540)
 ### Potentially-breaking changes
 
 - Replace `#header-social` in CSS files with `.header-social` to mach updated markup. [Pull request #1826](https://github.com/WPBuddy/largo/pull/1826) for [issue #1781](https://github.com/WPBuddy/largo/issues/1781).
