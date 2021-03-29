@@ -1,6 +1,6 @@
 # Largo
 
-A responsive WordPress framework designed for news publishers and developed by the Institute for Nonprofit News.
+A responsive WordPress framework designed for news publishers and developed by @INN and maintained by @WPBuddy.
 
 ## About Largo
 
@@ -10,36 +10,36 @@ A responsive WordPress framework designed for news publishers and developed by t
 
 The project extends work done by [NPR's Project Argo](http://argoproject.org/).
 
-**Current version:** [v0.6.4](https://github.com/INN/largo/releases)
+**Current version:** [v0.6.4](https://github.com/WPBuddy/largo/releases)
 **Working version:** 0.7.0-prerelease
 
 **Changelog** is available in this repository: [changelog.md](./changelog.md)
 
-**Documentation** and more information at: [largo.inn.org](https://largo.inn.org)
+**Documentation** and more information at: [laro.wpbuddy.co](https://largo.wpbuddy.co)
 
-**Support** is available [via our helpdesk system](http://support.largoproject.org/) or by emailing [support@largoproject.org](mailto:support@largoproject.org).
+**Support** is available [via our helpdesk system](https://largo.wpbuddy.co/support) or by emailing [support@wpbuddy.co](mailto:support@wpbuddy.co).
 
 **Minimum PHP version:** We only support the [currently-maintained versions of PHP](https://secure.php.net/supported-versions.php).
 
 **Minimum supported WordPress version:** We recommend using [the current version of WordPress](https://wordpress.org/download/releases/). To see what versions of WordPress automated tests are run against, check out [the Travis CI configuration file](./.travis.yml).
 
-If you're using Largo on your site, say hi! Send us an email at [labs@inn.org](mailto:labs@inn.org) or [through the contact form](https://labs.inn.org/contact/), sign up for a slot in [our weekly open office hours](https://docs.google.com/spreadsheets/d/1p-twn2D8oow7vXBfkcdYcZnVA4z8Q42OMs77KlHwf-g/edit#gid=0), or just say hi to [our staff](https://labs.inn.org/nerds/) at a conference. We'd love to include you on our [list of sites using Largo](https://github.com/INN/largo/wiki/Sites-Using-Largo).
+If you're using Largo on your site, say hi! Send us an email at [hello@wpbuddy.co](mailto:hello@wpbuddy.co) or [through the contact form](https://wpbuddy.co/), sign up for a slot in [our weekly open office hours](https://wpbuddy.co/#contact), or join our public [Slack group](https://join.slack.com/t/joinwpbuddy/shared_invite/zt-nqi3e7xw-wCUd6EW8HHXKUc2xWLPWNQ). We'd love to include you on our [list of sites using Largo](https://github.com/WPBuddy/largo/wiki/Sites-Using-Largo).
 
 ## Setup
 
-Follow the [setup instructions in the documentation](https://largo.inn.org/guides/administrators/installing-largo/).
+Follow the [setup instructions in the documentation](https://largo.wpbuddy.co/guides/administrators/installing-largo/).
 
 ## Contributing
 
 We welcome contributions to any of our open source projects.
 
-If you're not sure where to start, [review the open issues on github](https://github.com/INN/Largo/issues) (you might be particularly interested in the issues labelled [help wanted](https://github.com/INN/Largo/labels/help%20wanted) or [good for beginners](https://github.com/INN/Largo/issues?q=label%3A%22good+for+beginners%22)) and then see [our contributing guidelines](/contributing.md) to get started.
+If you're not sure where to start, [review the open issues on github](https://github.com/WPBuddy/Largo/issues) (you might be particularly interested in the issues labelled [help wanted](https://github.com/WPBuddy/Largo/labels/help%20wanted) or [good for beginners](https://github.com/WPBuddy/Largo/issues?q=label%3A%22good+for+beginners%22)) and then see [our contributing guidelines](/contributing.md) to get started.
 
 If you're still not sure where to start, that's totally fine! [Just shoot us an email](mailto:nerds@inn.org) and we'll do our best to help.
 
 We are making regular updates that may or may not always play nice with previous versions.
 
-For released versions of Largo, please see the [list of tagged releases](https://github.com/INN/Largo/releases).
+For released versions of Largo, please see the [list of tagged releases](https://github.com/WPBuddy/Largo/releases).
 
 The `release` branch is what INN is using for our sites in production. Please do not submit pull requests to this branch unless they are minor hotfixes that can be directly merged.
 
@@ -47,19 +47,24 @@ The `trunk` branch is contains work in progress slated for our next point releas
 
 The `master`, `develop`, and `1.0` branches contain work in progress slated for an eventual rewrite of Largo.
 
-Feedback, comments and questions to: [largo@inn.org](mailto:largo@inn.org)
+Feedback, comments and questions to: [largo@wpbuddy.co](mailto:largo@wpbuddy.co)
 
 ## Credits
 
-Built and maintained by the [Institute for Nonprofit News](http://inn.org) product and technology team ([@INNNerds](http://twitter.com/INNNerds)):
+Built by the [Institute for Nonprofit News](http://inn.org) and maintained by the technology team at [WP Buddy](https://wpbuddy.co) ([@yourwpbuddy](http://twitter.com/yourwpbuddy)):
 
+- **[Josh Darby](https://github.com/joshdarby)**, Lead Buddy / Backend Developer
+- **[Rylan Lambertsen](https://github.com/rlambertsen)**, Lead Buddy / Frontend Developer
+- **[Bill McAllister](https://github.com/billmca20)**, Intern Buddy
+
+Extra special thanks to the previous team at INN Labs:
 - **[Kay Lima](https://github.com/kaylima)**, Director
 - **[Ben Keith](https://github.com/benlk)** ([@benlkeith](http://twitter.com/benlkeith)), Lead Developer
 - **Paola Baradello**, Account Director
 - **[Miranda Krapf](https://github.com/MirandaEcho)**, Project Manager
 - **[Josh Darby](https://github.com/joshdarby)**, Senior Developer
 
-Special thanks to everyone who has contributed to the project, including the following alphabetical list of people:
+Special thanks to everyone else who has contributed to the project, including the following alphabetical list of people:
 - [aschweigert](https://github.com/aschweigert)
 - [danielbachhuber](http://github.com/danielbachhuber)
 - [DrewAPicture](http://github.com/drewapicture)

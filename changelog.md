@@ -27,6 +27,8 @@ Particular thanks go to outside contributor [@seanchayes](https://github.com/sea
 - Updated invalid `font` css property to valid `font-family` property in `less/inc/typography.less`. [Pull request #1892](https://github.com/WPBuddy/largo/pull/1892) for [issue #1768](https://github.com/WPBuddy/largo/issues/1768) by [@billmca20](https://github.com/billmca20).
 - Replaces `current_time('timestamp')` function with `time()` in the `largo_time_diff` function because WordPress is phasing out WordPress timestamps. [Pull request #1896](https://github.com/WPBuddy/largo/pull/1896) for [issue #1804](https://github.com/WPBuddy/largo/issues/1804) by [@omnisite](https://github.com/omnisite).
 - Updates `widget-content.php` partial to only display thubmnail if `$thumb` is not empty. [Pull request #1897](https://github.com/WPBuddy/largo/pull/1897) for [issue #1784](https://github.com/WPBuddy/largo/issues/1784) by [@omnisite](https://github.com/omnisite).
+- Updates the `largo_save_avatar_field` function to use `WP_Filesystem` instead of `@file_get_contents`. [Pull request #1898](https://github.com/WPBuddy/largo/pull/1898) for [issue #1526](https://github.com/WPBuddy/largo/issues/1526) by [@omnisite](https://github.com/omnisite).
+- Refactors `largo_top_term` function to break out the getting / fetching of the term from the actual output for easier customization. [Pull request #1824](https://github.com/WPBuddy/largo/pull/1824) for [issue #1775](https://github.com/WPBuddy/largo/issues/1775), by [@seanchayes](https://github.com/seanchayes).
 - Update all npm packages to latest version; updated package.json command scripts to allow developers to quickly run grunt tasks
 ### Potentially-breaking changes
 
