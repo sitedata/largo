@@ -171,7 +171,10 @@ module.exports = function(grunt) {
   grunt.registerTask('pot', ['shell:pot']);
 
   // Build docs and language files
-  grunt.registerTask('build', 'Build docs and language files', [
+  grunt.registerTask('build', 'Build assets, docs and language files', [
+    'less',
+    'cssmin',
+    'uglify',
     'apidocs',
     'docs',
     'pot',
