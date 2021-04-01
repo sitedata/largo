@@ -385,7 +385,7 @@ function cftl_tax_landing_main($post) {
 	wp_nonce_field(plugin_basename(__FILE__), 'cftl_tax_landing_main');
 	$custom = get_post_custom( $post->ID );
 	$fields = ( ! empty( $custom ) ) ? $custom : cftl_field_defaults();
-	$fields['show'] = maybe_unserialize( $fields['show'] );
+	$fields['show'] = maybe_unserialize( $fields['show'][0] );
 	foreach( array('image','excerpt','byline','tags') as $key ) {
 		if ( !array_key_exists($key, $fields['show'])) $fields['show'][$key] = 0;
 	}
