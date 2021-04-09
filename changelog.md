@@ -30,6 +30,7 @@ Particular thanks go to outside contributor [@seanchayes](https://github.com/sea
 - Updates the `largo_save_avatar_field` function to use `WP_Filesystem` instead of `@file_get_contents`. [Pull request #1898](https://github.com/WPBuddy/largo/pull/1898) for [issue #1526](https://github.com/WPBuddy/largo/issues/1526) by [@omnisite](https://github.com/omnisite).
 - Refactors `largo_top_term` function to break out the getting / fetching of the term from the actual output for easier customization. [Pull request #1824](https://github.com/WPBuddy/largo/pull/1824) for [issue #1775](https://github.com/WPBuddy/largo/issues/1775), by [@seanchayes](https://github.com/seanchayes).
 - Replaces "category" string in `largo_top_term` title attribute with the singular name of the top term's taxonomy. [Pull request #1903](https://github.com/WPBuddy/largo/pull/1903) for [issue #1776](https://github.com/WPBuddy/largo/issues/1776), by [@charmoney](https://github.com/charmoney).
+- Widget titles may now be set on the Largo Twitter and Largo Facebook widgets. Pull requests [#1822](https://github.com/INN/largo/pull/1822) by [@seanchayes](https://github.com/seanchayes) and [#1840](https://github.com/INN/largo/pull/1840) for issues [#1739](https://github.com/INN/largo/issues/1739) and [#1740](https://github.com/INN/largo/issues/1740).
 
 ### Potentially-breaking changes
 
