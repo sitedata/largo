@@ -14,6 +14,7 @@ get_header();
 					echo wp_kses_post( __('Search', 'largo') );
 				} else {
 					echo wp_kses_post( sprintf(
+						// translators: %s is the search query.
 						__('Search results for <span class="search-term">%s</span>', 'largo'),
 						$search_query
 					) );
@@ -108,8 +109,16 @@ get_header();
 
 			<h3 class="recent-posts clearfix">
 				<?php
-					printf( __('Your search for <span class="search-term">%s</span> returned ', 'largo'), get_search_query() );
-					printf( _n( '%s result', '%s results', $wp_query->found_posts ), number_format_i18n( $wp_query->found_posts ) );
+					printf(
+						// translators: %s is the search query.
+						__('Your search for <span class="search-term">%s</span> returned ', 'largo'),
+						get_search_query()
+					);
+					printf(
+						// translators: %s is the output of number_format_i18n( the number of found posts ) .
+						_n( '%s result', '%s results', $wp_query->found_posts, 'largo' ),
+						number_format_i18n( $wp_query->found_posts )
+					);
 					printf( '<a class="rss-link" href="%1$s"><i class="icon-rss"></i></a>', get_search_feed_link() );
 				?>
 			</h3>

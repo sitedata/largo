@@ -93,12 +93,12 @@ class largo_staff_widget extends WP_Widget {
 
 		?>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:' ); ?></label>
+			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php echo esc_html_x( 'Title:', 'largo-staff', 'largo' ); ?></label>
 			<input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo esc_attr( $title ); ?>">
 		</p>
 
 		<p>
-			<label><?php _e( 'Include:' ); ?></label><br/>
+			<label><?php echo esc_html_x( 'Include:', 'largo-staff', 'largo' ); ?></label><br/>
 			<?php foreach ($roles as $key => $role) {
 				if (
 					isset( $instance['roles'] )
