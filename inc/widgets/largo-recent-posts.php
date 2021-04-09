@@ -1,7 +1,6 @@
 <?php
-
 /**
- * Largo Recent Posts
+ * Largo Recent Posts Widget
  */
 class largo_recent_posts_widget extends WP_Widget {
 
@@ -112,7 +111,11 @@ class largo_recent_posts_widget extends WP_Widget {
 			echo $output;
 
 		} else {
-			printf( __( '<p class="error"><strong>You don\'t have any recent %s.</strong></p>', 'largo' ), strtolower( $posts_term ) );
+			printf(
+				// translators: %s is the theme option value for the name of "posts".
+				__( '<p class="error"><strong>You don\'t have any recent %s.</strong></p>', 'largo' ),
+				strtolower( $posts_term )
+			);
 		} // end more featured posts
 
 		// close the ul
@@ -153,7 +156,11 @@ class largo_recent_posts_widget extends WP_Widget {
 
 	function form( $instance ) {
 		$defaults = array(
-			'title' => __( 'Recent ' . of_get_option( 'posts_term_plural', 'Posts' ), 'largo' ),
+			'title' => sprintf(
+				// translators: %1$s is the admin-defined plural term for "posts" on this site.
+				__( 'Recent %1$s' , 'largo' ),
+				of_get_option( 'posts_term_plural', 'Posts' )
+			),
 			'num_posts' => 5,
 			'avoid_duplicates' => '',
 			'thumbnail_display' => 'small',

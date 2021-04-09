@@ -6,6 +6,7 @@ if ( is_404() ) {
 		$apologies = of_get_option( '404_message' );
 	} else {
 		$apologies = sprintf(
+			// translators: %s is the search query.
 			__( 'Apologies, but <code>%s</code> was not found. Perhaps searching will help.', 'largo' ),
 			wp_kses($_SERVER['REQUEST_URI'], array()) // The url, sanitized
 		);
