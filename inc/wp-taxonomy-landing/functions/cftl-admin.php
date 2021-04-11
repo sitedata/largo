@@ -451,7 +451,7 @@ function cftl_tax_landing_main($post) {
             * when trying to check the count of false we get an error
             * check its not false and is and array before trying to count it
             */
-            $terms = get_the_terms( $post->ID, 'series');
+            $terms = get_the_terms( $post->ID, 'series' );
             if ($terms && is_array($terms) && count($terms) >= 1) {
                 $series_id = $terms[0]->term_taxonomy_id;
             } else {
