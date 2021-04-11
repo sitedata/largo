@@ -33,7 +33,7 @@ Particular thanks go to outside contributor [@seanchayes](https://github.com/sea
 - Widget titles may now be set on the Largo Twitter and Largo Facebook widgets. Pull requests [#1822](https://github.com/INN/largo/pull/1822) by [@seanchayes](https://github.com/seanchayes) and [#1840](https://github.com/INN/largo/pull/1840) for issues [#1739](https://github.com/INN/largo/issues/1739) and [#1740](https://github.com/INN/largo/issues/1740).
 - Adds in `aria-page="current"` attribute to widget content anchors if the queried object ID matches the current post ID. [Pull request #1819](https://github.com/WPBuddy/largo/pull/1819) for [issue #1805](https://github.com/WPBuddy/largo/issues/1805) by [@seanchayes](https://github.com/seanchayes).
 - Removes meta tag `maximum-scale=1.0` to disable scaling. [Pull request #1811](https://github.com/WPBuddy/largo/pull/1811) for [issue #1785](https://github.com/WPBuddy/largo/issues/1785) by [@vanduc1102](https://github.com/vanduc1102)
-
+- Check that Landing Page $terms variable is not false and an array then check its length [Pull Request #1905](https://github.com/WPBuddy/largo/pull/1905) Fixes Issue [#1904](https://github.com/WPBuddy/largo/issues/1904)
 ### Potentially-breaking changes
 
 - Replace `#header-social` in CSS files with `.header-social` to mach updated markup. [Pull request #1826](https://github.com/WPBuddy/largo/pull/1826) for [issue #1781](https://github.com/WPBuddy/largo/issues/1781).
