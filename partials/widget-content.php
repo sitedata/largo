@@ -30,10 +30,13 @@ if ( ! empty( $thumb ) ) {
 		<?php
 	}
 }
-
+$aria_current = '';
+if ( get_queried_object_id() === get_the_ID() ) {
+	$aria_current .= ' aria-current="page"';
+}
 // the headline and optionally the post-type icon
 ?><h5>
-	<a href="<?php echo get_permalink(); ?>"><?php echo get_the_title(); ?>
+	<a href="<?php echo get_permalink(); ?>"<?php echo $aria_current; ?>><?php echo get_the_title(); ?>
 	<?php
 		if ( isset( $instance['show_icon'] ) && $instance['show_icon'] == true ) {
 			post_type_icon();
