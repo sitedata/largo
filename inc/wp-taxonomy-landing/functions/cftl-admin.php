@@ -387,7 +387,9 @@ function cftl_tax_landing_main($post) {
 	$fields = ( ! empty( $custom ) ) ? $custom : cftl_field_defaults();
 	$fields['show'] = maybe_unserialize( $fields['show'][0] );
 	foreach( array('image','excerpt','byline','tags') as $key ) {
-		if ( !array_key_exists($key, $fields['show'])) $fields['show'][$key] = 0;
+		if( is_array( $fields['show'] ) ) {
+			if ( ! array_key_exists( $key, $fields['show'] ) ) $fields['show'][$key] = 0;
+		}
 	}
 	?>
 <div class="form-field-radios">
