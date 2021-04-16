@@ -152,9 +152,10 @@ class Largo_Byline {
 	 */
 	function twitter() {
 		$twitter = get_the_author_meta( 'twitter', $this->author_id );
+		$twitter_username  = largo_twitter_url_to_username( $twitter );
 		$output = '';
 		if ( $twitter && is_single() ) {
-			$output .= ' <span class="twitter"><a href="https://twitter.com/' . largo_twitter_url_to_username( $twitter ) . '"><i class="icon-twitter"></i></a></span>';
+			$output .= ' <span class="twitter"><a href="https://twitter.com/' . $twitter_username . '" title="Follow '. $twitter_username .' on Twitter" ><i class="icon-twitter"></i></a></span>';
 		}
 		echo $output;
 	}
@@ -185,7 +186,10 @@ class Largo_Byline {
 	function edit_link() {
 		// Add the edit link if the current user can edit the post
 		if ( current_user_can( 'edit_post', $this->post_id ) ) {
-			echo ' <span class="edit-link"><a href="' . get_edit_post_link( $this->post_id ) . '">' . __( 'Edit This Post', 'largo' ) . '</a></span>';
+			$edit_post_link = get_edit_post_link( $this->post_id );
+			if (!empty($edit_post_link)){			
+				echo ' <span class="edit-link"><a href="' . $edit_post_link . '">' . __( 'Edit This Post', 'largo' ) . '</a></span>';
+			}
 		}
 	}
 }
