@@ -119,6 +119,7 @@ if ( isset( $wp_query->query_vars['term'] )
 	switch ( $opt['post_order'] ) {
 		case 'ASC':
 			$args['orderby'] = 'ASC';
+			$args['order'] = 'ASC';
 			break;
 		case 'custom':
 			$args['orderby'] = 'series_custom';
