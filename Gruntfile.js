@@ -30,7 +30,7 @@ module.exports = function(grunt) {
           paths: ['less'],
           sourceMap: true,
           outputSourceFiles: true,
-          sourceMapBasepath: path,
+          sourceMapBasePath: path,
         },
         files: cssLessFiles
       }
@@ -170,7 +170,7 @@ module.exports = function(grunt) {
   // Former grunt-pot
   grunt.registerTask('pot', ['shell:pot']);
 
-  // Build assets, docs and language files
+  // Build docs and language files
   grunt.registerTask('build', 'Build assets, docs and language files', [
     'less',
     'cssmin',
@@ -179,5 +179,12 @@ module.exports = function(grunt) {
     'docs',
     'pot',
     'shell:msgmerge'
+  ]);
+
+// Build asset files
+  grunt.registerTask('UI', 'Build less files and minify js', [
+    'less',
+    'cssmin',
+    'uglify',
   ]);
 }

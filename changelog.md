@@ -36,7 +36,7 @@ Particular thanks go to outside contributor [@seanchayes](https://github.com/sea
 - Check that Landing Page $terms variable is not false and an array then check its length [Pull Request #1905](https://github.com/WPBuddy/largo/pull/1905) Fixes Issue [#1904](https://github.com/WPBuddy/largo/issues/1904)
 - Fixes the series landing page "Oldest first" post ordering functionality. [Pull request #1902](https://github.com/WPBuddy/largo/pull/1902) for [issue #1901](https://github.com/WPBuddy/largo/issues/1901).
 - Fixes the issue of saved landing page checkbox options not displaying their saved value in the admin editor. [Pull request #1900](https://github.com/WPBuddy/largo/pull/1900) for [issue #1870](https://github.com/WPBuddy/largo/issues/1870).
-
+- Update all npm packages to latest version; updated package.json command scripts to allow developers to quickly run grunt tasks [Pull request](https://github.com/WPBuddy/largo/pull/1899) fixes issue [#1540](https://github.com/WPBuddy/largo/issues/1540)
 ### Potentially-breaking changes
 
 - Replace `#header-social` in CSS files with `.header-social` to mach updated markup. [Pull request #1826](https://github.com/WPBuddy/largo/pull/1826) for [issue #1781](https://github.com/WPBuddy/largo/issues/1781).
