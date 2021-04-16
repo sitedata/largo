@@ -35,6 +35,7 @@ Particular thanks go to outside contributor [@seanchayes](https://github.com/sea
 - Removes meta tag `maximum-scale=1.0` to disable scaling. [Pull request #1811](https://github.com/WPBuddy/largo/pull/1811) for [issue #1785](https://github.com/WPBuddy/largo/issues/1785) by [@vanduc1102](https://github.com/vanduc1102)
 - Check that Landing Page $terms variable is not false and an array then check its length [Pull Request #1905](https://github.com/WPBuddy/largo/pull/1905) Fixes Issue [#1904](https://github.com/WPBuddy/largo/issues/1904)
 - Fixes the series landing page "Oldest first" post ordering functionality. [Pull request #1902](https://github.com/WPBuddy/largo/pull/1902) for [issue #1901](https://github.com/WPBuddy/largo/issues/1901).
+- Fixes `Largo_Related::popularity_sort` sorting in the wrong order. [Pull request #1877](https://github.com/WPBuddy/largo/pull/1877) for [issue #1868](https://github.com/WPBuddy/largo/issues/1868) by [@pedroxido](https://github.com/pedroxido).
 
 ### Potentially-breaking changes
 
