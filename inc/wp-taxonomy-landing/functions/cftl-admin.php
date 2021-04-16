@@ -385,9 +385,11 @@ function cftl_tax_landing_main($post) {
 	wp_nonce_field(plugin_basename(__FILE__), 'cftl_tax_landing_main');
 	$custom = get_post_custom( $post->ID );
 	$fields = ( ! empty( $custom ) ) ? $custom : cftl_field_defaults();
-	$fields['show'] = maybe_unserialize( $fields['show'] );
+	$fields['show'] = maybe_unserialize( $fields['show'][0] );
 	foreach( array('image','excerpt','byline','tags') as $key ) {
-		if ( !array_key_exists($key, $fields['show'])) $fields['show'][$key] = 0;
+		if( is_array( $fields['show'] ) ) {
+			if ( ! array_key_exists( $key, $fields['show'] ) ) $fields['show'][$key] = 0;
+		}
 	}
 	?>
 <div class="form-field-radios">
@@ -446,8 +448,17 @@ function cftl_tax_landing_main($post) {
 	<div>
 		<?php
 			//allow 'custom' if we have a single term
-			$terms = get_the_terms( $post->ID, 'series');
-			if (count($terms) == 1) $series_id = $terms[0]->term_taxonomy_id;
+			/*
+            * issue #1904
+            * when trying to check the count of false we get an error
+            * check its not false and is and array before trying to count it
+            */
+            $terms = get_the_terms( $post->ID, 'series' );
+            if ($terms && is_array($terms) && count($terms) >= 1) {
+                $series_id = $terms[0]->term_taxonomy_id;
+            } else {
+                $series_id = 0;
+            }
 		?>
 		<select name="post_order">
 			<?php

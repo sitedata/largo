@@ -343,13 +343,17 @@ function largo_top_term( $options = array() ) {
 
 	$term_object = largo_get_top_term( $args );
 
+	// get the taxonomy object & labels
+	$taxonomy = get_taxonomy( $term_object->taxonomy );
+	$taxonomy_labels = get_taxonomy_labels( $taxonomy );
+
 	/*
 	 * If we get a term object use it to generate some text
 	 */
 	if ( is_a( $term_object, 'WP_Term' ) ) {
 		$icon = ( $args['use_icon'] ) ?  '<i class="icon-white icon-tag"></i>' : '' ;	//this will probably change to a callback largo_term_icon() someday
 
-		$link = ( $args['link'] ) ? array( '<a href="%2$s" title="Read %3$s in the %4$s category">','</a>' ) : array( '', '' ) ;
+		$link = ( $args['link'] ) ? array( '<a href="%2$s" title="Read %3$s in the %4$s %7$s">','</a>' ) : array( '', '' ) ;
 
 		$output = sprintf(
 			'<%1$s class="post-category-link _top_term_output %6$s">'.$link[0].'%5$s%4$s'.$link[1].'</%1$s>',
@@ -362,7 +366,8 @@ function largo_top_term( $options = array() ) {
 				'%1$s-%2$s',
 				$term_object->taxonomy,
 				$term_object->slug
-			)
+			),
+			$taxonomy_labels->singular_name ? strtolower( $taxonomy_labels->singular_name ) : 'category'
 		);
 	}
 

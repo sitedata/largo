@@ -49,7 +49,7 @@ if ( ! function_exists( 'largo_post_social_links' ) ) {
 					$fb_verb_localized = wp_strip_all_tags( $fb_verb );
 			}
 
-			$fb_share = '<span class="facebook"><a target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/sharer/sharer.php?u=%1$s"><i class="icon-facebook"></i><span class="hidden-phone">%2$s</span></a></span>';
+			$fb_share = '<span class="facebook"><a target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/sharer/sharer.php?u=%1$s" title="Share on Facebook"><i class="icon-facebook"></i><span class="hidden-phone">%2$s</span></a></span>';
 
 			$output .= sprintf(
 				$fb_share,
@@ -59,7 +59,7 @@ if ( ! function_exists( 'largo_post_social_links' ) ) {
 		}
 
 		if ( isset( $utilities['twitter'] ) && '1' === $utilities['twitter'] ) {
-			$twitter_share = '<span class="twitter"><a target="_blank" rel="noopener noreferrer" href="https://twitter.com/intent/tweet?text=%1$s&url=%2$s%3$s"><i class="icon-twitter"></i><span class="hidden-phone">%4$s</span></a></span>';
+			$twitter_share = '<span class="twitter"><a target="_blank" rel="noopener noreferrer" href="https://twitter.com/intent/tweet?text=%1$s&url=%2$s%3$s" title="Share on Twitter"><i class="icon-twitter"></i><span class="hidden-phone">%4$s</span></a></span>';
 
 			// By default, don't set a via.
 			$via = '';
@@ -106,7 +106,7 @@ if ( ! function_exists( 'largo_post_social_links' ) ) {
 
 		if ( isset( $utilities['email'] ) && '1' === $utilities['email'] ) {
 			$output .= sprintf(
-				'<span data-service="email" class="email share-button"><a href="mailto:?subject=%2$s&body=%3$s%4$s" rel="noopener noreferrer" target="_blank"><i class="icon-mail"></i> <span class="hidden-phone">%1$s</span></a></span>',
+				'<span data-service="email" class="email share-button"><a href="mailto:?subject=%2$s&body=%3$s%4$s" rel="noopener noreferrer" target="_blank" title="Share to Email"><i class="icon-mail"></i> <span class="hidden-phone">%1$s</span></a></span>',
 				esc_attr( __( 'Email', 'largo' ) ),
 				rawurlencode( html_entity_decode( get_the_title(), ENT_QUOTES, get_option( 'blog_charset' ) ) ), // subject
 				rawurlencode( html_entity_decode( strip_tags( get_the_excerpt() ), ENT_QUOTES, get_option( 'blog_charset' ) ) ), // description
@@ -176,7 +176,7 @@ if ( ! function_exists( 'largo_post_social_links' ) ) {
 
 			$output .= <<<EOD
 <span class="more-social-links">
-	<a class="popover-toggle" href="#"><i class="icon-plus"></i><span class="hidden-phone">${more}</span></a>
+	<a class="popover-toggle" href="#" title="More Option"><i class="icon-plus"></i><span class="hidden-phone">${more}</span></a>
 	<span class="popover">
 	<ul>
 		${more_social_links_str}
