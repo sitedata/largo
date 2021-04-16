@@ -10,9 +10,15 @@ The following image sizes are registered in Largo, using the constants defined b
 
   - ``60x60``
       - 60x60px image crop.
+  - ``96x96``
+      - 96x96px image crop
+      - Used for avatars and small square listing images.
   - ``rect_thumb``
       - 800x600px image crop
       - Used for cat/tax archive pages.
+  - ``rect_thumb_half``
+      - 400x300px image crop
+      - Used for areas where fixed aspect ratio of `rect_thumb` is desired but too big.
   - ``medium``
       - Image size defined by constants: ``MEDIUM_WIDTHxMEDIUM_HEIGHT``
       - Default is 336px wide by a flexible height.
@@ -28,6 +34,8 @@ The following image sizes are registered in Largo, using the constants defined b
   - ``two-third-full``
       - Image size defined by: ``(FULL_WIDTH*2/3)xFULL_HEIGHT``
       - Default is 780px wide by a flexible height.
+
+Largo also sets the `post-thumbnail` and `thumbnail` image sizes to be 140x140, instead of the WordPress default.
 
 Constants
 ---------
