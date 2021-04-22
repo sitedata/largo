@@ -38,6 +38,7 @@ Particular thanks go to outside contributor [@seanchayes](https://github.com/sea
 - Fixes the issue of saved landing page checkbox options not displaying their saved value in the admin editor. [Pull request #1900](https://github.com/WPBuddy/largo/pull/1900) for [issue #1870](https://github.com/WPBuddy/largo/issues/1870).
 - Update all npm packages to latest version; updated package.json command scripts to allow developers to quickly run grunt tasks [Pull request](https://github.com/WPBuddy/largo/pull/1899) fixes issue [#1540](https://github.com/WPBuddy/largo/issues/1540)
 - Fixes `Largo_Related::popularity_sort` sorting in the wrong order. [Pull request #1877](https://github.com/WPBuddy/largo/pull/1877) for [issue #1868](https://github.com/WPBuddy/largo/issues/1868) by [@pedroxido](https://github.com/pedroxido).
+- Fixes `Undefined variable: feature_posts in partials/sticky-posts.php` on line 60. [Pull request #1814](https://github.com/WPBuddy/largo/pull/1814) for [issue #1765](https://github.com/WPBuddy/largo/issues/1765) by [@amnuts](https://github.com/amnuts).
 
 ### Potentially-breaking changes
 
