@@ -39,7 +39,12 @@ class largo_disclaimer_widget extends WP_Widget {
 	}
 
 	function form( $instance ) {
-		$defaults = array( 'title' => __('About ' . get_bloginfo('name'), 'largo') );
+		$defaults = array(
+			'title' => sprintf(
+				__( 'About %1$s', 'largo' ),
+				get_bloginfo( 'name' )
+			),
+		);
 		$instance = wp_parse_args( (array) $instance, $defaults );
 	}
 }

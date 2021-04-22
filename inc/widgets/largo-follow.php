@@ -32,31 +32,32 @@ class largo_follow_widget extends WP_Widget {
 			
 			// Display the usual buttons and whatnot
 			$networks = array(
-				'facebook' => 'Like Us on Facebook',
-				'twitter' => 'Follow Us on Twitter',
-				'youtube' => 'Follow Us on YouTube',
-				'instagram' => 'Follow Us on Instagram',
-				'linkedin' => 'Find Us on LinkedIn',
-				'tumblr' => 'Follow us on Tumblr',
-				'pinterest' => 'Follow us on Pinterest',
-				'github' => 'Find Us on GitHub',
-				'flickr' => 'Follow Us on Flickr',
-				'rss' => 'Subscribe via RSS'
+				'facebook'  => __( 'Like Us on Facebook', 'largo' ),
+				'twitter'   => __( 'Follow Us on Twitter', 'largo' ),
+				'youtube'   => __( 'Follow Us on YouTube', 'largo' ),
+				'instagram' => __( 'Follow Us on Instagram', 'largo' ),
+				'linkedin'  => __( 'Find Us on LinkedIn', 'largo' ),
+				'tumblr'    => __( 'Follow us on Tumblr', 'largo' ),
+				'pinterest' => __( 'Follow us on Pinterest', 'largo' ),
+				'github'    => __( 'Find Us on GitHub', 'largo' ),
+				'flickr'    => __( 'Follow Us on Flickr', 'largo' ),
+				'rss'       => __( 'Subscribe via RSS', 'largo' ),
 			);
 			$networks = apply_filters( 'largo_additional_networks', $networks );
-			
+
 			foreach ( $networks as $network => $btn_text ) {
 				if ( $network == 'rss' ) {
 					$link = of_get_option( 'rss_link' ) ? esc_url( of_get_option( 'rss_link' ) ) : get_feed_link();
 				} else {
 					$link = esc_url( of_get_option( $network . '_link' ) );
 				}
-				
-				if ( $link ) {
-					printf( __( '<a class="%1$s subscribe btn social-btn" href="%2$s"><i class="icon-%1$s"></i>%3$s</a>', 'largo'),
-						$network,
-						$link,
-						$btn_text
+
+				if ( ! empty( $link ) ) {
+					printf(
+						'<a class="%1$s subscribe btn social-btn" href="%2$s"><i class="icon-%1$s"></i>%3$s</a>',
+						esc_attr( $network ),
+						esc_attr( $link ),
+						esc_html( $btn_text )
 					);
 				}
 			}
@@ -74,12 +75,18 @@ class largo_follow_widget extends WP_Widget {
 	function form( $instance ) {
 
 		/* Set up some default widget settings. */
-		$defaults = array( 'title' => sprintf( __('Follow %s', 'largo'), get_bloginfo('name') ) );
+		$defaults = array(
+			'title' => sprintf(
+				// translators: %s is the site's name
+				__('Follow %s', 'largo'),
+				get_bloginfo('name')
+			)
+		);
 		$instance = wp_parse_args( (array) $instance, $defaults );
 		?>
 
 		<p>
-			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e('Title', 'largo'); ?>:</label>
+			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php esc_html_e('Title', 'largo'); ?>:</label>
 			<input id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo esc_attr( $instance['title'] ); ?>" style="width:90%;" />
 		</p>
 

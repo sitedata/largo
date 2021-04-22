@@ -37,7 +37,7 @@ function largo_add_meta_box( $id, $title, $callbacks = array(), $post_types = 'p
 	if ( is_null( $callbacks ) ) $callbacks = array();
 
 	$largo['meta']['boxes'][$id] = array(
-		'title' => __( $title, 'largo'),
+		'title' => $title,
 		'callbacks' => $callbacks,
 		'screens' => $post_types,
 		'context' => $context,

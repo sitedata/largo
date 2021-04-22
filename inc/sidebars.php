@@ -105,7 +105,7 @@ function largo_register_sidebars() {
 			$sidebar_slug = largo_make_slug( $sidebar );
 			if ( $sidebar_slug ) {
 				$sidebars[] = array(
-					'name' 	=> __( $sidebar, 'largo' ),
+					'name' 	=> $sidebar,
 					'desc' 	=> '',
 					'id' 	=> $sidebar_slug
 				);

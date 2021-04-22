@@ -3,7 +3,7 @@ inc/widgets/largo-recent-posts.php
 
 .. php:class:: largo_recent_posts_widget
 
-      Largo Recent Posts
+      Largo Recent Posts Widget
 
    .. php:method:: largo_recent_posts_widget::__construct()
 

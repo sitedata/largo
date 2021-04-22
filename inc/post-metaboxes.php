@@ -176,12 +176,14 @@ function largo_layout_meta_box_display () {
 	if ( $post->post_type != 'page' ) {
 		echo '<p><strong>' . __('Template', 'largo' ) . '</strong></p>';
 		echo '<p>' . __('Select the post template you wish this post to use.', 'largo') . '</p>';
-		echo '<label class="hidden" for="post_template">' . __("Post Template", 'largo' ) . '</label>';
+		echo '<label class="hidden" for="post_template">' . __('Post Template', 'largo' ) . '</label>';
 		echo '<select name="_wp_post_template" id="post_template" class="dropdown">';
+		// translators: %s is the name of the current page template
 		echo '<option value="">' . sprintf(__( 'Default: %s', 'largo' ), $current_template) . '</option>';
 		post_templates_dropdown(); //get the options
 		echo '</select>';
 		echo '<p>' . sprintf(
+			// translators: %s is a URL.
 			__('<a href="%s">Click here</a> to change the default post template.', 'largo' ),
 			admin_url('themes.php?page=options-framework#of-option-layoutoptions41'));
 		echo '</p>';
@@ -189,7 +191,7 @@ function largo_layout_meta_box_display () {
 
 	echo '<p><strong>' . __('Custom Sidebar', 'largo' ) . '</strong><br />';
 	echo __('Select a custom sidebar to display.', 'largo' ) . '</p>';
-	echo '<label class="hidden" for="custom_sidebar">' . __("Custom Sidebar", 'largo' ) . '</label>';
+	echo '<label class="hidden" for="custom_sidebar">' . __('Custom Sidebar', 'largo' ) . '</label>';
 	echo '<select name="custom_sidebar" id="custom_sidebar" class="dropdown">';
 	largo_custom_sidebars_dropdown(); //get the options
 	echo '</select>';
@@ -220,11 +222,17 @@ function largo_custom_sidebar_js() {
 		$default_sidebar_labels = array();
 
 		foreach ($post_templates as $template) {
-			if (in_array($template, array('full-page.php', 'single-one-column.php')))
+			if (in_array($template, array('full-page.php', 'single-one-column.php'))) {
 				$default_sidebar_labels[$template] = 'Default (no sidebar)';
+			}
 
-			if ($template == 'single-two-column.php')
-				$default_sidebar_labels[$template] = sprintf(__('Default (%s)', 'largo'), $wp_registered_sidebars['sidebar-single']['name']);
+			if ($template == 'single-two-column.php') {
+				$default_sidebar_labels[$template] = sprintf(
+					// translators: %s is the name of the single sidebar.
+					__( 'Default (%s)', 'largo' ),
+					$wp_registered_sidebars['sidebar-single']['name']
+				);
+			}
 		}
 
 		wp_localize_script('custom-sidebar', 'default_sidebar_labels', $default_sidebar_labels);
@@ -245,7 +253,7 @@ function largo_custom_related_meta_box_display() {
 	$value = get_post_meta( $post->ID, 'largo_custom_related_posts', true );
 
 	echo '<p><strong>' . __('Related Posts', 'largo') . '</strong><br />';
-	echo __('To override the default related posts functionality enter specific related post IDs separated by commas.') . '</p>';
+	echo __( 'To override the default related posts functionality enter specific related post IDs separated by commas.', 'largo' ) . '</p>';
 	echo '<input type="text" name="largo_custom_related_posts" value="' . esc_attr( $value ) . '" />';
 }
 largo_register_meta_input( 'largo_custom_related_posts', 'sanitize_text_field' );

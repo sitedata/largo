@@ -104,7 +104,7 @@ if ( ! isset( $largo ) )
  */
 if ( ! function_exists( 'optionsframework_init' ) ) {
 	define( 'OPTIONS_FRAMEWORK_DIRECTORY', get_template_directory_uri() . '/lib/options-framework/' );
-	if ( 0 == validate_file( get_template_directory() . '/lib/options-framework/options-framework.php' ) ) {
+	if ( 0 == validate_file( '/lib/options-framework/options-framework.php' ) ) {
 		require_once get_template_directory() . '/lib/options-framework/options-framework.php';
 	}
 }
@@ -203,7 +203,7 @@ class Largo {
 		}
 
 		foreach ( $includes as $include ) {
-			if ( 0 === validate_file( get_template_directory() . $include ) ) {
+			if ( 0 === validate_file( $include ) ) {
 				require_once( get_template_directory() . $include );
 			}
 		}
@@ -376,13 +376,16 @@ function largo_php_warning() {
 	$minver = "5.3.0";
 	$curver = phpversion();
 
-	if( current_user_can('update_themes') && version_compare( $curver, $minver, "<" ) ) :
-		$warning = "Largo requires <b>PHP $minver</b>. You're running <b>$curver</b>. Please upgrade your version of php.";
- 		echo "<div class='update-nag'>";
-    	_e( $warning, 'largo' );
- 		echo "</div>";
- 	endif;
-
+	if ( current_user_can('update_themes') && version_compare( $curver, $minver, "<" ) ) {
+		echo "<div class='update-nag'>";
+		printf(
+			// translators: %1$s and %2$s are PHP version numbers.
+			esc_html__( 'Largo requires <b>PHP %1$s</b>. Your server runs <b>$curver</b>. Please upgrade your version of php.', 'largo'),
+			$minver,
+			$curver
+		);
+		echo "</div>";
+	}
 }
 add_action( 'admin_notices', 'largo_php_warning' );
 
@@ -402,7 +405,7 @@ if ( of_get_option( 'custom_landing_enabled' ) && of_get_option( 'series_enabled
  * Perform load
  */
 foreach ( $includes as $include ) {
-	if ( 0 === validate_file( get_template_directory() . $include ) ) {
+	if ( 0 === validate_file( $include ) ) {
 		require_once( get_template_directory() . $include );
 	}
 }

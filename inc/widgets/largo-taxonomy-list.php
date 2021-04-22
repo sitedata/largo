@@ -1,8 +1,8 @@
 <?php
 /*
- * List all of the terms in a custom taxonom
+ * List all of the terms in a custom taxonomy
  *
- * This widget takes two primary forms: 1) a <select> element of terms, or 2) a customizable UL of terms.
+ * This widget takes two primary forms: 1) a <select> element of terms, or 2) a customizable <ul> of terms.
  */
 class largo_taxonomy_list_widget extends WP_Widget {
 
@@ -73,7 +73,13 @@ class largo_taxonomy_list_widget extends WP_Widget {
 			$terms = get_categories( $term_args ); ?>
 
 			<select id="taxonomy-list-widget">
-				<option value=""><?php printf( __( 'Select %s', 'largo' ), ucwords( $instance['taxonomy'] ) ); ?></option>
+				<option value=""><?php
+					printf(
+						// translators: %s is the slug name of a taxonomy, uppercased.
+						__( 'Select %s', 'largo' ),
+						ucwords( $instance['taxonomy'] )
+					);
+				?></option>
 			<?php foreach ( $terms as $term ) : ?>
 				<option value="<?php echo get_term_link( $term, $term->taxonomy ) ?>"><?php echo $term->name ?></option>
 			<?php endforeach; ?>

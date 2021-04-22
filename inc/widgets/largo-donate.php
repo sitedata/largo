@@ -14,7 +14,7 @@ class largo_donate_widget extends WP_Widget {
 
 	function widget( $args, $instance ) {
 
-		$title = apply_filters('widget_title', empty( $instance['title'] ) ? __('Support ' . get_bloginfo('name'), 'largo') : $instance['title'], $instance, $this->id_base);
+		$title = apply_filters('widget_title', $instance['title'], $instance, $this->id_base);
 
 		echo $args['before_widget'];
 		if ( $title ) {
@@ -45,7 +45,11 @@ class largo_donate_widget extends WP_Widget {
 		if ( of_get_option( 'donate_button_text' ) )
 			$donate_btn_text = esc_attr( of_get_option( 'donate_button_text' ) );
 		$defaults = array(
-			'title' 			=> __('Support ' . get_bloginfo('name'), 'largo'),
+			'title' 			=> sprintf(
+				// translators: %1$s is the blog name
+				__( 'Support %1$s' , 'largo' ),
+				get_bloginfo( 'name' )
+			),
 			'cta_text' 			=> __('We depend on your support. A generous gift in any amount helps us continue to bring you this service.', 'largo'),
 			'button_text' 		=> $donate_btn_text,
 			'button_url' 		=> $donate_link

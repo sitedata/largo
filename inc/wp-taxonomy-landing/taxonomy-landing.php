@@ -32,7 +32,10 @@ Author URI: https://crowdfavorite.com
 if (!defined('LARGO_TEMPLATE_LANDING_VERSION')) {
 	define('LARGO_TEMPLATE_LANDING_VERSION', '1.1.2');
 
-	load_plugin_textdomain( 'cf-tax-landing' );
+	// Commented out as part of https://github.com/INN/largo/pull/1858
+	// because this "plugin" is being loaded as a library directly in Largo
+	// and as a result, no text domain is being shipped from wordpress.org.
+	// load_plugin_textdomain( 'cf-tax-landing' );
 
 	include('functions/cftl-admin.php');
 	include('functions/cftl-intercept-queries.php');
