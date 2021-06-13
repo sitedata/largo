@@ -42,6 +42,7 @@ Particular thanks go to outside contributor [@seanchayes](https://github.com/sea
 - Fixes `Undefined variable: feature_posts in partials/sticky-posts.php` on line 60. [Pull request #1814](https://github.com/WPBuddy/largo/pull/1814) for [issue #1765](https://github.com/WPBuddy/largo/issues/1765) by [@amnuts](https://github.com/amnuts).
 - Fixes an issue where Largo series landing pages would sometimes not find their assigned footer widget area. [Pull request #1907](https://github.com/WPBuddy/largo/pull/1907) for [issue #1839](https://github.com/WPBuddy/largo/issues/1839).
 - Fixes an issue where `largo_has_avatar()` would return `true` even if `get_avatar()` returned no avatar by adding a function to hook into the `pre_get_avatar` filter and making sure it uses the custom `largo_avatar` meta if available. [Pull request #1906](https://github.com/WPBuddy/largo/pull/1906) for [issue #1864](https://github.com/WPBuddy/largo/issues/1864).
+- Adds new `largo_widget_background_options` filter to allow developers to add to/create their own list of widget background options to be used. [Pull request #1912](https://github.com/WPBuddy/largo/pull/1912) for [issue #1842](https://github.com/WPBuddy/largo/issues/1842).
 
 ### Potentially-breaking changes
 
