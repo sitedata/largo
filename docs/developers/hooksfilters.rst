@@ -256,20 +256,20 @@ filter: **largo_widget_background_options**
 
     Passed is an array, where each item in the array must contain a `value` and `label` key to indicate the background option value and text label. The default array in Largo is:
 
-    $widget_background_options = array(
-		0 => array(
-			'value' => 'default',
-			'label' => 'Default'
-		),
-		1 => array(
-			'value' => 'rev',
-			'label' => 'Reverse'
-		),
-		2 => array(
-			'value' => 'no-bg',
-			'label' => 'No Background'
-		)
-	);
+        $widget_background_options = array(
+            0 => array(
+                'value' => 'default',
+                'label' => 'Default'
+            ),
+            1 => array(
+                'value' => 'rev',
+                'label' => 'Reverse'
+            ),
+            2 => array(
+                'value' => 'no-bg',
+                'label' => 'No Background'
+            )
+        );
 
     Adding new background options is as simple as adding a new item to the array: ::
 
