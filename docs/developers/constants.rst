@@ -25,17 +25,9 @@ For more information about how Largo handles image sizes, see `Image Sizes <imag
 The other constants
 -------------------
 
-.. php:const:: INN_HOSTED
+.. php:const:: WPB_HOSTED
 
-	``INN_HOSTED`` indicates whether or not a WordPress instance is hosted by INN. This setting should be set in ``wp-config.php``, but there is no reason for you to set this.
-
-	If ``INN_HOSTED`` is true, then ``INN_MEMBER`` below is also true.
-
-.. php:const:: INN_MEMBER
-
-	``INN_MEMBER`` indicates whether or not a WordPress site belongs to `a member of the Institute for Nonprofit News <https://inn.org/members/>`_. 
-
-	``INN_MEMBER`` is defined as true in ``functions.php`` if it is not otherwise defined and if ``INN_HOSTED`` is true. If ``INN_HOSTED`` is false, then ``INN_MEMBER`` will also be false unless ``INN_MEMBER`` is explicitly defined in ``wp_config.php`` or in the ``functions.php`` of a child theme.
+	``WPB_HOSTED`` indicates whether or not a WordPress instance is hosted by WP Buddy. This setting should be set in ``wp-config.php``, but there is no reason for you to set this.
 
 .. php:const:: LARGO_DEBUG
 

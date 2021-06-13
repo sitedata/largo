@@ -30,23 +30,12 @@
  */
 
 /**
- * By default we'll assume the site is not hosted by INN.
+ * By default we'll assume the site is not hosted by WPB.
  *
- * There should be no reason to set this. It is defined to
- * modify the default value of 'INN_MEMBER' below to true for
- * INN hosted sites.
+ * There should be no reason to set this.
  */
-if ( ! defined( 'INN_HOSTED' ) )
-	define( 'INN_HOSTED', FALSE );
-
-/**
- * By default we'll assume the site is not for an INN member.
- *
- * Set INN_MEMBER to TRUE to show an INN logo in the footer
- * and a widget of INN member stories in the homepage sidebar
- */
-if ( ! defined( 'INN_MEMBER' ) )
-	define( 'INN_MEMBER', FALSE || INN_HOSTED );
+if ( ! defined( 'WPB_HOSTED' ) )
+	define( 'WPB_HOSTED', FALSE );
 
 /**
  * LARGO_DEBUG defines whether or not to use minified assets
