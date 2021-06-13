@@ -254,7 +254,7 @@ filter: **largo_widget_background_options**
 
     Called in `largo_widget_custom_fields_form` to filter the array of background options that widgets can use.
 
-    Passed is an array, where each item in the array must contain a `value` and `label` key to indicate the background option value and text label. The default array in Largo is:
+    Passed is an array, where each item in the array must contain a `value` and `label` key to indicate the background option value and text label. The default array in Largo is: ::
 
         $widget_background_options = array(
             0 => array(
