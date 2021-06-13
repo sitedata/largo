@@ -249,6 +249,44 @@ filter: **largo_post_social_more_social_links**
         }
         add_filter('largo_top_term_metabox_taxonomies', 'add_taxonomies');
 
+filter: **largo_widget_background_options**
+    *args: Array $widget_background_options*
+
+    Called in `largo_widget_custom_fields_form` to filter the array of background options that widgets can use.
+
+    Passed is an array, where each item in the array must contain a `value` and `label` key to indicate the background option value and text label. The default array in Largo is:
+
+    $widget_background_options = array(
+		0 => array(
+			'value' => 'default',
+			'label' => 'Default'
+		),
+		1 => array(
+			'value' => 'rev',
+			'label' => 'Reverse'
+		),
+		2 => array(
+			'value' => 'no-bg',
+			'label' => 'No Background'
+		)
+	);
+
+    Adding new background options is as simple as adding a new item to the array: ::
+
+        function add_new_background_option( $options ) {
+
+            $my_custom_option = array(
+                'value' => 'my-opt',
+                'label' => 'My Custom Option'
+            );
+
+            $options['my_custom_option'] = $my_custom_option;
+
+            return $options;
+            
+        }
+        add_filter( 'largo_widget_background_options', 'add_new_background_option' );
+
 
 Template Hooks
 --------------
