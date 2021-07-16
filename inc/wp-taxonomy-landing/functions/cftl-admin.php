@@ -435,9 +435,9 @@ function cftl_tax_landing_main($post) {
 	<div>
 		<select name="per_page">
 			<?php
-				$options = array("5", "10", "15", "20", "30", "all");
-				foreach ($options as $opt) {
-					echo '<option value="', $opt, '"', selected( $fields['per_page'][0], $opt), '>', $opt, "</option>\n";
+				$options = array("5" => "5", "10" => "10", "15" => "15", "20" => "20", "30" => "30", "all" => "-1");
+				foreach ($options as $opt => $value) {
+					echo '<option value="', $value, '"', selected( $fields['per_page'][0], $value), '>', $opt, "</option>\n";
 				}
 			?>
 		</select>
