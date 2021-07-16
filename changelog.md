@@ -44,6 +44,7 @@ Particular thanks go to outside contributor [@seanchayes](https://github.com/sea
 - Fixes an issue where `largo_has_avatar()` would return `true` even if `get_avatar()` returned no avatar by adding a function to hook into the `pre_get_avatar` filter and making sure it uses the custom `largo_avatar` meta if available. [Pull request #1906](https://github.com/WPBuddy/largo/pull/1906) for [issue #1864](https://github.com/WPBuddy/largo/issues/1864).
 - Solves an issue where the "All" option for the series landing page "posts per page" setting wasn't saving or working as expected. [Pull request #1909](https://github.com/WPBuddy/largo/pull/1909) for [issue #1908](https://github.com/WPBuddy/largo/issues/1908).
 - Updates `largo_get_series_landing_page_by_series` to verify that `$series` exists using `term_exists()` before attempting to use it. [Pull request #1910](https://github.com/WPBuddy/largo/pull/1910) for [issue #1844](https://github.com/WPBuddy/largo/issues/1844).
+- Adds in case for "DESC" for `Largo_Related` series. [Pull request #1911](https://github.com/WPBuddy/largo/pull/1911) for [issue #1863](https://github.com/WPBuddy/largo/issues/1863).
 
 ### Potentially-breaking changes
 
