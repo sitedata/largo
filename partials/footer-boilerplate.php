@@ -20,15 +20,12 @@
 		</div>
 
 		<div class="span6 right">
-			<?php if (INN_MEMBER) { ?>
-				<?php inn_logo(); ?>
-			<?php } ?>
-			<p class="footer-credit <?php echo ( !INN_MEMBER ? 'footer-credit-padding-inn-logo-missing' : ''); ?>"><?php
+			<p class="footer-credit"><?php
 				printf(
 					// translators: %1$s and %2$s are URLs for largo.inn.org and inn.org respectively
-					__('Built with the <a href="%1$s">Largo WordPress Theme</a> from the <a href="%2$s">Institute for Nonprofit News</a>.', 'largo'),
+					__('Built with the <a href="%1$s">Largo WordPress Theme</a> from <a href="%2$s">WP Buddy</a>', 'largo'),
 					'https://largo.inn.org/',
-					'https://inn.org'
+					'https://wpbuddy.co'
 				);
 			?></p>
 		</div>
