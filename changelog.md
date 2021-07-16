@@ -45,6 +45,7 @@ Particular thanks go to outside contributor [@seanchayes](https://github.com/sea
 - Solves an issue where the "All" option for the series landing page "posts per page" setting wasn't saving or working as expected. [Pull request #1909](https://github.com/WPBuddy/largo/pull/1909) for [issue #1908](https://github.com/WPBuddy/largo/issues/1908).
 - Updates `largo_get_series_landing_page_by_series` to verify that `$series` exists using `term_exists()` before attempting to use it. [Pull request #1910](https://github.com/WPBuddy/largo/pull/1910) for [issue #1844](https://github.com/WPBuddy/largo/issues/1844).
 - Adds in case for "DESC" for `Largo_Related` series. [Pull request #1911](https://github.com/WPBuddy/largo/pull/1911) for [issue #1863](https://github.com/WPBuddy/largo/issues/1863).
+- Adds new `largo_widget_background_options` filter to allow developers to add to/create their own list of widget background options to be used. [Pull request #1912](https://github.com/WPBuddy/largo/pull/1912) for [issue #1842](https://github.com/WPBuddy/largo/issues/1842).
 
 ### Potentially-breaking changes
 

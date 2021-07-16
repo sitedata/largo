@@ -138,12 +138,31 @@ function largo_widget_custom_fields_form( $widget, $args, $instance ) {
 	$desktop = ! empty( $instance['hidden_desktop'] ) ? 'checked="checked"' : '';
 	$tablet = ! empty( $instance['hidden_tablet'] ) ? 'checked="checked"' : '';
 	$phone = ! empty( $instance['hidden_phone'] ) ? 'checked="checked"' : '';
+
+	$widget_background_options = array(
+		0 => array(
+			'value' => 'default',
+			'label' => 'Default'
+		),
+		1 => array(
+			'value' => 'rev',
+			'label' => 'Reverse'
+		),
+		2 => array(
+			'value' => 'no-bg',
+			'label' => 'No Background'
+		)
+	);
+
+	$widget_background_options = apply_filters( 'largo_widget_background_options', $widget_background_options, $widget_background_options );
 ?>
   <label for="<?php echo $widget->get_field_id( 'widget_class' ); ?>"><?php _e('Widget Background', 'largo'); ?></label>
   <select id="<?php echo $widget->get_field_id('widget_class'); ?>" name="<?php echo $widget->get_field_name('widget_class'); ?>" class="widefat" style="width:90%;">
-  	<option <?php selected( $instance['widget_class'], 'default'); ?> value="default"><?php _e('Default', 'largo'); ?></option>
-  	<option <?php selected( $instance['widget_class'], 'rev'); ?> value="rev"><?php _e('Reverse', 'largo'); ?></option>
-  	<option <?php selected( $instance['widget_class'], 'no-bg'); ?> value="no-bg"><?php _e('No Background', 'largo'); ?></option>
+	<?php
+		foreach( $widget_background_options as $background_option ) {
+			echo '<option '.selected( $instance['widget_class'], $background_option['value'] ).' value="'.$background_option['value'].'">'.__( $background_option['label'], 'largo').'</option>';
+		}
+	?>
   </select>
 
   <p style="margin:15px 0 10px 5px">
