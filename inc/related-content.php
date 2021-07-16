@@ -645,6 +645,8 @@ class Largo_Related {
 							case 'ASC':
 								$args['order'] = 'ASC';
 								break;
+							case 'DESC':
+								$args['order'] = 'DESC';
 							// 'series_custom' and 'featured' are custom ones, caught with largo_series_custom_order in inc/wp-taxonomy-landing/functions/cftl-series-order.php
 							case 'custom':
 								$args['orderby'] = 'series_custom';
