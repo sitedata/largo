@@ -384,7 +384,7 @@ add_filter( 'post_type_link', 'largo_series_landing_link', 22, 2 );
  * @return array An array of all WP_Post objects answering the description of this series. May be 0, 1 or conceivably many.
  */
 function largo_get_series_landing_page_by_series( $series ) {
-	if ( ! is_object( $series ) ) {
+	if ( ! is_object( $series ) && term_exists( $series ) ) {
 		if ( is_int( $series ) ) {
 			$series = get_term( $series, $taxonomy );
 		} else {
